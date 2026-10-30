@@ -1,5 +1,5 @@
 // ==== Data reused verbatim from UK_Mass_Casualty_Training_Suite_corrected.html ====
-        // 1. INCIDENT REGISTRY (2016–2024). Figures checked against sources on 16 October 2026.
+        // 1. INCIDENT REGISTRY (2016–2024). Figures checked against sources on 16 October 2026; second round 30 October 2026 (docs/verification/verify_round2_uk.md).
         // Each incident carries `checks`: [status, note] pairs shown in the UI.
         // status: "ok" = confirmed in a source read; "partial" = partly correct / snapshot; "unverified" = could not verify.
         const INCIDENTS_MASTER = [
@@ -16,8 +16,9 @@
                 checks: [
                     ["ok", "Date, CR4000 three-section tram, ~73 km/h into 20 km/h curve, 7 deaths, 19 serious injuries (RAIB report)."],
                     ["ok", "LAS: 31 to CUH, 20 to St George's (Londonist; St George's statement)."],
-                    ["unverified", "Could not verify: CUH emptied its ED in 20 minutes; more than 60 staff called in via WhatsApp; one coach of 29 walking wounded; several upgraded on arrival (source article not retrievable)."],
-                    ["unverified", "Could not verify: that CUH upgrades 'validated' the 2023 triage change."]
+                    ["partial", "Staff response at CUH: a major incident alert went to all hospital staff and many came in; the trust later named 66 staff who helped (Lydall blog, 6 Dec 2016, by the author of the Evening Standard report). The 'called in via WhatsApp' detail rests on the Evening Standard only, which could not be opened."],
+                    ["unverified", "Could not verify (Evening Standard, 5 Dec 2016, blocked at source and in archives): CUH emptied its ED in 20 minutes; a coach of 29 walking wounded; first patient at 07:30; patients upgraded on arrival. The Croydon Advertiser says the ED did not close, 38 crash patients were treated at CUH, 2 were transferred to St George's and only 1 stayed overnight."],
+                    ["unverified", "Removed: the claim that CUH's upgrades on arrival 'validated' the 2023 NHS triage change. No source links the two; secondary triage commonly re-prioritises self-presenting or bus-conveyed casualties, but that is a general lesson, not a documented driver of the 2023 change."]
                 ]
             },
             {
@@ -27,11 +28,12 @@
                 location: "Westminster, London",
                 archetype: "ARCH_02",
                 mechanism: "Vehicle ramming on the Westminster Bridge pavement (hired Hyundai Tucson SUV), followed by a fatal knife attack at Carriage Gates.",
-                casualties: "5 victims killed; attacker shot dead by a protection officer. Two pedestrians died on the day; Leslie Rhodes (75), also struck on the bridge, died at King's College Hospital the next day (23 March) when life support was withdrawn. Andreea Cristea, knocked into the Thames, died in hospital on 6 April 2017. PC Keith Palmer was fatally stabbed. About 40–50 injured.",
+                casualties: "5 victims killed; attacker shot dead by a protection officer. Two pedestrians died on the day; Leslie Rhodes (75), also struck on the bridge, died at King's College Hospital the next day (23 March) when life support was withdrawn. Andreea Cristea, knocked into the Thames, died in hospital on 6 April 2017. PC Keith Palmer was fatally stabbed in the chest and died at the scene. About 40–50 injured in early reports; the Chief Coroner's report (2018) counts 29 people seriously injured by the vehicle.",
                 dispersal: "Early reports: 12 seriously injured (some 'catastrophic') and 8 with less serious injuries treated at the scene. Receiving hospitals included St Thomas', King's College (admitted 8), St Mary's, the Royal London, and Chelsea and Westminster.",
-                injuries: "Bimodal: blunt vehicle-impact injuries and a fatal stabbing; one victim recovered from the river (immersion).",
+                injuries: "Bimodal: blunt vehicle-impact injuries and a fatal stabbing; one victim recovered from the river (immersion). BMJ 2017: 'most patients brought to hospital had blunt trauma'.",
                 checks: [
                     ["ok", "Vehicle was a Hyundai Tucson (not an i40)."],
+                    ["ok", "29 seriously injured by the vehicle and PC Palmer's fatal chest stab wound (Chief Coroner's Regulation 28 report, Dec 2018); most hospital patients had blunt trauma (Gulland, BMJ 2017;358:j4309)."],
                     ["ok", "Leslie Rhodes died the next day, not at the scene."],
                     ["partial", "Scene figures (12 serious, 8 minor) are attributed to Guardian reporting; no LAS primary source found."]
                 ]
@@ -49,7 +51,8 @@
                 checks: [
                     ["ok", "Dark et al. EMJ 2021 (TARN case series) and Manchester Arena Inquiry Vol 2."],
                     ["partial", "The TARN dataset was deployed after the event; scene triage could not be linked to hospital records. It is not described as 'validated'."],
-                    ["unverified", "Could not verify: individual operations lasting up to 14 hours."]
+                    ["ok", "Craigie et al. BMJ Mil Health 2020 give 160 hospital attendances (40 children), 87 admitted and 28 to critical care; 20 died at the scene and 3 shortly after arrival. The two papers' totals differ (153 vs 160 attendances; 24 vs 28 critical care)."],
+                    ["unverified", "Could not verify: individual operations lasting up to 14 hours (not in Dark et al. 2021 or Craigie et al. 2020; no page found stating it)."]
                 ]
             },
             {
@@ -59,13 +62,14 @@
                 location: "London Bridge & Borough Market, London",
                 archetype: "ARCH_02",
                 mechanism: "Van (white Renault Master) driven at high speed into pedestrians, followed by stabbings by three attackers.",
-                casualties: "8 victims killed; 3 attackers shot dead 8 minutes after the first 999 call. 48 conveyed to hospital; on 4 June, 36 remained in London hospitals, 21 of them critical (a snapshot). All 48 who reached hospital reportedly survived (secondary report only).",
+                casualties: "8 victims killed; 3 attackers shot dead 8 minutes after the first 999 call. 48 conveyed to hospital; on 4 June, 36 remained in London hospitals, 21 of them critical (a snapshot). All 48 patients LAS took to hospital survived (LAS statement at the close of the inquest, 28 June 2019). First call logged 22:07; crews on scene within 6 minutes.",
                 dispersal: "5 hospitals (NHS England, 4 June 2017): King's College 14 admitted (8 critical); Royal London 12 (6 critical); St Thomas' 4 (4 critical); UCH 5 (2 critical); St Mary's 1 (1 critical).",
-                injuries: "Predominantly penetrating stab injuries plus vehicle-impact injuries.",
+                injuries: "Predominantly penetrating stab injuries plus vehicle-impact injuries: 'many patients presented with stab wounds' (BMJ 2017); 'multiple victims of penetrating trauma' (Rutherford, J Paramedic Pract 2017).",
                 checks: [
-                    ["ok", "Royal London 12 admitted / 6 critical; King's 14 admitted / 8 critical (NHS England update)."],
-                    ["unverified", "Could not verify: van speed '~50 mph'; '~90% penetrating at King's'; 2–3 patients at King's before the 23:04 major incident declaration."],
-                    ["unverified", "Removed: '56.3% Zone 2 neck injuries' — not linked to this attack in any source found."]
+                    ["ok", "Royal London 12 admitted / 6 critical; King's 14 admitted / 8 critical (NHS England update, 4 June 2017; C4TS/QMUL)."],
+                    ["ok", "All 48 patients conveyed to hospital survived (LAS statement, 28 June 2019)."],
+                    ["unverified", "Could not verify: van speed 'about 50 mph' (the Chief Coroner's report and inquest coverage give only 'high speed'); 'about 90% penetrating at King's' (BMJ 2017 says 'many patients presented with stab wounds', no percentage); patients at King's before the 23:04 declaration (BMJ j4309 covers casualties arriving before declaration, but its full text is paywalled; no time or number was found)."],
+                    ["unverified", "Removed: Zone 2 and neck-exploration percentages (56.3%, 84.4%, 67.2%, 50.8%, 42%) — not in Borsetto et al. 2019, Kasbekar et al. 2017 or Zakaria et al. 2022, and not linked to this attack in any source found."]
                 ]
             },
             {
@@ -91,12 +95,12 @@
                 location: "Seven Sisters Road, London",
                 archetype: "ARCH_02",
                 mechanism: "Vehicle ramming attack on pedestrians.",
-                casualties: "1 death at the scene (Makram Ali, who had collapsed beforehand; post-mortem found multiple injuries). 10–11 injured: LAS took 8 (some reports say 9) to hospital and treated 2 at the scene.",
-                dispersal: "Receiving hospitals: could not verify.",
+                casualties: "1 death at the scene (Makram Ali, who had collapsed beforehand; post-mortem found multiple injuries). 10–11 injured: NHS England (11:00, 19 June 2017) counted 7 patients in hospital, with 2 treated and discharged at the scene by LAS; earlier reports said LAS took 8 (some 9) to hospital.",
+                dispersal: "Seven patients were taken to the Royal London (4), the Whittington (2) and St Mary's (1); two were treated at the scene (NHS England London statement, 19 June 2017). King's College Hospital did not receive patients.",
                 injuries: "Blunt vehicle-impact injuries (pattern not individually verified).",
                 checks: [
                     ["ok", "Date, 1 death, 10–11 injured, LAS conveyed 8–9."],
-                    ["unverified", "Could not verify: receiving hospitals (the earlier 'King's College and Royal London' claim is unsupported)."]
+                    ["ok", "Receiving hospitals: Royal London 4, Whittington 2, St Mary's 1 (NHS England London, 19 June 2017). The earlier 'King's College and Royal London' claim was wrong and has been corrected."]
                 ]
             },
             {
@@ -122,12 +126,12 @@
                 location: "Fishmongers' Hall and London Bridge, London",
                 archetype: "ARCH_02",
                 mechanism: "Lone-actor knife attack; attacker wore a fake suicide vest.",
-                casualties: "2 killed (Jack Merritt, 25, and Saskia Jones, 23), both from a stab wound to the chest; 3 others injured. The attacker was shot dead by City of London Police on London Bridge. Jones was pronounced dead at the scene at 14:25; Merritt was moved to King William Street and pronounced dead at 15:14.",
-                dispersal: "Receiving hospitals: could not verify.",
-                injuries: "Fatal chest stab wounds; survivors' wound sites not verified.",
+                casualties: "2 killed (Jack Merritt, 25, and Saskia Jones, 23); 3 others injured, all later discharged. The attacker was shot dead by City of London Police on London Bridge. Both victims died at the scene (Chief Coroner's prevention of future deaths report, 2021): Jones, with a single neck wound that was 'not survivable', was assessed as dead at the scene by a paramedic and a doctor; Merritt, whose injuries were 'not survivable', was moved to the junction of Cannon Street and King William Street for advanced care, where a pre-hospital thoracotomy was performed at the casualty clearing point, and was assessed as dead at the scene by a doctor. News reports give his time of death as 14:33 (LBC) or 15:14.",
+                dispersal: "LAS was called at 14:02 and had a medic on scene within 7 minutes; HART, a tactical response unit and London's Air Ambulance advanced trauma team (by road) were sent and a major incident declared. The three injured survivors went to two London hospitals, which LAS did not name.",
+                injuries: "Jones: one stab wound above the right clavicle, 5 cm wide and 10 cm deep, through the right upper lobe. Merritt: 15 stab and slash wounds including a 7.2 cm chest wound through a rib to the diaphragm and liver (pathology evidence at the inquest, PA). Survivors' wound sites not verified.",
                 checks: [
-                    ["ok", "Deaths, cause, attacker shot, fake vest, 3 injured."],
-                    ["unverified", "Could not verify: receiving hospitals; pre-hospital transfusion and damage control details."]
+                    ["ok", "Deaths, place of death (both at the scene), pre-hospital thoracotomy, attacker shot, fake vest, 3 injured and discharged (Chief Coroner's report 2021; LAS; Counter Terrorism Policing; LBC inquest report)."],
+                    ["unverified", "Could not verify: the receiving hospitals (LAS and NHS England name none; the earlier 'Royal London / King's College' claim is deleted); pre-hospital transfusion and damage control details."]
                 ]
             },
             {
@@ -137,12 +141,13 @@
                 location: "Forbury Gardens, Reading, Berkshire",
                 archetype: "ARCH_02",
                 mechanism: "Lone-actor knife attack in a public park, lasting about half a minute.",
-                casualties: "3 killed (James Furlong, David Wails, Joseph Ritchie-Bennett), each from a single stab wound; 3 injured (attempted murders), all taken to hospital and later discharged. Place of death not stated in the sources read.",
-                dispersal: "Receiving hospital: could not verify.",
+                casualties: "3 killed (James Furlong, David Wails, Joseph Ritchie-Bennett), each from a single stab wound; 3 injured (attempted murders), all taken to hospital and later discharged. James Furlong died in Forbury Gardens: his Record of Inquest gives 'a stab wound of the neck' that was not survivable, and says he died extremely rapidly despite police, ambulance and air ambulance efforts. The Records of Inquest for Wails and Ritchie-Bennett could not be retrieved.",
+                dispersal: "News reports only: two survivors were taken to the Royal Berkshire Hospital (LBC, quoting SCAS; PA), and a third to the John Radcliffe, Oxford, where he was discharged without admission (Wikipedia, citing BBC/Guardian).",
                 injuries: "Furlong and Ritchie-Bennett: single stab wound to the neck. Wails: stabbed once in the back.",
                 checks: [
                     ["ok", "Single stab wound each (police post-mortem release; sentencing reports); wound sites as stated."],
-                    ["unverified", "Could not verify: deaths 'at the scene'; Royal Berkshire Hospital as receiving hospital."]
+                    ["ok", "Place of death for James Furlong: Forbury Gardens (Record of Inquest, judiciary.uk)."],
+                    ["partial", "Receiving hospitals rest on news reports (Royal Berkshire Hospital for two; John Radcliffe for one). Place of death for Wails and Ritchie-Bennett: their Records of Inquest could not be retrieved."]
                 ]
             },
             {
@@ -153,12 +158,15 @@
                 archetype: "ARCH_02",
                 mechanism: "Knife attack at a holiday dance workshop for children in Years 2–6 (aged 6–11; 26 booked).",
                 casualties: "3 girls killed (aged 6, 7 and 9): two died at the scene and one in hospital the next day. 10 injured (8 children, 2 adults). Critical: 7 (5 children, 2 adults) in early reports; 8 (6 children and both adults) in later reporting.",
-                dispersal: "7 children to Alder Hey Children's Hospital; others to Aintree University Hospital, Ormskirk District General Hospital and Royal Manchester Children's Hospital.",
-                injuries: "Penetrating stab injuries. One adult survivor (stabbed 5 times) was readmitted around 15 August with breathing problems and had lung surgery. The last injured child was discharged on 8 August 2024.",
+                dispersal: "Casualties went to five hospitals by ambulance and air ambulance: Alder Hey, Royal Manchester Children's, Aintree, Southport and Formby DGH and Ormskirk (NWAS). Earlier reporting put 7 children at Alder Hey. The first patient conveyed, at 12:35, was Alice da Silva Aguiar, to Southport DGH; the hospital in which she died at 01:20 the next day is not named in the sentencing remarks or the inquest opening.",
+                injuries: "Penetrating stab injuries. Sentencing remarks (R v Rudakubana, 23 January 2025): the three girls who died sustained at least 122, at least 85 and 5 sharp-force wounds respectively; the eight surviving children had between 1 and 32 stab wounds, several with vertebral or scapular fractures, a splenectomy or transfusion; one adult was stabbed five times (vertebral, rib and scapular fractures, transfusion) and the other once (deep leg wound). The attack lasted about 15 minutes from 11:45. One adult survivor was readmitted around 15 August with breathing problems and had lung surgery (secondary reporting). The last injured child was discharged on 8 August 2024.",
                 checks: [
                     ["ok", "Ages 6–11; 3 deaths; 10 injured; 8 critical per later reporting."],
-                    ["unverified", "Could not verify: NWAS/HART/MERIT deployment detail (Inquiry Vol 1 NWAS section not retrieved); 'up to 8+ stab wounds per victim'."],
-                    ["unverified", "Removed: '100% surgical survival' (one child died in hospital the next day)."]
+                    ["ok", "Per-victim wound counts (sentencing remarks, judiciary.uk, Jan 2025). These replace the earlier 'eight or more stab wounds per victim', which fitted only some survivors."],
+                    ["ok", "Receiving hospitals: Alder Hey, Royal Manchester Children's, Aintree, Southport and Formby DGH, Ormskirk (NWAS statement, 29 July 2024; NWAS evidence to the Inquiry)."],
+                    ["partial", "NWAS response (trust statement; NWAS witness statement and closing submission to the Southport Inquiry): first 999 call 11:47; first NWAS clinician on scene 11:57; first ambulance 12:05; HEMS on the ground by 12:16; 37 resources and over 100 personnel, including 17 ambulances, 4 HART units, 2 advanced paramedics and 5 doctors (including MERIT and HEMS); major incident declared at about 12:25, though the Inquiry heard of confusion and delay in the declaration and in passing METHANE. MERIT rests on the trust statement; the Inquiry report's NWAS chapter could not be read."],
+                    ["ok", "The Inquiry's expert evidence (Professor Lyon, cited in NWAS's closing submission) found the care of the child who died in hospital was of high quality with minimal delay; the government response confirms recommendations 8–10 concern major-incident training, declaration and terminology. The earlier 'forensic survivability analyses showing preventable deaths' claim has been deleted as unsupported."],
+                    ["unverified", "Removed: '100% surgical survival' (Alice reached Southport DGH at 12:35 and died at 01:20 the next day; no source says she reached surgery)."]
                 ]
             }
         ];
@@ -178,7 +186,7 @@
                 regions: "Neck, chest, armpits, back, abdomen, groin, buttocks (the TST penetrating-injury search areas); limbs; pelvis (vehicle impact)",
                 lsi: "Hot/warm zone extraction; Pressure / Tourniquet / Packing; clinician-led chest decompression within scope of practice",
                 hospital: "Massive haemorrhage protocol (London Code Red 2018: Pack A = 4 RBC + 4 FFP; Pack B = 6 RBC + 6 FFP + 2 cryo + 1 platelets; TXA 1 g over 10 min); penetrating neck injury assessment per MTC protocol",
-                pitfall: "Borsetto et al. 2019 (Queen Elizabeth Hospital Birmingham, 2012–2018 cohort): when CT angiography showed indirect signs alone, only 12.1% had significant vascular injury at exploration (PPV ≈ 12.1%)."
+                pitfall: "Borsetto et al. 2019 (Queen Elizabeth Hospital Birmingham, penetrating neck injury 2012–2018; 157 identified, 67 included): when CT angiography showed indirect signs of vascular injury alone, only 12.1% had significant vascular injury at neck exploration; direct radiological signs combined with clinical signs gave 97.7% specificity."
             },
             {
                 id: "ARCH_03",
@@ -464,10 +472,10 @@
                 personnel: "Paramedics, EMTs, HART, MERIT, HEMS / air ambulance",
                 gaps: "67.2% of under-16s in TARN 2008–2017 lacked complete pre-hospital physiology (Chernbumroong et al., preprint); poor shared mental models with armed police (Stephens et al. 2026); Manchester Arena Inquiry Vol 2 noted a paucity of analgesia within the inner cordon.",
                 mandate: [
-                    "NHS MITT (primary clinical triage for NHS responders): catastrophic bleeding → P1; walking → P3; breathing? open airway, still not breathing → DEAD; does not respond to voice → P1; under 2 → P1; RR <12 or ≥24 → P1; HR ≥100 → P1 (check current NHS England card; EMJ 2022 text reads >100); otherwise P2",
+                    "NHS MITT (primary clinical triage for NHS responders): catastrophic bleeding → P1; walking → P3; breathing? open airway, still not breathing → DEAD; does not respond to voice → P1; under 2 → P1; RR <12 or ≥24 → P1; HR 100 or more → P1 (the card's wording; the EMJ 2022 derivation paper reads >100); otherwise P2",
                     "Complete paediatric vital signs wherever possible",
                     "Inner-cordon analgesia provision",
-                    "Hydroxocobalamin 5 g IV (adult) / 70 mg/kg, max 5 g (child) and atropine per the PHE/NHSE 2018 briefing — scope of practice varies by service; verify against current JRCALC/TOXBASE and local SOP"
+                    "Hydroxocobalamin 5 g IV (adult) / 70 mg/kg, max 5 g (child) and atropine per the PHE/NHSE 2018 briefing. What is public: English ambulance trusts carry nerve-agent antidote auto-injectors (a combined atropine/oxime device) on frontline and major-incident vehicles under a national programme (SECAmb FOI, 2017); hydroxocobalamin is an ED Category A stock item (RCEM/NPIS 2021) and at least one trust holds none (national resilience stock). JRCALC drug text is subscription-only; verify locally"
                 ],
                 benchmark: "Simulation reference, not a standard: in the same study, MITT applied after TST took 25.9 s per casualty (960 s), against 40.5 s (1,500 s) for a single MITT-alone run (Park, Vassallo et al. 2026). A ≤26 s target is derived from that study.",
                 unsourced: ["Delayed analgesia due to locked vehicle drug cabinets", ">90% physiological documentation benchmark in children under 5", "'55.1% missed P1s with legacy Sieve'", "MITT 'Pit Stop' pathway (not part of MITT)"]
@@ -489,7 +497,7 @@
             {
                 tier: "Tier 4: Specialist Surgical, Anaesthetic & ICU Teams",
                 personnel: "Trauma, vascular, ENT, orthopaedic, paediatric and burns surgeons; anaesthetists; intensivists",
-                gaps: "Penetrating neck injury: indirect CT angiography signs alone had a 12.1% rate of significant vascular injury at exploration (Borsetto et al. 2019, Queen Elizabeth Hospital Birmingham). Prolonged ICU care after nerve agent poisoning (Salisbury: five critically ill patients in ICU, BJA 2022).",
+                gaps: "Penetrating neck injury: indirect CT angiography signs alone had a 12.1% rate of significant vascular injury at exploration; direct signs plus clinical signs gave 97.7% specificity (Borsetto et al. 2019, Queen Elizabeth Hospital Birmingham, 2012–2018). Prolonged ICU care after nerve agent poisoning (Salisbury: five critically ill patients in ICU, BJA 2022).",
                 mandate: [
                     "Damage control surgery for blast injury",
                     "Penetrating neck injury assessment (interpret indirect CT angiography signs with caution)",
@@ -498,7 +506,7 @@
                     "Level 3 ICU surge: the Severn Trauma Adult Guideline asks units to double Level 3 ventilated capacity and maintain it for at least 96 hours (regional guidance; no national source found)"
                 ],
                 benchmark: "No published benchmark found.",
-                unsourced: ["Zone 2 vascular control within 15 min of incision", "Cricothyroidotomy through eschar in under 90 s", "Zone 2 neck figures 56.3%, 84.4%, 67.2%, 50.8%, 42% (could not verify)", "Limited out-of-hours ENT/vascular exposure (no source)"]
+                unsourced: ["Zone 2 vascular control within 15 min of incision", "Cricothyroidotomy through eschar in under 90 s", "Zone 2 neck figures 56.3%, 84.4%, 67.2%, 50.8%, 42% (not in Borsetto 2019, Kasbekar 2017 or Zakaria 2022; deleted)", "Limited out-of-hours ENT/vascular exposure (no source)"]
             }
         ];
 

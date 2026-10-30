@@ -11,7 +11,10 @@ const VFILE = {
   VR:"Registry verification table (verify_registry.md)",
   D12:"WMAS Major Incident Response Aide-Memoire 2018 (public card)",
   SUITE:"Training suite data (archetype names)",
-  VE:"European incident verification table (verify_europe.md)"
+  VE:"European incident verification table (verify_europe.md)",
+  V2C:"Clinical verification, round 2 (verify_round2_clinical.md)",
+  V2U:"UK incident verification, round 2 (verify_round2_uk.md)",
+  V2E:"European incident verification, round 2 (verify_round2_europe.md)"
 };
 const U = {
   naru:"https://www.england.nhs.uk/wp-content/uploads/2018/12/naru-tst-non-clinical-responders-supplementary-information.pdf",
@@ -43,7 +46,28 @@ const U = {
   nmtr:"https://www.england.nhs.uk/outcomes-and-registries-programme/nmtr/",
   euTri:"https://doi.org/10.1097/MEJ.0000000000000771",
   euMadrid:"https://doi.org/10.1007/s00068-008-8805-2",
-  euBerlin:"https://doi.org/10.1007/s12024-020-00277-6"
+  euBerlin:"https://doi.org/10.1007/s12024-020-00277-6",
+  mittLong:"https://www.england.nhs.uk/long-read/nhs-major-incident-triage-tool-mitt/",
+  las2019:"https://www.londonambulance.nhs.uk/?p=26474",
+  hostler:"https://researchconnect.buffalo.edu/en/publications/admission-temperature-and-survival-in-patients-admitted-to-burn-c/",
+  dbth:"https://www.dbth.nhs.uk/wp-content/uploads/2025/03/Adult-Burn-Referral-Guidance-2025-2028-3.pdf",
+  ukhsaNA:"https://assets.publishing.service.gov.uk/media/670fd675e84ae1fd8592f503/Nerve_Agents_UKHSA_IM_.pdf",
+  chemm:"https://chemm.hhs.gov/na_hospital_mmg.htm",
+  secambFoi:"https://www.secamb.nhs.uk/wp-content/uploads/foi_disclosure_log/2017/09%20-%20September/Miscellaneous/170901%20-%20Chemical%20Attacks%20.pdf",
+  npis:"https://www.npis.org/Download/RCEM_NPIS_Antidote_Guideline_List_2021_FINAL_V3.pdf",
+  jesip:"https://www.jesip.org.uk/",
+  naruHart:"https://naru.org.uk/the-interoperable-capabilities/hart/",
+  aaceMerit:"https://aace.org.uk/?p=3032",
+  tarnIss:"https://www.c4ts.qmul.ac.uk/downloads/procedures-manual-tarn-p13-iss.pdf",
+  niss:"https://www.qxmd.com/r/9420106",
+  naruPlan:"https://naru.org.uk/wp-content/uploads/2024/01/NARU-ANNUAL-BUSINESS-PLAN-2023-2024.pdf",
+  tarnWales:"https://trauma.nhs.wales/information-for-patients/tarnnmtr/",
+  scasRole:"https://www.scas.nhs.uk/wp-content/uploads/2022/09/Resuscitation-Policy.pdf",
+  nfccRvp:"https://nfcc.org.uk/control-measure/control-measure-rendezvous-points-and-marshalling-areas/",
+  jramc:"https://militaryhealth.bmj.com/content/jramc/early/2017/12/04/jramc-2017-000819.full.pdf",
+  protectuk:"https://www.protectuk.police.uk/threat-risk/threat-analysis/marauding-terrorist-attacks-mta",
+  toxbase:"https://www.toxbase.org/",
+  lenval:"https://doi.org/10.1007/s00068-018-0901-3"
 };
 const S = (f,c,u) => ({f,c,u:u||""});
 const AIDE = S("D12","WMAS Major Incident Response Aide-Memoire, 2018 v1 Edition 2");
@@ -115,7 +139,8 @@ const MODULES = [
 <li><b>Talking?</b> Yes: a deliberate, targeted search for penetrating injury that "must include the neck, chest, armpits, back, abdomen, groin and buttocks" (front, back and sides). Found: <span class="tag p1">P1</span>. None: <span class="tag p2">P2</span>. Not talking: go to step 4.</li>
 <li><b>Breathing?</b> Open the airway if able, then a 10-second look, listen and feel. Yes: recovery position, <span class="tag p1">P1</span>. No: recovery position, <span class="tag nb">NOT BREATHING</span>. CPR if resources allow; it must not detract from stopping external bleeding and opening airways.</li>
 </ol>
-<p><b>Additional rule:</b> any child under 2 is automatically <span class="tag p1">P1</span>.</p>
+<p><b>Additional rule:</b> any child under 2 is automatically <span class="tag p1">P1</span>: "In the context of TST, this should be taken literally and any child under 2 should be automatically triaged as a P1" (NARU TST Supplementary Information v1.0, April 2023).</p>
+<p><b>Card versus guidance.</b> The NHS England TST card (April 2023) carries only the flowchart labels: "Talking", "Penetrating Injury", "Front or Back", "Severe Bleeding", "Pressure", "Tourniquet", "Packing" and so on. The list of body regions and the under-2 rule appear only in the NARU supplementary guidance, not on the card.</p>
 <p><b>Bands:</b> P1 white on red, P2 black on yellow, P3 white on green, NOT BREATHING black on silver. A white checked border identifies TST bands.</p>
 <p><b>No DEAD category.</b> NOT BREATHING records the objective finding of the breathing check. Later, a healthcare practitioner with time reassesses the casualty as a viable resuscitation (P1) or ROLE/PLE (dead).</p>
 <div class="callout small"><p><strong>One simulation study, not a standard.</strong> In a 37-casualty field simulation (Park, Vassallo et al. 2026), TST took a mean of 10.2 s per casualty with 80.3% accuracy, against 79.3% for MITT. These figures come from one exercise and are not competency standards.</p></div>`,
@@ -155,11 +180,11 @@ const MODULES = [
 <li><b>Breathing?</b> If not, open the airway. Still not breathing: <span class="tag dead">DEAD</span>. In children under 12, consider 5 rescue breaths after submersion, immersion or smoke inhalation.</li>
 <li><b>Responds to voice?</b> If not: recovery position, <span class="tag p1">P1</span></li>
 <li><b>Aged under 2?</b> <span class="tag p1">P1</span></li>
-<li><b>Breathing rate outside 12–23</b> (below 12, or 24 and above)? <span class="tag p1">P1</span></li>
+<li><b>Breathing rate outside 12 - 23</b> (below 12, or 24 and above)? <span class="tag p1">P1</span>. The card gives the normal band as "12 - 23"; the digits 24 do not appear on it.</li>
 <li><b>Heart rate 100 or more?</b> <span class="tag p1">P1</span></li>
 <li>Otherwise <span class="tag p2">P2</span></li>
 </ol>
-<div class="callout warn small"><p><strong>Heart rate wording differs between sources.</strong> The NHS England MITT tool reads "Heart Rate 100 or More". The EMJ 2022 text reads "&gt;100". Check your current local card.</p></div>
+<div class="callout warn small"><p><strong>The card and the derivation paper differ at the boundary.</strong> The NHS England MITT card (April 2023, PRN00365ii) reads "Heart Rate 100 or More", so a heart rate of exactly 100 is P1. The derivation paper (Vassallo et al., EMJ 2022) describes the MPTT-24 thresholds as "Heart Rate &gt;100 and Respiratory Rate &lt;12 or ≥24", which read literally would make 100 a P2. Neither source writes "≥100". The published card is the operational standard and is what this site teaches. The NHS England text version of MITT gives no numeric heart-rate threshold at all; the number is on the card graphic.</p></div>
 <ul class="tight">
 <li>MITT uses the same physiological thresholds for adults and children across the entire age range, derived from MPTT-24.</li>
 <li>MITT keeps a DEAD category. It has <b>no "Pit Stop" pathway</b>.</li>
@@ -173,7 +198,7 @@ const MODULES = [
     {q:"Which breathing rates make a casualty P1 on MITT (once they reach that step)?",o:["Below 10 or above 30","Below 12, or 24 and above (outside 12–23)","Above 20 only","Below 8 only"],a:1,
      why:"The tool gives \"Breathing Rate 12–23\"; outside that range is P1. EMJ 2022 states RR <12 or ≥24.",src:S("VT","NHS England MITT PDF; Vassallo et al. EMJ 2022",U.mittpdf)},
     {q:"An adult responds to voice, has a breathing rate of 18 and a heart rate of exactly 100. Using the wording on the published NHS England MITT tool, what category are they?",o:["P2","P1, because the tool reads \"Heart Rate 100 or More\"","P3","It cannot be decided"],a:1,
-     why:"The published tool reads \"100 or more\", so 100 gives P1. The EMJ 2022 text reads \">100\", which would give P2. This discrepancy is flagged on this site: check your current local card.",src:S("VT","NHS England MITT PDF, April 2023; EMJ 2022 (\">100\", see verify_registry.md)",U.mittpdf)},
+     why:"The published card reads \"100 or More\", so 100 gives P1. The EMJ 2022 derivation paper reads \">100\", which would give P2. The card is the operational standard, so teach 100 or more.",src:S("V2C","NHS England MITT PDF, April 2023; Vassallo et al. EMJ 2022",U.mittpdf)},
     {q:"Which of these is part of MITT?",o:["A \"Pit Stop\" pathway","A DEAD category","A Survivor Reception Centre route for the uninjured","Separate paediatric thresholds"],a:1,
      why:"MITT keeps a DEAD category. It contains no Pit Stop pathway, the Survivor Reception Centre route was removed, and the same thresholds apply at all ages.",src:S("VT","NHS England MITT long-read and PDF; EMJ 2022",U.emj22)},
     {q:"A 9-year-old has been pulled from water and is not breathing after the airway is opened. What does MITT say to consider?",o:["Nothing; categorise as DEAD immediately","5 rescue breaths","A heart rate check first","Walking test"],a:1,
@@ -302,6 +327,8 @@ const MODULES = [
 <li>Atropine IV/IM/IO: 4.0–4.2 mg for adults and children aged 12 or over (50–75 microgram/kg under 12), repeated every 5 minutes until secretions are minimal and the patient is atropinised (lungs clear, HR above 80/min, adequate BP). No maximum dose is stated. <b>Pupil size must not be used as an endpoint.</b><span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Novichok (A-series) agents inhibit acetylcholinesterase; the inhibited enzyme ages rapidly (2–4 min), so oxime reactivation is difficult. Current therapy is atropine, oximes and benzodiazepines with supportive care including ventilation.</li>
 <li>Salisbury 2018: the Skripals plus three further critically ill patients were cared for in Salisbury District Hospital's ICU. Dawn Sturgess was the only fatality of the five people poisoned.</li>
+<li><b>How long is atropine needed?</b> UK guidance (PHE 2018; UKHSA 2024) titrates repeated boluses to the endpoint and gives no fixed duration. In nerve-agent vapour exposure the requirement is usually measured in hours (US CHEMM: life-threatening effects rarely beyond 3 hours; lesser effects 6–36 hours); severe cases may need a maintenance infusion. Multi-day infusions are described mainly in organophosphate <i>insecticide</i> poisoning (median about 5 days in one Korean series), with exceptional cases lasting weeks. Salisbury and Amesbury patients needed weeks of intensive care, but no published UK source gives their atropine duration.</li>
+<li><b>Who carries the antidotes?</b> English ambulance trusts carry nerve-agent antidote auto-injectors (a combined atropine/oxime device, not plain atropine) on frontline and major-incident vehicles under a national programme, with all operational staff trained at induction (SECAmb FOI, 2017). Hydroxocobalamin is a hospital ED stock item (RCEM/NPIS 2021, Category A); at least one trust holds none and relies on national resilience stock. The JRCALC drug text is available only to subscribers via the JRCALC Plus/iCPG apps.</li>
 </ul>`,
   links:[["prehospital","CBRN first responder flowchart"],["sops","SOP 6: suspected nerve agent casualties"],["clinical","Clinical guides"]],
   quiz:[
@@ -340,7 +367,10 @@ const MODULES = [
 <li>Cyanide antidote plus high-flow oxygen for suspected smoke inhalation with altered mental status and/or cardiovascular instability. Hydroxocobalamin: adults 5 g IV over 15 minutes (a second 5 g may follow; maximum total 10 g); children 70 mg/kg, not exceeding 5 g (Cyanokit SmPC).<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Prophylactic large-bore tracheal intubation where airway compromise is suspected. Surgical airway through a burnt neck: a longitudinal skin incision, <b>then</b> a transverse incision into the cricothyroid membrane.</li>
 <li>Cool running water for 20 minutes, ideally within 10 minutes and up to 3 hours from injury; water below 20°C; no ice water. Hydrogel only if running water is unavailable.</li>
-<li>Warmed fluid resuscitation for adults and children with burns above 20% TBSA; 0.9% sodium chloride for children if available. Severity bands: below 20%, 20–50%, above 50%.</li>
+<li>Warmed fluid resuscitation for adults and children with burns above 20% TBSA (Grade D); 0.9% sodium chloride for children if available. Severity bands: below 20%, 20–50%, above 50%. Hospital burns-service guidance commonly uses lower thresholds (for example above 15% TBSA in adults in Sheffield's referral guidance), so follow the receiving burns network's protocol once in hospital.</li>
+<li>Prevent hypothermia with active warming and regular temperature monitoring (Grade C). Admission hypothermia (36.5°C or below) was independently associated with death in a US statewide registry of burn-centre patients: adjusted odds ratio 1.91, 95% CI 1.58–2.29 (Hostler et al., J Burn Care Res 2013).</li>
+<li>After hydroxocobalamin, expect red skin and mucous membranes (up to about 15 days) and dark red urine (up to 35 days), interference with many laboratory assays for roughly 24 hours (bilirubin up to 4 days) and with urine colorimetric tests for about 48 hours, and a false "blood leak" alarm on haemodialysis machines. Take baseline bloods before the dose (Cyanokit SmPC sections 4.4 and 4.8).</li>
+<li>Tranexamic acid: NICE NG39 (2016) says give it intravenously as soon as possible in major trauma with active or suspected active bleeding (1.5.4) and not more than 3 hours after injury unless there is evidence of hyperfibrinolysis (1.5.5). NG39 gives no dose; this wording was read from a reproduction of the guideline, so check nice.org.uk.</li>
 <li>Revised Baux = age + %TBSA + 17 if inhalation injury. It predicts probability of death, not ICU need (Osler et al. 2010).</li>
 <li>Bleeding: TST step 2 is Pressure / Tourniquet / Packing, then P1. For hospital packs, see SOP 3.</li>
 </ul>`,
@@ -355,7 +385,7 @@ const MODULES = [
     {q:"A surgical airway is needed through a burnt neck. What technique does the consensus recommend?",o:["A transverse skin incision only","A longitudinal skin incision only","A longitudinal skin incision to expose the anatomy, then a transverse incision into the cricothyroid membrane","Needle cricothyroidotomy only"],a:2,
      why:"The consensus requires the longitudinal skin incision followed by a transverse incision into the identified cricothyroid membrane. Teaching only the longitudinal step is misleading.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 5)",U.fphc)},
     {q:"Above what burn size does the consensus recommend starting fluid resuscitation in children?",o:["10% TBSA","15% TBSA","20% TBSA, the same as adults","30% TBSA"],a:2,
-     why:"Initiate fluid resuscitation for adult and paediatric burns above 20% TBSA; the paediatric threshold was aligned with adults.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 7)",U.fphc)},
+     why:"The pre-hospital consensus initiates fluid resuscitation for adult and paediatric burns above 20% TBSA (Grade D); the paediatric threshold was aligned with adults. Hospital burns-service guidance often starts lower (for example above 15% TBSA in adults), so follow the burns network's protocol in hospital.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 7); round 2 clinical verification",U.fphc)},
     {q:"Which cooling statement is correct?",o:["Ice water for 5 minutes","Cool running water for 20 minutes, ideally within 10 minutes and up to 3 hours from injury, water below 20°C","Hydrogel is preferred to running water","Cooling is only useful within 10 minutes"],a:1,
      why:"Cool running water for 20 minutes, ideally within 10 minutes, up to 3 hours; water below 20°C (optimum about 12°C); ice water is not recommended. Hydrogel only if running water is unavailable.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 9 and 10)",U.fphc)},
     {q:"What does the revised Baux score predict?",o:["Need for intensive care","Probability of death","Fluid volume required","Need for intubation"],a:1,
@@ -376,10 +406,10 @@ const MODULES = [
   content:`
 <ul class="tight">
 <li><b>Manchester Arena, 2017.</b> 22 victims died. The 20 who died at the scene include the bomber, so 19 victims died at the scene and 3 in hospital during early resuscitation. 150 of the 153 hospital patients survived to day 30.</li>
-<li><b>London Bridge, 2017.</b> 48 people were taken to five London hospitals. King's admitted 14 (8 in critical care); the Royal London admitted 12 (6 critical). Calling all 26 "critical" was an error: 21 of the 36 still in hospital were critical.</li>
+<li><b>London Bridge, 2017.</b> 48 people were taken to five London hospitals, and all 48 survived (London Ambulance Service statement at the close of the inquest, June 2019). King's admitted 14 (8 in critical care); the Royal London admitted 12 (6 critical). Calling all 26 "critical" was an error: 21 of the 36 still in hospital were critical.</li>
 <li><b>Croydon, 2016.</b> LAS took 51 people to hospital: 31 to Croydon University Hospital and 20 to St George's. St George's said 4 of its 20 were seriously injured and 16 minor, so the MTC took many minor cases too.</li>
 <li><b>Westminster, 2017.</b> Casualties went to St Thomas', King's, St Mary's, the Royal London and Chelsea and Westminster.</li>
-<li><b>Southport, 2024.</b> Early reporting said 5 children and 2 adults were critical; later sources say 8 (6 children and both adults). Seven children went to Alder Hey.</li>
+<li><b>Southport, 2024.</b> Early reporting said 5 children and 2 adults were critical; later sources say 8 (6 children and both adults). Casualties went to five hospitals (NWAS). The sentencing remarks give the wound count for each victim; the three girls who died had at least 122, at least 85 and 5 sharp-force wounds, and surviving children between 1 and 32.</li>
 <li><b>Simulation is not incident data.</b> Timings of 40.5 s per casualty and 1,377 s come from one simulated exercise, not from any real attack.</li>
 <li><b>European incidents.</b> Seven European attacks, from Madrid 2004 to Barcelona 2017, are in the incident database. Each has a confidence level, sources for every medical fact, and caveats where sources disagree. See the European lessons there.</li>
 <li><b>Staff experience.</b> Skryabina et al. found gaps in blast-injury protocols, communication and psychological support among hospital staff.</li>
@@ -389,7 +419,7 @@ const MODULES = [
     {q:"At Manchester Arena, \"20 died at the scene\". How many of those were victims?",o:["20","19: the 20 includes the person who detonated the device","22","23"],a:1,
      why:"\"Killed at scene: 20, including the person who detonated the device.\" 19 victims died at the scene and 3 in hospital, giving 22. \"20 + 3\" would wrongly give 23.",src:S("VI","Dark et al. EMJ 2021; Manchester Arena Inquiry Vol 2",U.emjArena)},
     {q:"After the 2017 London Bridge attack, King's College Hospital admitted 14 patients. How many were in critical care?",o:["14","12","8","6"],a:2,
-     why:"NHS England (4 June 2017): King's admitted 14, 8 in critical care; the Royal London admitted 12, 6 critical.",src:S("VI","NHS England update, 4 June 2017",U.nhse17)},
+     why:"NHS England (4 June 2017): King's admitted 14, 8 in critical care; the Royal London admitted 12, 6 critical. All 48 patients LAS took to hospital survived (LAS statement, June 2019).",src:S("VI","NHS England update, 4 June 2017",U.nhse17)},
     {q:"Croydon tram derailment, 2016: what did St George's (the MTC) report about its 20 patients?",o:["All 20 were critical P1s","4 were seriously injured and 16 had minor injuries","None were admitted","It received no patients"],a:1,
      why:"St George's said 4 of its 20 were seriously injured and 16 minor. An MTC can take a large share of minor cases too.",src:S("VI","St George's statement, November 2016",U.stgeorges)},
     {q:"Which hospitals received casualties after the 2017 Westminster attack?",o:["St Thomas' only","St Thomas' and King's only","St Thomas', King's, St Mary's, the Royal London, and Chelsea and Westminster","The Royal London only"],a:2,
@@ -425,7 +455,7 @@ const TRAINER_TOOLS = {
     },
     order:["walk","bleed","talk","pen","breath"],
     src:["NARU TST supplementary information v1.0; NHS England TST tool, April 2023",U.naru]},
-  MITT:{name:"NHS Major Incident Triage Tool (MITT)", note:"Heart rate: the published tool reads \"100 or more\"; the EMJ 2022 text reads \">100\". Check your local card.",
+  MITT:{name:"NHS Major Incident Triage Tool (MITT)", note:"Heart rate: the published NHS England card reads \"100 or More\" and is the operational standard; the EMJ 2022 derivation paper reads \">100\".",
     start:"cat",
     nodes:{
       cat:{q:"Catastrophic bleeding?",yes:{out:"P1"},no:"walk",rule:"MITT step 1: catastrophic bleeding → P1."},
@@ -434,8 +464,8 @@ const TRAINER_TOOLS = {
         rule:"Not breathing after airway opening → DEAD. MITT keeps a DEAD category."},
       voice:{q:"Responds to voice?",yes:"age",no:{out:"P1",act:"Recovery position"},rule:"No response to voice → recovery position → P1."},
       age:{q:"Aged under 2?",yes:{out:"P1"},no:"rr",rule:"Under 2 → P1."},
-      rr:{q:"Breathing rate outside 12–23?",d:"Below 12, or 24 and above.",yes:{out:"P1"},no:"hr",rule:"Breathing rate outside 12–23 → P1."},
-      hr:{q:"Heart rate 100 or more?",d:"Tool wording. EMJ 2022 reads \">100\".",yes:{out:"P1"},no:{out:"P2"},rule:"Heart rate 100 or more → P1; otherwise P2."}
+      rr:{q:"Breathing rate outside 12 - 23?",d:"The card's normal band is \"12 - 23\": below 12, or 24 and above, is P1.",yes:{out:"P1"},no:"hr",rule:"Breathing rate outside 12 - 23 → P1."},
+      hr:{q:"Heart rate 100 or more?",d:"Card wording, the operational standard. EMJ 2022 reads \">100\".",yes:{out:"P1"},no:{out:"P2"},rule:"Heart rate 100 or more → P1; otherwise P2."}
     },
     order:["cat","walk","breathe","voice","age","rr","hr"],
     src:["NHS England MITT, April 2023; Vassallo et al. EMJ 2022",U.mittpdf]}
@@ -472,43 +502,43 @@ const PRESENTATION = {
 };
 
 // ---------------- Glossary ----------------
-// x: expansion as given in the files; x:null means the expansion is not in the verified files ("check").
+// x: expansion as given in the files. A leading "~" marks an expansion confirmed against a source in verification round 2 (verify_round2_clinical.md, section 7); x:null means the expansion is not in the verified files ("check").
 const GLOSSARY = [
   ["AChE","Acetylcholinesterase","The enzyme inhibited by nerve agents, including Novichok (A-series) agents. Enzyme inhibited by A-agents ages rapidly (2–4 min), so oxime reactivation is difficult.","VC"],
   ["AIS","Abbreviated Injury Scale","Injury severity scale used in the registry papers. The Manchester abstract writes \"AIS>3\"; the conventional serious-injury definition is AIS ≥3.","VR"],
   ["BRRT","Burn Rapid Response Team","WHO Emergency Medical Team construct: a small senior team deploying in 6–12 h to support first receiving hospitals; not expected to work on scene. Not a UK NHS structure.","VC"],
   ["BST","Burn Specialist Team","WHO Emergency Medical Team construct: arrives 48–72 h or later and stays up to about 6 weeks. Not a UK NHS structure.","VC"],
-  ["CBRN","~Chemical, Biological, Radiological and Nuclear","Used for chemical incidents, including nerve agents. The \"Plus\" in STEP 1-2-3 Plus is the CBRN first responder flowchart.","D12"],
+  ["CBRN","~Chemical, Biological, Radiological, Nuclear","Used for chemical incidents, including nerve agents. NARU writes CBRN(e), adding Explosives. The \"Plus\" in STEP 1-2-3 Plus is the CBRN first responder flowchart. Expansion: SECAmb HART Deployment Procedure 2024; NARU.","V2C"],
   ["CCP","Casualty Collection Point","Where injured walking casualties are directed under TST. The 2018 aide-memoire separately lists a \"Casualty Clearing Point\" among the locations the first attendant identifies.","VT"],
   ["COHb","Carboxyhaemoglobin","Standard pulse oximeters cannot distinguish it from oxyhaemoglobin. Above 30% indicates severe CO poisoning.","VC"],
   ["Code Red","London major haemorrhage algorithm (2018)","Pack A: 4 red cells + 4 FFP. Pack B: 6 red cells, 6 FFP, 2 cryo, 1 platelets. Other networks differ.","VR"],
   ["CSCATTT","Command and control, Safety, Communications, Assessment, Triage, Treatment, Transport","Order of priorities at the scene for the NHS. The 2018 card's \"Sieve & Sort\" triage entry is superseded by TST and MITT.","D12"],
   ["DEAD (MITT)","MITT category","Not breathing after airway opening. MITT keeps a DEAD category; TST does not.","VT"],
-  ["HART","~Hazardous Area Response Team","Specialist ambulance asset named in the source material. Whether such teams carry hydroxocobalamin or atropine is service-specific.","VC"],
-  ["ISS","~Injury Severity Score","Sum of squares of the highest AIS in each of the three most severely injured body regions (six regions; set to 75 if any AIS is 6).","VR"],
-  ["JESIP","~Joint Emergency Services Interoperability Principles","Principles for joint working on the aide-memoire: co-locate, communicate, co-ordinate, jointly understand risk, shared situational awareness.","D12"],
+  ["HART","~Hazardous Area Response Team","Specialist ambulance teams (NARU: \"Hazardous Area Response Teams\"). Antidotes: English ambulance trusts carry nerve-agent antidote auto-injectors on frontline and major-incident vehicles under a national programme (SECAmb FOI, 2017); hydroxocobalamin is ED stock (RCEM/NPIS 2021) and at least one trust holds none. JRCALC drug text is subscription-only.","V2C"],
+  ["ISS","~Injury Severity Score","TARN Procedures Manual: \"Square the highest score in each body region\" and \"add the sum of the squares of the highest AIS scores in each of the three most severely injured body regions\" (six regions; set to 75 if any AIS is 6).","V2C"],
+  ["JESIP","~Joint Emergency Services Interoperability Principles","Principles for joint working on the aide-memoire: co-locate, communicate, co-ordinate, jointly understand risk, shared situational awareness. The archived 2013 Joint Doctrine used \"Programme\" for the P; the JESIP website now uses \"Principles\".","V2C"],
   ["JRCALC","UK Ambulance Services Clinical Practice Guidelines","Subscription resource. Not accessed when this site was compiled, so no dose here is verified against it.","VC"],
-  ["MERIT","~Medical Emergency Response Incident Team","Specialist pre-hospital asset named in the source material. Scope varies by service.","VC"],
+  ["MERIT","~Medical Emergency Response Incident Team","Specialist pre-hospital medical teams (NHS guidance via AACE; NWAS; PHE 2018 \"Medical Emergency Response Incident Teams (MERIT)\"). Scope varies by service.","V2C"],
   ["METHANE","Major incident, Exact location, Type of incident, Hazards, Access, Number of casualties, Emergency services","Structure for a major incident report.","D12"],
   ["MITT","NHS Major Incident Triage Tool","NHS responders' rapid primary triage tool (April 2023). Uses breathing rate and heart rate; same thresholds at all ages; keeps DEAD; no Pit Stop pathway.","VT"],
-  ["MPTT-24","~Modified Physiological Triage Tool-24","The triage tool from which MITT's physiological thresholds were derived.","VT"],
-  ["MTA","~Marauding Terrorist Attack","Used in the training suite's archetype names for sharp-force and vehicle attacks.","SUITE"],
+  ["MPTT-24","~Modified Physiological Triage Tool-24","The triage tool from which MITT's physiological thresholds were derived (EMJ 2022; NHS England). The 24 is the upper respiratory-rate threshold: \"increasing the upper respiratory rate threshold to 24 breaths per minute (MPTT-24)\" (Vassallo et al., J R Army Med Corps 2017).","V2C"],
+  ["MTA","~Marauding Terrorist Attack","ProtectUK (NPSA): \"fast-moving, violent incidents where assailants move through a location aiming to find and kill or injure as many people as possible\". SECAmb and NARU also use MTA, not MTFA. Used in the training suite's archetype names for sharp-force and vehicle attacks.","V2C"],
   ["MTC","Major trauma centre","Hospital in a regional trauma network. Greater Manchester's network listed 3 MTCs alongside trauma units and local emergency hospitals; 75 (49%) of the 153 Manchester hospital patients attended an MTC.","VR"],
-  ["NARU","~National Ambulance Resilience Unit","Publisher, with NHS England, of the TST supplementary information (v1.0, April 2023).","VT"],
-  ["NISS","~New Injury Severity Score","Sum of squares of the three highest AIS scores regardless of body region. Always ≥ ISS by construction; a higher NISS says nothing about accuracy.","VR"],
+  ["NARU","~National Ambulance Resilience Unit","Publisher, with NHS England, of the TST supplementary information (v1.0, April 2023). Expansion: NARU Annual Business Plan 2023–24. Note: naru.org.uk now redirects to the London Ambulance Service \"NHS Resilience Emergency Capabilities Unit\" page (October 2025); no page opened states that NARU has been formally renamed.","V2C"],
+  ["NISS","~New Injury Severity Score","Osler et al., J Trauma 1997: the sum of the squares of the AIS scores of each of a patient's three most severe injuries regardless of body region. Always ≥ ISS by construction; a higher NISS says nothing about accuracy.","V2C"],
   ["NMTR","National Major Trauma Registry","Run by NHS England's Outcomes and Registries Programme. Launched April 2024, taking over from TARN.","VR"],
   ["NOT BREATHING","TST band (black on silver)","Objective finding of the TST breathing check, not a declaration of death. A healthcare practitioner later reassesses for viable resuscitation (P1) or ROLE/PLE.","VT"],
   ["P1 / P2 / P3","Priority One / Two / Three","Triage priorities. TST bands: P1 white on red, P2 black on yellow, P3 white on green. All living people involved are at least P3 under MITT.","VT"],
   ["Remove-Remove-Remove","Initial actions for a contaminated casualty","Remove from the area; remove outer clothing if affected; remove the substance from skin (dry decontamination unless skin is itchy, burning or painful).","D12"],
   ["Revised Baux","Age + %TBSA + 17 if inhalation injury","Derived and validated to predict probability of death after burns, not ICU need.","VC"],
-  ["ROLE / PLE","~Recognition of Life Extinct / Pronouncing Life Extinct","Outcome a healthcare practitioner may reach when reassessing a casualty with a NOT BREATHING band.","VT"],
-  ["RVP","~Rendezvous Point","Location given under Access in METHANE. The aide-memoire also lists a \"Multi-Agency Rendezvous Point\".","D12"],
+  ["ROLE / PLE","~Recognition of Life Extinct (ROLE)","Outcome a healthcare practitioner may reach when reassessing a casualty with a NOT BREATHING band (the NARU TST guidance writes \"ROLE/PLE (DEAD)\"). ROLE is expanded in the SCAS Resuscitation Policy (2022); no source opened expands PLE.","V2C"],
+  ["RVP","~Rendezvous point","Location given under Access in METHANE. The aide-memoire also lists a \"Multi-Agency Rendezvous Point\". Expansion: JESIP Joint Doctrine 2013 (\"a rendezvous point (RVP)\"); NFCC.","V2C"],
   ["SRC","Survivor Reception Centre","Former route for the uninjured, removed from MITT. All living people involved are at least P3.","VT"],
   ["STAG","Severn Trauma Adult Guideline","Severn network manual. Asks critical care units to double Level 3 ventilated capacity for at least 96 hours.","VR"],
   ["STEP 1-2-3 Plus","Safety triggers for responders","One person: standard approach. Two: caution. Three or more in close proximity with no obvious reason: caution and the CBRN flowchart.","D12"],
-  ["TARN","~Trauma Audit and Research Network","Trauma registry whose 2008–2017 data underpin the triage studies cited here. It moved to the NHS England NMTR in April 2024.","VR"],
-  ["TBSA","~Total Body Surface Area","Burn size measure. Fluid resuscitation above 20% for adults and children; severity bands below 20%, 20–50%, above 50%.","VC"],
-  ["TOXBASE","~National Poisons Information Service online database (not an acronym)","Subscription toxicology resource. Not accessed when this site was compiled.","VC"],
+  ["TARN","~Trauma Audit and Research Network","Trauma registry whose 2008–2017 data underpin the triage studies cited here. It moved to the NHS England NMTR in April 2024. Expansion: South Wales Trauma Network; TARN Procedures Manual.","V2C"],
+  ["TBSA","~Total body surface area","Burn size measure (FPHC/BBA consensus). NICE MIB58 writes the variant \"total burn surface area\". Pre-hospital fluid resuscitation above 20% for adults and children (Grade D); some hospital guidance starts above 15% in adults; severity bands below 20%, 20–50%, above 50%.","V2C"],
+  ["TOXBASE","Not an acronym: the National Poisons Information Service clinical toxicology database","A proper name (NPIS: \"our bespoke database - TOXBASE®\"; toxbase.org: \"The primary clinical toxicology database of the National Poisons Information Service\"). For health professionals only; registration required. Not accessed when this site was compiled.","V2C"],
   ["TST","Ten Second Triage","NHS England / NARU triage tool for anyone at the scene (v1.0, April 2023). Uses no physiological measurements.","VT"]
 ];
 
@@ -516,9 +546,9 @@ const GLOSSARY = [
 const SESSION_PLANS = [
   {id:"huddle", title:"15-minute huddle: TST and MITT refresher", mins:15, who:"Any ED or ambulance team at a shift handover",
    objectives:["Recall the TST questions and bands in order.","Recall the MITT steps, including the heart rate wording flag.","Know what a scene band means when it arrives at the ED."],
-   timings:[["0–2 min","Introduce the session. Read out the training-only disclaimer."],["2–6 min","Walk through the TST quick-reference card."],["6–10 min","Walk through the MITT quick-reference card. Point out the heart rate wording discrepancy."],["10–14 min","Triage two casualty cards together: SIM_02 (walked at scene, deteriorates at ED) and SIM_10 (not breathing)."],["14–15 min","Close: where the trust major incident plan is kept <span class=\"ph\">[location]</span>."]],
+   timings:[["0–2 min","Introduce the session. Read out the training-only disclaimer."],["2–6 min","Walk through the TST quick-reference card."],["6–10 min","Walk through the MITT quick-reference card. Point out that the card reads \"100 or more\" for heart rate, while the EMJ 2022 paper reads \">100\"; the card is the standard."],["10–14 min","Triage two casualty cards together: SIM_02 (walked at scene, deteriorates at ED) and SIM_10 (not breathing)."],["14–15 min","Close: where the trust major incident plan is kept <span class=\"ph\">[location]</span>."]],
    materials:["TST and MITT quick-reference cards (Printables)","Casualty cards SIM_02 and SIM_10","Trust major incident plan <span class=\"ph\">[location]</span>"],
-   debrief:["What does a silver NOT BREATHING band mean when it arrives in the ED?","Why do we re-triage people who walked at the scene?","What does our local MITT card say about a heart rate of exactly 100?"]},
+   debrief:["What does a silver NOT BREATHING band mean when it arrives in the ED?","Why do we re-triage people who walked at the scene?","What category does the NHS England MITT card give a heart rate of exactly 100, and why?"]},
   {id:"teach60", title:"60-minute teaching session: mass casualty triage and the front door", mins:60, who:"ED doctors and nurses, paramedics, students",
    objectives:["Use METHANE and CSCATTT to structure an incident.","Apply TST and MITT correctly to fictional casualties.","Plan for self-presenters, re-triage and surge using the Manchester Arena case series."],
    timings:[["0–5 min","Welcome, objectives, training-only disclaimer, ground rules for a safe learning space."],["5–15 min","Module 1: METHANE, JESIP principles and CSCATTT."],["15–30 min","Modules 2 and 3: TST and MITT. Project the triage trainer and work two cards as a group."],["30–45 min","In pairs: the timed surge exercise (TST mode, then MITT mode). Compare debriefs."],["45–55 min","Module 4: what Manchester Arena showed about arrivals, self-presenters and critical care."],["55–60 min","Debrief questions. Ask learners to complete the module knowledge checks."]],
