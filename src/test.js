@@ -7,7 +7,22 @@ const SP = process.env.SHOTS_DIR || path.join(__dirname, '..', 'screenshots');
 fs.mkdirSync(SP, { recursive: true });
 const FILE = path.join(__dirname, '..', 'index.html');
 const URL = 'file://' + FILE;
-const TABS = ['home','learn','triage','prehospital','trainer','surge','drill','sops','clinical','incidents','glossary','sources','teach','printables','planning'];
+const TABS = ['home','research','incidents','europe-lessons','registry','sources','incident-planning','sops','prehospital','clinical','training','learn','triage','trainer','surge','drill','teach','printables','glossary','planning'];
+const LANDINGS = { research: { name: 'Research', pages: ['incidents','europe-lessons','registry','sources'] },
+  'incident-planning': { name: 'Planning for incidents', pages: ['sops','prehospital','clinical','planning'] },
+  training: { name: 'Training and practice', pages: ['learn','triage','trainer','surge','drill','teach','printables'] } };
+// Hashes in use before the three-section layout, and the page each must still open.
+const OLD_HASHES = { home:'home', learn:'learn', triage:'triage', prehospital:'prehospital', trainer:'trainer', surge:'surge', drill:'drill', sops:'sops', clinical:'clinical',
+  incidents:'incidents', glossary:'glossary', sources:'sources', teach:'teach', printables:'printables', planning:'planning',
+  europe:'incidents', 'uk-incidents':'incidents', 'europe-lessons':'europe-lessons', 'europe-not-found':'europe-lessons', registry:'registry',
+  injects:'teach', hotdebrief:'teach', 'learn/m3':'learn', 'pr-tst':'printables' };
+// Common American spellings that must not appear in visible text (British English throughout).
+const US_WORDS = ['color','colors','colored','coloring','center','centers','centered','favor','favorite','behavior','behaviors','gray','defense','offense','catalog','license plate',
+  'anemia','hemorrhage','hemorrhagic','hemostatic','hemostasis','hematoma','edema','esophagus','esophageal','pediatric','pediatrics','anesthesia','anesthetic','anesthetist','orthopedic','orthopedics',
+  'ischemia','ischemic','hypoglycemia','hypovolemia','hypovolemic','hypoxemia','septicemia','fetal hemoglobin','hemoglobin','carboxyhemoglobin','oxyhemoglobin','liter','liters','milliliter','milliliters',
+  'tumor','labor','honor','neighbor','fiber','maneuver','aluminum','traveled','traveling','labeled','labeling','modeling','modeled','canceled','toward','afterward','enrollment','fulfill','program','programs',
+  'practiced','practicing','artifact','artifacts','acknowledgment','analog','dialog','catalogs','percent'];
+const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|res)iz(?:e|es|ed|ing|ation|ations)|\\w+yz(?:e|es|ed|ing))\\b', 'gi');
 
 (async () => {
   const browser = await chromium.launch();
@@ -49,8 +64,82 @@ const TABS = ['home','learn','triage','prehospital','trainer','surge','drill','s
     ok(`desktop section #${t} visible`, vis);
   }
   ok('title', (await page.title()) === 'Mass Casualty Handbook');
-  ok('nav groups Learn/Practise/Reference/Teach', (await page.$$eval('#siteNav .nav-h', els => els.map(e => e.textContent).join(','))) === 'Learn,Practise,Reference,Teach');
+  ok('nav groups Research/Planning for incidents/Training and practice/More', (await page.$$eval('#siteNav .nav-h', els => els.map(e => e.textContent).join(','))) === 'Research,Planning for incidents,Training and practice,More');
+  ok('every page is in the navigation once', (await page.$$eval('#siteNav a[data-tab]', as => as.map(a => a.dataset.tab).sort().join(','))) === [...TABS].sort().join(','));
+  ok('html lang is en-GB', (await page.getAttribute('html', 'lang')) === 'en-GB');
   ok('nav marks current page', (await page.getAttribute('#siteNav a[aria-current="page"]', 'data-tab')) === 'planning');
+
+  // ---------- Three sections: landing pages, home cards, breadcrumb, old hashes ----------
+  for (const [id, L] of Object.entries(LANDINGS)) {
+    await page.goto(URL + '#' + id); await page.waitForTimeout(60);
+    const info = await page.evaluate(id => { const s = document.getElementById('tab-' + id); return { active: s.classList.contains('active'), h1: s.querySelector('h1').textContent.trim(), purpose: (s.querySelector('.sec-hero .purpose') || {}).textContent || '',
+      cards: [...s.querySelectorAll('.page-card')].map(c => c.dataset.page), hrefs: [...s.querySelectorAll('.page-card h3 a')].map(a => a.getAttribute('href')), sec: s.dataset.sec }; }, id);
+    ok(`landing #${id}: shown with heading "${L.name}"`, info.active && info.h1 === L.name, info.h1);
+    ok(`landing #${id}: one-paragraph purpose statement`, info.purpose.length > 150, String(info.purpose.length));
+    ok(`landing #${id}: cards link to every page in the section`, info.cards.join(',') === L.pages.join(',') && info.hrefs.join(',') === L.pages.map(p => '#' + p).join(','), info.cards.join(','));
+    ok(`landing #${id}: breadcrumb names the section`, (await page.textContent('#crumb')).startsWith(L.name));
+    for (const p of L.pages) {
+      await page.goto(URL + '#' + p); await page.waitForTimeout(40);
+      const c = await page.evaluate(() => ({ crumb: document.getElementById('crumb').textContent, sec: document.querySelector('section.tab.active').dataset.sec, cur: (document.querySelector('#siteNav a[aria-current="page"]') || {}).dataset }));
+      ok(`page #${p}: breadcrumb shows "${L.name}" and section colour`, c.crumb.startsWith(L.name + '›') && c.sec === info.sec && c.cur && c.cur.tab === p, c.crumb);
+    }
+    await page.goto(URL + '#' + id); await page.waitForTimeout(40);
+    await page.click(`#tab-${id} .page-card h3 a >> nth=0`); await page.waitForTimeout(60);
+    ok(`landing #${id}: first card navigates`, (await page.evaluate(() => document.querySelector('section.tab.active').id)) === 'tab-' + L.pages[0]);
+  }
+  ok('three sections have distinct colours', await page.evaluate(() => { const c = ['research','planning','training'].map(k => { const d = document.querySelector(`.nav-group[data-sec="${k}"] .sec-ico`); return getComputedStyle(d).backgroundColor; }); return new Set(c).size === 3; }));
+  await page.goto(URL + '#home'); await page.waitForTimeout(60);
+  const homeSecs = await page.$$eval('#homeSections .home-sec', els => els.map(e => ({ h: e.querySelector('h3').textContent.trim(), btn: e.querySelector('a.btn').getAttribute('href'), links: e.querySelectorAll('li a').length })));
+  ok('home: three large section cards', homeSecs.length === 3 && homeSecs.map(s => s.h).join('|') === 'Research|Planning for incidents|Training and practice' && homeSecs.map(s => s.btn).join(',') === '#research,#incident-planning,#training' && homeSecs.every(s => s.links >= 4), JSON.stringify(homeSecs));
+  ok('home: section cards come before the role routes', await page.evaluate(() => { const a = document.getElementById('homeSections'), r = document.querySelector('#tab-home .role-card'); return !!(a.compareDocumentPosition(r) & Node.DOCUMENT_POSITION_FOLLOWING); }));
+  ok('home: disclaimer, progress and role routes kept', /For training only\. This is not a clinical protocol\./.test(await page.textContent('#tab-home')) && (await page.locator('#homeProgress .prog-row').count()) === 8 && (await page.locator('#tab-home .role-card').count()) === 3);
+  ok('home: every role-route link is labelled with its section', await page.evaluate(() => [...document.querySelectorAll('#tab-home .role-card li')].every(li => li.querySelector('.sec-tag'))));
+  await page.click('#homeSections .home-sec[data-sec="planning"] a.btn'); await page.waitForTimeout(60);
+  ok('home: Planning card opens the Planning landing page', (await page.evaluate(() => document.querySelector('section.tab.active').id)) === 'tab-incident-planning');
+  for (const [h, tab] of Object.entries(OLD_HASHES)) {
+    await page.goto(URL + '#home'); await page.goto(URL + '#' + h); await page.waitForTimeout(40);
+    const act = await page.evaluate(() => document.querySelector('section.tab.active').id);
+    ok(`old hash #${h} still resolves`, act === 'tab-' + tab, act);
+  }
+  await page.goto(URL + '#home'); await page.goto(URL + '#practise'); await page.waitForTimeout(60);
+  ok('alias #practise redirects to #training', (await page.evaluate(() => [document.querySelector('section.tab.active').id, location.hash].join(' '))) === 'tab-training #training');
+  await page.goto(URL + '#planning-for-incidents'); await page.waitForTimeout(60);
+  ok('alias #planning-for-incidents redirects to the Planning landing page', (await page.evaluate(() => location.hash)) === '#incident-planning');
+  await page.goto(URL + '#pr-mitt'); await page.waitForTimeout(60);
+  ok('Planning links to the quick-reference cards in Printables', (await page.locator('#tab-incident-planning a[href="#pr-tst"]').count()) === 1 && (await page.evaluate(() => document.querySelector('section.tab.active').id)) === 'tab-printables');
+
+  // ---------- British English: visible text on every page ----------
+  const usHits = [], titleHits = [];
+  async function scanUS(where) {
+    const r = await page.evaluate(src => {
+      const re = new RegExp(src, 'gi');
+      document.querySelectorAll('details').forEach(d => d.open = true);
+      let body = document.body.innerText;
+      // Cited titles (link text of sources) may keep their original spelling; check them separately.
+      const cited = [...document.querySelectorAll('a.url')].map(a => a.innerText).filter(Boolean);
+      cited.forEach(c => { body = body.split(c).join(' '); });
+      const attrs = [...document.querySelectorAll('[aria-label],[title],[alt],[placeholder]')].map(e => ['aria-label','title','alt','placeholder'].map(a => e.getAttribute(a) || '').join(' ')).join(' ');
+      const hit = s => [...s.matchAll(re)].map(m => m[0]);
+      return { body: hit(body + ' ' + attrs + ' ' + document.title), cited: hit(cited.join(' ')) };
+    }, US_RE.source);
+    r.body.forEach(w => usHits.push(where + ':' + w)); r.cited.forEach(w => titleHits.push(where + ':' + w));
+  }
+  for (const t of TABS) { await page.goto(URL + '#' + t); await page.waitForTimeout(40); await scanUS('#' + t); }
+  const modIds = await page.evaluate(() => MODULES.map(m => m.id));
+  for (const id of modIds) for (const tb of ['mt-obj', 'mt-learn', 'mt-quiz']) {
+    await page.goto(URL + '#learn/' + id); await page.waitForTimeout(30); await page.click('#' + tb); await scanUS(`#learn/${id}/${tb}`);
+  }
+  await page.goto(URL + '#drill'); await page.click('#cardPills button[data-i="0"]'); await page.click('#drillSubmit'); await scanUS('#drill feedback');
+  await page.goto(URL + '#trainer'); await page.click('#trWhyBtn').catch(() => {}); await scanUS('#trainer');
+  await page.goto(URL + '#home'); await page.reload(); // the scan opened every <details>; start the later checks from a fresh page
+  ok('British English: no common American spellings in visible text on any page', usHits.length === 0, usHits.slice(0, 10).join(' '));
+  ok('British English: cited titles checked separately (original spelling allowed)', true, titleHits.length ? 'kept as published: ' + [...new Set(titleHits.map(h => h.split(':').pop()))].join(', ') : 'none found');
+  ok('British English: scan regex catches American spellings', ['colour-coded color', 'hemorrhage', 'organize', 'pediatric', 'analyze'].every(w => new RegExp(US_RE.source, 'i').test(w)) && !['colour','haemorrhage','organise','paediatric','analyse','size','programme','practice'].some(w => new RegExp(US_RE.source, 'i').test(w)));
+  await page.goto(URL + '#home');
+  await page.fill('#siteSearch', 'atropine'); await page.waitForTimeout(80);
+  const secNames = await page.$$eval('#searchResults .r-sec .sec-tag', els => [...new Set(els.map(e => e.textContent))]);
+  ok('search: results show the new section names', secNames.length > 0 && secNames.every(n => ['Research', 'Planning for incidents', 'Training and practice'].includes(n)), secNames.join(','));
+  await page.keyboard.press('Escape');
 
   // Incident filter (existing)
   await page.goto(URL + '#incidents');
@@ -374,7 +463,7 @@ const TABS = ['home','learn','triage','prehospital','trainer','surge','drill','s
   ok('search: Escape closes results', await page.isHidden('#searchResults'));
 
   // ---------- Contrast (both themes) ----------
-  const PAIRS = [['text','bg'],['text-muted','bg'],['text-muted','surface'],['text-muted','surface-2'],['accent-text','accent-soft'],['bg','accent'],['accent-text','surface'],['link','bg'],['link','surface'],['warn-text','warn-bg'],['danger-text','danger-bg'],['ok-text','ok-bg'],['unv-text','unv-bg'],['p1-fg','p1-bg'],['p2-fg','p2-bg'],['p3-fg','p3-bg'],['nb-fg','nb-bg'],['dead-fg','dead-bg']];
+  const PAIRS = [['text','bg'],['text-muted','bg'],['text-muted','surface'],['text-muted','surface-2'],['accent-text','accent-soft'],['bg','accent'],['accent-text','surface'],['link','bg'],['link','surface'],['warn-text','warn-bg'],['danger-text','danger-bg'],['ok-text','ok-bg'],['unv-text','unv-bg'],['p1-fg','p1-bg'],['p2-fg','p2-bg'],['p3-fg','p3-bg'],['nb-fg','nb-bg'],['dead-fg','dead-bg'],['sec-r-text','sec-r-soft'],['sec-r-text','surface'],['sec-p-text','sec-p-soft'],['sec-p-text','surface'],['sec-t-text','sec-t-soft'],['sec-t-text','surface'],['bg','sec-r'],['bg','sec-p'],['bg','sec-t']];
   async function contrastFails(p) {
     return p.evaluate(pairs => {
       const lum = c => { const [r, g, b] = c.match(/\d+/g).slice(0, 3).map(Number).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
@@ -405,9 +494,12 @@ const TABS = ['home','learn','triage','prehospital','trainer','surge','drill','s
     await page.goto(URL + '#' + t); await page.waitForTimeout(80);
     await shot(page, `screenshot-desktop-${t}-dark.png`);
   }
+  for (const t of Object.keys(LANDINGS)) { await page.goto(URL + '#' + t); await page.waitForTimeout(80); await shot(page, `screenshot-desktop-${t}-dark.png`); }
   await page.click('#themeBtn');
   await page.goto(URL + '#home'); await page.waitForTimeout(80);
   await shot(page, 'screenshot-desktop-home.png');
+  await shot(page, 'screenshot-desktop-home-full.png', true);
+  for (const t of Object.keys(LANDINGS)) { await page.goto(URL + '#' + t); await page.waitForTimeout(80); await shot(page, `screenshot-desktop-${t}.png`, true); }
   await page.goto(URL + '#learn'); await page.waitForTimeout(80);
   await shot(page, 'screenshot-desktop-learn.png');
   await page.goto(URL + '#triage'); await page.waitForTimeout(80);
@@ -433,7 +525,7 @@ const TABS = ['home','learn','triage','prehospital','trainer','surge','drill','s
       await m.waitForTimeout(60);
       const sw = await overflow(m);
       ok(`mobile(${scheme}) #${t} no horizontal overflow`, sw <= 375, `scrollWidth=${sw}`);
-      if (scheme === 'light' && ['home', 'triage', 'drill', 'incidents', 'sops', 'trainer', 'teach', 'printables', 'glossary', 'learn'].includes(t)) {
+      if (scheme === 'light' && ['home', 'research', 'incident-planning', 'training', 'triage', 'drill', 'incidents', 'sops', 'trainer', 'teach', 'printables', 'glossary', 'learn'].includes(t)) {
         await m.evaluate(() => window.scrollTo(0, 0));
         await shot(m, `screenshot-mobile-${t}.png`);
       }
@@ -470,9 +562,11 @@ const TABS = ['home','learn','triage','prehospital','trainer','surge','drill','s
     await m.click('#menuBtn');
     ok(`mobile(${scheme}) menu opens`, await m.isVisible('#siteNav') && (await m.getAttribute('#menuBtn', 'aria-expanded')) === 'true');
     ok(`mobile(${scheme}) open menu no overflow`, (await overflow(m)) <= 375);
+    ok(`mobile(${scheme}) menu shows the three section names`, (await m.$$eval('#siteNav .nav-h', els => els.filter(e => e.offsetParent !== null).map(e => e.textContent).join(','))) === 'Research,Planning for incidents,Training and practice,More');
     if (scheme === 'light') await shot(m, 'screenshot-mobile-menu.png');
     await m.click('#siteNav a[data-tab="glossary"]');
     await m.waitForTimeout(80);
+    if (scheme === 'light') { for (const t of ['home', ...Object.keys(LANDINGS)]) { await m.goto(URL + '#' + t); await m.waitForTimeout(60); await shot(m, `screenshot-mobile-${t}-full.png`, true); } await m.goto(URL + '#glossary'); await m.waitForTimeout(60); }
     ok(`mobile(${scheme}) menu link navigates and closes`, (await m.evaluate(() => document.querySelector('section.tab.active').id)) === 'tab-glossary' && !(await m.isVisible('#menuClose')));
     if (scheme === 'dark') { await m.goto(URL + '#sources'); await shot(m, 'screenshot-mobile-sources-dark.png'); await m.goto(URL + '#learn'); await shot(m, 'screenshot-mobile-learn-dark.png'); }
     await m.context().close();

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mass Casualty Handbook</title>
-<meta name="description" content="Training handbook for UK emergency department and pre-hospital clinicians on mass casualty incidents: a learning pathway with knowledge checks, an interactive triage trainer, a timed surge exercise, facilitator session plans, printable cards, a verified incident database, TST and MITT triage, draft hospital SOPs, pre-hospital doctrine and clinical guides. For training only; not a clinical protocol.">
+<meta name="description" content="Handbook for UK emergency department and pre-hospital clinicians on mass casualty incidents, in three sections: research from real incidents, planning for incidents, and training and practice. It includes a learning pathway with knowledge checks, an interactive triage trainer, a timed surge exercise, facilitator session plans, printable cards, a verified incident database, TST and MITT triage, draft hospital SOPs, pre-hospital doctrine and clinical guides. For training only; not a clinical protocol.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap">
@@ -21,6 +21,9 @@
   --nb-bg:#c9cdd1; --nb-fg:#111111; --dead-bg:#111111; --dead-fg:#ffffff;
   --shadow:0 1px 2px rgba(20,30,28,.06),0 2px 8px rgba(20,30,28,.05);
   --hero-from:#e3f0ee; --hero-to:#f7f8f6;
+  --sec-r:#2f55a8; --sec-r-soft:#e6edfa; --sec-r-text:#22427f;
+  --sec-p:#a24d0c; --sec-p-soft:#fcecdd; --sec-p-text:#7d3906;
+  --sec-t:#2a7340; --sec-t-soft:#e2f2e6; --sec-t-text:#1c5a2f;
   --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-head:"Source Serif 4",Georgia,"Times New Roman",serif;
   --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -39,6 +42,9 @@
     --nb-bg:#c9cdd1; --nb-fg:#111111; --dead-bg:#000000; --dead-fg:#ffffff;
     --shadow:0 1px 2px rgba(0,0,0,.4);
   --hero-from:#173634; --hero-to:#141b1a;
+  --sec-r:#8fb0f5; --sec-r-soft:#1d2a47; --sec-r-text:#bccffa;
+  --sec-p:#f0a868; --sec-p-soft:#3b2614; --sec-p-text:#f8cda3;
+  --sec-t:#7acb8d; --sec-t-soft:#173322; --sec-t-text:#ade4bb;
     color-scheme:dark;
   }
 }
@@ -54,6 +60,9 @@
   --nb-bg:#c9cdd1; --nb-fg:#111111; --dead-bg:#000000; --dead-fg:#ffffff;
   --shadow:0 1px 2px rgba(0,0,0,.4);
   --hero-from:#173634; --hero-to:#141b1a;
+  --sec-r:#8fb0f5; --sec-r-soft:#1d2a47; --sec-r-text:#bccffa;
+  --sec-p:#f0a868; --sec-p-soft:#3b2614; --sec-p-text:#f8cda3;
+  --sec-t:#7acb8d; --sec-t-soft:#173322; --sec-t-text:#ade4bb;
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -443,6 +452,52 @@ a.btn{text-decoration:none;display:inline-block}
   #printRoot textarea{border:1px solid #000;min-height:28mm;width:100%;resize:none}
   #printRoot .qr{border:2pt solid #000}
 }
+/* ===== Three site sections: Research / Planning for incidents / Training and practice ===== */
+:root{--sc:var(--accent);--sc-soft:var(--accent-soft);--sc-text:var(--accent-text)}
+[data-sec="research"]{--sc:var(--sec-r);--sc-soft:var(--sec-r-soft);--sc-text:var(--sec-r-text)}
+[data-sec="planning"]{--sc:var(--sec-p);--sc-soft:var(--sec-p-soft);--sc-text:var(--sec-p-text)}
+[data-sec="training"]{--sc:var(--sec-t);--sc-soft:var(--sec-t-soft);--sc-text:var(--sec-t-text)}
+.sec-ico{display:inline-grid;place-items:center;flex:0 0 auto}
+.sec-ico svg{display:block}
+.nav-group[data-sec] .nav-h{display:flex;align-items:center;gap:8px;color:var(--sc-text);font-size:.76rem}
+.nav-group[data-sec] .nav-h .sec-ico{width:22px;height:22px;border-radius:6px;background:var(--sc);color:var(--bg)}
+.nav-group[data-sec] .nav-list{border-left:3px solid var(--sc);margin-left:12px;padding-left:4px}
+.nav-group[data-sec] .nav-list a{padding-left:10px}
+.nav-group[data-sec] .nav-list a[aria-current="page"]{background:var(--sc-soft);color:var(--sc-text);border-left-color:var(--sc)}
+.nav-list a.nav-ov{font-weight:600;color:var(--sc-text)}
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:1.6em}
+.crumb:empty{display:none}
+.sec-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 4px;border-radius:999px;background:var(--sc-soft);color:var(--sc-text);border:1px solid var(--sc);font-weight:600;font-size:.82rem;text-decoration:none;max-width:100%}
+.sec-chip .sec-ico{width:20px;height:20px;border-radius:999px;background:var(--sc);color:var(--bg)}
+.crumb .sep{color:var(--text-muted)}
+.crumb b{color:var(--sc-text)}
+section.tab[data-sec]{border-top:4px solid var(--sc);margin-top:10px}
+.sec-tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.03em;padding:1px 7px;border-radius:999px;background:var(--sc-soft);color:var(--sc-text);border:1px solid var(--sc);vertical-align:middle;white-space:nowrap}
+.sec-hero{display:flex;gap:16px;align-items:flex-start;background:var(--sc-soft);border:1px solid var(--sc);border-left:8px solid var(--sc);border-radius:14px;padding:20px 18px;margin:6px 0 18px}
+.sec-hero .sec-ico{width:52px;height:52px;border-radius:12px;background:var(--sc);color:var(--bg)}
+.sec-hero h1{margin:.05em 0 .3em;color:var(--sc-text)}
+.sec-hero .eyebrow{color:var(--sc-text)}
+.sec-hero p.purpose{margin:0;color:var(--text);max-width:72ch;font-size:1.04rem}
+@media (max-width:520px){.sec-hero{flex-direction:column;gap:10px}.sec-hero .sec-ico{width:44px;height:44px}}
+.page-card{border-top:5px solid var(--sc);display:flex;flex-direction:column}
+.page-card h3{margin:0 0 4px;font-size:1.12rem}
+.page-card h3 a{color:var(--sc-text);text-decoration:none}
+.page-card h3 a:hover{text-decoration:underline}
+.page-card p{margin:0 0 8px}
+.page-card ul{margin:0 0 10px;padding-left:1.2em}
+.page-card .btn{margin-top:auto;align-self:flex-start;background:var(--surface);color:var(--sc-text);border-color:var(--sc)}
+.home-secs{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));margin:8px 0 18px}
+.home-sec{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--sc);border-top:8px solid var(--sc);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.home-sec .hs-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.home-sec .sec-ico{width:46px;height:46px;border-radius:12px;background:var(--sc);color:var(--bg)}
+.home-sec h3{margin:0;font-size:1.35rem;color:var(--sc-text)}
+.home-sec p{margin:0 0 10px}
+.home-sec ul{margin:0 0 14px;padding-left:1.2em}
+.home-sec li{margin:3px 0}
+.home-sec .btn{margin-top:auto;align-self:stretch;text-align:center;background:var(--sc);border-color:var(--sc);color:var(--bg)}
+.search-pop .r-sec .sec-tag{margin-right:4px}
+.landing-sub{display:flex;align-items:center;gap:8px;color:var(--sc-text)}
+h1[id],h2[id],h3[id]{scroll-margin-top:80px}
 /* late fixes */
 .head-tools{flex:0 0 auto}
 .brand{flex:1 1 auto;min-width:0}
@@ -465,7 +520,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       </div>
       <div style="min-width:0">
         <div class="brand-name">Mass Casualty Handbook</div>
-        <div class="brand-sub">Teaching and training &middot; ED and pre-hospital &middot; UK</div>
+        <div class="brand-sub">Research &middot; Planning &middot; Training &middot; ED and pre-hospital &middot; UK</div>
       </div>
     </a>
     <div class="head-tools">
@@ -504,16 +559,47 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <section class="tab" id="tab-home" aria-labelledby="h-home">
   <div class="hero">
     <div>
-      <p class="eyebrow">Teaching and training &middot; UK emergency departments and pre-hospital care</p>
+      <p class="eyebrow">Research &middot; Planning &middot; Training &middot; UK emergency departments and pre-hospital care</p>
       <h1 id="h-home">Mass Casualty Handbook</h1>
-      <p class="lead" style="color:var(--text)">A structured course, practice tools and ready-made teaching sessions for mass casualty incidents. Everything here comes from fact-checked sources, and anything that could not be checked is labelled <span class="unv">Unverified</span>.</p>
-      <div class="cta-row">
-        <a class="btn lg" href="#learn" id="ctaLearn">Start learning</a>
-        <a class="btn secondary lg" href="#teach" id="ctaTeach">Run a session</a>
-        <a class="btn ghost lg" href="#trainer">Practise triage</a>
-      </div>
+      <p class="lead" style="color:var(--text)">The handbook has three sections: <b>research</b> on what happened at real incidents, <b>planning</b> to prepare your hospital and its pre-hospital interface, and <b>training and practice</b> to build the skills. Everything comes from fact-checked sources, and anything that could not be checked is labelled <span class="unv">Unverified</span>.</p>
     </div>
     <div class="card hero-side" id="heroProgress" aria-live="polite"></div>
+  </div>
+
+  <h2 id="sections">Choose a section</h2>
+  <div class="home-secs" id="homeSections">
+    <div class="home-sec" data-sec="research">
+      <div class="hs-head"><span class="sec-ico"><svg width="26" height="26" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12.3 12.3 17 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><h3>Research</h3></div>
+      <p>Evidence from real incidents: what happened, what the case series and registries show, and how sure we are of each fact. Ten UK and seven European incidents, each with a verification status or confidence level and sources for each fact.</p>
+      <ul>
+        <li><a href="#incidents">Incident database</a></li>
+        <li><a href="#europe-lessons">European lessons</a></li>
+        <li><a href="#registry">Registry and case series (Manchester Arena, TARN)</a></li>
+        <li><a href="#sources">Sources and verification</a></li>
+      </ul>
+      <a class="btn lg" href="#research">Go to Research</a>
+    </div>
+    <div class="home-sec" data-sec="planning">
+      <div class="hs-head"><span class="sec-ico"><svg width="26" height="26" viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="3.5" width="12" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 3.5V2.2h5v1.3M7 8.2h6M7 11.2h6M7 14.2h3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><h3>Planning for incidents</h3></div>
+      <p>Preparing a hospital and its pre-hospital interface before the day: draft ED SOPs, national scene doctrine, clinical guides and planning tools.</p>
+      <ul>
+        <li><a href="#sops">Hospital SOPs (draft)</a></li>
+        <li><a href="#prehospital">Pre-hospital doctrine: METHANE, JESIP, CSCATTT, STEP 1-2-3 Plus</a></li>
+        <li><a href="#clinical">Clinical guides</a></li>
+        <li><a href="#planning">Planning tools: surge calculator and TNA</a></li>
+      </ul>
+      <a class="btn lg" href="#incident-planning">Go to Planning</a>
+    </div>
+    <div class="home-sec" data-sec="training">
+      <div class="hs-head"><span class="sec-ico"><svg width="26" height="26" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="10" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="10" r="1.2" fill="currentColor"/></svg></span><h3>Training and practice</h3></div>
+      <p>Learning and rehearsing the skills: eight modules with knowledge checks, TST and MITT triage, three practice tools and ready-made teaching sessions.</p>
+      <ul>
+        <li><a href="#learn">Learning pathway</a> and <a href="#triage">triage: TST and MITT</a></li>
+        <li><a href="#trainer">Triage trainer</a>, <a href="#surge">timed surge exercise</a> and <a href="#drill">casualty drill</a></li>
+        <li><a href="#teach">Facilitator guide</a> and <a href="#printables">printables</a></li>
+      </ul>
+      <a class="btn lg" href="#training">Go to Training and practice</a>
+    </div>
   </div>
 
   <div class="callout danger" role="note">
@@ -522,17 +608,19 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </div>
 
   <h2>Choose your route</h2>
+  <p class="small muted">Suggested paths through the three sections for each role. The coloured label shows which section each page is in.</p>
   <div class="grid c3">
     <div class="card role-card">
       <div class="role-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
       <h3>ED doctor or nurse</h3>
       <p class="small muted">Front-door triage, re-triage and the first hours of surge.</p>
       <ol>
-        <li><a href="#learn/m3">Module 3: MITT</a></li>
-        <li><a href="#learn/m4">Module 4: The hospital response</a></li>
-        <li><a href="#learn/m7">Module 7: Clinical priorities</a></li>
-        <li><a href="#surge">Timed surge exercise (MITT mode)</a></li>
-        <li><a href="#sops">Draft hospital SOPs</a></li>
+        <li><a href="#learn/m3">Module 3: MITT</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#learn/m4">Module 4: The hospital response</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#surge">Timed surge exercise (MITT mode)</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#sops">Draft hospital SOPs</a> <span class="sec-tag" data-sec="planning">Planning</span></li>
+        <li><a href="#clinical">Clinical guides</a> <span class="sec-tag" data-sec="planning">Planning</span></li>
+        <li><a href="#registry">Manchester Arena case series</a> <span class="sec-tag" data-sec="research">Research</span></li>
       </ol>
       <a class="btn secondary" href="#learn/m3">Start at Module 3</a>
     </div>
@@ -541,11 +629,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       <h3>Paramedic or pre-hospital</h3>
       <p class="small muted">Scene doctrine, TST, the interface with hospitals and CBRN.</p>
       <ol>
-        <li><a href="#learn/m1">Module 1: Major incident principles</a></li>
-        <li><a href="#learn/m2">Module 2: Ten Second Triage</a></li>
-        <li><a href="#learn/m5">Module 5: The pre-hospital and hospital interface</a></li>
-        <li><a href="#learn/m6">Module 6: CBRN and Remove-Remove-Remove</a></li>
-        <li><a href="#trainer">Triage trainer (TST)</a></li>
+        <li><a href="#learn/m1">Module 1: Major incident principles</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#learn/m2">Module 2: Ten Second Triage</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#trainer">Triage trainer (TST)</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#prehospital">Pre-hospital doctrine</a> <span class="sec-tag" data-sec="planning">Planning</span></li>
+        <li><a href="#learn/m6">Module 6: CBRN and Remove-Remove-Remove</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#incidents">Incident database</a> <span class="sec-tag" data-sec="research">Research</span></li>
       </ol>
       <a class="btn secondary" href="#learn/m1">Start at Module 1</a>
     </div>
@@ -554,11 +643,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       <h3>Educator or facilitator</h3>
       <p class="small muted">Ready-made sessions, a tabletop exercise and printable cards.</p>
       <ol>
-        <li><a href="#teach">Session plans: huddle, 60 minutes, tabletop</a></li>
-        <li><a href="#teach">Tabletop injects (fictional)</a></li>
-        <li><a href="#teach">Hot-debrief template</a></li>
-        <li><a href="#printables">Printable TST, MITT and casualty cards</a></li>
-        <li><a href="#surge">Timed surge exercise for groups</a></li>
+        <li><a href="#session-plans">Session plans: huddle, 60 minutes, tabletop</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#injects">Tabletop injects (fictional)</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#hotdebrief">Hot-debrief template</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#printables">Printable TST, MITT and casualty cards</a> <span class="sec-tag" data-sec="training">Training</span></li>
+        <li><a href="#tna">Training needs analysis</a> <span class="sec-tag" data-sec="planning">Planning</span></li>
+        <li><a href="#europe-lessons">European lessons for teaching</a> <span class="sec-tag" data-sec="research">Research</span></li>
       </ol>
       <a class="btn secondary" href="#teach">Open the facilitator guide</a>
     </div>
@@ -566,16 +656,6 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 
   <h2>Your progress</h2>
   <div class="card"><div id="homeProgress"></div></div>
-
-  <h2>Explore</h2>
-  <div class="grid c3">
-    <a class="card quick" href="#triage"><div class="q-title">Triage tools</div><div class="small muted">TST and MITT as flowcharts, hospital re-triage, and how the two compare.</div></a>
-    <a class="card quick" href="#drill"><div class="q-title">Casualty drill</div><div class="small muted">Ten fictional casualties. Choose TST and MITT categories and key actions.</div></a>
-    <a class="card quick" href="#sops"><div class="q-title">Hospital SOPs</div><div class="small muted">Draft ED SOPs 1–6: front door triage, surge, haemorrhage, smoke, burns, nerve agents.</div></a>
-    <a class="card quick" href="#prehospital"><div class="q-title">Pre-hospital</div><div class="small muted">METHANE, JESIP, CSCATTT, STEP 1-2-3 Plus and Remove-Remove-Remove.</div></a>
-    <a class="card quick" href="#incidents"><div class="q-title">Incident database</div><div class="small muted">Ten UK and seven European incidents, with a verification status or confidence level and sources for each fact.</div></a>
-    <a class="card quick" href="#clinical"><div class="q-title">Clinical guides</div><div class="small muted">Safe-to-teach statements on smoke, burns and nerve agents, with dose warnings.</div></a>
-  </div>
 
   <h2>What has been verified</h2>
   <p>Every clinical and factual statement here comes from a set of verification tables. In those tables, "confirmed" means a source was opened and read, not just found in a search. Anything that could not be checked is labelled <span class="unv">Unverified</span>.</p>
@@ -604,6 +684,160 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
         <li>Simulation timings come from one study and are not standards.</li>
       </ul>
       <p class="small"><a href="#sources">Full list of unverified items</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION LANDING: RESEARCH ============ -->
+<section class="tab landing" id="tab-research" aria-labelledby="h-research">
+  <div class="sec-hero">
+    <span class="sec-ico"><svg width="30" height="30" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12.3 12.3 17 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+    <div>
+      <p class="eyebrow">Section</p>
+      <h1 id="h-research">Research</h1>
+      <p class="purpose">Evidence from real incidents. This section brings together what happened at ten UK and seven European mass casualty incidents, the figures from hospital case series and registries such as the Manchester Arena series and the TARN triage studies, and where every fact came from. Use it to ground your teaching and planning in what has actually happened, and to see how sure we can be of each figure: every item carries a verification status or confidence level.</p>
+    </div>
+  </div>
+  <h2>Pages in this section</h2>
+  <div class="grid c2" id="landingCards-research">
+    <div class="card page-card" data-sec="research" data-page="incidents">
+      <h3><a href="#incidents">Incident database</a></h3>
+      <p class="small">Ten UK incidents (2016–2024) and seven European incidents (2004–2017). Filter by region (UK or Europe), incident type, year and verification status.</p>
+      <ul class="small tight"><li><a href="#uk-incidents">UK incidents</a></li><li><a href="#europe">European incidents</a></li></ul>
+      <a class="btn" href="#incidents">Open<span class="sr-only"> Incident database</span></a>
+    </div>
+    <div class="card page-card" data-sec="research" data-page="europe-lessons">
+      <h3><a href="#europe-lessons">European lessons</a></h3>
+      <p class="small">Cross-cutting teaching points from the European incidents, each with its source, and the European data that could not be found.</p>
+      <ul class="small tight"><li><a href="#europe-not-found">European data: not found or unverified</a></li></ul>
+      <a class="btn" href="#europe-lessons">Open<span class="sr-only"> European lessons</span></a>
+    </div>
+    <div class="card page-card" data-sec="research" data-page="registry">
+      <h3><a href="#registry">Registry and case series</a></h3>
+      <p class="small">The Manchester Arena hospital case series and the TARN-based triage studies: each figure with its status and caveat.</p>
+      
+      <a class="btn" href="#registry">Open<span class="sr-only"> Registry and case series</span></a>
+    </div>
+    <div class="card page-card" data-sec="research" data-page="sources">
+      <h3><a href="#sources">Sources and verification</a></h3>
+      <p class="small">How the content was checked, the corrections made, everything still unverified, and every source used.</p>
+      <ul class="small tight"><li><a href="#still-unverified">Still unverified</a></li></ul>
+      <a class="btn" href="#sources">Open<span class="sr-only"> Sources and verification</span></a>
+    </div>
+  </div>
+  <h2>Related pages in other sections</h2>
+  <ul class="tight">
+    <li><a href="#learn/m8">Module 8: lessons from UK and European incidents</a> <span class="sec-tag" data-sec="training">Training</span></li>
+    <li><a href="#responder-research">Responder experience: what the research says</a> <span class="sec-tag" data-sec="planning">Planning</span></li>
+  </ul>
+</section>
+
+<!-- ============ SECTION LANDING: PLANNING FOR INCIDENTS ============ -->
+<section class="tab landing" id="tab-incident-planning" aria-labelledby="h-incident-planning">
+  <div class="sec-hero">
+    <span class="sec-ico"><svg width="30" height="30" viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="3.5" width="12" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 3.5V2.2h5v1.3M7 8.2h6M7 11.2h6M7 14.2h3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+    <div>
+      <p class="eyebrow">Section</p>
+      <h1 id="h-incident-planning">Planning for incidents</h1>
+      <p class="purpose">Preparing a hospital and its pre-hospital interface before an incident happens. This section holds draft emergency department SOPs to adapt, the national scene doctrine that ambulance colleagues work to (METHANE, JESIP, CSCATTT, STEP 1-2-3 Plus and Remove-Remove-Remove), clinical guides for the injuries that dominate these incidents, and tools for estimating surge and planning training. It is a starting point for local plans, not a replacement for your trust's major incident plan.</p>
+    </div>
+  </div>
+  <h2>Pages in this section</h2>
+  <div class="grid c2" id="landingCards-planning">
+    <div class="card page-card" data-sec="planning" data-page="sops">
+      <h3><a href="#sops">Hospital SOPs (draft)</a></h3>
+      <p class="small">Draft ED SOPs 1–6: front-door triage, surge, haemorrhage, smoke inhalation, burns and nerve agents, plus the points to confirm locally.</p>
+      
+      <a class="btn" href="#sops">Open<span class="sr-only"> Hospital SOPs (draft)</span></a>
+    </div>
+    <div class="card page-card" data-sec="planning" data-page="prehospital">
+      <h3><a href="#prehospital">Pre-hospital doctrine</a></h3>
+      <p class="small">Scene doctrine and the interface with hospitals.</p>
+      <ul class="small tight"><li><a href="#methane">METHANE and JESIP</a></li><li><a href="#cscattt">CSCATTT and first crew on scene</a></li><li><a href="#step123">STEP 1-2-3 Plus and Remove-Remove-Remove</a></li></ul>
+      <a class="btn" href="#prehospital">Open<span class="sr-only"> Pre-hospital doctrine</span></a>
+    </div>
+    <div class="card page-card" data-sec="planning" data-page="clinical">
+      <h3><a href="#clinical">Clinical guides</a></h3>
+      <p class="small">Safe-to-teach statements on smoke, burns and nerve agents, with dose warnings, and what is not safe to teach.</p>
+      
+      <a class="btn" href="#clinical">Open<span class="sr-only"> Clinical guides</span></a>
+    </div>
+    <div class="card page-card" data-sec="planning" data-page="planning">
+      <h3><a href="#planning">Planning tools</a></h3>
+      <p class="small">An illustrative surge calculator and a four-tier training needs analysis (TNA).</p>
+      <ul class="small tight"><li><a href="#surge-calculator">Surge calculator</a></li><li><a href="#tna">Training needs analysis</a></li></ul>
+      <a class="btn" href="#planning">Open<span class="sr-only"> Planning tools</span></a>
+    </div>
+  </div>
+  <h2>Action and quick-reference cards</h2>
+  <p>The printable TST and MITT quick-reference cards live in Training and practice, so there is one copy to keep up to date.</p>
+  <ul class="tight">
+    <li><a href="#pr-tst">Ten Second Triage (TST) quick-reference card</a> <span class="sec-tag" data-sec="training">Training</span></li>
+    <li><a href="#pr-mitt">NHS Major Incident Triage Tool (MITT) quick-reference card</a> <span class="sec-tag" data-sec="training">Training</span></li>
+    <li><a href="#injects">Tabletop injects to test your plan</a> <span class="sec-tag" data-sec="training">Training</span></li>
+    <li><a href="#registry">Manchester Arena case series, for planning assumptions</a> <span class="sec-tag" data-sec="research">Research</span></li>
+  </ul>
+</section>
+
+<!-- ============ SECTION LANDING: TRAINING AND PRACTICE ============ -->
+<section class="tab landing" id="tab-training" aria-labelledby="h-training">
+  <div class="sec-hero">
+    <span class="sec-ico"><svg width="30" height="30" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="10" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="10" r="1.2" fill="currentColor"/></svg></span>
+    <div>
+      <p class="eyebrow">Section</p>
+      <h1 id="h-training">Training and practice</h1>
+      <p class="purpose">Learning and rehearsing the skills you will need on the day. Work through the eight-module learning pathway with its knowledge checks, learn the TST and MITT triage tools, then practise them in the triage trainer, the timed surge exercise and the casualty drill. Educators will find session plans, a fictional tabletop exercise, a hot-debrief template and printable cards. All casualties are fictional; these are training simulations.</p>
+    </div>
+  </div>
+  <h2 class="landing-sub">Learn</h2>
+  <div class="grid c2" id="landingCards-training">
+    <div class="card page-card" data-sec="training" data-page="learn">
+      <h3><a href="#learn">Learning pathway</a></h3>
+      <p class="small">Eight short modules, each with objectives, teaching content and a knowledge check with a rationale and source for every answer. Pass mark: 80%.</p>
+      
+      <a class="btn" href="#learn">Open<span class="sr-only"> Learning pathway</span></a>
+    </div>
+    <div class="card page-card" data-sec="training" data-page="triage">
+      <h3><a href="#triage">Triage: TST and MITT</a></h3>
+      <p class="small">Ten Second Triage and the NHS Major Incident Triage Tool as flowcharts, hospital re-triage and how the two compare.</p>
+      
+      <a class="btn" href="#triage">Open<span class="sr-only"> Triage: TST and MITT</span></a>
+    </div>
+  </div>
+  <h2 class="landing-sub">Practise</h2>
+  <div class="grid c3">
+    <div class="card page-card" data-sec="training" data-page="trainer">
+      <h3><a href="#trainer">Triage trainer</a></h3>
+      <p class="small">Work one fictional casualty through the TST or MITT flowchart, one decision at a time.</p>
+      
+      <a class="btn" href="#trainer">Open<span class="sr-only"> Triage trainer</span></a>
+    </div>
+    <div class="card page-card" data-sec="training" data-page="surge">
+      <h3><a href="#surge">Timed surge exercise</a></h3>
+      <p class="small">Triage a stream of fictional casualties against the clock, then review a debrief.</p>
+      
+      <a class="btn" href="#surge">Open<span class="sr-only"> Timed surge exercise</span></a>
+    </div>
+    <div class="card page-card" data-sec="training" data-page="drill">
+      <h3><a href="#drill">Casualty drill</a></h3>
+      <p class="small">Ten fictional casualties: choose TST and MITT categories and key actions.</p>
+      
+      <a class="btn" href="#drill">Open<span class="sr-only"> Casualty drill</span></a>
+    </div>
+  </div>
+  <h2 class="landing-sub">Teach</h2>
+  <div class="grid c2">
+    <div class="card page-card" data-sec="training" data-page="teach">
+      <h3><a href="#teach">Facilitator guide</a></h3>
+      <p class="small">Session plans, a fictional tabletop exercise and a debrief template.</p>
+      <ul class="small tight"><li><a href="#session-plans">Session plans</a></li><li><a href="#injects">Tabletop injects</a></li><li><a href="#hotdebrief">Hot-debrief template</a></li></ul>
+      <a class="btn" href="#teach">Open<span class="sr-only"> Facilitator guide</span></a>
+    </div>
+    <div class="card page-card" data-sec="training" data-page="printables">
+      <h3><a href="#printables">Printables</a></h3>
+      <p class="small">TST and MITT quick-reference cards and ten casualty cards, each with its own Print button.</p>
+      
+      <a class="btn" href="#printables">Open<span class="sr-only"> Printables</span></a>
     </div>
   </div>
 </section>
@@ -756,15 +990,25 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <p>Seven terrorist mass casualty incidents in Europe outside the UK. Every figure comes from a source opened on 30 October 2026, mostly peer-reviewed papers. Where sources disagree, both figures are given and the card says so. "Not found" means no source was located.</p>
     <div id="eurList"></div>
   </div>
-  <h2 id="europe-lessons">European lessons</h2>
-  <p>Cross-cutting teaching points from the European incidents. Each is supported by the source cited.</p>
+  <div class="callout small"><p>See also <a href="#europe-lessons">European lessons</a> and <a href="#registry">registry and case-series figures</a>, both in Research.</p></div>
+</section>
+
+<!-- ============ EUROPEAN LESSONS ============ -->
+<section class="tab" id="tab-europe-lessons" aria-labelledby="europe-lessons">
+  <h1 id="europe-lessons">European lessons</h1>
+  <p class="lead">Cross-cutting teaching points from the European incidents. Each is supported by the source cited.</p>
   <div class="card"><ol class="eu-list" id="eurLessons"></ol></div>
   <h3 id="europe-not-found">European data: not found or unverified</h3>
   <p class="small">No source could be found for these, so they are not used in teaching content.</p>
   <div class="card"><ul class="eu-list" id="eurNotFound"></ul></div>
 
-  <h2 id="registry">Registry and research figures</h2>
-  <p>These figures come from the Manchester Arena case series and the TARN-based triage studies. All three TARN cohorts cover 2008–2017; none uses NMTR data.</p>
+  <p class="small">The incident cards these lessons come from are in the <a href="#europe">incident database</a>.</p>
+</section>
+
+<!-- ============ REGISTRY ============ -->
+<section class="tab" id="tab-registry" aria-labelledby="registry">
+  <h1 id="registry">Registry and case-series figures</h1>
+  <p class="lead">These figures come from the Manchester Arena case series and the TARN-based triage studies. All three TARN cohorts cover 2008–2017; none uses NMTR data.</p>
   <div class="table-wrap"><table class="wide" id="regTable">
     <thead><tr><th>Source</th><th>Figure</th><th>Status</th><th>Caveat</th></tr></thead>
     <tbody></tbody>
@@ -850,7 +1094,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 
 <!-- ============ DRILL ============ -->
 <section class="tab" id="tab-drill" aria-labelledby="h-drill">
-  <h1 id="h-drill">Training drill</h1>
+  <h1 id="h-drill">Casualty drill</h1>
   <p class="lead">Ten fictional casualties, informed by published incidents. Pick a TST band, a MITT category, or both. Select the actions you would take, then check your answer.</p>
   <div class="score-bar" aria-live="polite">
     <div class="stat"><div class="n" id="scTST">0/0</div><div class="l">TST correct</div></div>
@@ -971,7 +1215,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </ul>
   <span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Assess the airway early. Consider prophylactic large-bore tracheal intubation for suspected impending airway compromise: full-thickness facial burns, stridor, respiratory distress, swelling on laryngoscopy, smoke inhalation or singed nasal hairs. The most experienced airway operator available should do it.</li>
-<li>If a surgical airway is needed through burned neck tissue: make a longitudinal skin incision to expose the anatomy, then a transverse incision into the identified cricothyroid membrane.</li>
+<li>If a surgical airway is needed through burnt neck tissue: make a longitudinal skin incision to expose the anatomy, then a transverse incision into the identified cricothyroid membrane.</li>
 <li>Record where hydroxocobalamin has been given: it colours skin and urine red and can interfere with some laboratory tests. <span class="unv">Unverified</span> <span class="small muted">(the draft notes this is from general knowledge and was not checked; confirm with the SmPC and local laboratory)</span></li>
 </ol>
 <p>Stock: confirm where hydroxocobalamin is held and how many doses are available <span class="ph">[location, number]</span>, and how to get more from the network.</p>
@@ -1036,7 +1280,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 
 <!-- ============ PRE-HOSPITAL ============ -->
 <section class="tab" id="tab-prehospital" aria-labelledby="h-pre">
-  <h1 id="h-pre">Pre-hospital</h1>
+  <h1 id="h-pre">Pre-hospital doctrine</h1>
   <p class="lead">Scene doctrine for ambulance clinicians and others who may be first on scene. METHANE, JESIP, CSCATTT, STEP 1-2-3 Plus and Remove-Remove-Remove are taken from the West Midlands Ambulance Service (WMAS) Major Incident Response Aide-Memoire, 2018 v1 Edition 2, a public-facing card.</p>
   <div class="callout warn">
     <p><strong>The 2018 aide-memoire's triage is superseded.</strong> It lists "Sieve &amp; Sort" under Triage. NHS England replaced the Triage Sieve, the Triage Sort and the Paediatric Triage Tape with TST and MITT from April 2023, with full NHS implementation by 30 June 2024 (<a href="https://www.england.nhs.uk/wp-content/uploads/2023/04/PRN00358ii-major-incident-triage-tools-letter-acute-trusts.pdf">NHS England letter, April 2023</a>). Use <a href="#triage">TST and MITT</a>. The card is also WMAS-specific; check your own service's current version.</p>
@@ -1044,7 +1288,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 
   <div class="grid c2">
     <div class="card">
-      <h2 style="margin-top:0">METHANE</h2>
+      <h2 style="margin-top:0" id="methane">METHANE</h2>
       <div class="table-wrap"><table>
         <thead><tr><th>Letter</th><th>Item</th><th>Aide-memoire prompt</th></tr></thead>
         <tbody>
@@ -1059,7 +1303,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       </table></div>
     </div>
     <div class="card">
-      <h2 style="margin-top:0">JESIP</h2>
+      <h2 style="margin-top:0" id="jesip">JESIP</h2>
       <h4>Principles for joint working</h4>
       <ul class="tight"><li>Co-locate</li><li>Communicate</li><li>Co-ordinate</li><li>Jointly understand risk</li><li>Shared situational awareness</li></ul>
       <h4>Joint Decision Model</h4>
@@ -1075,7 +1319,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </div>
 
   <div class="card">
-    <h2 style="margin-top:0">CSCATTT</h2>
+    <h2 style="margin-top:0" id="cscattt">CSCATTT</h2>
     <p class="small muted">The order of priorities for the NHS at the scene. Triage is updated here to current doctrine.</p>
     <div class="table-wrap"><table class="wide">
       <thead><tr><th>Priority</th><th>Aide-memoire (2018)</th><th>Note</th></tr></thead>
@@ -1112,7 +1356,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       </ul>
     </div>
     <div class="card">
-      <h2 style="margin-top:0">STEP 1-2-3 Plus</h2>
+      <h2 style="margin-top:0" id="step123">STEP 1-2-3 Plus</h2>
       <p class="small muted">Safety triggers for responders.</p>
       <ol class="flow" aria-label="STEP 1-2-3 Plus">
         <li><div class="q"><b>STEP 1</b><span class="d">One person incapacitated with no obvious reason</span></div><div class="yes">Approach using standard protocols</div></li>
@@ -1130,7 +1374,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </div>
 
   <div class="card">
-    <h2 style="margin-top:0">CBRN first responder flowchart (summary)</h2>
+    <h2 style="margin-top:0" id="cbrn-flowchart">CBRN first responder flowchart (summary)</h2>
     <ol class="tight">
       <li><strong>Hazard assessment.</strong> Report arrival and location to control. Identify hazards and give a situation report. Apply STEP 1-2-3 Plus.</li>
       <li><strong>Are there 3 or more casualties in close proximity with no obvious reason?</strong> No: follow STEP 1 or 2. Yes: continue.</li>
@@ -1141,7 +1385,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </div>
 
   <div class="card">
-    <h2 style="margin-top:0">Responder experience: what the research says</h2>
+    <h2 style="margin-top:0" id="responder-research">Responder experience: what the research says</h2>
     <p>Stephens et al. (BMJ Open 2026) interviewed 26 armed and unarmed police, paramedics, doctors, fire officers and survivors from 7/7, Westminster Bridge, London Bridge/Borough Market, Manchester Arena and Fishmongers' Hall.</p>
     <ul class="tight">
       <li>Unarmed police were willing to help, but training and first-aid kits did not match: "I just felt really, really under-prepared".</li>
@@ -1178,10 +1422,11 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <!-- ============ PLANNING ============ -->
 <section class="tab" id="tab-planning" aria-labelledby="h-plan">
   <h1 id="h-plan">Planning tools</h1>
+  <p class="lead">Tools for planning your department's response and its training: an illustrative surge calculator and a training needs analysis (TNA). For printable action cards, see the <a href="#printables">printables</a> in Training and practice.</p>
   <div class="callout warn"><p><strong>Illustrative only. Not validated.</strong> This calculator is a teaching aid. Only the blast (Manchester) rates come from a source. Every other rate, the first-hour share and the older-adult factor are assumptions with no source. Do not use it for real capacity planning.</p></div>
 
   <div class="card">
-    <h2 style="margin-top:0">Illustrative surge calculator</h2>
+    <h2 style="margin-top:0" id="surge-calculator">Illustrative surge calculator</h2>
     <div class="filters">
       <label>Incident type
         <select id="modArch"></select>
@@ -1210,7 +1455,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <div class="metric-tiles" id="bloodOut"></div>
   </div>
 
-  <h2>Training needs analysis</h2>
+  <h2 id="tna">Training needs analysis</h2>
   <p>A four-tier curriculum from the training suite. Only items that trace to a source are listed as curriculum items. Items with no source are shown separately so they are not mistaken for evidence.</p>
   <div id="tnaList"></div>
 </section>
@@ -1233,7 +1478,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <ul class="tight" id="changesList"></ul>
   </div>
 
-  <h2>Still unverified</h2>
+  <h2 id="still-unverified">Still unverified</h2>
   <p>These may be true, but no source could be read for them. They are left out of teaching content or marked <span class="unv">Unverified</span>.</p>
   <div class="card"><ul class="tight" id="unvList"></ul></div>
 
@@ -1249,7 +1494,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <p class="lead">Ready-made sessions for teams of any size: a 15-minute huddle, a 60-minute teaching session and a tabletop exercise, plus fictional injects and a hot-debrief template. Each has a Print button.</p>
   <div class="callout warn"><p><strong>Before you run a session.</strong> Read out the training-only disclaimer. Text in <span class="ph">[square brackets]</span> is for your local detail: this site does not know your phone numbers, roles, locations or capacities, and does not guess them. Use your trust's major incident plan.</p></div>
 
-  <h2>Session plans</h2>
+  <h2 id="session-plans">Session plans</h2>
   <div id="planList"></div>
 
   <h2 id="injects">Tabletop injects: Exercise Harbour Light</h2>
@@ -1443,7 +1688,7 @@ const SAFE_TO_TEACH = [
     {n:2,t:"Where a CO meter is available, a level >30% indicates severe poisoning. In confirmed CO poisoning, give 100% normobaric oxygen until COHb is normal (<3%).",src:[FPHC]},
     {n:3,t:"High-flow oxygen via a non-rebreathing reservoir mask at 10–15 L/min; in the absence of CO poisoning, aim for SpO2 94–98%.",src:[FPHC]},
     {n:4,t:"Prophylactic tracheal intubation (large bore) is recommended where there is suspicion of impending airway compromise: full-thickness facial burns, stridor, respiratory distress, swelling on laryngoscopy, smoke inhalation or singed nasal hairs.",src:[FPHC]},
-    {n:5,t:"If a surgical airway is required through burned neck tissue: a longitudinal skin incision to expose the anatomy, followed by a transverse incision into the identified cricothyroid membrane.",src:[FPHC]},
+    {n:5,t:"If a surgical airway is required through burnt neck tissue: a longitudinal skin incision to expose the anatomy, followed by a transverse incision into the identified cricothyroid membrane.",src:[FPHC]},
     {n:6,t:"Give a cyanide antidote plus high-flow oxygen to any fire casualty with suspected smoke inhalation showing altered mental status and/or cardiovascular instability. Adult hydroxocobalamin dose 5 g IV over 15 min (a second 5 g may follow; maximum total 10 g). Paediatric: 70 mg/kg, not exceeding 5 g (maximum total 140 mg/kg, not exceeding 10 g).",dose:true,src:[FPHC,["Cyanokit 5 g SmPC","https://www.medicines.org.uk/emc/product/4786/smpc"]]},
     {n:7,t:"Initiate fluid resuscitation for adult and paediatric burns >20% TBSA; weight-based. For children, use a crystalloid with higher sodium content (0.9% sodium chloride) if available. Warm the fluid.",dose:true,src:[FPHC]},
     {n:8,t:"Estimate burn severity in the bands <20%, 20–50% and >50% TBSA, using a Lund & Browder chart or electronic equivalent.",src:[FPHC]},
@@ -1466,7 +1711,7 @@ const SAFE_TO_TEACH = [
 const REVIEW_FINDINGS = [
   ["Atropine for nerve agents \"1.5 to 10 mg every 5 minutes, up to 20 mg\" (and \"5–10 mg\" for paramedics)","PHE/NHS England 2018: 4.0–4.2 mg IV/IM/IO for adults and children 12 or over, 50–75 microgram/kg under 12, repeated every 5 minutes until atropinised. No ceiling. Pupil size is not an endpoint."],
   ["Magnesium sulfate \"4–6 g of 20% over 24 hours\" and intravenous lipid emulsion for Novichok","No source supports either. The one systematic review found (organophosphate insecticides) says evidence is insufficient to recommend magnesium."],
-  ["Surgical airway through a burned neck: \"longitudinal skin incision\"","FPHC/BBA 2020: longitudinal skin incision, then a transverse incision into the cricothyroid membrane."],
+  ["Surgical airway through a burnt neck: \"longitudinal skin incision\"","FPHC/BBA 2020: longitudinal skin incision, then a transverse incision into the cricothyroid membrane."],
   ["TST talking step checks the \"front or back of the torso\"","NHS England/NARU 2023: the search must include the neck, chest, armpits, back, abdomen, groin and buttocks, front, back and sides."],
   ["MITT described as a secondary triage tool with a \"Pit Stop\" pathway","MITT is the NHS responders' primary triage tool. It has no Pit Stop pathway and keeps a DEAD category."],
   ["Manchester Arena: \"20 died at the scene alongside the perpetrator, 3 in ED\"","The 20 includes the bomber: 19 victims at the scene and 3 in hospital, giving 22."],
@@ -1625,18 +1870,40 @@ const archName = id => (ARCHETYPES_MATRIX.find(a=>a.id===id)||{}).name || id;
   });
 })();
 
-// ============ Navigation (grouped: Learn / Practise / Reference / Teach) ============
+// ============ Navigation: three sections (Research / Planning for incidents / Training and practice) ============
+const SEC_ICON={
+  research:'<svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12.3 12.3 17 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  planning:'<svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="3.5" width="12" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 3.5V2.2h5v1.3M7 8.2h6M7 11.2h6M7 14.2h3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  training:'<svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="10" r="3.8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="10" r="1.3" fill="currentColor"/></svg>'
+};
+// [section key, heading, landing page id, pages]. The landing page is listed first in each group.
 const NAV=[
-  ["",[["home","Home"]]],
-  ["Learn",[["learn","Learning pathway"],["triage","Triage: TST and MITT"],["prehospital","Pre-hospital doctrine"]]],
-  ["Practise",[["trainer","Triage trainer"],["surge","Timed surge exercise"],["drill","Casualty drill"]]],
-  ["Reference",[["sops","Hospital SOPs"],["clinical","Clinical guides"],["incidents","Incident database"],["glossary","Glossary"],["sources","Sources & verification"]]],
-  ["Teach",[["teach","Facilitator guide"],["printables","Printables"],["planning","Planning tools"]]]
+  ["","",null,[["home","Home"]]],
+  ["research","Research","research",[["research","Research overview"],["incidents","Incident database"],["europe-lessons","European lessons"],["registry","Registry and case series"],["sources","Sources & verification"]]],
+  ["planning","Planning for incidents","incident-planning",[["incident-planning","Planning overview"],["sops","Hospital SOPs"],["prehospital","Pre-hospital doctrine"],["clinical","Clinical guides"],["planning","Planning tools"]]],
+  ["training","Training and practice","training",[["training","Training overview"],["learn","Learning pathway"],["triage","Triage: TST and MITT"],["trainer","Triage trainer"],["surge","Timed surge exercise"],["drill","Casualty drill"],["teach","Facilitator guide"],["printables","Printables"]]],
+  ["more","More",null,[["glossary","Glossary"]]]
 ];
-const TABS=NAV.flatMap(g=>g[1]);
-const TAB_GROUP=Object.fromEntries(NAV.flatMap(([g,items])=>items.map(([id])=>[id,g])));
+const TABS=NAV.flatMap(g=>g[3]);
+const TAB_SEC=Object.fromEntries(NAV.flatMap(([k,,,items])=>items.map(([id])=>[id,k])));
+const SEC_NAME=Object.fromEntries(NAV.map(([k,h])=>[k,h]));
+const SEC_LANDING=Object.fromEntries(NAV.map(([k,,l])=>[k,l]));
 const TAB_NAME=Object.fromEntries(TABS);
-$("#siteNav").innerHTML=NAV.map(([g,items],gi)=>`<div class="nav-group">${g?`<h2 class="nav-h" id="ng-${gi}">${esc(g)}</h2>`:""}<ul class="nav-list"${g?` aria-labelledby="ng-${gi}"`:""}>${items.map(([id,t])=>`<li><a href="#${id}" data-tab="${id}">${esc(t)}${id==="learn"?`<span class="nav-n" id="navLearnN"></span>`:""}</a></li>`).join("")}</ul></div>`).join("");
+const LANDINGS=new Set(NAV.map(g=>g[2]).filter(Boolean));
+// Friendly aliases. Every hash used before the three-section layout is still a page or an anchor, so old links keep working.
+const HASH_ALIASES={"planning-for-incidents":"incident-planning","plan":"incident-planning","prepare":"incident-planning","training-and-practice":"training","practice":"training","practise":"training","learning":"learn","evidence":"research","lessons":"europe-lessons","case-series":"registry","manchester":"registry","planning-tools":"planning"};
+const secIco=k=>SEC_ICON[k]?`<span class="sec-ico">${SEC_ICON[k]}</span>`:"";
+document.querySelectorAll("section.tab").forEach(s=>{const k=TAB_SEC[s.id.slice(4)];if(k&&SEC_ICON[k])s.dataset.sec=k;});
+$("#siteNav").innerHTML=NAV.map(([k,g,land,items],gi)=>`<div class="nav-group"${SEC_ICON[k]?` data-sec="${k}"`:""}>${g?`<h2 class="nav-h" id="ng-${gi}">${secIco(k)}<span>${esc(g)}</span></h2>`:""}<ul class="nav-list"${g?` aria-labelledby="ng-${gi}"`:""}>${items.map(([id,t])=>`<li><a href="#${id}" data-tab="${id}"${id===land?` class="nav-ov"`:""}>${esc(t)}${id==="learn"?`<span class="nav-n" id="navLearnN"></span>`:""}</a></li>`).join("")}</ul></div>`).join("");
+function secOfHash(h){const id=h.split("/")[0];if(TAB_SEC[id])return TAB_SEC[id];const el=document.getElementById(h);const s=el&&el.closest("section.tab");return s?TAB_SEC[s.id.slice(4)]:"";}
+function secTag(h){const k=secOfHash(h);return SEC_ICON[k]?` <span class="sec-tag" data-sec="${k}">${esc(SEC_NAME[k])}</span>`:"";}
+function crumbHTML(id){
+  if(id==="home") return "";
+  const k=TAB_SEC[id], g=SEC_NAME[k]||"";
+  const chip=SEC_ICON[k]?`<a class="sec-chip" data-sec="${k}" href="#${SEC_LANDING[k]}">${secIco(k)}${esc(g)}</a>`:(g?`<span>${esc(g)}</span>`:"");
+  if(LANDINGS.has(id)) return `${chip}<span class="sep" aria-hidden="true">&rsaquo;</span><b>Section overview</b>`;
+  return `${chip}<span class="sep" aria-hidden="true">&rsaquo;</span><b>${esc(TAB_NAME[id])}</b>`;
+}
 
 let currentTab="home";
 function showTab(id,focus){
@@ -1646,8 +1913,8 @@ function showTab(id,focus){
   document.querySelectorAll("#siteNav a").forEach(a=>{
     if(a.dataset.tab===id) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
   });
-  const g=TAB_GROUP[id];
-  $("#crumb").innerHTML=id==="home"?"":`${g?esc(g)+" &rsaquo; ":""}<b>${esc(TAB_NAME[id])}</b>`;
+  $("#crumb").innerHTML=crumbHTML(id);
+  const sk=TAB_SEC[id]; if(SEC_ICON[sk]) $("#main").dataset.sec=sk; else delete $("#main").dataset.sec;
   store.set("mch-tab",id);
   closeDrawer();
   if(id!=="surge") surgeAbortIfRunning();
@@ -1660,8 +1927,9 @@ function revealEl(el){
   el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
 }
 function route(focus){
-  const h=decodeURIComponent(location.hash.slice(1));
+  let h=decodeURIComponent(location.hash.slice(1));
   if(!h){ return false; }
+  if(HASH_ALIASES[h]){ h=HASH_ALIASES[h]; history.replaceState(null,"","#"+h); }
   if(TABS.some(t=>t[0]===h)){ showTab(h,focus); if(h==="learn") showModuleList(); return true; }
   const m=h.match(/^learn\/(m\d)$/);
   if(m && MODULES.some(x=>x.id===m[1])){ showTab("learn",focus); openModule(m[1]); return true; }
@@ -1767,7 +2035,7 @@ function openModule(id){
     </div>
     <div role="tabpanel" id="mp-learn" aria-labelledby="mt-learn" tabindex="0" hidden>
       <div class="module-content">${m.content}</div>
-      <h4>Go deeper</h4><ul class="tight">${m.links.map(([t,l])=>`<li><a href="#${t}">${esc(l)}</a></li>`).join("")}</ul>
+      <h4>Go deeper</h4><ul class="tight">${m.links.map(([t,l])=>`<li><a href="#${t}">${esc(l)}</a>${secTag(t)}</li>`).join("")}</ul>
       <p><button class="btn" type="button" data-goto-tab="mt-quiz">Take the knowledge check</button></p>
     </div>
     <div role="tabpanel" id="mp-quiz" aria-labelledby="mt-quiz" tabindex="0" hidden>
@@ -2030,7 +2298,7 @@ function surgeAbortIfRunning(){
 }
 function renderSurgeHistory(){
   const h=(PROGRESS.surge||[]);
-  $("#sgHistory").innerHTML=h.length?`<h3>Your recent runs</h3><div class="table-wrap"><table><thead><tr><th>Date</th><th>Mode</th><th>Accuracy</th><th>Over</th><th>Under</th><th>No decision</th><th>Mean time</th></tr></thead><tbody>${h.slice().reverse().map(r=>`<tr><td>${esc(new Date(r.d).toLocaleString("en-GB",{dateStyle:"short",timeStyle:"short"}))}</td><td>${esc(r.mode)}</td><td>${r.acc}%</td><td>${r.over}</td><td>${r.under}</td><td>${r.to}</td><td>${r.mean} s</td></tr>`).join("")}</tbody></table></div>`:"";
+  $("#sgHistory").innerHTML=h.length?`<h3>Your recent runs</h3><div class="table-wrap"><table><thead><tr><th>Date</th><th>Mode</th><th>Accuracy</th><th>Over</th><th>Under</th><th>No decision</th><th>Mean time</th></tr></thead><tbody>${h.slice().reverse().map(r=>`<tr><td>${esc(new Date(r.d).toLocaleString("en-GB",{day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"}))}</td><td>${esc(r.mode)}</td><td>${r.acc}%</td><td>${r.over}</td><td>${r.under}</td><td>${r.to}</td><td>${r.mean} s</td></tr>`).join("")}</tbody></table></div>`:"";
 }
 function initSurgeExercise(){
   $("#sgStart").addEventListener("click",surgeStart);
@@ -2091,7 +2359,7 @@ function buildIndex(){
   const incF=["#incRegion","#incSearch","#incType","#incVer","#incYear"].map(s=>$(s).value), filtered=incF.some(Boolean);
   if(filtered){resetIncFilters();renderIncidents();}
   document.querySelectorAll("section.tab").forEach(sec=>{
-    const tab=sec.id.slice(4); if(tab==="learn") return;
+    const tab=sec.id.slice(4); if(tab==="learn"||LANDINGS.has(tab)) return;
     let heading=TAB_NAME[tab];
     sec.querySelectorAll("h1,h2,h3,h4,summary,p,li,td,dd").forEach(el=>{
       if(el.closest("button,.search-pop,script,#moduleView,#sgRun,#sgDebrief,#trFlow,#trOutcome")) return;
@@ -2126,7 +2394,7 @@ function runSearch(input,pop){
   const seen=new Set(), out=[];
   for(const {r} of hits){const key=r.tab+"|"+(r.mod||"")+"|"+r.heading+"|"+r.t.slice(0,40);if(seen.has(key))continue;seen.add(key);out.push(r);if(out.length>=12)break;}
   pop._results=out;
-  pop.innerHTML=`<p class="sr-count" role="status">${hits.length?`${hits.length} match${hits.length===1?"":"es"}${hits.length>out.length?`, showing ${out.length}`:""}`:"No matches"}</p><ul>${out.map((r,i)=>`<li><a href="#${r.mod?"learn/"+r.mod:r.tab}" data-ri="${i}"><span class="r-sec">${esc(TAB_NAME[r.tab])}${r.heading&&r.heading!==TAB_NAME[r.tab]?" &rsaquo; "+esc(r.heading.slice(0,60)):""}</span><span class="r-t">${hl(snippet(r.t,words[0]),words)}</span></a></li>`).join("")}</ul>`;
+  pop.innerHTML=`<p class="sr-count" role="status">${hits.length?`${hits.length} match${hits.length===1?"":"es"}${hits.length>out.length?`, showing ${out.length}`:""}`:"No matches"}</p><ul>${out.map((r,i)=>`<li><a href="#${r.mod?"learn/"+r.mod:r.tab}" data-ri="${i}"><span class="r-sec">${SEC_ICON[TAB_SEC[r.tab]]?`<span class="sec-tag" data-sec="${TAB_SEC[r.tab]}">${esc(SEC_NAME[TAB_SEC[r.tab]])}</span>`:""}${esc(TAB_NAME[r.tab])}${r.heading&&r.heading!==TAB_NAME[r.tab]?" &rsaquo; "+esc(r.heading.slice(0,60)):""}</span><span class="r-t">${hl(snippet(r.t,words[0]),words)}</span></a></li>`).join("")}</ul>`;
   pop.hidden=false; input.setAttribute("aria-expanded","true");
 }
 function wireSearch(input,pop){
@@ -2466,6 +2734,9 @@ renderTeach(); renderPrintCards(); renderGlossary(); $("#glossFilter").addEventL
 initTrainer(); initSurgeExercise(); renderProgress();
 (function(){
   if(!route(false)){ const last=store.get("mch-tab"); showTab(TABS.some(t=>t[0]===last)?last:"home"); }
+  // A page whose heading shares its hash (#europe-lessons, #registry) should open at the top, with the breadcrumb in view.
+  const top=()=>{if(TABS.some(t=>t[0]===decodeURIComponent(location.hash.slice(1))))window.scrollTo(0,0);};
+  top(); window.addEventListener("load",top,{once:true});
 })();
 </script>
 </body>

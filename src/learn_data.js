@@ -329,7 +329,7 @@ const MODULES = [
   objectives:[
     "Explain why a normal SpO2 does not exclude carbon monoxide poisoning.",
     "State the indication and adult dose for hydroxocobalamin in smoke inhalation.",
-    "Describe the surgical airway technique through a burned neck.",
+    "Describe the surgical airway technique through a burnt neck.",
     "Apply the burns cooling, fluid and severity thresholds, and the revised Baux score correctly."
   ],
   content:`
@@ -338,7 +338,7 @@ const MODULES = [
 <li>Standard pulse oximeters cannot tell carboxyhaemoglobin from oxyhaemoglobin: CO poisoning may be present with a normal SpO2. COHb above 30% indicates severe poisoning. In confirmed CO poisoning, give 100% oxygen until COHb is normal (below 3%).</li>
 <li>High-flow oxygen via a non-rebreathing mask at 10–15 L/min; without CO poisoning, aim for SpO2 94–98%.</li>
 <li>Cyanide antidote plus high-flow oxygen for suspected smoke inhalation with altered mental status and/or cardiovascular instability. Hydroxocobalamin: adults 5 g IV over 15 minutes (a second 5 g may follow; maximum total 10 g); children 70 mg/kg, not exceeding 5 g (Cyanokit SmPC).<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
-<li>Prophylactic large-bore tracheal intubation where airway compromise is suspected. Surgical airway through a burned neck: a longitudinal skin incision, <b>then</b> a transverse incision into the cricothyroid membrane.</li>
+<li>Prophylactic large-bore tracheal intubation where airway compromise is suspected. Surgical airway through a burnt neck: a longitudinal skin incision, <b>then</b> a transverse incision into the cricothyroid membrane.</li>
 <li>Cool running water for 20 minutes, ideally within 10 minutes and up to 3 hours from injury; water below 20°C; no ice water. Hydrogel only if running water is unavailable.</li>
 <li>Warmed fluid resuscitation for adults and children with burns above 20% TBSA; 0.9% sodium chloride for children if available. Severity bands: below 20%, 20–50%, above 50%.</li>
 <li>Revised Baux = age + %TBSA + 17 if inhalation injury. It predicts probability of death, not ICU need (Osler et al. 2010).</li>
@@ -352,7 +352,7 @@ const MODULES = [
      why:"\"A level >30% indicates severe poisoning.\" In confirmed CO poisoning, the endpoint is 100% normobaric oxygen until COHb is below 3%, not an SpO2 target.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 2)",U.fphc)},
     {q:"Which smoke-exposed casualty should receive a cyanide antidote, and what is the adult hydroxocobalamin dose?",o:["Every smoke-exposed casualty; 100 mg/kg","Suspected smoke inhalation with altered mental status and/or cardiovascular instability; 5 g IV over 15 minutes","Only those with a confirmed cyanide level; 1 g","Only children; 70 mg/kg with no maximum"],a:1,
      why:"The indication is suspected smoke inhalation with altered mental status and/or cardiovascular instability. Adult dose 5 g IV over 15 min (Cyanokit SmPC). Do not teach 100 mg/kg. Dose check: verify against JRCALC / TOXBASE / BNF and local formulary.",src:S("VC","FPHC/BBA 2020; Cyanokit SmPC (safe-to-teach 6)",U.cyanokit)},
-    {q:"A surgical airway is needed through a burned neck. What technique does the consensus recommend?",o:["A transverse skin incision only","A longitudinal skin incision only","A longitudinal skin incision to expose the anatomy, then a transverse incision into the cricothyroid membrane","Needle cricothyroidotomy only"],a:2,
+    {q:"A surgical airway is needed through a burnt neck. What technique does the consensus recommend?",o:["A transverse skin incision only","A longitudinal skin incision only","A longitudinal skin incision to expose the anatomy, then a transverse incision into the cricothyroid membrane","Needle cricothyroidotomy only"],a:2,
      why:"The consensus requires the longitudinal skin incision followed by a transverse incision into the identified cricothyroid membrane. Teaching only the longitudinal step is misleading.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 5)",U.fphc)},
     {q:"Above what burn size does the consensus recommend starting fluid resuscitation in children?",o:["10% TBSA","15% TBSA","20% TBSA, the same as adults","30% TBSA"],a:2,
      why:"Initiate fluid resuscitation for adult and paediatric burns above 20% TBSA; the paediatric threshold was aligned with adults.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 7)",U.fphc)},
@@ -384,7 +384,7 @@ const MODULES = [
 <li><b>European incidents.</b> Seven European attacks, from Madrid 2004 to Barcelona 2017, are in the incident database. Each has a confidence level, sources for every medical fact, and caveats where sources disagree. See the European lessons there.</li>
 <li><b>Staff experience.</b> Skryabina et al. found gaps in blast-injury protocols, communication and psychological support among hospital staff.</li>
 </ul>`,
-  links:[["incidents","Incident database"],["europe","European incidents and lessons (Paris, Brussels, Nice, Berlin, Barcelona, Madrid, Oslo and Utøya)"],["sources","Review findings and corrections"]],
+  links:[["incidents","Incident database"],["europe","European incidents (Paris, Brussels, Nice, Berlin, Barcelona, Madrid, Oslo and Utøya)"],["europe-lessons","European lessons"],["sources","Review findings and corrections"]],
   quiz:[
     {q:"At Manchester Arena, \"20 died at the scene\". How many of those were victims?",o:["20","19: the 20 includes the person who detonated the device","22","23"],a:1,
      why:"\"Killed at scene: 20, including the person who detonated the device.\" 19 victims died at the scene and 3 in hospital, giving 22. \"20 + 3\" would wrongly give 23.",src:S("VI","Dark et al. EMJ 2021; Manchester Arena Inquiry Vol 2",U.emjArena)},

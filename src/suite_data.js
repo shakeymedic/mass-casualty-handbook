@@ -192,7 +192,7 @@
                 id: "ARCH_04",
                 name: "High-Rise Structural Fire & Toxic Asphyxiants",
                 regions: "Airway; carbon monoxide (COHb >30% = severe); cyanide; skin (%TBSA)",
-                lsi: "High-flow O2 10–15 L/min via non-rebreathing mask (SpO2 94–98% if no CO poisoning; in confirmed CO poisoning 100% O2 until COHb is normal, <3%). Hydroxocobalamin for suspected smoke inhalation with altered mental status and/or cardiovascular instability: adult 5 g IV over 15 min; child 70 mg/kg, max 5 g. Prophylactic large-bore tracheal intubation if impending airway compromise. Surgical airway through a burned neck: longitudinal skin incision, then a transverse incision into the cricothyroid membrane. Cool running water for 20 min, ideally within 10 min and up to 3 h after injury (water <20 °C; no ice water).",
+                lsi: "High-flow O2 10–15 L/min via non-rebreathing mask (SpO2 94–98% if no CO poisoning; in confirmed CO poisoning 100% O2 until COHb is normal, <3%). Hydroxocobalamin for suspected smoke inhalation with altered mental status and/or cardiovascular instability: adult 5 g IV over 15 min; child 70 mg/kg, max 5 g. Prophylactic large-bore tracheal intubation if impending airway compromise. Surgical airway through a burnt neck: longitudinal skin incision, then a transverse incision into the cricothyroid membrane. Cool running water for 20 min, ideally within 10 min and up to 3 h after injury (water <20 °C; no ice water).",
                 hospital: "Fluids for adult and paediatric burns >20% TBSA (0.9% sodium chloride preferred in children); active warming. Revised Baux = age + %TBSA + 17 if inhalation injury — predicts probability of death (Osler et al. 2010). Note: BRRT/BST are WHO Emergency Medical Team constructs that support receiving hospitals; they are not UK structures and do not work on scene.",
                 pitfall: "Standard pulse oximeters cannot distinguish carboxyhaemoglobin from oxyhaemoglobin: CO poisoning may be present with a normal SpO2."
             },
@@ -392,7 +392,7 @@
                 requiredLSIs: ["hydroxocobalamin_crico"],
                 iss: 25,
                 niss: 25,
-                rationale: "TST: P1 (red). Not walking; no bleeding; not talking → open airway, breathing → recovery position → P1. MITT: P1 (RR 30). Standard pulse oximeters cannot distinguish carboxyhaemoglobin from oxyhaemoglobin; COHb >30% indicates severe poisoning — give 100% oxygen until COHb is normal. Suspected smoke inhalation with altered mental status and cardiovascular instability → hydroxocobalamin 5 g IV over 15 min (adult). Prophylactic large-bore tracheal intubation for impending airway compromise; if a surgical airway is needed through the burned neck: longitudinal skin incision, then a transverse incision into the cricothyroid membrane.",
+                rationale: "TST: P1 (red). Not walking; no bleeding; not talking → open airway, breathing → recovery position → P1. MITT: P1 (RR 30). Standard pulse oximeters cannot distinguish carboxyhaemoglobin from oxyhaemoglobin; COHb >30% indicates severe poisoning — give 100% oxygen until COHb is normal. Suspected smoke inhalation with altered mental status and cardiovascular instability → hydroxocobalamin 5 g IV over 15 min (adult). Prophylactic large-bore tracheal intubation for impending airway compromise; if a surgical airway is needed through the burnt neck: longitudinal skin incision, then a transverse incision into the cricothyroid membrane.",
                 pathway: "Revised Baux = 31 + 25 + 17 = 73 (predicts probability of death; Osler et al. 2010). Fluids (>20% TBSA; 25% sits in the 20–50% band), active warming, burns centre referral via the regional burns network."
             },
             {
@@ -494,7 +494,7 @@
                     "Damage control surgery for blast injury",
                     "Penetrating neck injury assessment (interpret indirect CT angiography signs with caution)",
                     "Paediatric chest injury management",
-                    "Surgical airway through a burned neck: longitudinal skin incision, then a transverse incision into the cricothyroid membrane (FPHC/BBA 2020, Grade D)",
+                    "Surgical airway through a burnt neck: longitudinal skin incision, then a transverse incision into the cricothyroid membrane (FPHC/BBA 2020, Grade D)",
                     "Level 3 ICU surge: the Severn Trauma Adult Guideline asks units to double Level 3 ventilated capacity and maintain it for at least 96 hours (regional guidance; no national source found)"
                 ],
                 benchmark: "No published benchmark found.",
