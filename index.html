@@ -667,19 +667,20 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
         <li>TST steps, order and band colours (NHS England / NARU v1.0, April 2023).</li>
         <li>MITT steps and thresholds (NHS England MITT, April 2023; EMJ 2022).</li>
         <li>Manchester Arena hospital case series (Dark et al., EMJ 2021).</li>
-        <li>Burns and smoke points from the FPHC/BBA consensus (2020) and the Cyanokit SmPC.</li>
-        <li>Nerve agent atropine regimen from the PHE/NHS England ED briefing (July 2018).</li>
-        <li>Dates, deaths and headline casualty counts for all ten UK incidents.</li>
-        <li>Medical facts for seven European incidents, each with its source and confidence level (checked 30 October 2026).</li>
+        <li>Burns and smoke points from the FPHC/BBA consensus (2020) and the Cyanokit SmPC, including the red colouration and laboratory interference after hydroxocobalamin (SmPC sections 4.4 and 4.8).</li>
+        <li>Nerve agent atropine regimen from the PHE/NHS England ED briefing (July 2018). Duration is not fixed in UK guidance; hours in nerve-agent vapour exposure (CHEMM), days mainly in insecticide poisoning.</li>
+        <li>MITT heart rate wording settled: the NHS England card reads "100 or more" and is the operational standard; the EMJ 2022 derivation paper reads "&gt;100".</li>
+        <li>Burns: hypothermia independently associated with mortality (Hostler et al. 2013; FPHC/BBA); fluid resuscitation above 20% TBSA pre-hospital (Grade D), with some hospital guidance starting above 15%.</li>
+        <li>Dates, deaths and headline casualty counts for all ten UK incidents; in round 2 (30 October 2026) the London Bridge 48/48 survival (LAS), Southport wound counts and hospitals (sentencing remarks; NWAS), Finsbury Park hospitals (NHS England), Fishmongers' Hall and Forbury Gardens places of death (Chief Coroner; Record of Inquest).</li>
+        <li>Medical facts for seven European incidents, each with its source and confidence level (checked 30 October 2026); round 2 added official death and injured totals for Paris, Nice, Berlin, Brussels, Barcelona and Utøya.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Not verified or open to question</h3>
       <ul class="tight">
         <li>Anything in JRCALC or TOXBASE (subscription resources, not accessed).</li>
-        <li>MITT heart rate wording: the tool reads "100 or more"; the EMJ 2022 text reads "&gt;100".</li>
-        <li>Several receiving hospitals and hospital anecdotes (see the incident database).</li>
-        <li>Some European casualty totals, where sources disagree or rest on news only (stated on each European card).</li>
+        <li>Croydon University Hospital anecdotes from the 2016 tram derailment (Evening Standard only, blocked); Fishmongers' Hall receiving hospitals (not named by LAS); Manchester "14-hour operations"; London Bridge van speed.</li>
+        <li>A few European figures that rest on news only (Barcelona's combined toll; Brussels' 35 court-recognised deaths) or remain unresolved (Berlin's 22 or 23 hospitals), stated on each European card.</li>
         <li>All surge model rates except the Manchester-derived ones.</li>
         <li>Simulation timings come from one study and are not standards.</li>
       </ul>
@@ -987,7 +988,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </div>
   <div id="eurBlock">
     <h2 id="europe">European incidents</h2>
-    <p>Seven terrorist mass casualty incidents in Europe outside the UK. Every figure comes from a source opened on 30 October 2026, mostly peer-reviewed papers. Where sources disagree, both figures are given and the card says so. "Not found" means no source was located.</p>
+    <p>Seven terrorist mass casualty incidents in Europe outside the UK. Every figure comes from a source opened on 30 October 2026: peer-reviewed papers, and in the second round official government, parliamentary, court and public-health documents. Where published figures differ because they count different things, the card explains what each counts and keeps all of them. Where a difference is genuinely unresolved, both figures are given and the card says sources disagree. "Not found" means no source was located.</p>
     <div id="eurList"></div>
   </div>
   <div class="callout small"><p>See also <a href="#europe-lessons">European lessons</a> and <a href="#registry">registry and case-series figures</a>, both in Research.</p></div>
@@ -1027,10 +1028,11 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       <ol class="flow" aria-label="TST steps">
         <li><div class="q"><b>Walking?</b><span class="d">Uninjured: direct to a place of relative safety. Injured walking: casualty collection point.</span></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag p3">P3</span></div></li>
         <li><div class="q"><b>Severe bleeding?</b></div><div class="yes"><span class="lbl">Yes:</span> Pressure / Tourniquet / Packing, then <span class="tag p1">P1</span></div></li>
-        <li><div class="q"><b>Talking?</b><span class="d">If yes, make a deliberate search for penetrating injury, front, back and sides: neck, chest, armpits, back, abdomen, groin and buttocks.</span></div><div class="yes"><span class="lbl">Yes:</span> penetrating injury found <span class="tag p1">P1</span><br>none found <span class="tag p2">P2</span></div></li>
+        <li><div class="q"><b>Talking?</b><span class="d">If yes, make a deliberate search for penetrating injury "front or back" (card wording). The NARU guidance says the search "must include the neck, chest, armpits, back, abdomen, groin and buttocks, (front back and sides)".</span></div><div class="yes"><span class="lbl">Yes:</span> penetrating injury found <span class="tag p1">P1</span><br>none found <span class="tag p2">P2</span></div></li>
         <li class="final"><div class="q"><b>Breathing?</b><span class="d">Not talking: open the airway if able, then a 10-second breathing check (look, listen, feel).</span></div><div class="yes"><span class="lbl">Yes:</span> recovery position, <span class="tag p1">P1</span><br><span class="lbl">No:</span> recovery position, <span class="tag nb">NOT BREATHING</span><br><span class="small">CPR if resources allow. It must not take priority over stopping external bleeding and opening airways.</span></div></li>
       </ol>
       <div class="flow-end">Additional rule: any child under 2 is automatically <span class="tag p1">P1</span></div>
+      <p class="small muted">The under-2 rule and the list of body regions come from the NARU supplementary guidance (v1.0, April 2023); the NHS England card itself carries only the flowchart labels ("Penetrating Injury", "Front or Back").</p>
       <h4>Bands</h4>
       <p class="small"><span class="tag p1">P1</span> white on red &nbsp; <span class="tag p2">P2</span> black on yellow &nbsp; <span class="tag p3">P3</span> white on green &nbsp; <span class="tag nb">NOT BREATHING</span> black on silver. A white checked border identifies TST bands and separates them from MITT cards.</p>
       <p class="small"><strong>No DEAD category.</strong> "Not Breathing" records the objective finding of the breathing check. Later, a healthcare practitioner with time reassesses the casualty as a viable resuscitation (P1) or ROLE/PLE (dead).</p>
@@ -1045,8 +1047,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
         <li><div class="q"><b>Not breathing after airway opening?</b><span class="d">In children under 12 after submersion, immersion or smoke inhalation, consider 5 rescue breaths.</span></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag dead">DEAD</span></div></li>
         <li><div class="q"><b>No response to voice?</b></div><div class="yes"><span class="lbl">Yes:</span> recovery position, <span class="tag p1">P1</span></div></li>
         <li><div class="q"><b>Aged under 2?</b></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag p1">P1</span></div></li>
-        <li><div class="q"><b>Respiratory rate &lt;12 or &ge;24?</b><span class="d">i.e. outside 12–23</span></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag p1">P1</span></div></li>
-        <li><div class="q"><b>Heart rate &ge;100?</b><span class="d">The published tool reads "100 or more". The EMJ 2022 text reads "&gt;100". Check your local card.</span></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag p1">P1</span></div></li>
+        <li><div class="q"><b>Breathing rate outside 12 - 23?</b><span class="d">The card gives the normal band "12 - 23": below 12, or 24 and above, is P1 (EMJ 2022: RR &lt;12 or &ge;24).</span></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag p1">P1</span></div></li>
+        <li><div class="q"><b>Heart rate 100 or more?</b><span class="d">The published NHS England card reads "100 or More" and is the operational standard, so a heart rate of exactly 100 is P1. The EMJ 2022 derivation paper reads "&gt;100".</span></div><div class="yes"><span class="lbl">Yes:</span> <span class="tag p1">P1</span></div></li>
       </ol>
       <div class="flow-end">Otherwise: <span class="tag p2">P2</span></div>
       <p class="small" style="margin-top:12px">MITT keeps a DEAD category. It has <strong>no "Pit Stop" pathway</strong>. The Survivor Reception Centre route for the uninjured has gone: every living person involved is at least P3.</p>
@@ -1152,8 +1154,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <li>Not breathing after airway opening: <span class="tag dead">DEAD</span> on MITT. In children under 12 after submersion, immersion or smoke inhalation, consider 5 rescue breaths first.</li>
   <li>Does not respond to voice: recovery position, <span class="tag p1">P1</span></li>
   <li>Aged under 2: <span class="tag p1">P1</span></li>
-  <li>Respiratory rate below 12 or 24 and above: <span class="tag p1">P1</span></li>
-  <li>Heart rate 100 or above: <span class="tag p1">P1</span> <span class="ph">[confirm against current NHS England MITT card; the EMJ 2022 text reads "above 100"]</span></li>
+  <li>Breathing rate outside 12 - 23 (below 12, or 24 and above): <span class="tag p1">P1</span></li>
+  <li>Heart rate 100 or more: <span class="tag p1">P1</span> (the wording on the NHS England MITT card, April 2023, which is the operational standard; the EMJ 2022 derivation paper reads "&gt;100")</li>
   <li>Otherwise: <span class="tag p2">P2</span></li>
   </ol></li>
 <li>Do not discharge or send anyone home as "uninjured" from the triage point. Every living person involved is at least P3, because the Survivor Reception Centre category has been removed from MITT (<a href="https://emj.bmj.com/content/39/11/800">EMJ 2022</a>).</li>
@@ -1182,12 +1184,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 
 <details class="sop"><summary>SOP 3: Massive haemorrhage activation in a mass casualty incident</summary><div class="body">
 <p><strong>Trigger:</strong> any casualty with suspected major haemorrhage, typically penetrating torso or junctional wounds, blast fragment injuries or traumatic amputation.</p>
-<p><strong>Why:</strong> penetrating and blast wounds dominated the survivors reaching hospital after the 2017 attacks. <span class="unv">Unverified</span> <span class="small muted">(this summary is the draft's own; the verification tables confirm limb and torso injuries predominated at Manchester and stab injuries predominated at London Bridge, but not this wider statement)</span>. Several patients bleeding at once can exhaust blood bank stock quickly, so blood bank must know the scale early.</p>
+<p><strong>Why:</strong> the mechanism depends on the attack. Manchester Arena: blast with high-energy shrapnel penetration, mainly limb and torso injuries; 153–160 ED attendances, 61% admitted, 14% needing damage-control surgery and 16% critical care, while most casualties (median ISS 1) were walking wounded who self-presented (<a href="https://emj.bmj.com/content/38/10/746">Dark et al. EMJ 2021</a>; <a href="https://militaryhealth.bmj.com/content/166/2/72">Craigie et al. BMJ Mil Health 2020</a>). London Bridge, June 2017: 48 injured, mostly stab wounds, plus vehicle-strike injuries (<a href="https://www.bmj.com/content/358/bmj.j4309.full">Gulland, BMJ 2017</a>; <a href="https://www.paramedicpractice.com/content/opinion/the-london-bridge-attack-managing-multiple-victims-of-penetrating-trauma">Rutherford, J Paramedic Pract 2017</a>). Westminster Bridge, March 2017: 29 seriously injured, mostly blunt vehicle-strike trauma, with one fatal stabbing (<a href="https://www.judiciary.uk/wp-content/uploads/2018/12/Westminster-Terror-Attack-2018-0304.pdf">Chief Coroner, 2018</a>; BMJ 2017). No published series gives mechanism percentages. Plan for penetrating and blast injury, but do not assume it will dominate every incident. Several patients bleeding at once can exhaust blood bank stock quickly, so blood bank must know the scale early.</p>
 <h4>Actions</h4>
 <ol>
 <li>Declare a major haemorrhage using your trust's call <span class="ph">[local name, e.g. "Code Red"]</span> and give the patient's major incident number, not only their name.</li>
 <li>Blood bank lead <span class="ph">[role]</span> is told at declaration how many P1 casualties are expected, so they can call in emergency stock from NHS Blood and Transplant early.</li>
-<li>Give tranexamic acid as per local protocol <span class="ph">[dose and timing]</span>. The London Code Red algorithm (2018) uses 1 g over 10 minutes.<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
+<li>Give tranexamic acid as per local protocol <span class="ph">[dose and timing]</span>. NICE NG39 (2016): use intravenous tranexamic acid as soon as possible in patients with major trauma and active or suspected active bleeding (1.5.4); do not use it more than 3 hours after injury unless there is evidence of hyperfibrinolysis (1.5.5) (<a href="https://www.nice.org.uk/guidance/ng39">NG39</a>; wording read from a <a href="https://prep.medthority.com/nice/conditions-and-diseases/injuries-accidents-and-wounds/ng39">reproduction</a>, medium confidence, so re-check against nice.org.uk). NG39 gives no dose. The London Code Red algorithm (2018) uses 1 g over 10 minutes.<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Issue packs as per local protocol <span class="ph">[pack names and contents]</span>. For reference, the London Code Red algorithm (2018) uses:
 <div class="table-wrap"><table><thead><tr><th>Pack</th><th>Contents</th></tr></thead><tbody>
 <tr><td>Pack A</td><td>4 units red cells and 4 units FFP</td></tr>
@@ -1216,7 +1218,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Assess the airway early. Consider prophylactic large-bore tracheal intubation for suspected impending airway compromise: full-thickness facial burns, stridor, respiratory distress, swelling on laryngoscopy, smoke inhalation or singed nasal hairs. The most experienced airway operator available should do it.</li>
 <li>If a surgical airway is needed through burnt neck tissue: make a longitudinal skin incision to expose the anatomy, then a transverse incision into the identified cricothyroid membrane.</li>
-<li>Record where hydroxocobalamin has been given: it colours skin and urine red and can interfere with some laboratory tests. <span class="unv">Unverified</span> <span class="small muted">(the draft notes this is from general knowledge and was not checked; confirm with the SmPC and local laboratory)</span></li>
+<li>Record where hydroxocobalamin has been given, and take baseline bloods before the dose. It turns the skin and mucous membranes red (reversible; up to about 15 days) and the urine dark red (marked for 3 days; up to 35 days). Its colour interferes with many laboratory assays: falsely raised creatinine, bilirubin, glucose, total protein, haemoglobin and MCHC; falsely low ALT and amylase; unpredictable AST, CK, LDH, aPTT and PT/INR, for roughly 24 hours after 5 g (bilirubin up to 4 days; a further 24 hours after 10 g), and with all urine colorimetric tests for about 48 hours. Its colour can also trigger the "blood leak" alarm and shut down haemodialysis machines; consider this before starting dialysis (<a href="https://www.medicines.org.uk/emc/product/4786/smpc">Cyanokit SmPC</a>, sections 4.4 and 4.8).</li>
 </ol>
 <p>Stock: confirm where hydroxocobalamin is held and how many doses are available <span class="ph">[location, number]</span>, and how to get more from the network.</p>
 </div></details>
@@ -1230,8 +1232,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <li>Cool the burn with cool running water for 20 minutes. This is ideally started within 10 minutes and is still worthwhile up to 3 hours after injury. Use water below 20°C; do not use ice water.</li>
 <li>Use hydrogel dressings only if running water is not available.</li>
 <li>Estimate burn size with a Lund and Browder chart and record it in one of three bands: below 20%, 20–50%, or above 50% TBSA.</li>
-<li>Start warmed fluid resuscitation for adults and children with burns above 20% TBSA, calculated by weight <span class="ph">[local formula]</span>. For children, use 0.9% sodium chloride if available.<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
-<li>Prevent hypothermia: active warming and regular temperature checks, during cooling as well as after.</li>
+<li>Start warmed fluid resuscitation for adults and children with burns above 20% TBSA (FPHC/BBA, Grade D), calculated by weight <span class="ph">[local formula]</span>. For children, use 0.9% sodium chloride if available. Hospital burns-service guidance commonly uses lower thresholds, for example above 15% TBSA in adults (<a href="https://www.dbth.nhs.uk/wp-content/uploads/2025/03/Adult-Burn-Referral-Guidance-2025-2028-3.pdf">Sheffield/DBTH referral guidance 2025–28</a>), so follow the receiving burns network's protocol <span class="ph">[local threshold]</span>.<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
+<li>Prevent hypothermia: active warming and regular temperature checks, during cooling as well as after (Grade C). Admission hypothermia (36.5°C or below) was independently associated with death in a US statewide registry of burn-centre patients, adjusted odds ratio 1.91 (95% CI 1.58–2.29) (<a href="https://researchconnect.buffalo.edu/en/publications/admission-temperature-and-survival-in-patients-admitted-to-burn-c/">Hostler et al., J Burn Care Res 2013</a>).</li>
 <li>Calculate the revised Baux score (age + %TBSA + 17 if inhalation injury) to support decisions. It predicts probability of death, not need for intensive care (<a href="https://doi.org/10.1097/TA.0b013e3181c453b3">Osler 2010</a>).</li>
 <li>Contact the burns network <span class="ph">[Burn Care Operational Delivery Network contact]</span> early for advice, bed availability and onward transfer.</li>
 </ol>
@@ -1258,6 +1260,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Give oximes and benzodiazepines as advised by TOXBASE or NPIS <span class="ph">[doses to be added by pharmacy]</span>. Current therapy for nerve agents combines atropine, oximes and benzodiazepines with supportive care including ventilation (<a href="https://doi.org/10.1080/15563650.2025.2501266">Thiermann et al. 2025</a>).</li>
 <li>Secure the airway and ventilate as needed. Plan for prolonged critical care: Salisbury District Hospital's ICU cared for five critically ill patients (<a href="https://doi.org/10.1016/j.bja.2021.10.008">Haslam et al., BJA 2022</a>).</li>
+<li>Duration of atropine: UK guidance (<a href="https://assets.publishing.service.gov.uk/media/5b10120c40f0b634d14c21ed/Chemical_biological_radiological_and_nuclear_incidents_clinical_management_and_health_protection.pdf">PHE 2018</a>; <a href="https://assets.publishing.service.gov.uk/media/670fd675e84ae1fd8592f503/Nerve_Agents_UKHSA_IM_.pdf">UKHSA 2024</a>) titrates repeated boluses to the endpoint above and gives no fixed duration. In nerve-agent vapour exposure the requirement is usually measured in hours (<a href="https://chemm.hhs.gov/na_hospital_mmg.htm">US CHEMM</a>: life-threatening effects rarely beyond 3 hours; lesser effects 6–36 hours, then an infusion of 10–20% of the atropinising dose per hour). Severe cases may need a maintenance infusion (<a href="https://books.rsc.org/books/edited-volume/656/chapter/350941/Treatment-of-Nerve-Agent-Poisoning">Thiermann et al. 2016</a>). Multi-day infusions are described mainly in organophosphate insecticide poisoning (median about 5 days in one series: <a href="https://koreascience.or.kr/article/JAKO202007650437659.pdf">Park et al. 2020</a>), with exceptional cases lasting weeks. No published UK source gives the atropine duration for the Salisbury or Amesbury patients.</li>
 <li>Do not give magnesium sulfate or intravenous lipid emulsion on the strength of the original report. No source supports either for nerve agents.</li>
 </ol>
 <p>Stock: confirm how much atropine the hospital holds and where <span class="ph">[location, number of ampoules]</span>. Repeated doses at 4 mg each use ampoules quickly, so agree how to get more.</p>
@@ -1266,7 +1269,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <details class="sop"><summary>Before sign-off: checklist</summary><div class="body">
 <ul>
 <li>Pharmacy checks every dose against current BNF, BNFc, TOXBASE and JRCALC (none were accessible for this draft).</li>
-<li>Confirm the MITT heart rate threshold wording against the current NHS England card ("100 or more" vs "above 100").</li>
+<li>Use the current NHS England MITT card wording for heart rate ("100 or more"); the EMJ 2022 derivation paper's "&gt;100" is not the operational wording.</li>
 <li>Blood bank replaces the London Code Red packs with local pack contents and TXA protocol.</li>
 <li>Critical care and the trauma network supply local surge and P1 receiving capacity figures.</li>
 <li>Emergency preparedness lead fills in roles, contacts and locations in <span class="ph">[square brackets]</span>.</li>
@@ -1400,7 +1403,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <section class="tab" id="tab-clinical" aria-labelledby="h-clin">
   <h1 id="h-clin">Clinical guides</h1>
   <p class="lead">Only the "safe-to-teach" statements from the clinical verification are shown here. Each is supported by a source that was read in full. Doses still need local formulary and scope-of-practice sign-off.</p>
-  <div class="callout danger"><p><strong>Every dose on this page:</strong> Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE. Who may carry and give these drugs (for example HART, MERIT or specialist teams) varies by service; check your scope of practice.</p></div>
+  <div class="callout danger"><p><strong>Every dose on this page:</strong> Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE. Who may give these drugs varies by service; check your scope of practice. What is public: English ambulance trusts carry nerve-agent antidote auto-injectors (a combined atropine/oxime device, not plain atropine) on frontline and major-incident vehicles under a national programme, with all operational staff trained at induction (<a href="https://www.secamb.nhs.uk/wp-content/uploads/foi_disclosure_log/2017/09%20-%20September/Miscellaneous/170901%20-%20Chemical%20Attacks%20.pdf">SECAmb FOI, 2017</a>); hydroxocobalamin is a hospital ED stock item (<a href="https://www.npis.org/Download/RCEM_NPIS_Antidote_Guideline_List_2021_FINAL_V3.pdf">RCEM/NPIS 2021</a>, Category A, immediately available in the ED), and at least one trust has stated it holds none and relies on national resilience stock (<a href="https://www.secamb.nhs.uk/wp-content/uploads/foi_disclosure_log/2017/02%20-%20February/Miscellaneous/170228%20-%20Drugs%20held%20by%20the%20Trust.pdf">SECAmb FOI, 2017</a>). The JRCALC drug guidance is available only to subscribers via the JRCALC Plus/iCPG apps.</p></div>
   <div id="clinList"></div>
   <div class="card">
     <h2 style="margin-top:0">Not safe to teach</h2>
@@ -1472,6 +1475,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <tbody id="findingsBody"></tbody>
   </table></div>
   <p class="small">The original report also contained extraction artefacts (unrendered LaTeX and fragments such as "span_184") inside clinical sentences. None are reused here.</p>
+  <h3>Second verification round, 30 October 2026</h3>
+  <p>A second round re-checked the items left unverified or in conflict after the first review, using official inquiry, inquest, sentencing and government documents, trust statements and the primary papers. The findings tables are in this repository: <a href="docs/verification/verify_round2_uk.md">UK incidents</a>, <a href="docs/verification/verify_round2_clinical.md">clinical and triage claims</a> and <a href="docs/verification/verify_round2_europe.md">European incidents</a>, alongside the first-round tables (<a href="docs/verification/verify_triage.md">triage</a>, <a href="docs/verification/verify_clinical.md">clinical</a>, <a href="docs/verification/verify_incidents.md">incidents</a>, <a href="docs/verification/verify_registry.md">registry</a>, <a href="docs/verification/verify_europe.md">Europe</a>). The rule was unchanged: a claim is "confirmed" only where a source opened in the session states it, and nothing is filled from memory. Several hosts could not be opened (NICE, PubMed/PMC, Europe PMC, the Evening Standard, gov.uk direct downloads and web.archive.org), so a few items remain unverified and the NICE NG39 wording was read from a reproduction.</p>
 
   <h2>Changes made for this site</h2>
   <div class="card">
@@ -1484,7 +1489,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 
   <h2>Sources</h2>
   <p class="small muted">Several news sites (Guardian, Evening Standard, Independent, Manchester Evening News, Croydon Advertiser) blocked automated reading, so claims resting only on them are marked unverified. Some incident details are confirmed from Wikipedia summaries; treat those as secondary.</p>
-  <p class="small muted">European incident figures were checked on 30 October 2026 against sources opened that day: PubMed records (abstract or PMC full text), journal PDFs and pages fetched directly. Pages that could not be fetched (thelancet.com, link.springer.com, ResearchGate and the Belgian Chamber PDFs) are not used. High confidence means a peer-reviewed or official source reports the figure directly; medium means a single source, a trade or medical-chamber publication, or an internal inconsistency; low means a news outlet only, or an unresolved disagreement. Headline figures from news outlets are labelled as such. See the <a href="#europe">European incidents</a>.</p>
+  <p class="small muted">European incident figures were checked on 30 October 2026 against sources opened that day: PubMed records (abstract or PMC full text), journal PDFs and pages fetched directly, and in the second round the French inquiry hearing transcripts, the Élysée, AP-HP, the Berlin Fire Brigade and Senate, NOU 2012:14, the Belgian Chamber brochure and SPF Santé publique press releases. Pages that could not be fetched in full (thelancet.com, link.springer.com, ResearchGate, the body of the French and Belgian inquiry reports and the Bundestag report) are not used beyond what was read. High confidence means a peer-reviewed or official source reports the figure directly; medium means a single source, a trade or medical-chamber publication, or an internal inconsistency; low means a news outlet only, or an unresolved disagreement. Headline figures from news outlets are labelled as such. See the <a href="#europe">European incidents</a>.</p>
   <div id="srcList"></div>
 </section>
 
@@ -1557,10 +1562,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
           <ol>
             <li><b>Walking?</b> Yes: <span class="tag p3">P3</span> (uninjured: place of relative safety; injured walking: casualty collection point)</li>
             <li><b>Severe bleeding?</b> Yes: Pressure / Tourniquet / Packing, then <span class="tag p1">P1</span></li>
-            <li><b>Talking?</b> Yes: search for penetrating injury, front, back and sides: neck, chest, armpits, back, abdomen, groin, buttocks. Found <span class="tag p1">P1</span>; none <span class="tag p2">P2</span>. No: go to 4.</li>
+            <li><b>Talking?</b> Yes: search for penetrating injury "front or back" (card); the NARU guidance lists the neck, chest, armpits, back, abdomen, groin and buttocks, front, back and sides. Found <span class="tag p1">P1</span>; none <span class="tag p2">P2</span>. No: go to 4.</li>
             <li><b>Breathing?</b> Open airway if able; 10-second look, listen, feel. Yes: recovery position, <span class="tag p1">P1</span>. No: recovery position, <span class="tag nb">NOT BREATHING</span>. CPR if resources allow; it must not detract from stopping bleeding and opening airways.</li>
           </ol>
-          <p><b>Any child under 2:</b> automatically <span class="tag p1">P1</span>. <b>No DEAD category.</b> TST bands have a white checked border.</p>
+          <p><b>Any child under 2:</b> automatically <span class="tag p1">P1</span> (NARU guidance; not printed on the card). <b>No DEAD category.</b> TST bands have a white checked border.</p>
           <p class="qr-foot">Training aid from the Mass Casualty Handbook. Check against the current official card. Source: NARU TST supplementary information v1.0; NHS England TST tool, April 2023.</p>
         </div>
       </div>
@@ -1577,8 +1582,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
             <li><b>Breathing?</b> If not, open airway. Still not breathing: <span class="tag dead">DEAD</span>. Children under 12 after submersion, immersion or smoke: consider 5 rescue breaths.</li>
             <li><b>Responds to voice?</b> If not: recovery position, <span class="tag p1">P1</span></li>
             <li><b>Aged under 2?</b> <span class="tag p1">P1</span></li>
-            <li><b>Breathing rate outside 12–23?</b> <span class="tag p1">P1</span></li>
-            <li><b>Heart rate 100 or more?</b> <span class="tag p1">P1</span> <span class="small">(EMJ 2022 text reads "&gt;100": check your local card)</span></li>
+            <li><b>Breathing rate outside 12 - 23?</b> <span class="tag p1">P1</span></li>
+            <li><b>Heart rate 100 or more?</b> <span class="tag p1">P1</span> <span class="small">(card wording, the operational standard; the EMJ 2022 paper reads "&gt;100")</span></li>
             <li>Otherwise <span class="tag p2">P2</span></li>
           </ol>
           <p>No "Pit Stop" pathway. Every living person involved is at least <span class="tag p3">P3</span>.</p>
@@ -1619,14 +1624,14 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 </div>
 <footer class="site">
   <div class="wrap">
-    <p style="margin:0">Mass Casualty Handbook. For training and education only; not clinical guidance. Content checked against sources on 16–17 October 2026. Doses not verified against JRCALC or TOXBASE. All casualties and exercises are fictional.</p>
+    <p style="margin:0">Mass Casualty Handbook. For training and education only; not clinical guidance. Content checked against sources on 16–17 October 2026, with a second verification round on 30 October 2026. Doses not verified against JRCALC or TOXBASE. All casualties and exercises are fictional.</p>
   </div>
 </footer>
 
 <script>
 "use strict";
 // ==== Data reused verbatim from UK_Mass_Casualty_Training_Suite_corrected.html ====
-        // 1. INCIDENT REGISTRY (2016–2024). Figures checked against sources on 16 October 2026.
+        // 1. INCIDENT REGISTRY (2016–2024). Figures checked against sources on 16 October 2026; second round 30 October 2026 (docs/verification/verify_round2_uk.md).
         // Each incident carries `checks`: [status, note] pairs shown in the UI.
         // status: "ok" = confirmed in a source read; "partial" = partly correct / snapshot; "unverified" = could not verify.
         const INCIDENTS_MASTER = [
@@ -1643,8 +1648,9 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 checks: [
                     ["ok", "Date, CR4000 three-section tram, ~73 km/h into 20 km/h curve, 7 deaths, 19 serious injuries (RAIB report)."],
                     ["ok", "LAS: 31 to CUH, 20 to St George's (Londonist; St George's statement)."],
-                    ["unverified", "Could not verify: CUH emptied its ED in 20 minutes; more than 60 staff called in via WhatsApp; one coach of 29 walking wounded; several upgraded on arrival (source article not retrievable)."],
-                    ["unverified", "Could not verify: that CUH upgrades 'validated' the 2023 triage change."]
+                    ["partial", "Staff response at CUH: a major incident alert went to all hospital staff and many came in; the trust later named 66 staff who helped (Lydall blog, 6 Dec 2016, by the author of the Evening Standard report). The 'called in via WhatsApp' detail rests on the Evening Standard only, which could not be opened."],
+                    ["unverified", "Could not verify (Evening Standard, 5 Dec 2016, blocked at source and in archives): CUH emptied its ED in 20 minutes; a coach of 29 walking wounded; first patient at 07:30; patients upgraded on arrival. The Croydon Advertiser says the ED did not close, 38 crash patients were treated at CUH, 2 were transferred to St George's and only 1 stayed overnight."],
+                    ["unverified", "Removed: the claim that CUH's upgrades on arrival 'validated' the 2023 NHS triage change. No source links the two; secondary triage commonly re-prioritises self-presenting or bus-conveyed casualties, but that is a general lesson, not a documented driver of the 2023 change."]
                 ]
             },
             {
@@ -1654,11 +1660,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 location: "Westminster, London",
                 archetype: "ARCH_02",
                 mechanism: "Vehicle ramming on the Westminster Bridge pavement (hired Hyundai Tucson SUV), followed by a fatal knife attack at Carriage Gates.",
-                casualties: "5 victims killed; attacker shot dead by a protection officer. Two pedestrians died on the day; Leslie Rhodes (75), also struck on the bridge, died at King's College Hospital the next day (23 March) when life support was withdrawn. Andreea Cristea, knocked into the Thames, died in hospital on 6 April 2017. PC Keith Palmer was fatally stabbed. About 40–50 injured.",
+                casualties: "5 victims killed; attacker shot dead by a protection officer. Two pedestrians died on the day; Leslie Rhodes (75), also struck on the bridge, died at King's College Hospital the next day (23 March) when life support was withdrawn. Andreea Cristea, knocked into the Thames, died in hospital on 6 April 2017. PC Keith Palmer was fatally stabbed in the chest and died at the scene. About 40–50 injured in early reports; the Chief Coroner's report (2018) counts 29 people seriously injured by the vehicle.",
                 dispersal: "Early reports: 12 seriously injured (some 'catastrophic') and 8 with less serious injuries treated at the scene. Receiving hospitals included St Thomas', King's College (admitted 8), St Mary's, the Royal London, and Chelsea and Westminster.",
-                injuries: "Bimodal: blunt vehicle-impact injuries and a fatal stabbing; one victim recovered from the river (immersion).",
+                injuries: "Bimodal: blunt vehicle-impact injuries and a fatal stabbing; one victim recovered from the river (immersion). BMJ 2017: 'most patients brought to hospital had blunt trauma'.",
                 checks: [
                     ["ok", "Vehicle was a Hyundai Tucson (not an i40)."],
+                    ["ok", "29 seriously injured by the vehicle and PC Palmer's fatal chest stab wound (Chief Coroner's Regulation 28 report, Dec 2018); most hospital patients had blunt trauma (Gulland, BMJ 2017;358:j4309)."],
                     ["ok", "Leslie Rhodes died the next day, not at the scene."],
                     ["partial", "Scene figures (12 serious, 8 minor) are attributed to Guardian reporting; no LAS primary source found."]
                 ]
@@ -1676,7 +1683,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 checks: [
                     ["ok", "Dark et al. EMJ 2021 (TARN case series) and Manchester Arena Inquiry Vol 2."],
                     ["partial", "The TARN dataset was deployed after the event; scene triage could not be linked to hospital records. It is not described as 'validated'."],
-                    ["unverified", "Could not verify: individual operations lasting up to 14 hours."]
+                    ["ok", "Craigie et al. BMJ Mil Health 2020 give 160 hospital attendances (40 children), 87 admitted and 28 to critical care; 20 died at the scene and 3 shortly after arrival. The two papers' totals differ (153 vs 160 attendances; 24 vs 28 critical care)."],
+                    ["unverified", "Could not verify: individual operations lasting up to 14 hours (not in Dark et al. 2021 or Craigie et al. 2020; no page found stating it)."]
                 ]
             },
             {
@@ -1686,13 +1694,14 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 location: "London Bridge & Borough Market, London",
                 archetype: "ARCH_02",
                 mechanism: "Van (white Renault Master) driven at high speed into pedestrians, followed by stabbings by three attackers.",
-                casualties: "8 victims killed; 3 attackers shot dead 8 minutes after the first 999 call. 48 conveyed to hospital; on 4 June, 36 remained in London hospitals, 21 of them critical (a snapshot). All 48 who reached hospital reportedly survived (secondary report only).",
+                casualties: "8 victims killed; 3 attackers shot dead 8 minutes after the first 999 call. 48 conveyed to hospital; on 4 June, 36 remained in London hospitals, 21 of them critical (a snapshot). All 48 patients LAS took to hospital survived (LAS statement at the close of the inquest, 28 June 2019). First call logged 22:07; crews on scene within 6 minutes.",
                 dispersal: "5 hospitals (NHS England, 4 June 2017): King's College 14 admitted (8 critical); Royal London 12 (6 critical); St Thomas' 4 (4 critical); UCH 5 (2 critical); St Mary's 1 (1 critical).",
-                injuries: "Predominantly penetrating stab injuries plus vehicle-impact injuries.",
+                injuries: "Predominantly penetrating stab injuries plus vehicle-impact injuries: 'many patients presented with stab wounds' (BMJ 2017); 'multiple victims of penetrating trauma' (Rutherford, J Paramedic Pract 2017).",
                 checks: [
-                    ["ok", "Royal London 12 admitted / 6 critical; King's 14 admitted / 8 critical (NHS England update)."],
-                    ["unverified", "Could not verify: van speed '~50 mph'; '~90% penetrating at King's'; 2–3 patients at King's before the 23:04 major incident declaration."],
-                    ["unverified", "Removed: '56.3% Zone 2 neck injuries' — not linked to this attack in any source found."]
+                    ["ok", "Royal London 12 admitted / 6 critical; King's 14 admitted / 8 critical (NHS England update, 4 June 2017; C4TS/QMUL)."],
+                    ["ok", "All 48 patients conveyed to hospital survived (LAS statement, 28 June 2019)."],
+                    ["unverified", "Could not verify: van speed 'about 50 mph' (the Chief Coroner's report and inquest coverage give only 'high speed'); 'about 90% penetrating at King's' (BMJ 2017 says 'many patients presented with stab wounds', no percentage); patients at King's before the 23:04 declaration (BMJ j4309 covers casualties arriving before declaration, but its full text is paywalled; no time or number was found)."],
+                    ["unverified", "Removed: Zone 2 and neck-exploration percentages (56.3%, 84.4%, 67.2%, 50.8%, 42%) — not in Borsetto et al. 2019, Kasbekar et al. 2017 or Zakaria et al. 2022, and not linked to this attack in any source found."]
                 ]
             },
             {
@@ -1718,12 +1727,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 location: "Seven Sisters Road, London",
                 archetype: "ARCH_02",
                 mechanism: "Vehicle ramming attack on pedestrians.",
-                casualties: "1 death at the scene (Makram Ali, who had collapsed beforehand; post-mortem found multiple injuries). 10–11 injured: LAS took 8 (some reports say 9) to hospital and treated 2 at the scene.",
-                dispersal: "Receiving hospitals: could not verify.",
+                casualties: "1 death at the scene (Makram Ali, who had collapsed beforehand; post-mortem found multiple injuries). 10–11 injured: NHS England (11:00, 19 June 2017) counted 7 patients in hospital, with 2 treated and discharged at the scene by LAS; earlier reports said LAS took 8 (some 9) to hospital.",
+                dispersal: "Seven patients were taken to the Royal London (4), the Whittington (2) and St Mary's (1); two were treated at the scene (NHS England London statement, 19 June 2017). King's College Hospital did not receive patients.",
                 injuries: "Blunt vehicle-impact injuries (pattern not individually verified).",
                 checks: [
                     ["ok", "Date, 1 death, 10–11 injured, LAS conveyed 8–9."],
-                    ["unverified", "Could not verify: receiving hospitals (the earlier 'King's College and Royal London' claim is unsupported)."]
+                    ["ok", "Receiving hospitals: Royal London 4, Whittington 2, St Mary's 1 (NHS England London, 19 June 2017). The earlier 'King's College and Royal London' claim was wrong and has been corrected."]
                 ]
             },
             {
@@ -1749,12 +1758,12 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 location: "Fishmongers' Hall and London Bridge, London",
                 archetype: "ARCH_02",
                 mechanism: "Lone-actor knife attack; attacker wore a fake suicide vest.",
-                casualties: "2 killed (Jack Merritt, 25, and Saskia Jones, 23), both from a stab wound to the chest; 3 others injured. The attacker was shot dead by City of London Police on London Bridge. Jones was pronounced dead at the scene at 14:25; Merritt was moved to King William Street and pronounced dead at 15:14.",
-                dispersal: "Receiving hospitals: could not verify.",
-                injuries: "Fatal chest stab wounds; survivors' wound sites not verified.",
+                casualties: "2 killed (Jack Merritt, 25, and Saskia Jones, 23); 3 others injured, all later discharged. The attacker was shot dead by City of London Police on London Bridge. Both victims died at the scene (Chief Coroner's prevention of future deaths report, 2021): Jones, with a single neck wound that was 'not survivable', was assessed as dead at the scene by a paramedic and a doctor; Merritt, whose injuries were 'not survivable', was moved to the junction of Cannon Street and King William Street for advanced care, where a pre-hospital thoracotomy was performed at the casualty clearing point, and was assessed as dead at the scene by a doctor. News reports give his time of death as 14:33 (LBC) or 15:14.",
+                dispersal: "LAS was called at 14:02 and had a medic on scene within 7 minutes; HART, a tactical response unit and London's Air Ambulance advanced trauma team (by road) were sent and a major incident declared. The three injured survivors went to two London hospitals, which LAS did not name.",
+                injuries: "Jones: one stab wound above the right clavicle, 5 cm wide and 10 cm deep, through the right upper lobe. Merritt: 15 stab and slash wounds including a 7.2 cm chest wound through a rib to the diaphragm and liver (pathology evidence at the inquest, PA). Survivors' wound sites not verified.",
                 checks: [
-                    ["ok", "Deaths, cause, attacker shot, fake vest, 3 injured."],
-                    ["unverified", "Could not verify: receiving hospitals; pre-hospital transfusion and damage control details."]
+                    ["ok", "Deaths, place of death (both at the scene), pre-hospital thoracotomy, attacker shot, fake vest, 3 injured and discharged (Chief Coroner's report 2021; LAS; Counter Terrorism Policing; LBC inquest report)."],
+                    ["unverified", "Could not verify: the receiving hospitals (LAS and NHS England name none; the earlier 'Royal London / King's College' claim is deleted); pre-hospital transfusion and damage control details."]
                 ]
             },
             {
@@ -1764,12 +1773,13 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 location: "Forbury Gardens, Reading, Berkshire",
                 archetype: "ARCH_02",
                 mechanism: "Lone-actor knife attack in a public park, lasting about half a minute.",
-                casualties: "3 killed (James Furlong, David Wails, Joseph Ritchie-Bennett), each from a single stab wound; 3 injured (attempted murders), all taken to hospital and later discharged. Place of death not stated in the sources read.",
-                dispersal: "Receiving hospital: could not verify.",
+                casualties: "3 killed (James Furlong, David Wails, Joseph Ritchie-Bennett), each from a single stab wound; 3 injured (attempted murders), all taken to hospital and later discharged. James Furlong died in Forbury Gardens: his Record of Inquest gives 'a stab wound of the neck' that was not survivable, and says he died extremely rapidly despite police, ambulance and air ambulance efforts. The Records of Inquest for Wails and Ritchie-Bennett could not be retrieved.",
+                dispersal: "News reports only: two survivors were taken to the Royal Berkshire Hospital (LBC, quoting SCAS; PA), and a third to the John Radcliffe, Oxford, where he was discharged without admission (Wikipedia, citing BBC/Guardian).",
                 injuries: "Furlong and Ritchie-Bennett: single stab wound to the neck. Wails: stabbed once in the back.",
                 checks: [
                     ["ok", "Single stab wound each (police post-mortem release; sentencing reports); wound sites as stated."],
-                    ["unverified", "Could not verify: deaths 'at the scene'; Royal Berkshire Hospital as receiving hospital."]
+                    ["ok", "Place of death for James Furlong: Forbury Gardens (Record of Inquest, judiciary.uk)."],
+                    ["partial", "Receiving hospitals rest on news reports (Royal Berkshire Hospital for two; John Radcliffe for one). Place of death for Wails and Ritchie-Bennett: their Records of Inquest could not be retrieved."]
                 ]
             },
             {
@@ -1780,12 +1790,15 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 archetype: "ARCH_02",
                 mechanism: "Knife attack at a holiday dance workshop for children in Years 2–6 (aged 6–11; 26 booked).",
                 casualties: "3 girls killed (aged 6, 7 and 9): two died at the scene and one in hospital the next day. 10 injured (8 children, 2 adults). Critical: 7 (5 children, 2 adults) in early reports; 8 (6 children and both adults) in later reporting.",
-                dispersal: "7 children to Alder Hey Children's Hospital; others to Aintree University Hospital, Ormskirk District General Hospital and Royal Manchester Children's Hospital.",
-                injuries: "Penetrating stab injuries. One adult survivor (stabbed 5 times) was readmitted around 15 August with breathing problems and had lung surgery. The last injured child was discharged on 8 August 2024.",
+                dispersal: "Casualties went to five hospitals by ambulance and air ambulance: Alder Hey, Royal Manchester Children's, Aintree, Southport and Formby DGH and Ormskirk (NWAS). Earlier reporting put 7 children at Alder Hey. The first patient conveyed, at 12:35, was Alice da Silva Aguiar, to Southport DGH; the hospital in which she died at 01:20 the next day is not named in the sentencing remarks or the inquest opening.",
+                injuries: "Penetrating stab injuries. Sentencing remarks (R v Rudakubana, 23 January 2025): the three girls who died sustained at least 122, at least 85 and 5 sharp-force wounds respectively; the eight surviving children had between 1 and 32 stab wounds, several with vertebral or scapular fractures, a splenectomy or transfusion; one adult was stabbed five times (vertebral, rib and scapular fractures, transfusion) and the other once (deep leg wound). The attack lasted about 15 minutes from 11:45. One adult survivor was readmitted around 15 August with breathing problems and had lung surgery (secondary reporting). The last injured child was discharged on 8 August 2024.",
                 checks: [
                     ["ok", "Ages 6–11; 3 deaths; 10 injured; 8 critical per later reporting."],
-                    ["unverified", "Could not verify: NWAS/HART/MERIT deployment detail (Inquiry Vol 1 NWAS section not retrieved); 'up to 8+ stab wounds per victim'."],
-                    ["unverified", "Removed: '100% surgical survival' (one child died in hospital the next day)."]
+                    ["ok", "Per-victim wound counts (sentencing remarks, judiciary.uk, Jan 2025). These replace the earlier 'eight or more stab wounds per victim', which fitted only some survivors."],
+                    ["ok", "Receiving hospitals: Alder Hey, Royal Manchester Children's, Aintree, Southport and Formby DGH, Ormskirk (NWAS statement, 29 July 2024; NWAS evidence to the Inquiry)."],
+                    ["partial", "NWAS response (trust statement; NWAS witness statement and closing submission to the Southport Inquiry): first 999 call 11:47; first NWAS clinician on scene 11:57; first ambulance 12:05; HEMS on the ground by 12:16; 37 resources and over 100 personnel, including 17 ambulances, 4 HART units, 2 advanced paramedics and 5 doctors (including MERIT and HEMS); major incident declared at about 12:25, though the Inquiry heard of confusion and delay in the declaration and in passing METHANE. MERIT rests on the trust statement; the Inquiry report's NWAS chapter could not be read."],
+                    ["ok", "The Inquiry's expert evidence (Professor Lyon, cited in NWAS's closing submission) found the care of the child who died in hospital was of high quality with minimal delay; the government response confirms recommendations 8–10 concern major-incident training, declaration and terminology. The earlier 'forensic survivability analyses showing preventable deaths' claim has been deleted as unsupported."],
+                    ["unverified", "Removed: '100% surgical survival' (Alice reached Southport DGH at 12:35 and died at 01:20 the next day; no source says she reached surgery)."]
                 ]
             }
         ];
@@ -1805,7 +1818,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 regions: "Neck, chest, armpits, back, abdomen, groin, buttocks (the TST penetrating-injury search areas); limbs; pelvis (vehicle impact)",
                 lsi: "Hot/warm zone extraction; Pressure / Tourniquet / Packing; clinician-led chest decompression within scope of practice",
                 hospital: "Massive haemorrhage protocol (London Code Red 2018: Pack A = 4 RBC + 4 FFP; Pack B = 6 RBC + 6 FFP + 2 cryo + 1 platelets; TXA 1 g over 10 min); penetrating neck injury assessment per MTC protocol",
-                pitfall: "Borsetto et al. 2019 (Queen Elizabeth Hospital Birmingham, 2012–2018 cohort): when CT angiography showed indirect signs alone, only 12.1% had significant vascular injury at exploration (PPV ≈ 12.1%)."
+                pitfall: "Borsetto et al. 2019 (Queen Elizabeth Hospital Birmingham, penetrating neck injury 2012–2018; 157 identified, 67 included): when CT angiography showed indirect signs of vascular injury alone, only 12.1% had significant vascular injury at neck exploration; direct radiological signs combined with clinical signs gave 97.7% specificity."
             },
             {
                 id: "ARCH_03",
@@ -2091,10 +2104,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                 personnel: "Paramedics, EMTs, HART, MERIT, HEMS / air ambulance",
                 gaps: "67.2% of under-16s in TARN 2008–2017 lacked complete pre-hospital physiology (Chernbumroong et al., preprint); poor shared mental models with armed police (Stephens et al. 2026); Manchester Arena Inquiry Vol 2 noted a paucity of analgesia within the inner cordon.",
                 mandate: [
-                    "NHS MITT (primary clinical triage for NHS responders): catastrophic bleeding → P1; walking → P3; breathing? open airway, still not breathing → DEAD; does not respond to voice → P1; under 2 → P1; RR <12 or ≥24 → P1; HR ≥100 → P1 (check current NHS England card; EMJ 2022 text reads >100); otherwise P2",
+                    "NHS MITT (primary clinical triage for NHS responders): catastrophic bleeding → P1; walking → P3; breathing? open airway, still not breathing → DEAD; does not respond to voice → P1; under 2 → P1; RR <12 or ≥24 → P1; HR 100 or more → P1 (the card's wording; the EMJ 2022 derivation paper reads >100); otherwise P2",
                     "Complete paediatric vital signs wherever possible",
                     "Inner-cordon analgesia provision",
-                    "Hydroxocobalamin 5 g IV (adult) / 70 mg/kg, max 5 g (child) and atropine per the PHE/NHSE 2018 briefing — scope of practice varies by service; verify against current JRCALC/TOXBASE and local SOP"
+                    "Hydroxocobalamin 5 g IV (adult) / 70 mg/kg, max 5 g (child) and atropine per the PHE/NHSE 2018 briefing. What is public: English ambulance trusts carry nerve-agent antidote auto-injectors (a combined atropine/oxime device) on frontline and major-incident vehicles under a national programme (SECAmb FOI, 2017); hydroxocobalamin is an ED Category A stock item (RCEM/NPIS 2021) and at least one trust holds none (national resilience stock). JRCALC drug text is subscription-only; verify locally"
                 ],
                 benchmark: "Simulation reference, not a standard: in the same study, MITT applied after TST took 25.9 s per casualty (960 s), against 40.5 s (1,500 s) for a single MITT-alone run (Park, Vassallo et al. 2026). A ≤26 s target is derived from that study.",
                 unsourced: ["Delayed analgesia due to locked vehicle drug cabinets", ">90% physiological documentation benchmark in children under 5", "'55.1% missed P1s with legacy Sieve'", "MITT 'Pit Stop' pathway (not part of MITT)"]
@@ -2116,7 +2129,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
             {
                 tier: "Tier 4: Specialist Surgical, Anaesthetic & ICU Teams",
                 personnel: "Trauma, vascular, ENT, orthopaedic, paediatric and burns surgeons; anaesthetists; intensivists",
-                gaps: "Penetrating neck injury: indirect CT angiography signs alone had a 12.1% rate of significant vascular injury at exploration (Borsetto et al. 2019, Queen Elizabeth Hospital Birmingham). Prolonged ICU care after nerve agent poisoning (Salisbury: five critically ill patients in ICU, BJA 2022).",
+                gaps: "Penetrating neck injury: indirect CT angiography signs alone had a 12.1% rate of significant vascular injury at exploration; direct signs plus clinical signs gave 97.7% specificity (Borsetto et al. 2019, Queen Elizabeth Hospital Birmingham, 2012–2018). Prolonged ICU care after nerve agent poisoning (Salisbury: five critically ill patients in ICU, BJA 2022).",
                 mandate: [
                     "Damage control surgery for blast injury",
                     "Penetrating neck injury assessment (interpret indirect CT angiography signs with caution)",
@@ -2125,7 +2138,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
                     "Level 3 ICU surge: the Severn Trauma Adult Guideline asks units to double Level 3 ventilated capacity and maintain it for at least 96 hours (regional guidance; no national source found)"
                 ],
                 benchmark: "No published benchmark found.",
-                unsourced: ["Zone 2 vascular control within 15 min of incision", "Cricothyroidotomy through eschar in under 90 s", "Zone 2 neck figures 56.3%, 84.4%, 67.2%, 50.8%, 42% (could not verify)", "Limited out-of-hours ENT/vascular exposure (no source)"]
+                unsourced: ["Zone 2 vascular control within 15 min of incision", "Cricothyroidotomy through eschar in under 90 s", "Zone 2 neck figures 56.3%, 84.4%, 67.2%, 50.8%, 42% (not in Borsetto 2019, Kasbekar 2017 or Zakaria 2022; deleted)", "Limited out-of-hours ENT/vascular exposure (no source)"]
             }
         ];
 
@@ -2159,9 +2172,9 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 // ==== End of reused data ====
 
 // ==== European (non-UK) terrorist mass casualty incidents ====
-// Every figure is taken from verify_europe.md, where each source was opened and checked on 30 Oct 2026.
-// Where sources disagree, both figures are given in the text. "Not found" means no source was located.
-// Do not add figures here unless they are first added to verify_europe.md with a source.
+// Every figure is taken from verify_europe.md and verify_round2_europe.md (docs/verification), where each source was opened and checked on 30 Oct 2026.
+// Where figures differ because they count different things, the text says what each counts. Where a difference is genuinely unresolved, both figures are given and the card says sources disagree. "Not found" means no source was located.
+// Do not add figures here unless they are first added to a verification file with a source.
 
 const EU_SRC = {
   pHir:  { s: "Hirsch M, Carli P, et al. Lancet 2015;386:2535-8", u: "https://doi.org/10.1016/S0140-6736(15)01063-6" },
@@ -2198,7 +2211,36 @@ const EU_SRC = {
   oFrag: { s: "Jorgensen JJ, et al. Injury 2016;47:1951-4", u: "https://doi.org/10.1016/j.injury.2016.03.023" },
   oEms:  { s: "Sollid SJ, et al. Scand J Trauma Resusc Emerg Med 2012;20:3", u: "https://doi.org/10.1186/1757-7241-20-3" },
   oRad:  { s: "Norway ED radiology response. Eur Radiol 2016", u: "https://doi.org/10.1007/s00330-016-4677-8" },
-  oPain: { s: "Chronic pain after 22 July 2011. Acta Anaesthesiol Scand 2019", u: "https://doi.org/10.1111/aas.13373" }
+  oPain: { s: "Chronic pain after 22 July 2011. Acta Anaesthesiol Scand 2019", u: "https://doi.org/10.1111/aas.13373" },
+  // Round 2 (verify_round2_europe.md): official, parliamentary and court sources, plus news where stated.
+  pMea:  { s: "Méadel J (secrétaire d'État), hearing before the Assemblée nationale commission d'enquête, 16 June 2016 (single victim list: 130 dead, 493 injured, 1,124 'choquées')", u: "https://www.assemblee-nationale.fr/14/pdf/cr-cemoyter/15-16/c1516034.pdf" },
+  pJus:  { s: "Ministère de la Justice: the 13 November 2015 trial (130 dead, more than 350 injured)", u: "https://www.justice.gouv.fr/node/326" },
+  pAph:  { s: "AP-HP press page, November 2016 (130 dead, 413 injured admitted to hospital)", u: "https://www.aphp.fr/espace-medias/liste-ressources-presse/rfi-un-apres-les-attentats-du-13-novembre" },
+  pSam:  { s: "SAMU de Paris and BSPP hearing, Assemblée nationale commission d'enquête, 16 March 2016", u: "https://www.assemblee-nationale.fr/14/pdf/cr-cemoyter/15-16/c1516009.pdf" },
+  pSsa:  { s: "Service de santé des armées hearing, Assemblée nationale Défense committee, 24 November 2015", u: "https://www.assemblee-nationale.fr/14/pdf/cr-cdef/15-16/c1516020.pdf" },
+  pRap:  { s: "Rapporteur's presentation, Assemblée nationale commission d'enquête, 5 July 2016", u: "https://www.assemblee-nationale.fr/14/pdf/cr-cemoyter/15-16/c1516035.pdf" },
+  pJems: { s: "Ernouf C, Tourtier JP, et al. Prehospital rescue organization during the November 2015 Paris attacks. JEMS (trade journal)", u: "https://www.jems.com/ems-operations/rescue-operations/prehospital-rescue-organization-during-the-november-2015-paris-terrorist-attacks/" },
+  nEly16:{ s: "Élysée: President Hollande, national tribute to the victims of the Nice attack, 15 October 2016 (86 victims; 15 under 18)", u: "https://www.elysee.fr/francois-hollande/2016/10/15/declaration-de-m-francois-hollande-president-de-la-republique-en-hommage-aux-victimes-de-lattentat-du-14-juillet-2016-a-nice-le-15-octobre-2016" },
+  nEly26:{ s: "Élysée: President Macron, 10th anniversary of the Nice attack, 14 July 2026 (86 killed; 450 physically injured)", u: "https://www.elysee.fr/emmanuel-macron/2026/07/14/commemoration-des-10-ans-de-lattentat-de-nice" },
+  nVil:  { s: "Ville de Nice: commemoration of the 14 July 2016 attack (86 dead)", u: "https://www.nice.fr/commemoration-des-10-ans-de-lattentat-du-14-juillet-2016/" },
+  n360:  { s: "le360 (news): death of a man injured in the Nice attack brings the toll to 86, 19 August 2016", u: "https://fr.le360.ma/monde/deces-dun-homme-blesse-dans-lattentat-de-nice-le-bilan-porte-a-86-morts-84223/" },
+  nLen1: { s: "Solla F, et al. Lenval children's hospital, Nice attack. Acad Pediatr 2018;18:361-3", u: "https://doi.org/10.1016/j.acap.2018.01.004" },
+  nLen2: { s: "Solla F, et al. Severe casualties from the Bastille Day attack in Nice. Eur J Trauma Emerg Surg 2019;45:857-64", u: "https://doi.org/10.1007/s00068-018-0901-3" },
+  gFw:   { s: "Berliner Feuerwehr, Jahresbericht 2016 (12 dead, 67 injured; all severely injured in hospital within 90 min)", u: "https://www.berliner-feuerwehr.de/fileadmin/bfw/dokumente/Publikationen/Jahresberichte/jahresbericht2016.pdf" },
+  gBb:   { s: "Brandenburg State Chancellery press release, 18 December 2021 (13th death; at least 67 injured)", u: "https://www.brandenburg.de/media_fast/365/211218%20PM%20Gedenken%20Anschlag%20Breitscheidplatz.pdf" },
+  gRbm:  { s: "Governing Mayor of Berlin, press release 19 December 2024 (13 killed)", u: "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2024/pressemitteilung.1513397.php" },
+  gSen:  { s: "Abgeordnetenhaus Berlin, Innenausschuss Wortprotokoll, 20 December 2016 (Senator Geisel: 12 dead, 53 injured, 14 very severely; alarm 20:04; all severely injured in hospital within 80 min)", u: "https://www.parlament-berlin.de/ados/18/InnSichO/protokoll/iso18-001-wp.pdf" },
+  gTon:  { s: "t-online / dpa (news): 13th victim of the Breitscheidplatz attack died 5 October 2021", u: "https://www.t-online.de/-/91338972" },
+  gAfp:  { s: "Deutsches Ärzteblatt / AFP (news), 20 December 2016: 52 admitted, 18 life-threatening", u: "https://www.aerzteblatt.de/news/0c6d4ce4-f136-43e4-aea8-91de9af07254" },
+  c3cat: { s: "3Cat/CCMA (Catalan public broadcaster, news), 8th anniversary 2025: 16 dead; 345 recognised victims per the court judgment", u: "https://www.3cat.cat/324/homenatge-a-les-victimes-del-17a-en-el-vuite-aniversari-dels-atemptats-de-barcelona-i-cambrils/noticia/3366247/" },
+  cAcn:  { s: "Catalan News Agency (news), 2021: 16 dead and 140 injured", u: "https://www.catalannews.com/society-science/item/sombre-memorial-for-victims-of-barcelona-terror-attack-four-years-on" },
+  oNou:  { s: "NOU 2012:14, Rapport fra 22. juli-kommisjonen (chapters 1-2)", u: "https://www.sintef.no/globalassets/project/nexus/nou201220120014000dddpdfs.pdf" },
+  oGov:  { s: "Government of Norway: 22 July terror attack (8 killed in Oslo, 69 at Utøya)", u: "https://www.regjeringen.no/en/aktuelt/22-july-terror-attack/id2979790/" },
+  bCham: { s: "Belgian Chamber of Representatives: brochure on the parliamentary inquiry into the 22 March 2016 attacks (32 dead plus 3 bombers; 340 injured)", u: "https://www.dekamer.be/kvvcr/pdf_sections/publications/attentats/Brochure_Terrorists_Attacks.pdf" },
+  bSpf1: { s: "SPF Santé publique press release, 28 March 2016 (about 340 injured; 96 in hospital, 55 in intensive care, 30 with burns, 29 hospital sites)", u: "https://news.belgium.be/fr/node/19267/pdf" },
+  bSpf2: { s: "SPF Santé publique press release, 4 April 2016 (66 in hospital, 37 in intensive care, 26 in burns centres)", u: "https://news.belgium.be/fr/node/19277/pdf" },
+  bSpf3: { s: "SPF Santé publique press release, 29 April 2016 (31 in hospital across 12 hospitals, 17 in intensive care, 11 in burns centres)", u: "https://news.belgium.be/fr/node/19364/pdf" },
+  bDh:   { s: "DH / Belga (news), 30 March 2016: Crisis Centre final toll of 32 dead; 87 in hospital, 47 in intensive care", u: "https://www.dhnet.be/actu/belgique/2016/03/30/attentats-de-bruxelles-87-victimes-encore-hospitalisees-en-belgique-R3BMT577RVEAHKWQ37BYLIVZSY/" }
 };
 
 function euF(text, key, confidence) { return { text, source: EU_SRC[key].s, url: EU_SRC[key].u, confidence }; }
@@ -2212,8 +2254,8 @@ const EUROPE_INCIDENTS = [
     country: "France",
     city: "Paris and Saint-Denis",
     type: "mixed",
-    deaths: "130 (Hirsch et al. report 129 dead at the scenes, plus 4 deaths among 302 AP-HP patients)",
-    injured: "Sources disagree: 352 (EJCTS 2017), 351 (Ann Vasc Surg 2017), 495 (Paris Fire Brigade 2017), 'more than 300' (Lancet 2015). 337 were admitted alive to hospital within 24 h.",
+    deaths: "130 (official French figure: government victim list; Ministry of Justice). Hirsch et al. report 129 dead at the scenes plus 4 deaths among 302 AP-HP patients; Dr Pelloux told the inquiry 129 died at the scenes and one after transfer to hospital, which the sources do not reconcile.",
+    injured: "The published totals count different things. About 350 physically injured was the figure used in the first days and in the clinical papers (352 EJCTS 2017; 351 Ann Vasc Surg 2017; 350 SAMU de Paris; 'more than 300' Lancet 2015). AP-HP counted 413 injured people admitted to hospital. By June 2016 the government's single victim list recorded 493 physically injured and a further 1,124 psychologically injured (1,747 victims in all); the Paris Fire Brigade's 495 is that list in early 2017. 337 were admitted alive to hospital within 24 h (Intensive Care Med 2019).",
     summary: "A coordinated multisite attack in about 40 minutes: suicide bombings at the Stade de France, shootings on café terraces, and a mass shooting with hostage-taking at the Bataclan concert hall. Paris hospitals activated Plan Blanc, and casualties were dominated by gunshot wounds.",
     medicalFacts: [
       euF("337 casualties were admitted alive within 24 h: 286 (85%) gunshot and 51 (15%) explosion.", "pIcm", "high"),
@@ -2223,10 +2265,15 @@ const EUROPE_INCIDENTS = [
       euF("Prehospital triage undertriaged 36% (95% CI 27-47%) and overtriaged 8% (95% CI 4-13%) of casualties, compared with an expert panel.", "pTri", "high"),
       euF("68 of 337 were transfused. Massive transfusion was needed in 20 (6%), with a plasma:RBC ratio of 0.8. Median time from admission to first red cells was 57 min for MT patients.", "pTxf", "high"),
       euF("Demand for tourniquets was so high that mobile teams returned without their belts (improvised tourniquets). The number applied was not reported.", "pHir", "high"),
+      euF("Each Paris Fire Brigade rescue vehicle carried a special-situations haemorrhage kit with two tactical tourniquets, enough to treat 4-5 victims with severe bleeding. The article does not report how many tourniquets were applied.", "pJems", "medium"),
+      euF("Prehospital triage by the Paris Fire Brigade recorded about 100 'urgences absolues' (immediate) and 157 'urgences relatives' (delayed); 98 absolute emergencies were counted in the Île-de-France hospitals.", "pSam", "high"),
+      euF("The government's single victim list (June 2016): 130 dead, 493 physically injured and 1,124 psychologically injured, 1,747 victims in all. AP-HP counted 413 injured admitted to hospital.", "pMea", "high"),
+      euF("Hospital mortality was about 1.5% of the injured, and there were no inter-hospital transfers (inquiry rapporteur, July 2016).", "pRap", "high"),
+      euF("The two military hospitals (Percy and Bégin) took 52 injured, 18 of them absolute emergencies; 13 were admitted to intensive care and 50 operations were performed in 48 hours.", "pSsa", "high"),
       euF("25 patients (7%) had penetrating thoracic injury (80% gunshot, mean ISS 26.8). 17 needed thoracic surgery, and postoperative mortality was 12%.", "pThx", "high"),
       euF("20 patients had non-thoracic vascular trauma, and 12 of them had prehospital CPR. There were no deaths or amputations at 6 months.", "pVasc", "high"),
       euF("At Bégin military hospital, 45 patients were triaged T1 8, T2 10 and T3 27 and managed on damage-control principles. 22 had emergency surgery.", "pBeg", "high"),
-      euF("Paediatric casualty numbers: not found in the sources reviewed.", "pHir", "high")
+      euF("Paediatric physical-injury numbers: not found in the clinical papers, the inquiry hearings, the Ministry of Justice page or Santé publique France.", "pMea", "high")
     ],
     lessons: [
       euL("Unidirectional patient flow, with enough staff under a single medical director, prevents a trauma centre being overwhelmed.", "pVis"),
@@ -2236,7 +2283,7 @@ const EUROPE_INCIDENTS = [
       euL("The rescue chain needs simpler, more robust organisation and better communication between operators.", "pBspp")
     ],
     verification: "high",
-    caveats: "Injured totals vary with definition (physical only or including psychological). Death accounting differs slightly between sources."
+    caveats: "Injured totals differ because they count different things: the early physical-casualty count (about 350), hospital admissions (413, AP-HP) and the legal victim list (493 physically and 1,124 psychologically injured by June 2016). The accounting of in-hospital deaths differs slightly between witnesses (one versus four)."
   },
   {
     id: "brussels-2016",
@@ -2245,14 +2292,17 @@ const EUROPE_INCIDENTS = [
     country: "Belgium",
     city: "Brussels",
     type: "explosive",
-    deaths: "32 commonly cited (16 airport, 16 metro); 35 recognised by the court in 2023 (news source only)",
-    injured: "Not verified (no medical or official source opened). 313 victims were dispatched to 30 hospitals.",
+    deaths: "32 victims killed (official Crisis Centre toll; the three suicide bombers are counted separately): 12 at Zaventem airport and 20 at Maelbeek on the day, rising with later deaths in hospital. In 2023 the assize court recognised 35 murder victims (18 Zaventem, 17 Maelbeek) after three injured people died later (news only).",
+    injured: "About 340 (official: Belgian Chamber of Representatives; SPF Santé publique, 28 March 2016). A conference abstract gives 313 victims dispatched to 30 hospitals.",
     summary: "Suicide bombings in the airport departure hall and on a metro train at Maelbeek station. Brussels had written a multisite medical plan after Paris only days before.",
     medicalFacts: [
       euF("313 victims were dispatched to 30 hospitals, and 11 medical teams were sent to the scenes for triage and vital care.", "bMoh", "medium"),
       euF("The Queen Astrid Military Hospital burn unit admitted 23 casualties under damage-control resuscitation and surgery principles. There were no deaths during admission or at 1-year follow-up.", "bBu", "high"),
       euF("At one tertiary centre, 56 patients presented with otological symptoms: tinnitus in 45, subjective hearing loss in 32, sensorineural loss in 41% and tympanic membrane perforation in 3.", "bEnt", "high"),
-      euF("Deaths: 32 immediate. The 2023 court verdict raised the toll to 35 (18 Zaventem, 17 Maelbeek). Headline figure from news only.", "bLib", "low")
+      euF("A week after the attacks the toll was 32 dead (plus the three perpetrators), 17 Belgians and 15 foreigners, and the number of injured had climbed to 340.", "bCham", "high"),
+      euF("Six days after the attack, 96 victims were still in hospital across 29 hospital sites, 55 of them in intensive care and 30 with burns (two in a French burns centre); four patients had died in hospital.", "bSpf1", "high"),
+      euF("By 4 April, 66 remained in hospital (37 in intensive care, 26 in burns centres); by 29 April, 31 remained in 12 hospitals (17 in intensive care, 11 in burns centres).", "bSpf3", "high"),
+      euF("The 2023 court verdict recognised 35 murder victims (18 Zaventem, 17 Maelbeek) because three injured people died later. News only.", "bLib", "low")
     ],
     lessons: [
       euL("Familiarity between emergency workers from previous joint exercises was credited as the key factor in limiting casualties.", "bMoh"),
@@ -2260,8 +2310,8 @@ const EUROPE_INCIDENTS = [
       euL("A single-site peacetime mass casualty plan was inadequate, so a multisite plan was written after Paris and used within days.", "bMip"),
       euL("A burn unit can act as buffer capacity in a mass casualty incident if it follows damage-control principles.", "bBu")
     ],
-    verification: "low",
-    caveats: "Casualty totals rest on news and a conference abstract. No full hospital cohort or parliamentary inquiry text could be opened."
+    verification: "medium",
+    caveats: "Deaths and injured totals are now official (Chamber brochure, SPF Santé publique, Crisis Centre). The 35 figure is a court count from news. Intensive care and burns figures are official hospital-census snapshots, not a clinical cohort; no system-wide total of operations has been published, and the inquiry's medical chapter could not be read."
   },
   {
     id: "nice-2016",
@@ -2270,8 +2320,8 @@ const EUROPE_INCIDENTS = [
     country: "France",
     city: "Nice",
     type: "vehicle",
-    deaths: "Sources disagree: 86 (J Visc Surg 2018; Int J Legal Med 2018) or 87 (Orthop Traumatol Surg Res 2019)",
-    injured: "458",
+    deaths: "86 (official: Élysée, 2016 and 2026; Ville de Nice). The toll was 84 on the night and rose as two injured people died in hospital, the last on 18 August 2016. The 86 excludes the attacker, who was shot dead by police; the orthopaedic paper's 87 does not explain its figure and can only be 86 plus the attacker. Fifteen of the dead were under 18.",
+    injured: "About 450 physically injured (Élysée 2026: 450; the clinical papers: 458; AFP: more than 450)",
     summary: "A 19-tonne lorry was driven into crowds watching the Bastille Day fireworks. The city's only adult trauma centre received 182 victims, most with road-traffic-type blunt injuries, and many children were affected.",
     medicalFacts: [
       euF("182 victims were admitted to the main trauma centre ED.", "nOrt", "high"),
@@ -2280,7 +2330,9 @@ const EUROPE_INCIDENTS = [
       euF("11 had abdominal trauma (median ISS 34) and 8 underwent urgent surgery on damage-control principles.", "nVis", "high"),
       euF("All victims were identified within 4.5 days.", "nFor", "high"),
       euF("In the first 2 weeks, 365 children and adolescents (54.6% of 668 registered) attended the paediatric medico-psychological emergency unit.", "nPsy", "high"),
-      euF("Paediatric physical-injury numbers: not found.", "nPsy", "high")
+      euF("15 of the 86 people killed were under 18 (national tribute, October 2016).", "nEly16", "high"),
+      euF("Lenval, the city's children's hospital, received 47 casualties, 12 of them adults (so 35 children).", "nLen1", "high"),
+      euF("Of the Lenval casualties, 11 were severely injured (3 adults, 8 children): 6 children needed surgery, 7 patients went to paediatric intensive care and 5 died. 28 operations were performed. Injuries were pelvic disruption, lower-limb fractures, vascular injury and crush injury of the head and trunk, mostly arriving without prehospital care.", "nLen2", "high")
     ],
     lessons: [
       euL("Non-operative management of abdominal injuries was judged unsuitable during a mass influx. Surgical haemostasis is recommended for patients at risk of secondary bleeding.", "nVis"),
@@ -2289,7 +2341,7 @@ const EUROPE_INCIDENTS = [
       euL("A dedicated paediatric medico-psychological emergency unit was needed. It was staffed by 146 child and adolescent mental health professionals.", "nPsy")
     ],
     verification: "high",
-    caveats: "The death toll differs by one between peer-reviewed sources, and the reason is not stated."
+    caveats: "The official toll is 86 victims; peer-reviewed sources giving 87 appear to include the attacker, though none says so. Injured totals range from 450 to 458 depending on the source."
   },
   {
     id: "berlin-2016",
@@ -2298,15 +2350,19 @@ const EUROPE_INCIDENTS = [
     country: "Germany",
     city: "Berlin",
     type: "vehicle",
-    deaths: "12 (including the hijacked lorry's driver, who was shot, and 3 who died in hospital that night)",
-    injured: "Sources disagree: 56 (Berliner Ärzte 2017) or 67 (JEMS 2018)",
-    summary: "A hijacked 40-tonne semitrailer was driven into a crowded Christmas market. Its original driver had been shot. Patients went to 22 or 23 Berlin hospitals (sources differ).",
+    deaths: "12 on the night (11 at the market, 3 of them in hospital that night, and the Polish driver of the hijacked lorry, who was shot); 13 officially since October 2021, when a 49-year-old man died of the late effects of a head injury (Brandenburg State Chancellery; Governing Mayor of Berlin; dpa).",
+    injured: "67 (official: Berlin Fire Brigade annual report 2016; Brandenburg State Chancellery; Berlin Senate record). Early counts of 53 (Senator for the Interior, 20 December 2016) and 56 (Berliner Ärzte 2017) were provisional.",
+    summary: "A hijacked 40-tonne semitrailer was driven into a crowded Christmas market. Its original driver had been shot. Patients went to 22 or 23 Berlin hospitals (trade sources differ; no official count found).",
     medicalFacts: [
       euF("12 deaths: the lorry's driver (gunshot to the head) and 11 market victims, 3 of whom died in hospital the same night despite CPR and emergency surgery.", "gFor", "high"),
       euF("At autopsy the market victims had massive blunt torso, pelvic and limb trauma with Morel-Lavallée lesions, often with little external sign ('Casper's sign'). No preventable deaths were found.", "gFor", "high"),
       euF("Rescuers used tourniquets for bleeding from décollement injuries to the legs. The number was not reported.", "gFor", "high"),
       euF("The first call came at 20:04 and the mass casualty (MANV) alarm at 20:07. Patients went to 23 hospitals.", "gAek", "medium"),
-      euF("The first category-1 transport left at 20:38, and all category 1 and 2 patients had been transported by 21:30. 22 hospitals received patients (this source).", "gJems", "medium")
+      euF("The first category-1 transport left at 20:38, and all category 1 and 2 patients had been transported by 21:30. 22 hospitals received patients (this source).", "gJems", "medium"),
+      euF("Official count: 12 dead and 67 injured, some severely; all severely injured patients were in suitable hospitals within about 90 minutes.", "gFw", "high"),
+      euF("The day after: 12 dead and 53 injured, 14 of them very severely; fire and police were alerted at 20:04, two minutes after the impact; all severely injured were in hospital within 80 minutes; Charité and Vivantes declared disaster alerts, each with about 1,000 medical staff deployed.", "gSen", "medium"),
+      euF("AFP, the day after: 52 injured admitted to Berlin hospitals, 18 with life-threatening injuries (3 of whom died); the Charité took 13, 6 of them in intensive care. News only.", "gAfp", "low"),
+      euF("A thirteenth victim died on 5 October 2021 of the late effects of a head injury and is officially counted among the dead.", "gBb", "high")
     ],
     lessons: [
       euL("The first triage round counted about half the final number of patients: plan for double.", "gJems"),
@@ -2314,7 +2370,7 @@ const EUROPE_INCIDENTS = [
       euL("Spare capacity, such as a free ICU bed, is a reserve for the unforeseen, not inefficiency. Exercises are the main route to preparedness.", "gAek")
     ],
     verification: "medium",
-    caveats: "No peer-reviewed clinical cohort of survivors was found. Injured totals and hospital counts differ between sources."
+    caveats: "No peer-reviewed clinical cohort of survivors exists (PubMed lists only the forensic series and responder mental-health studies), so survivor ISS, surgery and ICU totals are unknown. The number of receiving hospitals (22 or 23) rests on trade sources and is unresolved."
   },
   {
     id: "barcelona-2017",
@@ -2323,8 +2379,8 @@ const EUROPE_INCIDENTS = [
     country: "Spain",
     city: "Barcelona and Cambrils",
     type: "vehicle",
-    deaths: "Barcelona 14 (13 at scene, 1 later); Cambrils 1. Combined toll not verified.",
-    injured: "Sources disagree: 139 injured plus 14 dead, 153 victims in all (Emergencias 2026), or 139 victims including the dead (Emergencias 2017). Cambrils: 6 victims.",
+    deaths: "16 across the two attacks, the figure established by the Audiencia Nacional judgment of 27 May 2021: 14 in the La Rambla attack (13 at the scene, 1 later), 1 at Cambrils and 1 further victim. The 16 comes from news and the Catalan public broadcaster only (no official page could be opened), and its composition is not itemised in any source opened.",
+    injured: "About 140 overall and 130 on La Rambla (news). The Barcelona response papers count differently: 153 people attended, meaning 14 dead plus 139 injured (Emergencias 2026), or 139 victims including the 14 dead (Emergencias 2017). Cambrils: 6 victims (Emergencias 2026); 1 dead and 4 injured (3Cat, news).",
     summary: "A van was driven 550 m along La Rambla. A second attack at Cambrils followed early the next morning. There was no in-hospital mortality among the Barcelona injured.",
     medicalFacts: [
       euF("Real-time triage: 17 red, 32 yellow, 77 green, distributed to 10 hospitals and 7 urgent primary-care centres. Mortality was 0% at 24 h, 72 h and 7 days.", "cSal", "medium"),
@@ -2332,6 +2388,7 @@ const EUROPE_INCIDENTS = [
       euF("The first red patient was transported 10 min after the alert. 23 centres were pre-alerted, 17 received patients, and only 2 secondary transfers were needed.", "cVal", "medium"),
       euF("The initial estimate of 20 affected people rose to a final count of 153.", "cVal", "medium"),
       euF("Head and thoraco-abdominal injuries predominated, and 56% had more than one injury.", "cVal", "medium"),
+      euF("16 people died across the two attacks and 345 were recognised as victims by the court judgment (public broadcaster, news only).", "c3cat", "low"),
       euF("Paediatric numbers: not found.", "cVal", "medium")
     ],
     lessons: [
@@ -2340,7 +2397,7 @@ const EUROPE_INCIDENTS = [
       euL("Most injured were mildly hurt but had significant emotional impact, so psychological follow-up is needed.", "cVal")
     ],
     verification: "medium",
-    caveats: "Both sources have internal inconsistencies in their totals. A combined death toll of 16 appears in news reports but was not verified."
+    caveats: "The two papers' totals (153 and 139) are not a factual conflict: they count the dead differently. The triage sets are not comparable: 17/32/77 is the real-time prehospital tally and 30/30/63 a retrospective META reclassification of 123 injured. The combined toll of 16 rests on news reports attributing it to the court."
   },
   {
     id: "madrid-2004",
@@ -2376,15 +2433,16 @@ const EUROPE_INCIDENTS = [
     country: "Norway",
     city: "Oslo and Utøya",
     type: "mixed",
-    deaths: "77 in total: Oslo 8; Utøya 69 (or 68 at the scene, per the trauma centre paper)",
-    injured: "Oslo bomb: 98 casualties in all. Utøya: 60 injured (or 61, per the trauma centre paper).",
+    deaths: "77 (22 July Commission, NOU 2012:14): 8 in the Oslo government quarter and 69 at Utøya. The trauma-centre paper's 68 dead at the scene and 61 injured count one casualty who died after evacuation as injured rather than dead.",
+    injured: "Oslo bomb: 10 admitted to hospital with life-threatening or serious injuries and about 190 minor injuries treated at the Oslo emergency clinic in 24 h (NOU 2012:14); the trauma-centre paper counts 98 casualties in all. Utøya: 33 with life-threatening or serious physical injury (NOU 2012:14); the clinical papers give 60 or 61 injured in total.",
     summary: "A car bomb in central Oslo was followed by a mass shooting at a youth camp. Victims were largely adolescents, many with injuries from fragmenting rifle ammunition.",
     medicalFacts: [
       euF("The Oslo trauma centre treated 31 patients, 20 with ISS>15. 125 operations were done in 4 weeks, and critical mortality was 5% (1 death). Surge capacity was never exceeded.", "oTc", "high"),
       euF("A rural hospital (Ringerike) triaged 35 patients and admitted 18, including 22 within 1 h and 5 critical. There were no deaths.", "oRur", "high"),
       euF("18 Utøya patients had fragmenting-bullet injuries (median age 17, median ISS 21). There were 5 amputations within 9 days and 101 operations in 4 weeks, mostly repeated debridement.", "oFrag", "high"),
       euF("Minimum acceptable care restricted CT in the ED to suspected severe head injury. Radiology staff tripled.", "oRad", "high"),
-      euF("48 people were hospitalised with physical injuries. At 3-4 years, 80% of 30 followed up reported injury-related chronic pain.", "oPain", "high")
+      euF("48 people were hospitalised with physical injuries. At 3-4 years, 80% of 30 followed up reported injury-related chronic pain.", "oPain", "high"),
+      euF("Official count: 77 killed. Government quarter: 8 killed instantly, 10 admitted with life-threatening or serious injuries, 10 sent directly to the Ullevål trauma centre and about 190 with lesser injuries treated at the Oslo emergency clinic in the first 24 h. Utøya: 69 killed, most of them young people, and a further 33 with life-threatening or serious physical injury.", "oNou", "high")
     ],
     lessons: [
       euL("Protect the trauma centre from large numbers of walking wounded. A dual surgical command (ED triage plus treatment supervision with re-triage) worked well.", "oTc"),
@@ -2393,7 +2451,7 @@ const EUROPE_INCIDENTS = [
       euL("Two separate incidents close together challenge triage, evacuation and helicopter coordination.", "oEms")
     ],
     verification: "high",
-    caveats: "Utøya deaths and injured differ by one between sources."
+    caveats: "The Commission's 69 dead at Utøya includes one person who was alive when evacuated and died later; the trauma-centre paper counts that person as injured (68 dead, 61 injured). The Commission gives no single injured total for Utøya."
   }
 ];
 
@@ -2410,17 +2468,18 @@ const EUROPE_TEACHING_POINTS = [
   euL("Fragmenting or high-energy rounds need planned, repeated debridement (Utøya).", "oFrag"),
   euL("Initial counts underestimate: Barcelona's estimate rose from 20 to 153 victims, and Berlin advises planning for double.", "cVal"),
   euL("Children and adolescents: 365 attended Nice's paediatric medico-psychological unit in 2 weeks, and the Utøya surgical cohort's median age was 17.", "nPsy"),
+  euL("Children will be among the severely injured: in Nice 15 of the 86 dead were under 18, and the children's hospital received 47 casualties (35 children), 11 of them severe, mostly arriving without prehospital care.", "nLen2"),
   euL("Rehearsal pays off: Pitié-Salpêtrière had drilled Plan Blanc that morning, and Brussels credited joint exercises.", "pPsl"),
   euL("Smaller or remote hospitals can cope with good planning and staff recall (Ringerike: 35 triaged, no deaths).", "oRur")
 ];
 
 const EUROPE_NOT_FOUND = [
-  "Brussels 2016: total injured, and system-wide surgery and ICU numbers.",
-  "Berlin 2016: survivor injury severity, surgery and ICU numbers.",
-  "Barcelona/Cambrils 2017: combined death toll (news reports give 16, not verified).",
-  "Paediatric physical-injury counts for all incidents.",
-  "Numbers of tourniquets applied (Paris, Berlin).",
-  "Vienna 2020 and Stockholm 2017: no medical literature found, so they are excluded."
+  "Berlin 2016: the number of receiving hospitals (22 or 23, trade sources only; no official count found); survivor injury severity, surgery and ICU totals (no published hospital cohort).",
+  "Brussels 2016: a system-wide total of operations; the parliamentary inquiry's medical chapter (DOC 54 1752/006, pp. 92-98) could not be read. Injured (about 340) and deaths (32 plus 3 bombers) are now official.",
+  "Barcelona/Cambrils 2017: no official Generalitat or court page could be opened (the 16 deaths are news reports attributing the figure to the Audiencia Nacional), and the composition of the 16 is not itemised in any source opened.",
+  "Paediatric physical-injury counts for Paris, Brussels, Berlin, Barcelona and Utøya (found for Nice only: the Lenval series).",
+  "Numbers of tourniquets applied (Paris, Berlin): no official or peer-reviewed source gives a count.",
+  "Vienna 2020 and Stockholm 2017: no peer-reviewed clinical account found, so neither is included as a case study. What was found: Vienna (2 November 2020), four people killed and the attacker shot dead by police, 15 treated in hospital on the night (7 seriously) and later reports of more than 20 injured (wire services only); Stockholm (7 April 2017), 5 dead and 14 seriously injured in the Swedish Police Authority's evaluation, with Läkartidningen noting that patient numbers did not strain Stockholm's hospitals."
 ];
 
 if (typeof module !== "undefined") module.exports = { EUROPE_INCIDENTS, EUROPE_TEACHING_POINTS, EUROPE_NOT_FOUND, EU_SRC };
@@ -2438,7 +2497,10 @@ const VFILE = {
   VR:"Registry verification table (verify_registry.md)",
   D12:"WMAS Major Incident Response Aide-Memoire 2018 (public card)",
   SUITE:"Training suite data (archetype names)",
-  VE:"European incident verification table (verify_europe.md)"
+  VE:"European incident verification table (verify_europe.md)",
+  V2C:"Clinical verification, round 2 (verify_round2_clinical.md)",
+  V2U:"UK incident verification, round 2 (verify_round2_uk.md)",
+  V2E:"European incident verification, round 2 (verify_round2_europe.md)"
 };
 const U = {
   naru:"https://www.england.nhs.uk/wp-content/uploads/2018/12/naru-tst-non-clinical-responders-supplementary-information.pdf",
@@ -2470,7 +2532,28 @@ const U = {
   nmtr:"https://www.england.nhs.uk/outcomes-and-registries-programme/nmtr/",
   euTri:"https://doi.org/10.1097/MEJ.0000000000000771",
   euMadrid:"https://doi.org/10.1007/s00068-008-8805-2",
-  euBerlin:"https://doi.org/10.1007/s12024-020-00277-6"
+  euBerlin:"https://doi.org/10.1007/s12024-020-00277-6",
+  mittLong:"https://www.england.nhs.uk/long-read/nhs-major-incident-triage-tool-mitt/",
+  las2019:"https://www.londonambulance.nhs.uk/?p=26474",
+  hostler:"https://researchconnect.buffalo.edu/en/publications/admission-temperature-and-survival-in-patients-admitted-to-burn-c/",
+  dbth:"https://www.dbth.nhs.uk/wp-content/uploads/2025/03/Adult-Burn-Referral-Guidance-2025-2028-3.pdf",
+  ukhsaNA:"https://assets.publishing.service.gov.uk/media/670fd675e84ae1fd8592f503/Nerve_Agents_UKHSA_IM_.pdf",
+  chemm:"https://chemm.hhs.gov/na_hospital_mmg.htm",
+  secambFoi:"https://www.secamb.nhs.uk/wp-content/uploads/foi_disclosure_log/2017/09%20-%20September/Miscellaneous/170901%20-%20Chemical%20Attacks%20.pdf",
+  npis:"https://www.npis.org/Download/RCEM_NPIS_Antidote_Guideline_List_2021_FINAL_V3.pdf",
+  jesip:"https://www.jesip.org.uk/",
+  naruHart:"https://naru.org.uk/the-interoperable-capabilities/hart/",
+  aaceMerit:"https://aace.org.uk/?p=3032",
+  tarnIss:"https://www.c4ts.qmul.ac.uk/downloads/procedures-manual-tarn-p13-iss.pdf",
+  niss:"https://www.qxmd.com/r/9420106",
+  naruPlan:"https://naru.org.uk/wp-content/uploads/2024/01/NARU-ANNUAL-BUSINESS-PLAN-2023-2024.pdf",
+  tarnWales:"https://trauma.nhs.wales/information-for-patients/tarnnmtr/",
+  scasRole:"https://www.scas.nhs.uk/wp-content/uploads/2022/09/Resuscitation-Policy.pdf",
+  nfccRvp:"https://nfcc.org.uk/control-measure/control-measure-rendezvous-points-and-marshalling-areas/",
+  jramc:"https://militaryhealth.bmj.com/content/jramc/early/2017/12/04/jramc-2017-000819.full.pdf",
+  protectuk:"https://www.protectuk.police.uk/threat-risk/threat-analysis/marauding-terrorist-attacks-mta",
+  toxbase:"https://www.toxbase.org/",
+  lenval:"https://doi.org/10.1007/s00068-018-0901-3"
 };
 const S = (f,c,u) => ({f,c,u:u||""});
 const AIDE = S("D12","WMAS Major Incident Response Aide-Memoire, 2018 v1 Edition 2");
@@ -2542,7 +2625,8 @@ const MODULES = [
 <li><b>Talking?</b> Yes: a deliberate, targeted search for penetrating injury that "must include the neck, chest, armpits, back, abdomen, groin and buttocks" (front, back and sides). Found: <span class="tag p1">P1</span>. None: <span class="tag p2">P2</span>. Not talking: go to step 4.</li>
 <li><b>Breathing?</b> Open the airway if able, then a 10-second look, listen and feel. Yes: recovery position, <span class="tag p1">P1</span>. No: recovery position, <span class="tag nb">NOT BREATHING</span>. CPR if resources allow; it must not detract from stopping external bleeding and opening airways.</li>
 </ol>
-<p><b>Additional rule:</b> any child under 2 is automatically <span class="tag p1">P1</span>.</p>
+<p><b>Additional rule:</b> any child under 2 is automatically <span class="tag p1">P1</span>: "In the context of TST, this should be taken literally and any child under 2 should be automatically triaged as a P1" (NARU TST Supplementary Information v1.0, April 2023).</p>
+<p><b>Card versus guidance.</b> The NHS England TST card (April 2023) carries only the flowchart labels: "Talking", "Penetrating Injury", "Front or Back", "Severe Bleeding", "Pressure", "Tourniquet", "Packing" and so on. The list of body regions and the under-2 rule appear only in the NARU supplementary guidance, not on the card.</p>
 <p><b>Bands:</b> P1 white on red, P2 black on yellow, P3 white on green, NOT BREATHING black on silver. A white checked border identifies TST bands.</p>
 <p><b>No DEAD category.</b> NOT BREATHING records the objective finding of the breathing check. Later, a healthcare practitioner with time reassesses the casualty as a viable resuscitation (P1) or ROLE/PLE (dead).</p>
 <div class="callout small"><p><strong>One simulation study, not a standard.</strong> In a 37-casualty field simulation (Park, Vassallo et al. 2026), TST took a mean of 10.2 s per casualty with 80.3% accuracy, against 79.3% for MITT. These figures come from one exercise and are not competency standards.</p></div>`,
@@ -2582,11 +2666,11 @@ const MODULES = [
 <li><b>Breathing?</b> If not, open the airway. Still not breathing: <span class="tag dead">DEAD</span>. In children under 12, consider 5 rescue breaths after submersion, immersion or smoke inhalation.</li>
 <li><b>Responds to voice?</b> If not: recovery position, <span class="tag p1">P1</span></li>
 <li><b>Aged under 2?</b> <span class="tag p1">P1</span></li>
-<li><b>Breathing rate outside 12–23</b> (below 12, or 24 and above)? <span class="tag p1">P1</span></li>
+<li><b>Breathing rate outside 12 - 23</b> (below 12, or 24 and above)? <span class="tag p1">P1</span>. The card gives the normal band as "12 - 23"; the digits 24 do not appear on it.</li>
 <li><b>Heart rate 100 or more?</b> <span class="tag p1">P1</span></li>
 <li>Otherwise <span class="tag p2">P2</span></li>
 </ol>
-<div class="callout warn small"><p><strong>Heart rate wording differs between sources.</strong> The NHS England MITT tool reads "Heart Rate 100 or More". The EMJ 2022 text reads "&gt;100". Check your current local card.</p></div>
+<div class="callout warn small"><p><strong>The card and the derivation paper differ at the boundary.</strong> The NHS England MITT card (April 2023, PRN00365ii) reads "Heart Rate 100 or More", so a heart rate of exactly 100 is P1. The derivation paper (Vassallo et al., EMJ 2022) describes the MPTT-24 thresholds as "Heart Rate &gt;100 and Respiratory Rate &lt;12 or ≥24", which read literally would make 100 a P2. Neither source writes "≥100". The published card is the operational standard and is what this site teaches. The NHS England text version of MITT gives no numeric heart-rate threshold at all; the number is on the card graphic.</p></div>
 <ul class="tight">
 <li>MITT uses the same physiological thresholds for adults and children across the entire age range, derived from MPTT-24.</li>
 <li>MITT keeps a DEAD category. It has <b>no "Pit Stop" pathway</b>.</li>
@@ -2600,7 +2684,7 @@ const MODULES = [
     {q:"Which breathing rates make a casualty P1 on MITT (once they reach that step)?",o:["Below 10 or above 30","Below 12, or 24 and above (outside 12–23)","Above 20 only","Below 8 only"],a:1,
      why:"The tool gives \"Breathing Rate 12–23\"; outside that range is P1. EMJ 2022 states RR <12 or ≥24.",src:S("VT","NHS England MITT PDF; Vassallo et al. EMJ 2022",U.mittpdf)},
     {q:"An adult responds to voice, has a breathing rate of 18 and a heart rate of exactly 100. Using the wording on the published NHS England MITT tool, what category are they?",o:["P2","P1, because the tool reads \"Heart Rate 100 or More\"","P3","It cannot be decided"],a:1,
-     why:"The published tool reads \"100 or more\", so 100 gives P1. The EMJ 2022 text reads \">100\", which would give P2. This discrepancy is flagged on this site: check your current local card.",src:S("VT","NHS England MITT PDF, April 2023; EMJ 2022 (\">100\", see verify_registry.md)",U.mittpdf)},
+     why:"The published card reads \"100 or More\", so 100 gives P1. The EMJ 2022 derivation paper reads \">100\", which would give P2. The card is the operational standard, so teach 100 or more.",src:S("V2C","NHS England MITT PDF, April 2023; Vassallo et al. EMJ 2022",U.mittpdf)},
     {q:"Which of these is part of MITT?",o:["A \"Pit Stop\" pathway","A DEAD category","A Survivor Reception Centre route for the uninjured","Separate paediatric thresholds"],a:1,
      why:"MITT keeps a DEAD category. It contains no Pit Stop pathway, the Survivor Reception Centre route was removed, and the same thresholds apply at all ages.",src:S("VT","NHS England MITT long-read and PDF; EMJ 2022",U.emj22)},
     {q:"A 9-year-old has been pulled from water and is not breathing after the airway is opened. What does MITT say to consider?",o:["Nothing; categorise as DEAD immediately","5 rescue breaths","A heart rate check first","Walking test"],a:1,
@@ -2729,6 +2813,8 @@ const MODULES = [
 <li>Atropine IV/IM/IO: 4.0–4.2 mg for adults and children aged 12 or over (50–75 microgram/kg under 12), repeated every 5 minutes until secretions are minimal and the patient is atropinised (lungs clear, HR above 80/min, adequate BP). No maximum dose is stated. <b>Pupil size must not be used as an endpoint.</b><span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Novichok (A-series) agents inhibit acetylcholinesterase; the inhibited enzyme ages rapidly (2–4 min), so oxime reactivation is difficult. Current therapy is atropine, oximes and benzodiazepines with supportive care including ventilation.</li>
 <li>Salisbury 2018: the Skripals plus three further critically ill patients were cared for in Salisbury District Hospital's ICU. Dawn Sturgess was the only fatality of the five people poisoned.</li>
+<li><b>How long is atropine needed?</b> UK guidance (PHE 2018; UKHSA 2024) titrates repeated boluses to the endpoint and gives no fixed duration. In nerve-agent vapour exposure the requirement is usually measured in hours (US CHEMM: life-threatening effects rarely beyond 3 hours; lesser effects 6–36 hours); severe cases may need a maintenance infusion. Multi-day infusions are described mainly in organophosphate <i>insecticide</i> poisoning (median about 5 days in one Korean series), with exceptional cases lasting weeks. Salisbury and Amesbury patients needed weeks of intensive care, but no published UK source gives their atropine duration.</li>
+<li><b>Who carries the antidotes?</b> English ambulance trusts carry nerve-agent antidote auto-injectors (a combined atropine/oxime device, not plain atropine) on frontline and major-incident vehicles under a national programme, with all operational staff trained at induction (SECAmb FOI, 2017). Hydroxocobalamin is a hospital ED stock item (RCEM/NPIS 2021, Category A); at least one trust holds none and relies on national resilience stock. The JRCALC drug text is available only to subscribers via the JRCALC Plus/iCPG apps.</li>
 </ul>`,
   links:[["prehospital","CBRN first responder flowchart"],["sops","SOP 6: suspected nerve agent casualties"],["clinical","Clinical guides"]],
   quiz:[
@@ -2767,7 +2853,10 @@ const MODULES = [
 <li>Cyanide antidote plus high-flow oxygen for suspected smoke inhalation with altered mental status and/or cardiovascular instability. Hydroxocobalamin: adults 5 g IV over 15 minutes (a second 5 g may follow; maximum total 10 g); children 70 mg/kg, not exceeding 5 g (Cyanokit SmPC).<span class="dose-warn">Check JRCALC / TOXBASE / BNF and local formulary. Not verified against JRCALC or TOXBASE.</span></li>
 <li>Prophylactic large-bore tracheal intubation where airway compromise is suspected. Surgical airway through a burnt neck: a longitudinal skin incision, <b>then</b> a transverse incision into the cricothyroid membrane.</li>
 <li>Cool running water for 20 minutes, ideally within 10 minutes and up to 3 hours from injury; water below 20°C; no ice water. Hydrogel only if running water is unavailable.</li>
-<li>Warmed fluid resuscitation for adults and children with burns above 20% TBSA; 0.9% sodium chloride for children if available. Severity bands: below 20%, 20–50%, above 50%.</li>
+<li>Warmed fluid resuscitation for adults and children with burns above 20% TBSA (Grade D); 0.9% sodium chloride for children if available. Severity bands: below 20%, 20–50%, above 50%. Hospital burns-service guidance commonly uses lower thresholds (for example above 15% TBSA in adults in Sheffield's referral guidance), so follow the receiving burns network's protocol once in hospital.</li>
+<li>Prevent hypothermia with active warming and regular temperature monitoring (Grade C). Admission hypothermia (36.5°C or below) was independently associated with death in a US statewide registry of burn-centre patients: adjusted odds ratio 1.91, 95% CI 1.58–2.29 (Hostler et al., J Burn Care Res 2013).</li>
+<li>After hydroxocobalamin, expect red skin and mucous membranes (up to about 15 days) and dark red urine (up to 35 days), interference with many laboratory assays for roughly 24 hours (bilirubin up to 4 days) and with urine colorimetric tests for about 48 hours, and a false "blood leak" alarm on haemodialysis machines. Take baseline bloods before the dose (Cyanokit SmPC sections 4.4 and 4.8).</li>
+<li>Tranexamic acid: NICE NG39 (2016) says give it intravenously as soon as possible in major trauma with active or suspected active bleeding (1.5.4) and not more than 3 hours after injury unless there is evidence of hyperfibrinolysis (1.5.5). NG39 gives no dose; this wording was read from a reproduction of the guideline, so check nice.org.uk.</li>
 <li>Revised Baux = age + %TBSA + 17 if inhalation injury. It predicts probability of death, not ICU need (Osler et al. 2010).</li>
 <li>Bleeding: TST step 2 is Pressure / Tourniquet / Packing, then P1. For hospital packs, see SOP 3.</li>
 </ul>`,
@@ -2782,7 +2871,7 @@ const MODULES = [
     {q:"A surgical airway is needed through a burnt neck. What technique does the consensus recommend?",o:["A transverse skin incision only","A longitudinal skin incision only","A longitudinal skin incision to expose the anatomy, then a transverse incision into the cricothyroid membrane","Needle cricothyroidotomy only"],a:2,
      why:"The consensus requires the longitudinal skin incision followed by a transverse incision into the identified cricothyroid membrane. Teaching only the longitudinal step is misleading.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 5)",U.fphc)},
     {q:"Above what burn size does the consensus recommend starting fluid resuscitation in children?",o:["10% TBSA","15% TBSA","20% TBSA, the same as adults","30% TBSA"],a:2,
-     why:"Initiate fluid resuscitation for adult and paediatric burns above 20% TBSA; the paediatric threshold was aligned with adults.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 7)",U.fphc)},
+     why:"The pre-hospital consensus initiates fluid resuscitation for adult and paediatric burns above 20% TBSA (Grade D); the paediatric threshold was aligned with adults. Hospital burns-service guidance often starts lower (for example above 15% TBSA in adults), so follow the burns network's protocol in hospital.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 7); round 2 clinical verification",U.fphc)},
     {q:"Which cooling statement is correct?",o:["Ice water for 5 minutes","Cool running water for 20 minutes, ideally within 10 minutes and up to 3 hours from injury, water below 20°C","Hydrogel is preferred to running water","Cooling is only useful within 10 minutes"],a:1,
      why:"Cool running water for 20 minutes, ideally within 10 minutes, up to 3 hours; water below 20°C (optimum about 12°C); ice water is not recommended. Hydrogel only if running water is unavailable.",src:S("VC","FPHC/BBA burns consensus v2, 2020 (safe-to-teach 9 and 10)",U.fphc)},
     {q:"What does the revised Baux score predict?",o:["Need for intensive care","Probability of death","Fluid volume required","Need for intubation"],a:1,
@@ -2803,10 +2892,10 @@ const MODULES = [
   content:`
 <ul class="tight">
 <li><b>Manchester Arena, 2017.</b> 22 victims died. The 20 who died at the scene include the bomber, so 19 victims died at the scene and 3 in hospital during early resuscitation. 150 of the 153 hospital patients survived to day 30.</li>
-<li><b>London Bridge, 2017.</b> 48 people were taken to five London hospitals. King's admitted 14 (8 in critical care); the Royal London admitted 12 (6 critical). Calling all 26 "critical" was an error: 21 of the 36 still in hospital were critical.</li>
+<li><b>London Bridge, 2017.</b> 48 people were taken to five London hospitals, and all 48 survived (London Ambulance Service statement at the close of the inquest, June 2019). King's admitted 14 (8 in critical care); the Royal London admitted 12 (6 critical). Calling all 26 "critical" was an error: 21 of the 36 still in hospital were critical.</li>
 <li><b>Croydon, 2016.</b> LAS took 51 people to hospital: 31 to Croydon University Hospital and 20 to St George's. St George's said 4 of its 20 were seriously injured and 16 minor, so the MTC took many minor cases too.</li>
 <li><b>Westminster, 2017.</b> Casualties went to St Thomas', King's, St Mary's, the Royal London and Chelsea and Westminster.</li>
-<li><b>Southport, 2024.</b> Early reporting said 5 children and 2 adults were critical; later sources say 8 (6 children and both adults). Seven children went to Alder Hey.</li>
+<li><b>Southport, 2024.</b> Early reporting said 5 children and 2 adults were critical; later sources say 8 (6 children and both adults). Casualties went to five hospitals (NWAS). The sentencing remarks give the wound count for each victim; the three girls who died had at least 122, at least 85 and 5 sharp-force wounds, and surviving children between 1 and 32.</li>
 <li><b>Simulation is not incident data.</b> Timings of 40.5 s per casualty and 1,377 s come from one simulated exercise, not from any real attack.</li>
 <li><b>European incidents.</b> Seven European attacks, from Madrid 2004 to Barcelona 2017, are in the incident database. Each has a confidence level, sources for every medical fact, and caveats where sources disagree. See the European lessons there.</li>
 <li><b>Staff experience.</b> Skryabina et al. found gaps in blast-injury protocols, communication and psychological support among hospital staff.</li>
@@ -2816,7 +2905,7 @@ const MODULES = [
     {q:"At Manchester Arena, \"20 died at the scene\". How many of those were victims?",o:["20","19: the 20 includes the person who detonated the device","22","23"],a:1,
      why:"\"Killed at scene: 20, including the person who detonated the device.\" 19 victims died at the scene and 3 in hospital, giving 22. \"20 + 3\" would wrongly give 23.",src:S("VI","Dark et al. EMJ 2021; Manchester Arena Inquiry Vol 2",U.emjArena)},
     {q:"After the 2017 London Bridge attack, King's College Hospital admitted 14 patients. How many were in critical care?",o:["14","12","8","6"],a:2,
-     why:"NHS England (4 June 2017): King's admitted 14, 8 in critical care; the Royal London admitted 12, 6 critical.",src:S("VI","NHS England update, 4 June 2017",U.nhse17)},
+     why:"NHS England (4 June 2017): King's admitted 14, 8 in critical care; the Royal London admitted 12, 6 critical. All 48 patients LAS took to hospital survived (LAS statement, June 2019).",src:S("VI","NHS England update, 4 June 2017",U.nhse17)},
     {q:"Croydon tram derailment, 2016: what did St George's (the MTC) report about its 20 patients?",o:["All 20 were critical P1s","4 were seriously injured and 16 had minor injuries","None were admitted","It received no patients"],a:1,
      why:"St George's said 4 of its 20 were seriously injured and 16 minor. An MTC can take a large share of minor cases too.",src:S("VI","St George's statement, November 2016",U.stgeorges)},
     {q:"Which hospitals received casualties after the 2017 Westminster attack?",o:["St Thomas' only","St Thomas' and King's only","St Thomas', King's, St Mary's, the Royal London, and Chelsea and Westminster","The Royal London only"],a:2,
@@ -2852,7 +2941,7 @@ const TRAINER_TOOLS = {
     },
     order:["walk","bleed","talk","pen","breath"],
     src:["NARU TST supplementary information v1.0; NHS England TST tool, April 2023",U.naru]},
-  MITT:{name:"NHS Major Incident Triage Tool (MITT)", note:"Heart rate: the published tool reads \"100 or more\"; the EMJ 2022 text reads \">100\". Check your local card.",
+  MITT:{name:"NHS Major Incident Triage Tool (MITT)", note:"Heart rate: the published NHS England card reads \"100 or More\" and is the operational standard; the EMJ 2022 derivation paper reads \">100\".",
     start:"cat",
     nodes:{
       cat:{q:"Catastrophic bleeding?",yes:{out:"P1"},no:"walk",rule:"MITT step 1: catastrophic bleeding → P1."},
@@ -2861,8 +2950,8 @@ const TRAINER_TOOLS = {
         rule:"Not breathing after airway opening → DEAD. MITT keeps a DEAD category."},
       voice:{q:"Responds to voice?",yes:"age",no:{out:"P1",act:"Recovery position"},rule:"No response to voice → recovery position → P1."},
       age:{q:"Aged under 2?",yes:{out:"P1"},no:"rr",rule:"Under 2 → P1."},
-      rr:{q:"Breathing rate outside 12–23?",d:"Below 12, or 24 and above.",yes:{out:"P1"},no:"hr",rule:"Breathing rate outside 12–23 → P1."},
-      hr:{q:"Heart rate 100 or more?",d:"Tool wording. EMJ 2022 reads \">100\".",yes:{out:"P1"},no:{out:"P2"},rule:"Heart rate 100 or more → P1; otherwise P2."}
+      rr:{q:"Breathing rate outside 12 - 23?",d:"The card's normal band is \"12 - 23\": below 12, or 24 and above, is P1.",yes:{out:"P1"},no:"hr",rule:"Breathing rate outside 12 - 23 → P1."},
+      hr:{q:"Heart rate 100 or more?",d:"Card wording, the operational standard. EMJ 2022 reads \">100\".",yes:{out:"P1"},no:{out:"P2"},rule:"Heart rate 100 or more → P1; otherwise P2."}
     },
     order:["cat","walk","breathe","voice","age","rr","hr"],
     src:["NHS England MITT, April 2023; Vassallo et al. EMJ 2022",U.mittpdf]}
@@ -2899,43 +2988,43 @@ const PRESENTATION = {
 };
 
 // ---------------- Glossary ----------------
-// x: expansion as given in the files; x:null means the expansion is not in the verified files ("check").
+// x: expansion as given in the files. A leading "~" marks an expansion confirmed against a source in verification round 2 (verify_round2_clinical.md, section 7); x:null means the expansion is not in the verified files ("check").
 const GLOSSARY = [
   ["AChE","Acetylcholinesterase","The enzyme inhibited by nerve agents, including Novichok (A-series) agents. Enzyme inhibited by A-agents ages rapidly (2–4 min), so oxime reactivation is difficult.","VC"],
   ["AIS","Abbreviated Injury Scale","Injury severity scale used in the registry papers. The Manchester abstract writes \"AIS>3\"; the conventional serious-injury definition is AIS ≥3.","VR"],
   ["BRRT","Burn Rapid Response Team","WHO Emergency Medical Team construct: a small senior team deploying in 6–12 h to support first receiving hospitals; not expected to work on scene. Not a UK NHS structure.","VC"],
   ["BST","Burn Specialist Team","WHO Emergency Medical Team construct: arrives 48–72 h or later and stays up to about 6 weeks. Not a UK NHS structure.","VC"],
-  ["CBRN","~Chemical, Biological, Radiological and Nuclear","Used for chemical incidents, including nerve agents. The \"Plus\" in STEP 1-2-3 Plus is the CBRN first responder flowchart.","D12"],
+  ["CBRN","~Chemical, Biological, Radiological, Nuclear","Used for chemical incidents, including nerve agents. NARU writes CBRN(e), adding Explosives. The \"Plus\" in STEP 1-2-3 Plus is the CBRN first responder flowchart. Expansion: SECAmb HART Deployment Procedure 2024; NARU.","V2C"],
   ["CCP","Casualty Collection Point","Where injured walking casualties are directed under TST. The 2018 aide-memoire separately lists a \"Casualty Clearing Point\" among the locations the first attendant identifies.","VT"],
   ["COHb","Carboxyhaemoglobin","Standard pulse oximeters cannot distinguish it from oxyhaemoglobin. Above 30% indicates severe CO poisoning.","VC"],
   ["Code Red","London major haemorrhage algorithm (2018)","Pack A: 4 red cells + 4 FFP. Pack B: 6 red cells, 6 FFP, 2 cryo, 1 platelets. Other networks differ.","VR"],
   ["CSCATTT","Command and control, Safety, Communications, Assessment, Triage, Treatment, Transport","Order of priorities at the scene for the NHS. The 2018 card's \"Sieve & Sort\" triage entry is superseded by TST and MITT.","D12"],
   ["DEAD (MITT)","MITT category","Not breathing after airway opening. MITT keeps a DEAD category; TST does not.","VT"],
-  ["HART","~Hazardous Area Response Team","Specialist ambulance asset named in the source material. Whether such teams carry hydroxocobalamin or atropine is service-specific.","VC"],
-  ["ISS","~Injury Severity Score","Sum of squares of the highest AIS in each of the three most severely injured body regions (six regions; set to 75 if any AIS is 6).","VR"],
-  ["JESIP","~Joint Emergency Services Interoperability Principles","Principles for joint working on the aide-memoire: co-locate, communicate, co-ordinate, jointly understand risk, shared situational awareness.","D12"],
+  ["HART","~Hazardous Area Response Team","Specialist ambulance teams (NARU: \"Hazardous Area Response Teams\"). Antidotes: English ambulance trusts carry nerve-agent antidote auto-injectors on frontline and major-incident vehicles under a national programme (SECAmb FOI, 2017); hydroxocobalamin is ED stock (RCEM/NPIS 2021) and at least one trust holds none. JRCALC drug text is subscription-only.","V2C"],
+  ["ISS","~Injury Severity Score","TARN Procedures Manual: \"Square the highest score in each body region\" and \"add the sum of the squares of the highest AIS scores in each of the three most severely injured body regions\" (six regions; set to 75 if any AIS is 6).","V2C"],
+  ["JESIP","~Joint Emergency Services Interoperability Principles","Principles for joint working on the aide-memoire: co-locate, communicate, co-ordinate, jointly understand risk, shared situational awareness. The archived 2013 Joint Doctrine used \"Programme\" for the P; the JESIP website now uses \"Principles\".","V2C"],
   ["JRCALC","UK Ambulance Services Clinical Practice Guidelines","Subscription resource. Not accessed when this site was compiled, so no dose here is verified against it.","VC"],
-  ["MERIT","~Medical Emergency Response Incident Team","Specialist pre-hospital asset named in the source material. Scope varies by service.","VC"],
+  ["MERIT","~Medical Emergency Response Incident Team","Specialist pre-hospital medical teams (NHS guidance via AACE; NWAS; PHE 2018 \"Medical Emergency Response Incident Teams (MERIT)\"). Scope varies by service.","V2C"],
   ["METHANE","Major incident, Exact location, Type of incident, Hazards, Access, Number of casualties, Emergency services","Structure for a major incident report.","D12"],
   ["MITT","NHS Major Incident Triage Tool","NHS responders' rapid primary triage tool (April 2023). Uses breathing rate and heart rate; same thresholds at all ages; keeps DEAD; no Pit Stop pathway.","VT"],
-  ["MPTT-24","~Modified Physiological Triage Tool-24","The triage tool from which MITT's physiological thresholds were derived.","VT"],
-  ["MTA","~Marauding Terrorist Attack","Used in the training suite's archetype names for sharp-force and vehicle attacks.","SUITE"],
+  ["MPTT-24","~Modified Physiological Triage Tool-24","The triage tool from which MITT's physiological thresholds were derived (EMJ 2022; NHS England). The 24 is the upper respiratory-rate threshold: \"increasing the upper respiratory rate threshold to 24 breaths per minute (MPTT-24)\" (Vassallo et al., J R Army Med Corps 2017).","V2C"],
+  ["MTA","~Marauding Terrorist Attack","ProtectUK (NPSA): \"fast-moving, violent incidents where assailants move through a location aiming to find and kill or injure as many people as possible\". SECAmb and NARU also use MTA, not MTFA. Used in the training suite's archetype names for sharp-force and vehicle attacks.","V2C"],
   ["MTC","Major trauma centre","Hospital in a regional trauma network. Greater Manchester's network listed 3 MTCs alongside trauma units and local emergency hospitals; 75 (49%) of the 153 Manchester hospital patients attended an MTC.","VR"],
-  ["NARU","~National Ambulance Resilience Unit","Publisher, with NHS England, of the TST supplementary information (v1.0, April 2023).","VT"],
-  ["NISS","~New Injury Severity Score","Sum of squares of the three highest AIS scores regardless of body region. Always ≥ ISS by construction; a higher NISS says nothing about accuracy.","VR"],
+  ["NARU","~National Ambulance Resilience Unit","Publisher, with NHS England, of the TST supplementary information (v1.0, April 2023). Expansion: NARU Annual Business Plan 2023–24. Note: naru.org.uk now redirects to the London Ambulance Service \"NHS Resilience Emergency Capabilities Unit\" page (October 2025); no page opened states that NARU has been formally renamed.","V2C"],
+  ["NISS","~New Injury Severity Score","Osler et al., J Trauma 1997: the sum of the squares of the AIS scores of each of a patient's three most severe injuries regardless of body region. Always ≥ ISS by construction; a higher NISS says nothing about accuracy.","V2C"],
   ["NMTR","National Major Trauma Registry","Run by NHS England's Outcomes and Registries Programme. Launched April 2024, taking over from TARN.","VR"],
   ["NOT BREATHING","TST band (black on silver)","Objective finding of the TST breathing check, not a declaration of death. A healthcare practitioner later reassesses for viable resuscitation (P1) or ROLE/PLE.","VT"],
   ["P1 / P2 / P3","Priority One / Two / Three","Triage priorities. TST bands: P1 white on red, P2 black on yellow, P3 white on green. All living people involved are at least P3 under MITT.","VT"],
   ["Remove-Remove-Remove","Initial actions for a contaminated casualty","Remove from the area; remove outer clothing if affected; remove the substance from skin (dry decontamination unless skin is itchy, burning or painful).","D12"],
   ["Revised Baux","Age + %TBSA + 17 if inhalation injury","Derived and validated to predict probability of death after burns, not ICU need.","VC"],
-  ["ROLE / PLE","~Recognition of Life Extinct / Pronouncing Life Extinct","Outcome a healthcare practitioner may reach when reassessing a casualty with a NOT BREATHING band.","VT"],
-  ["RVP","~Rendezvous Point","Location given under Access in METHANE. The aide-memoire also lists a \"Multi-Agency Rendezvous Point\".","D12"],
+  ["ROLE / PLE","~Recognition of Life Extinct (ROLE)","Outcome a healthcare practitioner may reach when reassessing a casualty with a NOT BREATHING band (the NARU TST guidance writes \"ROLE/PLE (DEAD)\"). ROLE is expanded in the SCAS Resuscitation Policy (2022); no source opened expands PLE.","V2C"],
+  ["RVP","~Rendezvous point","Location given under Access in METHANE. The aide-memoire also lists a \"Multi-Agency Rendezvous Point\". Expansion: JESIP Joint Doctrine 2013 (\"a rendezvous point (RVP)\"); NFCC.","V2C"],
   ["SRC","Survivor Reception Centre","Former route for the uninjured, removed from MITT. All living people involved are at least P3.","VT"],
   ["STAG","Severn Trauma Adult Guideline","Severn network manual. Asks critical care units to double Level 3 ventilated capacity for at least 96 hours.","VR"],
   ["STEP 1-2-3 Plus","Safety triggers for responders","One person: standard approach. Two: caution. Three or more in close proximity with no obvious reason: caution and the CBRN flowchart.","D12"],
-  ["TARN","~Trauma Audit and Research Network","Trauma registry whose 2008–2017 data underpin the triage studies cited here. It moved to the NHS England NMTR in April 2024.","VR"],
-  ["TBSA","~Total Body Surface Area","Burn size measure. Fluid resuscitation above 20% for adults and children; severity bands below 20%, 20–50%, above 50%.","VC"],
-  ["TOXBASE","~National Poisons Information Service online database (not an acronym)","Subscription toxicology resource. Not accessed when this site was compiled.","VC"],
+  ["TARN","~Trauma Audit and Research Network","Trauma registry whose 2008–2017 data underpin the triage studies cited here. It moved to the NHS England NMTR in April 2024. Expansion: South Wales Trauma Network; TARN Procedures Manual.","V2C"],
+  ["TBSA","~Total body surface area","Burn size measure (FPHC/BBA consensus). NICE MIB58 writes the variant \"total burn surface area\". Pre-hospital fluid resuscitation above 20% for adults and children (Grade D); some hospital guidance starts above 15% in adults; severity bands below 20%, 20–50%, above 50%.","V2C"],
+  ["TOXBASE","Not an acronym: the National Poisons Information Service clinical toxicology database","A proper name (NPIS: \"our bespoke database - TOXBASE®\"; toxbase.org: \"The primary clinical toxicology database of the National Poisons Information Service\"). For health professionals only; registration required. Not accessed when this site was compiled.","V2C"],
   ["TST","Ten Second Triage","NHS England / NARU triage tool for anyone at the scene (v1.0, April 2023). Uses no physiological measurements.","VT"]
 ];
 
@@ -2943,9 +3032,9 @@ const GLOSSARY = [
 const SESSION_PLANS = [
   {id:"huddle", title:"15-minute huddle: TST and MITT refresher", mins:15, who:"Any ED or ambulance team at a shift handover",
    objectives:["Recall the TST questions and bands in order.","Recall the MITT steps, including the heart rate wording flag.","Know what a scene band means when it arrives at the ED."],
-   timings:[["0–2 min","Introduce the session. Read out the training-only disclaimer."],["2–6 min","Walk through the TST quick-reference card."],["6–10 min","Walk through the MITT quick-reference card. Point out the heart rate wording discrepancy."],["10–14 min","Triage two casualty cards together: SIM_02 (walked at scene, deteriorates at ED) and SIM_10 (not breathing)."],["14–15 min","Close: where the trust major incident plan is kept <span class=\"ph\">[location]</span>."]],
+   timings:[["0–2 min","Introduce the session. Read out the training-only disclaimer."],["2–6 min","Walk through the TST quick-reference card."],["6–10 min","Walk through the MITT quick-reference card. Point out that the card reads \"100 or more\" for heart rate, while the EMJ 2022 paper reads \">100\"; the card is the standard."],["10–14 min","Triage two casualty cards together: SIM_02 (walked at scene, deteriorates at ED) and SIM_10 (not breathing)."],["14–15 min","Close: where the trust major incident plan is kept <span class=\"ph\">[location]</span>."]],
    materials:["TST and MITT quick-reference cards (Printables)","Casualty cards SIM_02 and SIM_10","Trust major incident plan <span class=\"ph\">[location]</span>"],
-   debrief:["What does a silver NOT BREATHING band mean when it arrives in the ED?","Why do we re-triage people who walked at the scene?","What does our local MITT card say about a heart rate of exactly 100?"]},
+   debrief:["What does a silver NOT BREATHING band mean when it arrives in the ED?","Why do we re-triage people who walked at the scene?","What category does the NHS England MITT card give a heart rate of exactly 100, and why?"]},
   {id:"teach60", title:"60-minute teaching session: mass casualty triage and the front door", mins:60, who:"ED doctors and nurses, paramedics, students",
    objectives:["Use METHANE and CSCATTT to structure an incident.","Apply TST and MITT correctly to fictional casualties.","Plan for self-presenters, re-triage and surge using the Manchester Arena case series."],
    timings:[["0–5 min","Welcome, objectives, training-only disclaimer, ground rules for a safe learning space."],["5–15 min","Module 1: METHANE, JESIP principles and CSCATTT."],["15–30 min","Modules 2 and 3: TST and MITT. Project the triage trainer and work two cards as a group."],["30–45 min","In pairs: the timed surge exercise (TST mode, then MITT mode). Compare debriefs."],["45–55 min","Module 4: what Manchester Arena showed about arrivals, self-presenters and critical care."],["55–60 min","Debrief questions. Ask learners to complete the module knowledge checks."]],
@@ -2971,16 +3060,16 @@ const INJECTS = [
 
 // ============ Site data written for this handbook (from verify_*.md tables) ============
 const INCIDENT_SOURCES = {
-  INC_01: [["RAIB report into the Sandilands tram overturning","https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/931905/R182017_201022_Sandilands_v2.2.pdf"],["Londonist (LAS figures)","https://londonist.com/london/news/50-hurt-in-croydon-tram-crash"],["St George's statement","https://www.stgeorges.nhs.uk/newsitem/statement-regarding-tram-incident-in-croydon-on-9-november-2016/"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2016_Croydon_tram_derailment"],["Croydon Advertiser (headline only; body not retrievable)","https://www.croydonadvertiser.co.uk/news/croydon-news/how-croydon-university-hospital-coped-508701"]],
-  INC_02: [["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2017_Westminster_attack"],["Express & Star (vehicle)","https://expressandstar.com/news/uk-news/2018/09/19/khalid-masoods-final-movements-prior-to-westminster-attack-revealed-in-footage"],["Arab News (inquest)","https://www.arabnews.com/world/westminster-attack-inquest-finds-khalid-masoods-victims-were-killed-unlawfully-1382106"],["Sunday Post (Leslie Rhodes)","https://www.sundaypost.com/fp/75-year-old-becomes-fourth-innocent-victim-of-westminster-terror-attack/"],["ITV","https://www.itv.com/news/2017-03-23/westminster-london-terror-attack-victims"],["The New Arab (inquest)","https://www.newarab.com/news/lives-lost-82-seconds-westminster-attack-inquest-hears?amp"],["UK Defence Journal (scene figures)","https://ukdefencejournal.org.uk/westminster-attack-know/"],["Southwark News (King's admitted 8)","https://southwarknews.co.uk/news/eight-treated-kings-terror-attack/"]],
-  INC_03: [["Dark et al. EMJ 2021 (case series)","https://doi.org/10.1136/emermed-2019-208575"],["EMJ 2021 article page","https://emj.bmj.com/content/38/10/746"],["Manchester Arena Inquiry Volume 2","https://assets.publishing.service.gov.uk/media/6363d597e90e0705a35f5754/MAI-Vol2-Part_Ii_Accessible.pdf"]],
-  INC_04: [["NHS England update, 4 June 2017","https://www.england.nhs.uk/2017/06/london-attack-june-4-2017-nhs-england-update/"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2017_London_Bridge_attack"],["The Week (inquest)","https://theweek.com/101144/london-bridge-attack-what-we-ve-learned-from-the-inquest"],["BMJ j4309 (paywalled; not read)","https://www.bmj.com/content/358/bmj.j4309.full"],["Repost of Evening Standard report (secondary)","https://steemit.steemapps.com/news/@redrover36/all-48-london-bridge-attack-victims-who-made-it-to-hospital-have-survived"]],
+  INC_01: [["RAIB report into the Sandilands tram overturning","https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/931905/R182017_201022_Sandilands_v2.2.pdf"],["Londonist (LAS figures)","https://londonist.com/london/news/50-hurt-in-croydon-tram-crash"],["St George's statement","https://www.stgeorges.nhs.uk/newsitem/statement-regarding-tram-incident-in-croydon-on-9-november-2016/"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2016_Croydon_tram_derailment"],["Croydon Advertiser: how CUH coped","https://www.croydonadvertiser.co.uk/news/croydon-news/how-croydon-university-hospital-coped-508701"],["Ross Lydall blog, 6 Dec 2016 (66 named staff)","https://rosslydall.wordpress.com/2016/12/06/roll-of-honour-the-croydon-hospital-staff-who-helped-treat-the-tram-crash-victims/"]],
+  INC_02: [["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2017_Westminster_attack"],["Express & Star (vehicle)","https://expressandstar.com/news/uk-news/2018/09/19/khalid-masoods-final-movements-prior-to-westminster-attack-revealed-in-footage"],["Arab News (inquest)","https://www.arabnews.com/world/westminster-attack-inquest-finds-khalid-masoods-victims-were-killed-unlawfully-1382106"],["Sunday Post (Leslie Rhodes)","https://www.sundaypost.com/fp/75-year-old-becomes-fourth-innocent-victim-of-westminster-terror-attack/"],["ITV","https://www.itv.com/news/2017-03-23/westminster-london-terror-attack-victims"],["The New Arab (inquest)","https://www.newarab.com/news/lives-lost-82-seconds-westminster-attack-inquest-hears?amp"],["UK Defence Journal (scene figures)","https://ukdefencejournal.org.uk/westminster-attack-know/"],["Southwark News (King's admitted 8)","https://southwarknews.co.uk/news/eight-treated-kings-terror-attack/"],["Chief Coroner, Regulation 28 report, Dec 2018 (29 seriously injured)","https://www.judiciary.uk/wp-content/uploads/2018/12/Westminster-Terror-Attack-2018-0304.pdf"],["Gulland, BMJ 2017;358:j4309 (open portion: mostly blunt trauma)","https://www.bmj.com/content/358/bmj.j4309.full"]],
+  INC_03: [["Dark et al. EMJ 2021 (case series)","https://doi.org/10.1136/emermed-2019-208575"],["EMJ 2021 article page","https://emj.bmj.com/content/38/10/746"],["Manchester Arena Inquiry Volume 2","https://assets.publishing.service.gov.uk/media/6363d597e90e0705a35f5754/MAI-Vol2-Part_Ii_Accessible.pdf"],["Craigie et al. BMJ Mil Health 2020","https://militaryhealth.bmj.com/content/166/2/72"]],
+  INC_04: [["NHS England update, 4 June 2017","https://www.england.nhs.uk/2017/06/london-attack-june-4-2017-nhs-england-update/"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2017_London_Bridge_attack"],["The Week (inquest)","https://theweek.com/101144/london-bridge-attack-what-we-ve-learned-from-the-inquest"],["BMJ j4309 (paywalled; not read)","https://www.bmj.com/content/358/bmj.j4309.full"],["LAS statement at the close of the inquest, 28 June 2019 (48 of 48 survived)","https://www.londonambulance.nhs.uk/?p=26474"],["Chief Coroner, prevention of future deaths report, 2019 (timeline; no speed)","https://www.judiciary.uk/wp-content/uploads/2019/11/London-Bridge-Borough-Market-Terror-Attack-2019-0332.pdf"],["C4TS/QMUL (Royal London treated 12)","https://www.c4ts.qmul.ac.uk/news/blog/post/43-professor-brohi-leads-royal-london-surgical-response-to-london-bridge-terror-victims"],["Rutherford, J Paramedic Pract 2017","https://www.paramedicpractice.com/content/opinion/the-london-bridge-attack-managing-multiple-victims-of-penetrating-trauma"]],
   INC_05: [["Bhatt Murphy (Phase 2 report summary)","https://bhattmurphy.co.uk/newsroom/grenfell-tower-inquiry-phase-two-report-finds-all-72-deaths-were-avoidable/"],["AIA UK (Phase 2 summary)","https://www.aiauk.org/news/2024/beale-co-grenfell-tower-inquiry-phase-2-report-summary-of-main-findings"],["Wikipedia (secondary, citing NHS)","https://en.wikipedia.org/wiki/Grenfell_Tower_fire"],["Designing Buildings wiki (insulation)","https://www.designingbuildings.co.uk/wiki/Celotex_RS5000_PIR_insulation"]],
-  INC_06: [["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2017_Finsbury_Park_attack"],["ITV","https://itv.com/news/2017-06-22/man-who-died-at-scene-of-finsbury-terror-attack-named"]],
+  INC_06: [["NHS England (London) statement, 19 June 2017 (receiving hospitals)","https://www.england.nhs.uk/london/2017/06/19/statement-on-attack-at-finsbury-park-mosque/"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2017_Finsbury_Park_attack"],["ITV","https://itv.com/news/2017-06-22/man-who-died-at-scene-of-finsbury-terror-attack-named"]],
   INC_07: [["Haslam et al. BJA 2022","https://doi.org/10.1016/j.bja.2021.10.008"],["Bevan Brittan (Dawn Sturgess Inquiry summary)","https://www.bevanbrittan.com/insights/articles/2025/dawn-sturgess-inquiry-final-report-published/"],["Express & Star / PA (inquiry)","https://www.expressandstar.com/uk-news/inquiry-told-drugs-may-not-have-saved-woman-poisoned-by-novichok-5748163"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/Poisoning_of_Sergei_and_Yulia_Skripal"],["PHE/NHS England ED briefing, 2018","https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/738497/ED_briefing_note_nerve_agents.pdf"],["Noga & Jurowski, Arch Toxicol 2022","https://doi.org/10.1007/s00204-022-03437-5"]],
-  INC_08: [["LBC (inquest)","https://www.lbc.co.uk/crime/london-bridge-victims-died-from-stab-wounds-chest"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2019_London_Bridge_stabbing"]],
-  INC_09: [["Judiciary: Forbury Gardens factual findings","https://www.judiciary.uk/wp-content/uploads/2024/04/Forbury-Gardens-Factual-Findings-for-Publication.pdf"],["Wokingham Today (post-mortem release)","https://wokingham.today/post-mortem-details-released-for-victims-of-forbury-gardens-terror-attack/"],["Guernsey Press / PA (court report)","https://guernseypress.com/news/uk-news/2021/01/05/terrorist-stabbed-three-people-to-death-in-less-than-a-minute-court-told-2"],["ITV Meridian timeline","https://www.itv.com/news/meridian/2024-04-26/timeline-of-events-around-reading-terror-attack"]],
-  INC_10: [["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2024_Southport_stabbings"],["ITV Granada, 30 July 2024","https://www.itv.com/news/granada/2024-07-30/six-children-remain-in-critical-condition-as-police-quiz-boy-over-knife-attack"],["Southport Inquiry Volume 1 (April 2026)","https://assets.publishing.service.gov.uk/media/6a61eef4abcde513b38b6d95/31.236_HO_Southport_Inquiry_Volume1_WEB_v2__1_.pdf"],["Government response to Phase 1 (July 2026)","https://www.gov.uk/government/publications/southport-inquiry-phase-1-government-response/government-response-to-phase-1-of-the-southport-inquiry"]]
+  INC_08: [["Chief Coroner, Fishmongers' Hall inquests, prevention of future deaths report 2021 (place of death)","https://www.judiciary.uk/wp-content/uploads/2021/11/Fishmongers-Hall-Inquests-Prevention-of-future-deaths-report-2021-0362_Published-by-Chief-Coroner.pdf"],["LAS, 29 Nov 2019 (response; two hospitals unnamed)","https://www.londonambulance.nhs.uk/2019/11/29/incident-at-london-bridge/"],["NHS England, Nov 2019","https://www.england.nhs.uk/2019/11/nhs-chief-executive-responds-to-london-bridge-terror-attack/"],["Counter Terrorism Policing (survivors returned home)","https://www.counterterrorism.police.uk/london-bridge-incident/"],["LBC (inquest: HEMS thoracotomy; 14:33)","https://www.lbc.co.uk/article/medic-describes-unprecedented-decision-enter-london-bridge-attack-zone-DWytfQ_2/"],["Express & Star / PA (inquest pathology)","https://expressandstar.com/news/crime/2021/04/26/fishmongers-hall-victims-suffered-wounds-which-hit-major-organs-inquest-told"],["LBC (inquest, earlier report: 15:14)","https://www.lbc.co.uk/crime/london-bridge-victims-died-from-stab-wounds-chest"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2019_London_Bridge_stabbing"]],
+  INC_09: [["Judiciary: Record of Inquest, James Furlong (place of death)","https://www.judiciary.uk/wp-content/uploads/2024/04/Record-of-Inquest-FURLONG-J.pdf"],["Judiciary: Forbury Gardens factual findings","https://www.judiciary.uk/wp-content/uploads/2024/04/Forbury-Gardens-Factual-Findings-for-Publication.pdf"],["LBC (SCAS statement; Royal Berkshire Hospital; news)","https://lbc.co.uk/news/reading-incident-stabbing-forbury-gardens"],["Midlothian Advertiser / PA (news)","https://www.midlothianadvertiser.co.uk/news/crime/reading-stabbings-police-say-murder-of-three-people-in-forbury-gardens-was-terrorist-attack-2890750"],["Wikipedia (secondary; John Radcliffe)","https://en.wikipedia.org/wiki/2020_Reading_stabbings"],["Wokingham Today (post-mortem release)","https://wokingham.today/post-mortem-details-released-for-victims-of-forbury-gardens-terror-attack/"],["Guernsey Press / PA (court report)","https://guernseypress.com/news/uk-news/2021/01/05/terrorist-stabbed-three-people-to-death-in-less-than-a-minute-court-told-2"],["ITV Meridian timeline","https://www.itv.com/news/meridian/2024-04-26/timeline-of-events-around-reading-terror-attack"]],
+  INC_10: [["Sentencing remarks, R v Rudakubana, 23 Jan 2025 (wound counts)","https://www.judiciary.uk/wp-content/uploads/2025/01/R-v-Axel-Rudakubana.pdf"],["NWAS statement, 29 July 2024 (hospitals; HART; MERIT)","https://www.nwas.nhs.uk/news/southport-major-incident/"],["NWAS witness statement to the Inquiry, NWAS001083 (timeline)","https://southport-prod.s3.eu-west-2.amazonaws.com/2025/09/NWAS001083.pdf"],["NWAS closing submission, NWAS001338 (expert evidence; declaration)","https://southport-prod.s3.eu-west-2.amazonaws.com/2025/12/NWAS001338.pdf"],["The Scotsman / PA (inquests opened)","https://mp.scotsman.com/uk-news/inquests-into-deaths-of-southport-stabbing-victims-opened-and-adjourned-5777190"],["Wikipedia (secondary)","https://en.wikipedia.org/wiki/2024_Southport_stabbings"],["ITV Granada, 30 July 2024","https://www.itv.com/news/granada/2024-07-30/six-children-remain-in-critical-condition-as-police-quiz-boy-over-knife-attack"],["Southport Inquiry Volume 1 (April 2026)","https://assets.publishing.service.gov.uk/media/6a61eef4abcde513b38b6d95/31.236_HO_Southport_Inquiry_Volume1_WEB_v2__1_.pdf"],["Government response to Phase 1 (July 2026)","https://www.gov.uk/government/publications/southport-inquiry-phase-1-government-response/government-response-to-phase-1-of-the-southport-inquiry"]]
 };
 
 const REGISTRY_FACTS = [
@@ -3029,12 +3118,12 @@ const SAFE_TO_TEACH = [
     {n:3,t:"High-flow oxygen via a non-rebreathing reservoir mask at 10–15 L/min; in the absence of CO poisoning, aim for SpO2 94–98%.",src:[FPHC]},
     {n:4,t:"Prophylactic tracheal intubation (large bore) is recommended where there is suspicion of impending airway compromise: full-thickness facial burns, stridor, respiratory distress, swelling on laryngoscopy, smoke inhalation or singed nasal hairs.",src:[FPHC]},
     {n:5,t:"If a surgical airway is required through burnt neck tissue: a longitudinal skin incision to expose the anatomy, followed by a transverse incision into the identified cricothyroid membrane.",src:[FPHC]},
-    {n:6,t:"Give a cyanide antidote plus high-flow oxygen to any fire casualty with suspected smoke inhalation showing altered mental status and/or cardiovascular instability. Adult hydroxocobalamin dose 5 g IV over 15 min (a second 5 g may follow; maximum total 10 g). Paediatric: 70 mg/kg, not exceeding 5 g (maximum total 140 mg/kg, not exceeding 10 g).",dose:true,src:[FPHC,["Cyanokit 5 g SmPC","https://www.medicines.org.uk/emc/product/4786/smpc"]]},
-    {n:7,t:"Initiate fluid resuscitation for adult and paediatric burns >20% TBSA; weight-based. For children, use a crystalloid with higher sodium content (0.9% sodium chloride) if available. Warm the fluid.",dose:true,src:[FPHC]},
+    {n:6,t:"Give a cyanide antidote plus high-flow oxygen to any fire casualty with suspected smoke inhalation showing altered mental status and/or cardiovascular instability. Adult hydroxocobalamin dose 5 g IV over 15 min (a second 5 g may follow; maximum total 10 g). Paediatric: 70 mg/kg, not exceeding 5 g (maximum total 140 mg/kg, not exceeding 10 g). Hydroxocobalamin turns the skin and mucous membranes red (reversible; up to about 15 days) and the urine dark red (marked for 3 days; up to 35 days). Its colour interferes with many laboratory assays (falsely raised creatinine, bilirubin, glucose, total protein, haemoglobin and MCHC; falsely low ALT and amylase; unpredictable AST, CK, LDH, aPTT and PT/INR) for roughly 24 h after 5 g (bilirubin up to 4 days) and with all urine colorimetric tests for about 48 h, so take baseline bloods before the dose. It can trigger the 'blood leak' alarm and shut down haemodialysis machines (SmPC sections 4.4 and 4.8).",dose:true,src:[FPHC,["Cyanokit 5 g SmPC","https://www.medicines.org.uk/emc/product/4786/smpc"]]},
+    {n:7,t:"Initiate fluid resuscitation for adult and paediatric burns >20% TBSA (Grade D); weight-based, using a threshold method pre-hospital. For children, use a crystalloid with higher sodium content (0.9% sodium chloride) if available. Warm the fluid. Hospital burns-service guidance commonly uses lower thresholds (for example >15% TBSA in adults; around 10% in infants for referral), so follow the receiving burns network's protocol once in hospital.",dose:true,src:[FPHC,["Sheffield/DBTH Adult Burn Referral Guidance 2025–2028 (local example)","https://www.dbth.nhs.uk/wp-content/uploads/2025/03/Adult-Burn-Referral-Guidance-2025-2028-3.pdf"],["Birmingham KIDS transport team: Burns initial management 2025 (local example)","https://kids.bwc.nhs.uk/wp-content/uploads/2025/12/Burns-short-guide-Dec-2025-edit.pdf"]]},
     {n:8,t:"Estimate burn severity in the bands <20%, 20–50% and >50% TBSA, using a Lund & Browder chart or electronic equivalent.",src:[FPHC]},
     {n:9,t:"Cool running water for 20 minutes is strongly recommended, ideally within 10 minutes and up to 3 hours from injury; water <20°C (optimum about 12°C); ice water is not recommended.",src:[FPHC]},
     {n:10,t:"Hydrogel dressings are not supported by the evidence and are not superior to water; consider them only in a resource-limited setting when running water is unavailable.",src:[FPHC]},
-    {n:11,t:"Avoid hypothermia through active warming measures and regular temperature monitoring.",src:[FPHC]},
+    {n:11,t:"Avoid hypothermia through active warming measures and regular temperature monitoring (Grade C). Hypothermia at hospital admission (temperature ≤36.5°C) was independently associated with mortality in a US statewide registry of burn-centre patients, 2000–2011 (adjusted OR 1.91, 95% CI 1.58–2.29); this is an association in registry data, not proof of causation.",src:[FPHC,["Hostler et al. Admission temperature and survival in patients admitted to burn centers. J Burn Care Res 2013;34:498–506 (abstract)","https://researchconnect.buffalo.edu/en/publications/admission-temperature-and-survival-in-patients-admitted-to-burn-c/"]]},
     {n:12,t:"Revised Baux score = age + %TBSA + 17 (if inhalation injury), derived and validated as a predictor of probability of death.",src:[["Osler et al. J Trauma 2010","https://doi.org/10.1097/TA.0b013e3181c453b3"]]},
     {n:13,t:"WHO Emergency Medical Team burns structures: a Burn Rapid Response Team (BRRT) is a small senior team deploying in 6–12 h to support first receiving hospitals (definitive triage, assessment, patient distribution) and is not expected to work on scene. A Burn Specialist Team (BST) arrives 48–72 h or later and remains for up to about 6 weeks. These are not UK NHS structures.",src:[["WHO EMT burns MCI recommendations, Burns 2020","https://doi.org/10.1016/j.burns.2020.07.001"]]}
   ]},
@@ -3052,7 +3141,7 @@ const REVIEW_FINDINGS = [
   ["Atropine for nerve agents \"1.5 to 10 mg every 5 minutes, up to 20 mg\" (and \"5–10 mg\" for paramedics)","PHE/NHS England 2018: 4.0–4.2 mg IV/IM/IO for adults and children 12 or over, 50–75 microgram/kg under 12, repeated every 5 minutes until atropinised. No ceiling. Pupil size is not an endpoint."],
   ["Magnesium sulfate \"4–6 g of 20% over 24 hours\" and intravenous lipid emulsion for Novichok","No source supports either. The one systematic review found (organophosphate insecticides) says evidence is insufficient to recommend magnesium."],
   ["Surgical airway through a burnt neck: \"longitudinal skin incision\"","FPHC/BBA 2020: longitudinal skin incision, then a transverse incision into the cricothyroid membrane."],
-  ["TST talking step checks the \"front or back of the torso\"","NHS England/NARU 2023: the search must include the neck, chest, armpits, back, abdomen, groin and buttocks, front, back and sides."],
+  ["TST talking step checks the \"front or back of the torso\"","NARU TST Supplementary Information v1.0 (April 2023): the search \"must include the neck, chest, armpits, back, abdomen, groin and buttocks, (front back and sides)\". The NHS England card itself carries only \"Penetrating Injury\" and \"Front or Back\"; the body-region list and the under-2 rule are in the guidance, not on the card."],
   ["MITT described as a secondary triage tool with a \"Pit Stop\" pathway","MITT is the NHS responders' primary triage tool. It has no Pit Stop pathway and keeps a DEAD category."],
   ["Manchester Arena: \"20 died at the scene alongside the perpetrator, 3 in ED\"","The 20 includes the bomber: 19 victims at the scene and 3 in hospital, giving 22."],
   ["Penetrating neck statistics credited to King's College Hospital and London Bridge","Borsetto et al. 2019, Queen Elizabeth Hospital Birmingham, 2012–2018. Only the 12.1% PPV figure could be confirmed."],
@@ -3062,21 +3151,15 @@ const REVIEW_FINDINGS = [
 ];
 
 const UNVERIFIED_ITEMS = [
-  "Croydon University Hospital: ED emptied in 20 minutes; more than 60 staff called in via WhatsApp; a coach of 29 walking wounded; first patient at 07:30; upgrades on arrival.",
-  "London Bridge: van speed of about 50 mph; patients at King's before the 23:04 declaration; about 90% penetrating injuries at King's; 48 of 48 survived (secondary reporting only).",
-  "Manchester: operations lasting up to 14 hours.",
-  "Southport: victims stabbed 8 or more times; NWAS, HART and MERIT response details (Inquiry chapter 4 could not be retrieved).",
-  "Receiving hospitals for Finsbury Park, Fishmongers' Hall and Forbury Gardens; place of death at Forbury Gardens.",
-  "Penetrating neck figures other than the 12.1% PPV (Zone 2 56.3%, 84.4%, 67.2%, 50.8%, 42%).",
-  "Hypothermia \"independently associated with mortality\" in burns.",
-  "Atropine infusions \"for days or weeks\" in nerve agent poisoning.",
-  "Whether UK ambulance paramedics carry or give hydroxocobalamin or atropine (service-specific).",
-  "Hydroxocobalamin colouring skin and urine and interfering with laboratory tests (SOP 4; not checked).",
-  "SOP 3's statement that penetrating and blast wounds dominated survivors reaching hospital after the 2017 attacks (generalisation).",
-  "MITT heart rate wording: \"100 or more\" (tool) vs \">100\" (EMJ 2022). Check the current NHS England card.",
+  "Croydon University Hospital (Croydon tram derailment, 9 November 2016, not London Bridge): ED emptied in 20 minutes; a coach of 29 walking wounded; first patient at 07:30; upgrades on arrival; staff 'called in via WhatsApp'. All rest on an Evening Standard article (5 December 2016) that was blocked at source and in archives; the Croydon Advertiser says the ED did not close, 38 crash patients were treated at CUH, 2 were transferred to St George's and 1 stayed overnight.",
+  "London Bridge: van speed of about 50 mph (the inquest record says only 'high speed'); patients at King's before the 23:04 major incident declaration (BMJ 2017;358:j4309 covers the topic but is paywalled; no time or number found); 'about 90% penetrating injuries at King's' (BMJ 2017 says 'many patients presented with stab wounds', no percentage).",
+  "Manchester: individual operations lasting up to 14 hours (not in Dark et al. 2021 or Craigie et al. 2020; no page found stating it).",
+  "Southport: MERIT attendance rests on the NWAS statement; the Southport Inquiry Volume 1 NWAS chapter (page 142) and the exact wording of Recommendations 9–10 could not be read; the hospital in which Alice da Silva Aguiar died is not named in the sentencing remarks or the inquest opening.",
+  "Fishmongers' Hall: the two receiving hospitals (LAS and NHS England name none; the earlier 'Royal London / King's College' claim has been deleted). Forbury Gardens: the Records of Inquest for David Wails and Joseph Ritchie-Bennett could not be retrieved, and the survivors' hospitals (Royal Berkshire; John Radcliffe) rest on news reports.",
   "A national P1 receiving capacity per MTC per hour: none found.",
   "All surge calculator rates except the Manchester-derived blast rates.",
-  "Southport \"forensic survivability analyses\" showing preventable deaths in the care gap: nothing found to support this.",
+  "The number of receiving hospitals at the Berlin 2016 attack (22 or 23, trade sources only).",
+  "NICE NG39 tranexamic acid wording was read from a third-party reproduction (nice.org.uk could not be opened): medium confidence; re-check before sign-off.",
   "Anything in JRCALC or TOXBASE: these were not accessible."
 ];
 
@@ -3090,7 +3173,11 @@ const SITE_CHANGES = [
   "Surge calculator: the default capacity of \"8 P1 per hour per MTC\" has been removed, because it has no source. Enter a local figure to compare.",
   "Training needs analysis: curriculum items with no source (rapid ED decanting time, shift rotation planning, paediatric chest injury management) are listed under \"No source found\".",
   "The 2018 WMAS aide-memoire's \"Sieve & Sort\" is shown as superseded by TST and MITT.",
-  "Seven European incidents (Madrid 2004 to Barcelona 2017) were added to the incident database from the European verification table (30 October 2026), with a Region filter, a source and confidence level for every medical fact, the caveats, and conflicting figures shown side by side."
+  "Seven European incidents (Madrid 2004 to Barcelona 2017) were added to the incident database from the European verification table (30 October 2026), with a Region filter, a source and confidence level for every medical fact, the caveats, and conflicting figures shown side by side.",
+  "Verification round 2 (30 October 2026), clinical: the MITT heart rate wording is settled as the card's \"100 or more\" (the EMJ 2022 paper's \">100\" is noted once as the derivation wording) and the breathing band is given as the card's \"12 - 23\"; the hydroxocobalamin colour and laboratory-interference note is confirmed from the Cyanokit SmPC (no co-oximetry claim); burns hypothermia is now a sourced statement (Hostler 2013; FPHC/BBA); the unqualified \"atropine for days or weeks\" is replaced by what UKHSA/PHE, CHEMM and the insecticide literature say; ambulance antidote carriage is stated from the SECAmb FOIs and RCEM/NPIS 2021; SOP 3's generalisation is rewritten by incident with sources; NICE NG39 TXA timing added (no dose in NG39); the burns fluid threshold notes lower hospital thresholds; the TST body-region list and under-2 rule are quoted from NARU v1.0 with a note that the card carries only \"Front or Back\"; every glossary expansion previously marked as general knowledge is now confirmed from a source, and TOXBASE is shown as a proper name.",
+  "Verification round 2, UK incidents: London Bridge 48/48 survival confirmed (LAS statement); Southport per-victim wound counts from the sentencing remarks replace \"8 or more\", the NWAS/HART/MERIT timeline is added from NWAS evidence to the Inquiry, the five receiving hospitals are confirmed (NWAS) and the \"forensic survivability analyses\" claim is deleted as unsupported; Finsbury Park receiving hospitals corrected to the Royal London (4), the Whittington (2) and St Mary's (1), not King's; Fishmongers' Hall: both victims died at the scene (Chief Coroner's report) and Saskia Jones's wound was to the neck, not the chest; Forbury Gardens: place of death confirmed for James Furlong (Record of Inquest); the 12.1% PPV figure confirmed as Borsetto 2019 and the other neck percentages deleted; the Croydon University Hospital anecdotes are attributed to the 2016 tram derailment and the claim that they 'validated' the 2023 triage change is deleted.",
+  "Verification round 2, Europe: the Paris, Nice, Barcelona and Utøya 'sources disagree' boxes are replaced by explanations of what each figure counts (Paris about 350 clinical count, 413 hospitalised, 493 physically injured on the state list; Nice 86 official, 87 only with the attacker; Barcelona 16 dead combined, news only; Utøya 77 = 8 + 69 per NOU 2012:14); Berlin deaths 13 since October 2021 and 67 injured (official), with the 22 or 23 hospitals kept as a disagreement; Brussels about 340 injured and 32 dead plus 3 bombers (official) with the SPF Santé publique hospital censuses, and its confidence raised from low to medium; Nice paediatric facts added (15 under-18 deaths; Lenval 47 casualties; severe series); tourniquet counts remain not found; Vienna and Stockholm remain excluded, with what was found noted.",
+  "The three round-2 findings files were added to docs/verification and are linked from this page."
 ];
 
 const SOURCE_GROUPS = [
@@ -3124,7 +3211,16 @@ const SOURCE_GROUPS = [
     ["NHS England: National Major Trauma Registry","https://www.england.nhs.uk/outcomes-and-registries-programme/nmtr/"],
     ["ITPro: University of Manchester cyber incident, 30 June 2023","https://itpro.com/security/data-breaches/nhs-data-leak-raises-serious-questions-about-manchester-university-cyber-attack"],
     ["NOCA (Ireland) Major Trauma Audit National Report 2022","https://d7g406zpx7bgk.cloudfront.net/x/a077abe57d/major-trauma-audit-national-report-2022-final.pdf"],
-    ["Borsetto et al. Penetrating neck trauma: radiological predictors of vascular injury. 2019","https://doi.org/10.1007/s00405-019-05517-2"]
+    ["Borsetto et al. Penetrating neck trauma: radiological predictors of vascular injury. Eur Arch Otorhinolaryngol 2019;276:2541–7","https://doi.org/10.1007/s00405-019-05517-2"],
+    ["Kasbekar et al. Penetrating neck trauma at a UK centre. J Laryngol Otol 2017;131:8–12 (checked for the deleted Zone 2 figures: not present)","https://doi.org/10.1017/S0022215116009506"],
+    ["Zakaria et al. Penetrating neck injury, UK level I centre 2012–17. Clin Otolaryngol 2022;47:44–51 (checked for the deleted Zone 2 figures: not present)","https://mider.openrepository.com/entities/publication/baf89b5c-d0da-4da9-95ff-b28b97ede055"],
+    ["Craigie et al. Manchester Arena bombing: hospital attendances and paediatric injuries. BMJ Mil Health 2020;166:72","https://militaryhealth.bmj.com/content/166/2/72"],
+    ["Rutherford K. The London Bridge attack: managing multiple victims of penetrating trauma. J Paramedic Pract 2017","https://www.paramedicpractice.com/content/opinion/the-london-bridge-attack-managing-multiple-victims-of-penetrating-trauma"],
+    ["Gulland A. BMJ 2017;358:j4309 (open portion only; full text paywalled)","https://www.bmj.com/content/358/bmj.j4309.full"],
+    ["Khan, Fleming, Jeannon. Penetrating neck injury from the London Bridge attack. Br J Hosp Med 2018;79:72–78","https://www.imrpress.com/journal/BJHM/79/2/10.12968/hmed.2018.79.2.72"],
+    ["TARN Procedures Manual: the Injury Severity Score","https://www.c4ts.qmul.ac.uk/downloads/procedures-manual-tarn-p13-iss.pdf"],
+    ["Osler et al. NISS definition, J Trauma 1997 (abstract via QxMD)","https://www.qxmd.com/r/9420106"],
+    ["Vassallo, Smith, Wallis. MPTT-24 implementation. J R Army Med Corps 2017","https://militaryhealth.bmj.com/content/jramc/early/2017/12/04/jramc-2017-000819.full.pdf"]
   ]],
   ["Hospital protocols", [
     ["London Code Red algorithm 2018 (C4TS/QMUL)","https://www.c4ts.qmul.ac.uk/downloads/code-red-algorithm2018.pdf"],
@@ -3141,14 +3237,79 @@ const SOURCE_GROUPS = [
     ["Haslam et al. CBRN mass casualty medicine: Salisbury and Amesbury. BJA 2022 (abstract)","https://doi.org/10.1016/j.bja.2021.10.008"],
     ["Noga & Jurowski. What do we currently know about Novichoks? Arch Toxicol 2022","https://doi.org/10.1007/s00204-022-03437-5"],
     ["Thiermann et al. Clin Toxicol 2025","https://doi.org/10.1080/15563650.2025.2501266"],
-    ["Brvar et al. Magnesium sulfate and calcium channel blockers for OP insecticide poisoning. Clin Toxicol 2018","https://doi.org/10.1080/15563650.2018.1446532"]
+    ["Brvar et al. Magnesium sulfate and calcium channel blockers for OP insecticide poisoning. Clin Toxicol 2018","https://doi.org/10.1080/15563650.2018.1446532"],
+    ["Hostler et al. Admission temperature and survival in patients admitted to burn centers. J Burn Care Res 2013;34:498–506 (abstract, institutional repository)","https://researchconnect.buffalo.edu/en/publications/admission-temperature-and-survival-in-patients-admitted-to-burn-c/"],
+    ["Sheffield Teaching Hospitals / DBTH: Adult Burn Referral Guidance 2025–2028 (local example of a >15% TBSA threshold)","https://www.dbth.nhs.uk/wp-content/uploads/2025/03/Adult-Burn-Referral-Guidance-2025-2028-3.pdf"],
+    ["Birmingham Women's and Children's KIDS transport team: Burns, initial management (2025; local example)","https://kids.bwc.nhs.uk/wp-content/uploads/2025/12/Burns-short-guide-Dec-2025-edit.pdf"],
+    ["NICE MIB58 (TBSA variant wording)","https://www.nice.org.uk/advice/mib58/chapter/Introduction"],
+    ["NICE NG39: Major trauma, assessment and initial management (2016); not loadable in the session","https://www.nice.org.uk/guidance/ng39"],
+    ["Medthority reproduction of NICE NG39 (wording source; medium confidence)","https://prep.medthority.com/nice/conditions-and-diseases/injuries-accidents-and-wounds/ng39"],
+    ["UKHSA: Compendium of chemical hazards, Nerve agents, incident management (2024)","https://assets.publishing.service.gov.uk/media/670fd675e84ae1fd8592f503/Nerve_Agents_UKHSA_IM_.pdf"],
+    ["PHE: CBRN incidents, clinical management and health protection, 2nd ed. 2018","https://assets.publishing.service.gov.uk/media/5b10120c40f0b634d14c21ed/Chemical_biological_radiological_and_nuclear_incidents_clinical_management_and_health_protection.pdf"],
+    ["US HHS CHEMM: Nerve agents, hospital management","https://chemm.hhs.gov/na_hospital_mmg.htm"],
+    ["Thiermann, Aurbek, Worek. Treatment of nerve agent poisoning. In: Chemical Warfare Toxicology Vol 2 (RSC, 2016)","https://books.rsc.org/books/edited-volume/656/chapter/350941/Treatment-of-Nerve-Agent-Poisoning"],
+    ["Park et al. Atropine infusion in organophosphate poisoning. J Korean Soc Clin Toxicol 2020;18:123–129","https://koreascience.or.kr/article/JAKO202007650437659.pdf"],
+    ["SECAmb FOI 17/09/01: nerve-agent antidote carriage (2017)","https://www.secamb.nhs.uk/wp-content/uploads/foi_disclosure_log/2017/09%20-%20September/Miscellaneous/170901%20-%20Chemical%20Attacks%20.pdf"],
+    ["SECAmb FOI 17/02/28: antidotes held by the Trust (2017)","https://www.secamb.nhs.uk/wp-content/uploads/foi_disclosure_log/2017/02%20-%20February/Miscellaneous/170228%20-%20Drugs%20held%20by%20the%20Trust.pdf"],
+    ["RCEM/NPIS Antidote Availability Guideline, December 2021","https://www.npis.org/Download/RCEM_NPIS_Antidote_Guideline_List_2021_FINAL_V3.pdf"],
+    ["JRCALC guidelines (subscription; content not public)","https://jrcalc.org.uk/guidelines/"],
+    ["AACE: clinical practice guidelines (JRCALC Plus app)","https://aace.org.uk/clinical-practice-guidelines/"],
+    ["NPIS: about (TOXBASE is a proper name)","https://npis.org/about.html"],
+    ["TOXBASE (registration required)","https://www.toxbase.org/"]
+  ]],
+  ["Glossary expansions (verification round 2)", [
+    ["JESIP: Joint Emergency Services Interoperability Principles","https://www.jesip.org.uk/"],
+    ["JESIP Joint Doctrine 2013 (archived; 'Programme'; rendezvous point)","https://nfcc.org.uk/wp-content/uploads/2024/01/JESIP-Joint-Doctrine-The-Interoperability-Framework-ARCHIVED.pdf"],
+    ["NFCC: rendezvous points and marshalling areas","https://nfcc.org.uk/control-measure/control-measure-rendezvous-points-and-marshalling-areas/"],
+    ["SECAmb HART Deployment Procedure v1 (2024): CBRN; HART","https://www.secamb.nhs.uk/wp-content/uploads/2025/04/241024-HART-Deployment-Procedure-v1.pdf"],
+    ["NARU: Hazardous Area Response Teams; CBRN(e)","https://naru.org.uk/the-interoperable-capabilities/hart/"],
+    ["NARU Annual Business Plan 2023–24 (expansion of NARU)","https://naru.org.uk/wp-content/uploads/2024/01/NARU-ANNUAL-BUSINESS-PLAN-2023-2024.pdf"],
+    ["London Ambulance Service: NHS Resilience Emergency Capabilities Unit (naru.org.uk now redirects here)","https://www.londonambulance.nhs.uk/emergency-capabilities-unit/"],
+    ["AACE: Medical Emergency Response Incident Teams (MERIT)","https://aace.org.uk/?p=3032"],
+    ["NWAS: MERIT","https://www.nwas.nhs.uk/?p=6923"],
+    ["South Wales Trauma Network: TARN / NMTR","https://trauma.nhs.wales/information-for-patients/tarnnmtr/"],
+    ["SCAS Resuscitation Policy (2022): Recognition of Life Extinct (ROLE)","https://www.scas.nhs.uk/wp-content/uploads/2022/09/Resuscitation-Policy.pdf"],
+    ["ProtectUK (NPSA): Marauding terrorist attacks (MTA)","https://www.protectuk.police.uk/threat-risk/threat-analysis/marauding-terrorist-attacks-mta"],
+    ["NHS England: Major incident triage tools (long-read; MITT derived from MPTT-24)","https://www.england.nhs.uk/long-read/major-incident-triage-tools-2/"]
   ]],
   ["Incident sources", [
     ["RAIB: Sandilands tram overturning","https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/931905/R182017_201022_Sandilands_v2.2.pdf"],
     ["Manchester Arena Inquiry Volume 2","https://assets.publishing.service.gov.uk/media/6363d597e90e0705a35f5754/MAI-Vol2-Part_Ii_Accessible.pdf"],
     ["NHS England London attack update, 4 June 2017","https://www.england.nhs.uk/2017/06/london-attack-june-4-2017-nhs-england-update/"],
     ["Judiciary: Forbury Gardens factual findings","https://www.judiciary.uk/wp-content/uploads/2024/04/Forbury-Gardens-Factual-Findings-for-Publication.pdf"],
+    ["Judiciary: Record of Inquest, James Furlong (Forbury Gardens)","https://www.judiciary.uk/wp-content/uploads/2024/04/Record-of-Inquest-FURLONG-J.pdf"],
+    ["London Ambulance Service statement at the close of the London Bridge inquest, 28 June 2019 (48 of 48 survived)","https://www.londonambulance.nhs.uk/?p=26474"],
+    ["Chief Coroner: London Bridge and Borough Market attack, prevention of future deaths report, 2019","https://www.judiciary.uk/wp-content/uploads/2019/11/London-Bridge-Borough-Market-Terror-Attack-2019-0332.pdf"],
+    ["C4TS/QMUL: the Royal London's surgical response to the London Bridge attack","https://www.c4ts.qmul.ac.uk/news/blog/post/43-professor-brohi-leads-royal-london-surgical-response-to-london-bridge-terror-victims"],
+    ["Chief Coroner: Westminster terror attack, Regulation 28 report, December 2018","https://www.judiciary.uk/wp-content/uploads/2018/12/Westminster-Terror-Attack-2018-0304.pdf"],
+    ["Independent Reviewer of Terrorism Legislation: Westminster Bridge attack report, 2018","https://assets.publishing.service.gov.uk/media/5abb6ea1e5274a1aa5933964/IRTL-Westminster_Bridge_Attack_Report_March_2018..pdf"],
+    ["NHS England (London): statement on the attack at Finsbury Park mosque, 19 June 2017","https://www.england.nhs.uk/london/2017/06/19/statement-on-attack-at-finsbury-park-mosque/"],
+    ["Chief Coroner: Fishmongers' Hall inquests, prevention of future deaths report, 2021","https://www.judiciary.uk/wp-content/uploads/2021/11/Fishmongers-Hall-Inquests-Prevention-of-future-deaths-report-2021-0362_Published-by-Chief-Coroner.pdf"],
+    ["London Ambulance Service: incident at London Bridge, 29 November 2019","https://www.londonambulance.nhs.uk/2019/11/29/incident-at-london-bridge/"],
+    ["NHS England: chief executive responds to the London Bridge terror attack, November 2019","https://www.england.nhs.uk/2019/11/nhs-chief-executive-responds-to-london-bridge-terror-attack/"],
+    ["Counter Terrorism Policing: London Bridge incident (2019)","https://www.counterterrorism.police.uk/london-bridge-incident/"],
+    ["LBC: medic describes decision to enter the London Bridge attack zone (Fishmongers' Hall inquest)","https://www.lbc.co.uk/article/medic-describes-unprecedented-decision-enter-london-bridge-attack-zone-DWytfQ_2/"],
+    ["Express & Star / PA: Fishmongers' Hall victims' wounds (inquest pathology)","https://expressandstar.com/news/crime/2021/04/26/fishmongers-hall-victims-suffered-wounds-which-hit-major-organs-inquest-told"],
+    ["LBC: Reading stabbings, Forbury Gardens (SCAS statement; news)","https://lbc.co.uk/news/reading-incident-stabbing-forbury-gardens"],
+    ["Midlothian Advertiser / PA: Forbury Gardens attack (news)","https://www.midlothianadvertiser.co.uk/news/crime/reading-stabbings-police-say-murder-of-three-people-in-forbury-gardens-was-terrorist-attack-2890750"],
+    ["Sentencing remarks, R v Axel Rudakubana, 23 January 2025 (Southport)","https://www.judiciary.uk/wp-content/uploads/2025/01/R-v-Axel-Rudakubana.pdf"],
+    ["NWAS: Southport major incident statement, 29 July 2024","https://www.nwas.nhs.uk/news/southport-major-incident/"],
+    ["NWAS witness statement to the Southport Inquiry (NWAS001083)","https://southport-prod.s3.eu-west-2.amazonaws.com/2025/09/NWAS001083.pdf"],
+    ["NWAS closing submission to the Southport Inquiry (NWAS001338)","https://southport-prod.s3.eu-west-2.amazonaws.com/2025/12/NWAS001338.pdf"],
+    ["The Scotsman / PA: Southport inquests opened and adjourned (hospital of death not named)","https://mp.scotsman.com/uk-news/inquests-into-deaths-of-southport-stabbing-victims-opened-and-adjourned-5777190"],
+    ["Ross Lydall (Evening Standard reporter), blog, 6 December 2016: Croydon University Hospital staff who helped (tram derailment)","https://rosslydall.wordpress.com/2016/12/06/roll-of-honour-the-croydon-hospital-staff-who-helped-treat-the-tram-crash-victims/"],
+    ["Croydon Advertiser: how Croydon University Hospital coped (tram derailment)","https://www.croydonadvertiser.co.uk/news/croydon-news/how-croydon-university-hospital-coped-508701"],
     ["Further news and secondary sources are listed on each incident card in the incident database.",""]
+  ]],
+  ["Verification tables in this repository (docs/verification)", [
+    ["Round 2: UK incident claims (30 October 2026)","docs/verification/verify_round2_uk.md"],
+    ["Round 2: clinical and triage claims (30 October 2026)","docs/verification/verify_round2_clinical.md"],
+    ["Round 2: European incidents (30 October 2026)","docs/verification/verify_round2_europe.md"],
+    ["Round 1: triage","docs/verification/verify_triage.md"],
+    ["Round 1: clinical","docs/verification/verify_clinical.md"],
+    ["Round 1: incidents","docs/verification/verify_incidents.md"],
+    ["Round 1: registry","docs/verification/verify_registry.md"],
+    ["Round 1: Europe","docs/verification/verify_europe.md"]
   ]],
   ["European incident sources (checked 30 October 2026)", Object.values(EU_SRC).map(s=>[s.s,s.u])]
 ];
@@ -3672,7 +3833,7 @@ function renderGlossary(){
   const q=$("#glossFilter").value.trim().toLowerCase();
   const list=GLOSSARY.filter(g=>!q||g.join(" ").toLowerCase().includes(q));
   $("#glossCount").textContent=`${list.length} of ${GLOSSARY.length} terms`;
-  $("#glossList").innerHTML=list.map(([t,x,d,f])=>`<div class="g" id="g-${t.replace(/[^A-Za-z0-9]/g,"")}"><dt>${esc(t)}</dt><dd>${x&&x[0]==="~"?`<span class="gx">${esc(x.slice(1))}</span> <span class="small muted">(standard UK expansion added from general knowledge; not in the verified files)</span>`:x?`<span class="gx">${esc(x)}</span>`:`<span class="chk">Check</span> <span class="small muted">Expansion not given in the verified files.</span>`}<br>${esc(d)}<br><span class="gs">From: ${esc(VFILE[f]||f)}</span></dd></div>`).join("")||`<p class="empty">No matching terms.</p>`;
+  $("#glossList").innerHTML=list.map(([t,x,d,f])=>`<div class="g" id="g-${t.replace(/[^A-Za-z0-9]/g,"")}"><dt>${esc(t)}</dt><dd>${x&&x[0]==="~"?`<span class="gx">${esc(x.slice(1))}</span> <span class="small muted">(expansion confirmed against a source in verification round 2, 30 October 2026)</span>`:x?`<span class="gx">${esc(x)}</span>`:`<span class="chk">Check</span> <span class="small muted">Expansion not given in the verified files.</span>`}<br>${esc(d)}<br><span class="gs">From: ${esc(VFILE[f]||f)}</span></dd></div>`).join("")||`<p class="empty">No matching terms.</p>`;
 }
 
 // ============ Print one item ============
@@ -3802,14 +3963,15 @@ function renderIncidentFilters(){
 const EU_TYPE={mixed:"Mixed: explosives and firearms",explosive:"Explosive",vehicle:"Vehicle ramming"};
 const EU_CONF={high:["ok","High confidence"],medium:["partial","Medium confidence"],low:["unverified","Low confidence"]};
 const euBadge=c=>{const x=EU_CONF[c]||["neutral",c];return `<span class="badge ${x[0]}">${esc(x[1])}</span>`;};
-// Where the verification table records disagreement between sources. The figures themselves are shown verbatim from the data.
+// Figure notes from the verification tables. kind "explain": the figures count different things and the note says what each counts (round 2 resolved these; all figures and sources are kept).
+// kind "conflict": the disagreement is genuinely unresolved and the card says sources disagree.
 const EU_CONFLICTS={
-  "paris-2015":"the number injured (four different totals) and, slightly, the accounting of deaths",
-  "brussels-2016":"the death toll (32 commonly cited; 35 recognised by the court in 2023, from a news source only)",
-  "nice-2016":"the death toll (86 or 87)",
-  "berlin-2016":"the number injured (56 or 67) and the number of receiving hospitals (22 or 23)",
-  "barcelona-2017":"the victim and injured totals, and the triage counts (real-time and retrospective figures differ)",
-  "norway-2011":"Utøya deaths and injured (they differ by one)"
+  "paris-2015":{kind:"explain",text:"Published injured totals range from about 350 to 495 because they count different things. Roughly 350 physically injured was the figure used in the first days and in most clinical papers (352 EJCTS 2017; 351 Ann Vasc Surg 2017). AP-HP counted 413 injured people admitted to hospital region-wide, including later admissions and non-AP-HP sites. By June 2016 the French government's single victim list (LUV) recorded 493 physically injured and a further 1,124 psychologically injured, 1,747 victims in all, and the Paris Fire Brigade's 495 is that list in early 2017. None of the figures is wrong. Deaths: 130 is official; witnesses differ on how many of the 130 died after reaching hospital (one versus four)."},
+  "brussels-2016":{kind:"explain",text:"32 is the official Crisis Centre toll of victims killed, which excludes the three suicide bombers (the Belgian Chamber brochure writes '32, plus the three perpetrators'). 35 is the 2023 assize court's count of murder victims, which adds three injured people who died later; it is reported in the news only."},
+  "nice-2016":{kind:"explain",text:"86 is the official French figure (the Élysée's national tribute named 86 victims; the toll was 84 on the night and rose as two injured people died in hospital, the last on 18 August 2016). The 86 excludes the attacker, who was shot dead by police, so papers giving 87 can only be counting him; the orthopaedic paper does not explain its figure."},
+  "berlin-2016":{kind:"conflict",text:"the number of receiving hospitals (23 in Berliner Ärzte, 22 in JEMS; both are trade sources and no official count was found). The injured total is no longer in dispute: 67 is the official Berlin Fire Brigade figure, and 53 (Senate, the day after) and 56 (Berliner Ärzte) were provisional counts. Deaths: 12 on the night; 13 officially since a victim died of late complications in October 2021."},
+  "barcelona-2017":{kind:"explain",text:"153 (Emergencias 2026) counts everyone attended in Barcelona, 14 dead plus 139 injured; 139 (Emergencias 2017) counts 'victims' including the 14 dead. The two triage sets are not comparable: 17 red, 32 yellow and 77 green is the real-time prehospital tally (126 triaged), while 30/30/63 is a retrospective reclassification of 123 injured with the META score, which assigns more red. The combined toll of 16 dead and about 140 injured comes from news and the Catalan public broadcaster, attributing it to the Audiencia Nacional judgment; no official page could be opened."},
+  "norway-2011":{kind:"explain",text:"The 22 July Commission (NOU 2012:14) counts 77 dead: 8 in the government quarter and 69 at Utøya. The trauma-centre paper's 68 dead at the scene and 61 injured count one casualty who was alive when evacuated and died later as injured rather than dead. The Commission gives no single injured total for Utøya; it records 33 with life-threatening or serious physical injury, while the clinical papers give about 60 injured in all."}
 };
 function euHay(i){return [i.name,i.country,i.city,EU_TYPE[i.type]||i.type,i.deaths,i.injured,i.summary,i.caveats,"europe european",...i.medicalFacts.map(f=>f.text+" "+f.source),...i.lessons.map(l=>l.text+" "+l.source)].join(" ").toLowerCase();}
 function euCard(i){
@@ -3826,7 +3988,7 @@ function euCard(i){
         <dt>Injured</dt><dd>${esc(i.injured)}</dd>
         <dt>Overall</dt><dd>${euBadge(i.verification)}</dd>
       </dl>
-      ${conflict?`<div class="callout warn eu-conflict"><p><strong>Sources disagree</strong> on ${esc(conflict)}. The differing figures are shown side by side; none has been chosen over the others.</p></div>`:""}
+      ${conflict?(conflict.kind==="conflict"?`<div class="callout warn eu-conflict"><p><strong>Sources disagree</strong> on ${esc(conflict.text)} The differing figures are shown side by side; none has been chosen over the others.</p></div>`:`<div class="callout eu-conflict"><p><strong>Why the figures differ.</strong> ${esc(conflict.text)}</p></div>`):""}
       <h4>Medical facts</h4>
       <ul class="checks eu-facts">${i.medicalFacts.map(f=>`<li>${euBadge(f.confidence)}<span>${esc(f.text)}<span class="eu-src">Source: ${link(f.source,f.url)}</span></span></li>`).join("")}</ul>
       <h4>Lessons</h4>

@@ -115,8 +115,8 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
       const re = new RegExp(src, 'gi');
       document.querySelectorAll('details').forEach(d => d.open = true);
       let body = document.body.innerText;
-      // Cited titles (link text of sources) may keep their original spelling; check them separately.
-      const cited = [...document.querySelectorAll('a.url')].map(a => a.innerText).filter(Boolean);
+      // Cited titles (link text of sources) may keep their original spelling, and printed URLs are not prose; check them separately.
+      const cited = [...document.querySelectorAll('a.url, span.url')].map(a => a.innerText).filter(Boolean);
       cited.forEach(c => { body = body.split(c).join(' '); });
       const attrs = [...document.querySelectorAll('[aria-label],[title],[alt],[placeholder]')].map(e => ['aria-label','title','alt','placeholder'].map(a => e.getAttribute(a) || '').join(' ')).join(' ');
       const hit = s => [...s.matchAll(re)].map(m => m[0]);
@@ -189,10 +189,14 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
   ok('europe card: fact links match data URLs', factLinks.every((f, k) => f.href === EU.paris.medicalFacts[k].url));
   ok('europe card: lessons with source links', (await page.locator(pc + ' .eu-list li a.url').count()) === EU.paris.lessons.length);
   ok('europe card: caveats shown', (await page.textContent(pc)).includes(EU.paris.caveats));
-  ok('europe card: conflicting injured figures kept side by side', /352 \(EJCTS 2017\), 351 \(Ann Vasc Surg 2017\), 495/.test(await page.textContent(pc)) && /Sources disagree/.test(await page.textContent(pc + ' .eu-conflict')));
-  ok('europe card: Nice death toll disagreement stated', /86 or 87/.test(await page.textContent('#eurList [data-inc="nice-2016"] .eu-conflict')));
-  ok('europe card: Madrid has no disagreement callout', (await page.locator('#eurList [data-inc="madrid-2004"] .eu-conflict').count()) === 0);
-  ok('europe card: Brussels shows low confidence', /Low confidence/.test(await page.textContent('#eurList [data-inc="brussels-2016"] .inc-head')));
+  const parisTxt = await page.textContent(pc);
+  ok('europe card: Paris keeps every injured figure (352, 351, 413, 493, 495) with its source', ['352 EJCTS 2017', '351 Ann Vasc Surg 2017', '413', '493', '495'].every(s => parisTxt.includes(s)));
+  ok('europe card: Paris explains what each figure counts instead of "sources disagree"', /Why the figures differ/.test(await page.textContent(pc + ' .eu-conflict')) && !/Sources disagree/.test(await page.textContent(pc + ' .eu-conflict')) && /413 injured people admitted to hospital/.test(await page.textContent(pc + ' .eu-conflict')));
+  ok('europe card: Nice explains 86 (official) versus 87 (with the attacker)', /Why the figures differ/.test(await page.textContent('#eurList [data-inc="nice-2016"] .eu-conflict')) && /86 is the official French figure/.test(await page.textContent('#eurList [data-inc="nice-2016"] .eu-conflict')) && /15 of the 86/.test(await page.textContent('#eurList [data-inc="nice-2016"]')));
+  ok('europe card: Berlin keeps the unresolved hospital count as "sources disagree"', /Sources disagree/.test(await page.textContent('#eurList [data-inc="berlin-2016"] .eu-conflict')) && /22/.test(await page.textContent('#eurList [data-inc="berlin-2016"] .eu-conflict')) && /13 officially since October 2021/.test(await page.textContent('#eurList [data-inc="berlin-2016"]')));
+  ok('europe card: Utøya explained per NOU 2012:14 (77 = 8 + 69)', /Why the figures differ/.test(await page.textContent('#eurList [data-inc="norway-2011"] .eu-conflict')) && /8 in the government quarter and 69 at Utøya/.test(await page.textContent('#eurList [data-inc="norway-2011"] .eu-conflict')));
+  ok('europe card: Madrid has no figure-note callout', (await page.locator('#eurList [data-inc="madrid-2004"] .eu-conflict').count()) === 0);
+  ok('europe card: Brussels raised to medium confidence with official totals', /Medium confidence/.test(await page.textContent('#eurList [data-inc="brussels-2016"] .inc-head')) && /About 340 \(official/.test(await page.textContent('#eurList [data-inc="brussels-2016"]')));
   await page.fill('#incSearch', 'Bataclan');
   ok('incidents search "Bataclan" finds Paris only', (await vis('#eurList article')) === 1 && (await page.locator('#incList article').count()) === 0);
   await page.fill('#incSearch', '');
@@ -200,13 +204,15 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
   ok('europe type filter: vehicle ramming = 3', (await vis('#eurList article')) === 3 && (await page.locator('#incList article').count()) === 0);
   await page.selectOption('#incType', '');
   await page.selectOption('#incVer', 'eu-low');
-  ok('europe confidence filter: low = Brussels', (await vis('#eurList article')) === 1 && /Brussels/.test(await page.textContent('#eurList article h3')));
+  ok('europe confidence filter: no card is low confidence after round 2', (await vis('#eurList article')) === 0 && (await page.locator('#eurList .empty').count()) === 1);
+  await page.selectOption('#incVer', 'eu-medium');
+  ok('europe confidence filter: medium includes Brussels, Berlin and Barcelona', (await vis('#eurList article')) === 3 && /Brussels/.test(await page.textContent('#eurList')));
   await page.selectOption('#incVer', '');
   await page.selectOption('#incYear', '2004');
   ok('year filter includes European years (2004 = Madrid)', (await vis('#eurList article')) === 1 && (await page.locator('#incList article').count()) === 0);
   await page.selectOption('#incYear', '');
   ok('european lessons block from teaching points, each cited', (await page.locator('#eurLessons li').count()) === EU.tp && (await page.locator('#eurLessons li a.url').count()) === EU.tp);
-  ok('european not-found list', (await page.locator('#eurNotFound li').count()) === EU.nf && /Vienna 2020/.test(await page.textContent('#eurNotFound')));
+  ok('european not-found list', (await page.locator('#eurNotFound li').count()) === EU.nf && /Vienna 2020/.test(await page.textContent('#eurNotFound')) && /found for Nice only/.test(await page.textContent('#eurNotFound')));
   await page.selectOption('#incRegion', 'europe');
   await page.evaluate(() => { document.getElementById('europe').scrollIntoView(); window.scrollBy(0, -80); });
   await shot(page, 'screenshot-desktop-europe.png');
@@ -284,7 +290,31 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
   ok('clinical: 19 statements', (await page.locator('#clinList li').count()) === 19);
   ok('clinical: dose warnings present', (await page.locator('#clinList .dose-warn').count()) === 3);
   await page.goto(URL + '#triage');
-  ok('triage: MITT heart-rate >100 vs ≥100 flag kept', /The published tool reads "100 or more". The EMJ 2022 text reads ">100"/.test(await page.textContent('#tab-triage')));
+  const triTxt = await page.textContent('#tab-triage');
+  ok('triage: MITT teaches the card wording (100 or more) and notes the EMJ ">100" once', /Heart rate 100 or more\?/.test(triTxt) && /card reads "100 or More" and is the operational standard/.test(triTxt) && /EMJ 2022 derivation paper reads ">100"/.test(triTxt) && !/Check your local card/.test(triTxt));
+  ok('triage: MITT breathing band given as the card\'s "12 - 23"', /Breathing rate outside 12 - 23\?/.test(triTxt) && /normal band "12 - 23"/.test(triTxt));
+  ok('triage: TST card-versus-guidance note (under-2 rule and body regions from NARU)', /card itself carries only the flowchart labels/.test(triTxt) && /must include the neck, chest, armpits, back, abdomen, groin and buttocks/.test(triTxt));
+  await page.goto(URL + '#sops');
+  await page.evaluate(() => document.querySelectorAll('#sopList details').forEach(d => d.open = true));
+  const sopTxt = await page.textContent('#sopList');
+  ok('SOP 3: generalisation replaced by per-incident mechanism with sources, no Unverified label', /Westminster Bridge, March 2017: 29 seriously injured, mostly blunt vehicle-strike trauma/.test(sopTxt) && (await page.locator('#sopList details:nth-of-type(3) .unv').count()) === 0);
+  ok('SOP 3: NG39 timing wording with reproduction caveat and no NG39 dose', /not more than 3 hours after injury unless there is evidence of hyperfibrinolysis|more than 3 hours after injury unless there is evidence of hyperfibrinolysis/.test(sopTxt) && /NG39 gives no dose/.test(sopTxt) && /reproduction/.test(sopTxt));
+  ok('SOP 4: hydroxocobalamin colour and lab interference from the SmPC, no Unverified label, no co-oximetry claim about it', /urine dark red/.test(sopTxt) && /blood leak/.test(sopTxt) && (await page.locator('#sopList details:nth-of-type(4) .unv').count()) === 0 && !/hydroxocobalamin[^.]*co-oximetry/i.test(sopTxt));
+  ok('SOP 5: burns hypothermia sourced (Hostler 2013) and >15% hospital threshold noted', /Hostler et al., J Burn Care Res 2013/.test(sopTxt) && /above 15% TBSA in adults/.test(sopTxt));
+  ok('SOP 6: atropine duration stated from UKHSA/PHE and CHEMM, not "days or weeks"', /gives no fixed duration/.test(sopTxt) && /US CHEMM/.test(sopTxt) && !/days or weeks/.test(sopTxt));
+  await page.goto(URL + '#sources');
+  const unvTxt = await page.textContent('#unvList');
+  ok('sources: settled items removed from the unverified list', !/Hypothermia "independently/.test(unvTxt) && !/days or weeks/.test(unvTxt) && !/MITT heart rate wording/.test(unvTxt) && !/forensic survivability/.test(unvTxt) && !/48 of 48/.test(unvTxt) && !/8 or more/.test(unvTxt) && !/56\.3%/.test(unvTxt));
+  ok('sources: Croydon anecdotes attributed to the tram derailment, not London Bridge', /Croydon tram derailment, 9 November 2016, not London Bridge/.test(unvTxt));
+  ok('sources: round-2 verification files linked', (await page.locator('#tab-sources a[href="docs/verification/verify_round2_uk.md"]').count()) >= 1 && (await page.locator('#tab-sources a[href="docs/verification/verify_round2_clinical.md"]').count()) >= 1 && (await page.locator('#tab-sources a[href="docs/verification/verify_round2_europe.md"]').count()) >= 1 && ['verify_round2_uk.md','verify_round2_clinical.md','verify_round2_europe.md'].every(f => fs.existsSync(path.join(__dirname, '..', 'docs', 'verification', f))));
+  ok('sources: change log records round 2', /Verification round 2 \(30 October 2026\), clinical/.test(await page.textContent('#changesList')));
+  await page.goto(URL + '#incidents');
+  const incTxt = await page.textContent('#incList');
+  ok('incidents: London Bridge 48/48 confirmed from LAS', /All 48 patients LAS took to hospital survived \(LAS statement/.test(incTxt));
+  ok('incidents: Finsbury Park hospitals corrected (Royal London 4, Whittington 2, St Mary\'s 1; not King\'s)', /Royal London \(4\), the Whittington \(2\) and St Mary's \(1\)/.test(incTxt) && !/King's College and Royal London' claim is unsupported/.test(incTxt));
+  ok('incidents: Southport per-victim wound counts from the sentencing remarks replace "8+"', /at least 122, at least 85 and 5 sharp-force wounds/.test(incTxt) && !/8\+ stab wounds/.test(incTxt));
+  ok('incidents: Fishmongers\' Hall both died at the scene; Forbury Gardens place of death for Furlong', /Both victims died at the scene/.test(incTxt) && /James Furlong died in Forbury Gardens/.test(incTxt));
+  await page.goto(URL + '#triage');
 
   // ---------- Learning pathway ----------
   await page.goto(URL + '#learn');
@@ -422,7 +452,10 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
   await page.goto(URL + '#glossary');
   const gl = await page.evaluate(() => GLOSSARY.length);
   ok('glossary: all terms listed', (await page.locator('#glossList .g').count()) === gl, String(gl));
-  ok('glossary: general-knowledge expansions labelled', (await page.locator('#glossList').textContent()).includes('not in the verified files'));
+  const glTxt = await page.locator('#glossList').textContent();
+  ok('glossary: no expansion is labelled as general knowledge; round-2 confirmations labelled', !/general knowledge/.test(glTxt) && !/not in the verified files/.test(glTxt) && /confirmed against a source in verification round 2/.test(glTxt));
+  ok('glossary: TOXBASE shown as a proper name, not an acronym', /TOXBASENotanacronym/.test(glTxt.replace(/\s+/g, '')));
+  ok('glossary: JESIP, MERIT, MPTT-24 and TARN expansions present', ['Joint Emergency Services Interoperability Principles', 'Medical Emergency Response Incident Team', 'Modified Physiological Triage Tool-24', 'Trauma Audit and Research Network'].every(s => glTxt.includes(s)));
   await page.fill('#glossFilter', 'MITT');
   const gf = await page.locator('#glossList .g').count();
   ok('glossary: filter works', gf > 0 && gf < gl, String(gf));
