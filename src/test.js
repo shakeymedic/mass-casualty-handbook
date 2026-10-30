@@ -516,7 +516,9 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
 
   // Theme toggle (existing)
   await page.evaluate(() => document.documentElement.removeAttribute('data-theme'));
-  await page.click('#themeBtn');
+  await page.click('#themeBtn'); // Auto -> Light
+  ok('theme cycle: Auto then Light, and the label names the next action', (await page.evaluate(() => document.documentElement.getAttribute('data-theme'))) === 'light' && /Switch to dark theme/.test(await page.getAttribute('#themeBtn', 'aria-label')) && (await page.textContent('#themeBtn')).includes('Theme: Light'));
+  await page.click('#themeBtn'); // Light -> Dark
   const theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
   ok('theme toggle sets data-theme', theme === 'dark', theme);
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
@@ -528,7 +530,8 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
     await shot(page, `screenshot-desktop-${t}-dark.png`);
   }
   for (const t of Object.keys(LANDINGS)) { await page.goto(URL + '#' + t); await page.waitForTimeout(80); await shot(page, `screenshot-desktop-${t}-dark.png`); }
-  await page.click('#themeBtn');
+  await page.click('#themeBtn'); // Dark -> Auto
+  ok('theme cycle: Dark then back to Auto', (await page.evaluate(() => document.documentElement.getAttribute('data-theme'))) === null);
   await page.goto(URL + '#home'); await page.waitForTimeout(80);
   await shot(page, 'screenshot-desktop-home.png');
   await shot(page, 'screenshot-desktop-home-full.png', true);
@@ -604,6 +607,163 @@ const US_RE = new RegExp('\\b(' + US_WORDS.join('|') + '|\\w+(?<!s|pr|sei|cap|re
     if (scheme === 'dark') { await m.goto(URL + '#sources'); await shot(m, 'screenshot-mobile-sources-dark.png'); await m.goto(URL + '#learn'); await shot(m, 'screenshot-mobile-learn-dark.png'); }
     await m.context().close();
   }
+
+  // ---------- Usability pass (focus, long pages, sticky controls, phone ergonomics) ----------
+  ok('static: home section is active in the markup and a noscript notice exists', /<section class="tab active" id="tab-home"/.test(html) && /<noscript>/.test(html) && /needs JavaScript/.test(html));
+  ok('static: inset positioning has top/right/bottom/left fallbacks and :focus has a fallback ring', (html.match(/top:0;right:0;bottom:0;left:0;inset:0/g) || []).length === 2 && /\.choice input:focus \+ span\{outline/.test(html) && /\n:focus\{outline:3px solid/.test(html));
+  ok('static: every anchor target clears the sticky header', /\[id\]\{scroll-margin-top:80px\}/.test(html));
+  const HEADER = 57;
+  const rect = (p, sel) => p.evaluate(s => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, width: r.width, height: r.height }; }, sel);
+  const dx = await newPage(1366, 768, 'light', { tag: 'ux-1366' });
+  // quiz: keyboard focus stays in the question after Check answer
+  await dx.goto(URL + '#learn/m2'); await dx.waitForTimeout(80); await dx.click('#mt-quiz');
+  const q0 = await dx.evaluate(() => MODULES.find(m => m.id === 'm2').quiz[0].a);
+  await dx.check(`input[name="m2-q0"][value="${q0}"]`);
+  await dx.focus('#m2-q0 [data-check]'); await dx.keyboard.press('Enter'); await dx.waitForTimeout(60);
+  const afterCheck = await dx.evaluate(() => ({ fs: (document.activeElement.closest('fieldset') || {}).id, tag: document.activeElement.className }));
+  ok('quiz: focus moves to the feedback of the same question after Check answer', afterCheck.fs === 'm2-q0' && /qfb/.test(afterCheck.tag), JSON.stringify(afterCheck));
+  await dx.keyboard.press('Tab');
+  const tab1 = await dx.evaluate(() => ({ fs: (document.activeElement.closest('fieldset') || {}).id, tag: document.activeElement.tagName }));
+  await dx.keyboard.press('Tab');
+  const tab2 = await dx.evaluate(() => ({ fs: (document.activeElement.closest('fieldset') || {}).id, tag: document.activeElement.tagName }));
+  ok('quiz: Tab from the feedback reaches its source link, then question 2 (no restart at the header)', tab1.fs === 'm2-q0' && tab1.tag === 'A' && tab2.fs === 'm2-q1', JSON.stringify([tab1, tab2]));
+  // incident database: sticky filter bar, jump list, collapsed cards, back to top
+  await dx.goto(URL + '#incidents'); await dx.waitForTimeout(80);
+  ok('incidents: jump list has one link per incident shown', (await dx.locator('#incJump a').count()) === 17 && (await dx.getAttribute('#incJump a >> nth=0', 'href')) === '#inc-INC_01');
+  ok('incidents: cards start collapsed with a Show details control, and Expand all opens them', await dx.evaluate(() => { const all = [...document.querySelectorAll('#tab-incidents details.inc-more')]; return all.length === 17 && all.every(x => !x.open) && /Show details/.test(all[0].querySelector('summary').textContent); }));
+  await dx.click('#incExpandAll');
+  ok('incidents: Expand all opens every card', await dx.evaluate(() => [...document.querySelectorAll('#tab-incidents details.inc-more')].every(x => x.open)) && /Collapse all/.test(await dx.textContent('#incExpandAll')));
+  await dx.click('#incExpandAll');
+  await dx.evaluate(() => window.scrollTo(0, 2500)); await dx.waitForTimeout(120);
+  const bar = await rect(dx, '#incFilterBar');
+  ok('incidents: filter bar is sticky under the header at 1366', bar && Math.abs(bar.top - HEADER) <= 2 && bar.bottom < 200, JSON.stringify(bar));
+  ok('incidents: filter bar height is passed to the anchor scroll margin', await dx.evaluate(() => parseInt(getComputedStyle(document.getElementById('tab-incidents')).getPropertyValue('--incbar')) > 40));
+  const tt = await rect(dx, '#toTop');
+  ok('back to top: visible after scrolling, inside the viewport, 44 px tall', (await dx.evaluate(() => document.getElementById('toTop').classList.contains('show'))) && tt.bottom <= 768 && tt.right <= 1366 && tt.height >= 44, JSON.stringify(tt));
+  await dx.click('#toTop'); await dx.waitForFunction(() => window.scrollY === 0, null, { timeout: 4000 });
+  ok('back to top: scrolls to the top and hides', (await dx.evaluate(() => window.scrollY)) === 0 && !(await dx.evaluate(() => document.getElementById('toTop').classList.contains('show'))));
+  // anchors are not hidden under the header or the sticky bar
+  await dx.goto(URL + '#home'); await dx.goto(URL + '#inc-INC_04'); await dx.waitForTimeout(150);
+  const t4 = await rect(dx, '#inc-INC_04'), bar2 = await rect(dx, '#incFilterBar');
+  ok('anchor #inc-INC_04 lands below the sticky filter bar', t4 && bar2 && t4.top >= bar2.bottom - 1 && t4.top < 400, JSON.stringify([t4, bar2]));
+  await dx.goto(URL + '#home'); await dx.goto(URL + '#pr-tst'); await dx.waitForTimeout(150);
+  const prt = await rect(dx, '#pr-tst');
+  ok('anchor #pr-tst (a div, not a heading) lands below the header', prt && prt.top >= HEADER && prt.top < 200, JSON.stringify(prt));
+  await dx.goto(URL + '#home'); await dx.goto(URL + '#tna'); await dx.waitForTimeout(150);
+  const tna = await rect(dx, '#tna');
+  ok('anchor #tna lands below the header', tna && tna.top >= HEADER && tna.top < 200, JSON.stringify(tna));
+  // learn overview: module cards near the top; sources and teach have jump lists; glossary A-Z
+  await dx.goto(URL + '#learn'); await dx.waitForTimeout(80);
+  const mg = await rect(dx, '#moduleGrid > li');
+  ok('learn overview: first module card within the first screen at 1366x768', mg && mg.top < 500, JSON.stringify(mg));
+  await dx.goto(URL + '#sources'); await dx.waitForTimeout(60);
+  ok('sources: on-this-page jump list resolves', await dx.evaluate(() => [...document.querySelectorAll('#tab-sources .jump a')].length === 5 && [...document.querySelectorAll('#tab-sources .jump a')].every(a => document.getElementById(a.getAttribute('href').slice(1)))));
+  await dx.goto(URL + '#teach'); await dx.waitForTimeout(60);
+  ok('teach: on-this-page jump list resolves', await dx.evaluate(() => [...document.querySelectorAll('#tab-teach .jump a')].length === 4 && [...document.querySelectorAll('#tab-teach .jump a')].every(a => document.getElementById(a.getAttribute('href').slice(1)))));
+  await dx.goto(URL + '#glossary'); await dx.waitForTimeout(60);
+  ok('glossary: A-Z jump list resolves to the first term of each letter', await dx.evaluate(() => { const as = [...document.querySelectorAll('#glossJump a')]; return as.length > 5 && as.every(a => document.getElementById(a.getAttribute('href').slice(1))) && document.getElementById('gl-M').textContent === 'MERIT'; }));
+  // heading hierarchy
+  ok('headings: sidebar group headings are not h2s; no h2 precedes the page h1 in DOM order', await dx.evaluate(() => document.querySelectorAll('#siteNav h2').length === 0 && document.querySelector('.sidebar h1,.sidebar h2,.sidebar h3') === null));
+  const skips = await dx.evaluate(() => { const out = []; document.querySelectorAll('section.tab').forEach(sec => { let last = 0; sec.querySelectorAll('h1,h2,h3,h4').forEach(h => { if (h.closest('#moduleView,#sgDebrief,#trOutcome')) return; const n = +h.tagName[1]; if (n > last + 1) out.push(sec.id + ':' + h.tagName + ':' + h.textContent.trim().slice(0, 30)); last = n; }); }); return out; });
+  ok('headings: no skipped levels on any page', skips.length === 0, skips.join(' | '));
+  await dx.goto(URL + '#learn/m1'); await dx.waitForTimeout(60); await dx.click('#mt-learn');
+  ok('headings: module teaching sub-headings are h2s under the module h1', await dx.evaluate(() => document.querySelectorAll('#mp-learn h4').length === 0 && document.querySelectorAll('#mp-learn h2.sub').length > 0));
+  // legend pairs; measure; surge copy
+  await dx.goto(URL + '#incidents'); await dx.waitForTimeout(60);
+  ok('incidents: each legend badge is wrapped with its description', await dx.evaluate(() => [...document.querySelectorAll('#tab-incidents .legend .lg')].length === 6 && [...document.querySelectorAll('#tab-incidents .legend .lg')].every(l => l.querySelector('.badge') && l.textContent.trim().length > l.querySelector('.badge').textContent.length + 5)));
+  ok('readability: running text is capped at about 75ch', await dx.evaluate(() => { const p = document.querySelector('#tab-incidents #eurBlock > p'); return p.getBoundingClientRect().width < 760; }));
+  await dx.goto(URL + '#surge'); await dx.waitForTimeout(60);
+  ok('surge copy: "5, random order" / "All 10, random order"', (await dx.textContent('#sgCount')).includes('5, random order') && (await dx.textContent('#sgCount')).includes('All 10, random order'));
+  ok('breadcrumb on a landing page names the overview, not "Section overview"', (await dx.goto(URL + '#research'), await dx.waitForTimeout(60), (await dx.textContent('#crumb')).includes('Research overview') && !/Section overview/.test(await dx.textContent('#crumb'))));
+  // surge: timer and buttons visible at arrival and while scrolled, at 1366x768; pause on navigation
+  await dx.goto(URL + '#surge'); await dx.waitForTimeout(60);
+  await dx.selectOption('#sgCount', '5'); await dx.click('#sgStart'); await dx.waitForSelector('#sgCats button:not([disabled])'); await dx.waitForTimeout(100);
+  let clk = await rect(dx, '#sgClock'), cat = await rect(dx, '#sgCats button:last-child');
+  ok('surge 1366x768: clock and every category button visible when the first casualty arrives', clk.top >= HEADER && clk.bottom <= 768 && cat.top >= 0 && cat.bottom <= 768, JSON.stringify([clk, cat]));
+  ok('surge: lead and disclaimer are hidden while the clock runs', await dx.evaluate(() => getComputedStyle(document.querySelector('#tab-surge > .lead')).display === 'none'));
+  await dx.evaluate(() => window.scrollBy(0, 700)); await dx.waitForTimeout(100);
+  clk = await rect(dx, '#sgClock'); cat = await rect(dx, '#sgCats button:last-child');
+  ok('surge 1366x768: clock stays visible (sticky) after scrolling', clk.top >= HEADER - 1 && clk.bottom <= 768, JSON.stringify(clk));
+  ok('surge 1366x768: category buttons stay visible after scrolling', cat.top >= 0 && cat.bottom <= 768, JSON.stringify(cat));
+  await dx.goto(URL + '#home'); await dx.waitForTimeout(80);
+  ok('surge: leaving the page pauses the run instead of discarding it', await dx.evaluate(() => !!(SG && SG.paused) && document.getElementById('sgSetup').hidden));
+  await dx.goto(URL + '#surge'); await dx.waitForTimeout(80);
+  ok('surge: back on the page, a Paused notice with Resume is shown and the buttons are disabled', await dx.isVisible('#sgPause') && (await dx.locator('#sgCats button:not([disabled])').count()) === 0);
+  await dx.click('#sgResume'); await dx.waitForTimeout(80);
+  ok('surge: Resume restarts the clock and re-enables the buttons', !(await dx.isVisible('#sgPause')) && (await dx.locator('#sgCats button:not([disabled])').count()) === 4 && await dx.evaluate(() => SG.paused === null && SG.timer !== null));
+  await dx.click('#sgCats button >> nth=0'); await dx.waitForSelector('#sgCats button:not([disabled])');
+  ok('surge: a decision is recorded after resuming', await dx.evaluate(() => SG.results.length === 1 && SG.i === 1));
+  await dx.click('#sgStop'); await dx.waitForSelector('#sgDebrief:not([hidden])');
+  ok('surge: section no longer marked running after the debrief', await dx.evaluate(() => !document.getElementById('tab-surge').classList.contains('running')));
+  // tables: scroll cue wrapper
+  await dx.goto(URL + '#registry'); await dx.waitForTimeout(60);
+  ok('tables: wide tables are wrapped once with a scroll-cue wrapper', await dx.evaluate(() => document.querySelectorAll('#tab-registry .tw').length === 1 && document.querySelectorAll('#tab-registry .tw .table-wrap').length === 1));
+  // print cleanup fallback
+  await dx.goto(URL + '#printables'); await dx.evaluate(() => { window.print = () => {}; });
+  await dx.click('[data-print="pr-mitt"]');
+  ok('print: one-item state set', await dx.evaluate(() => document.body.classList.contains('print-one')));
+  await dx.waitForTimeout(2800);
+  ok('print: one-item state cleared by the timeout when afterprint never fires', await dx.evaluate(() => !document.body.classList.contains('print-one') && document.getElementById('printRoot').innerHTML === ''));
+  // phone header search button
+  await dx.context().close();
+  // sidebar at 1366x650: scrollable with a cue, every link reachable
+  const s650 = await newPage(1366, 650, 'light', { tag: 'ux-650' });
+  await s650.goto(URL + '#home'); await s650.waitForTimeout(80);
+  const sb = await s650.evaluate(() => { const s = document.getElementById('sidebar'); return { sh: s.scrollHeight, ch: s.clientHeight, cue: s.classList.contains('has-more'), pos: getComputedStyle(s).position, ov: getComputedStyle(s).overflowY }; });
+  ok('sidebar 1366x650: scrolls within the viewport and shows a scroll cue', sb.pos === 'sticky' && sb.ov === 'auto' && sb.sh > sb.ch && sb.cue, JSON.stringify(sb));
+  await s650.evaluate(() => { const s = document.getElementById('sidebar'); s.scrollTop = s.scrollHeight; s.dispatchEvent(new Event('scroll')); }); await s650.waitForTimeout(60);
+  const last = await rect(s650, '#siteNav a[data-tab="glossary"]');
+  ok('sidebar 1366x650: last link reachable by scrolling the sidebar; cue hides at the end', last.top >= HEADER && last.bottom <= 650 && !(await s650.evaluate(() => document.getElementById('sidebar').classList.contains('has-more'))), JSON.stringify(last));
+  ok('sidebar 1366x650: all 20 links are within the sidebar box', await s650.evaluate(() => { const s = document.getElementById('sidebar').getBoundingClientRect(); return [...document.querySelectorAll('#siteNav a')].every(a => { const r = a.getBoundingClientRect(); return r.left >= s.left && r.right <= s.right + 1; }); }));
+  const sh768 = await newPage(1366, 768, 'light', { tag: 'ux-768b' });
+  await sh768.goto(URL + '#home'); await sh768.waitForTimeout(80);
+  const sb2 = await sh768.evaluate(() => { const s = document.getElementById('sidebar'); return { sh: s.scrollHeight, ch: s.clientHeight }; });
+  ok('sidebar 1366x768: tighter spacing (list under 860 px)', sb2.sh < 860, JSON.stringify(sb2));
+  await sh768.context().close(); await s650.context().close();
+  // phone (touch): home cards in the first screen, tablist, tap targets, sticky filter, surge timer, search button
+  const ph = await browser.newContext({ viewport: { width: 375, height: 812 }, hasTouch: true, isMobile: true });
+  const mp = await ph.newPage(); mp.on('pageerror', e => errors.push('[ux-375] pageerror: ' + e.message)); mp.on('console', c => { if (c.type() === 'error' && !/fonts\.|ERR_|net::/.test(c.text())) errors.push('[ux-375] console: ' + c.text()); });
+  await mp.route('**/*', r => r.request().url().startsWith('file://') ? r.continue() : r.abort());
+  await mp.goto(URL + '#home'); await mp.waitForTimeout(100);
+  const hs = await rect(mp, '#homeSections .home-sec'), secH = await rect(mp, '#sections');
+  ok('phone home: "Choose a section" and the first section card are within the first screen (812 px)', secH.top < 700 && hs.top < 812 && hs.top > 0, JSON.stringify([secH, hs]));
+  ok('phone home: progress shown once (hero card hidden, module list kept)', await mp.evaluate(() => getComputedStyle(document.getElementById('heroProgress')).display === 'none' && document.getElementById('homeProgress').offsetParent !== null));
+  ok('phone: coarse pointer media query applies in this context', await mp.evaluate(() => matchMedia('(pointer:coarse)').matches || innerWidth <= 699));
+  const taps = await mp.evaluate(() => { const h = s => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().height) : -1; }; return { theme: h('#themeBtn'), menu: h('#menuBtn'), search: h('#searchBtn') }; });
+  ok('phone tap targets: header buttons at least 44 px', Object.values(taps).every(v => v >= 44), JSON.stringify(taps));
+  await mp.goto(URL + '#learn/m2'); await mp.waitForTimeout(80); await mp.click('#mt-quiz'); await mp.waitForTimeout(80);
+  const ob = await rect(mp, '#mt-obj');
+  ok('phone module tablist: "Objectives" fully visible after selecting Knowledge check', ob.left >= 0 && ob.right <= 375 && ob.width > 60 && (await mp.evaluate(() => { const t = document.getElementById('modTabs'); return t.scrollWidth <= t.clientWidth + 1; })), JSON.stringify(ob));
+  const tabsH = await mp.evaluate(() => [...document.querySelectorAll('#modTabs [role=tab]')].map(t => Math.round(t.getBoundingClientRect().height)));
+  ok('phone tap targets: module tabs at least 44 px', tabsH.every(v => v >= 44), tabsH.join(','));
+  await mp.goto(URL + '#drill'); await mp.waitForTimeout(80);
+  const taps2 = await mp.evaluate(() => { const h = s => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().height) : -1; }; return { chip: h('#cardPills .chip'), choice: h('#tstChoices .choice span'), act: h('#actGrid .act'), btn: h('#drillSubmit'), reset: h('#drillReset') }; });
+  ok('phone tap targets: drill chips, choice tags, action buttons and .btn at least 44 px', Object.values(taps2).every(v => v >= 44), JSON.stringify(taps2));
+  await mp.goto(URL + '#trainer'); await mp.waitForTimeout(80);
+  const taps3 = await mp.evaluate(() => { const h = s => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().height) : -1; }; return { seg: h('#trTools [role=tab]'), select: h('#trCard'), yes: h('#trFlow .current .btn'), chip: h('.sec-chip') }; });
+  ok('phone tap targets: segmented tabs, select and Yes/No at least 44 px; breadcrumb chip at least 36 px', taps3.seg >= 44 && taps3.select >= 44 && taps3.yes >= 44 && taps3.chip >= 36, JSON.stringify(taps3));
+  await mp.goto(URL + '#incidents'); await mp.waitForTimeout(80);
+  ok('phone incidents: More filters toggle reveals the other filters', !(await mp.isVisible('#incType')) && (await mp.click('#incMoreBtn'), await mp.waitForTimeout(50), await mp.isVisible('#incType')));
+  await mp.click('#incMoreBtn');
+  await mp.evaluate(() => window.scrollTo(0, 1500)); await mp.waitForTimeout(120);
+  const pbar = await rect(mp, '#incFilterBar');
+  ok('phone incidents: filter bar sticky under the header and under a third of the screen', Math.abs(pbar.top - HEADER) <= 2 && pbar.height < 812 / 3, JSON.stringify(pbar));
+  ok('phone incidents: back to top shown after scrolling', await mp.evaluate(() => document.getElementById('toTop').classList.contains('show')));
+  await mp.goto(URL + '#surge'); await mp.waitForTimeout(80);
+  await mp.selectOption('#sgCount', '5'); await mp.click('#sgStart'); await mp.waitForSelector('#sgCats button:not([disabled])'); await mp.waitForTimeout(100);
+  let pclk = await rect(mp, '#sgClock'), pcat = await rect(mp, '#sgCats button:last-child');
+  ok('surge 375x812: clock and category buttons visible at arrival', pclk.top >= HEADER - 1 && pclk.bottom <= 812 && pcat.top >= 0 && pcat.bottom <= 812, JSON.stringify([pclk, pcat]));
+  await mp.evaluate(() => window.scrollBy(0, 500)); await mp.waitForTimeout(100);
+  pclk = await rect(mp, '#sgClock'); pcat = await rect(mp, '#sgCats button:last-child');
+  ok('surge 375x812: clock and buttons still visible after scrolling', pclk.top >= HEADER - 1 && pclk.bottom <= 812 && pcat.top >= 0 && pcat.bottom <= 812, JSON.stringify([pclk, pcat]));
+  ok('surge 375x812: no horizontal overflow with sticky controls', (await mp.evaluate(() => document.documentElement.scrollWidth)) <= 375);
+  await mp.click('#sgStop');
+  await mp.goto(URL + '#home'); await mp.waitForTimeout(80);
+  await mp.click('#searchBtn'); await mp.waitForTimeout(80);
+  ok('phone: header search button opens the drawer with the search field focused', (await mp.evaluate(() => document.activeElement.id)) === 'siteSearchM' && await mp.isVisible('#siteNav'));
+  await mp.keyboard.press('Escape');
+  ok('phone: brand text not clipped to an ellipsis at 375 px', await mp.evaluate(() => { const b = document.querySelector('.brand-name'); return b.scrollWidth <= b.clientWidth + 1; }));
+  await ph.close();
 
   ok('no console/page errors', errors.length === 0, errors.join(' | '));
   console.log(results.join('\n'));

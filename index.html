@@ -11,7 +11,7 @@
 <style>
 :root{
   --bg:#f5f6f4; --surface:#ffffff; --surface-2:#eef1ef; --surface-3:#e3e8e5;
-  --text:#18211e; --text-muted:#4d5a55; --border:#cfd8d4; --border-strong:#8d9a95;
+  --text:#18211e; --text-muted:#4d5a55; --border:#cfd8d4; --border-strong:#6f7d78;
   --accent:#0f5f63; --accent-soft:#dcefee; --accent-text:#0b4a4d; --link:#0b5a8a;
   --warn-bg:#fff4d6; --warn-border:#c99a1a; --warn-text:#5a4200;
   --danger-bg:#fde8e6; --danger-border:#b3261e; --danger-text:#7a1610;
@@ -75,6 +75,9 @@ h1{font-size:1.9rem;margin-top:.3em} h2{font-size:1.45rem} h3{font-size:1.15rem}
 p{margin:.5em 0 .8em}
 code,.mono{font-family:var(--font-mono);font-size:.9em}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+/* Focus ring: :focus for older browsers, then narrowed to :focus-visible where supported (the :not() rule is dropped by browsers without :focus-visible). */
+:focus{outline:3px solid var(--accent);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .skip{position:absolute;left:-999px;top:0;background:var(--surface);padding:8px 12px;z-index:100}
 .skip:focus{left:16px}
@@ -87,7 +90,8 @@ header.site{background:var(--surface);border-bottom:1px solid var(--border);posi
 .brand-mark svg{display:block}
 .brand-name{font-family:var(--font-head);font-weight:700;font-size:1.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand-sub{font-size:.78rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.theme-btn{flex:0 0 auto;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;cursor:pointer}
+.theme-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;cursor:pointer;white-space:nowrap}
+.theme-btn svg{display:block;flex:0 0 auto}
 nav.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 nav.tabs ul{list-style:none;display:flex;gap:2px;margin:0;padding:0 0 0 0;white-space:nowrap}
 nav.tabs a{display:block;padding:9px 12px;text-decoration:none;color:var(--text-muted);font-size:.9rem;font-weight:500;border-bottom:3px solid transparent}
@@ -120,7 +124,7 @@ section.tab.active{display:block}
 .quick .q-title{font-family:var(--font-head);font-weight:600;font-size:1.05rem;color:var(--accent-text)}
 
 /* Badges & triage tags */
-.badge{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.02em;padding:2px 8px;border-radius:999px;border:1px solid;white-space:nowrap;vertical-align:middle}
+.badge{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.02em;padding:2px 8px;border-radius:999px;border:1px solid;white-space:nowrap;vertical-align:middle}
 .badge.ok{background:var(--ok-bg);color:var(--ok-text);border-color:var(--ok-border)}
 .badge.partial{background:var(--warn-bg);color:var(--warn-text);border-color:var(--warn-border)}
 .badge.unverified{background:var(--unv-bg);color:var(--unv-text);border-color:var(--unv-border)}
@@ -136,6 +140,15 @@ section.tab.active{display:block}
 
 /* Tables */
 .table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:10px;background:var(--surface);margin:12px 0}
+/* Scroll cue for wide tables: the outer .tw wrapper (added by JS) shows a fade at whichever edge has more columns. */
+.tw{position:relative;margin:12px 0}
+.tw > .table-wrap{margin:0}
+.tw::before,.tw::after{content:"";position:absolute;top:0;bottom:0;width:34px;pointer-events:none;opacity:0;transition:opacity .2s}
+.tw::after{right:0;border-radius:0 10px 10px 0;background:linear-gradient(270deg,var(--surface-3),rgba(0,0,0,0))}
+.tw::before{left:0;border-radius:10px 0 0 10px;background:linear-gradient(90deg,var(--surface-3),rgba(0,0,0,0))}
+.tw.more-right::after,.tw.more-left::before{opacity:1}
+.tw .tw-hint{font-size:.8rem;color:var(--text-muted);margin:4px 0 0;display:none}
+.tw.more-right .tw-hint,.tw.more-left .tw-hint{display:block}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--border)}
 th{background:var(--surface-2);font-weight:600;white-space:nowrap}
@@ -175,8 +188,10 @@ label{font-size:.9rem}
 .chip.done{border-style:dashed}
 .choice-row{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
 .choice{position:relative}
-.choice input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.choice input{position:absolute;opacity:0;top:0;right:0;bottom:0;left:0;inset:0;cursor:pointer}
 .choice span{display:inline-block;border-radius:6px;padding:7px 12px;border:2px solid transparent;font-weight:700;font-size:.88rem;min-width:56px;text-align:center}
+.choice input:focus + span{outline:3px solid var(--accent);outline-offset:2px}
+.choice input:focus:not(:focus-visible) + span{outline:none}
 .choice input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
 .choice input:checked + span{box-shadow:0 0 0 3px var(--surface),0 0 0 6px var(--text)}
 .choice input:checked + span::before{content:"\2713 "}
@@ -206,6 +221,7 @@ label{font-size:.9rem}
 details.sop{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin:10px 0;box-shadow:var(--shadow)}
 details.sop > summary{cursor:pointer;padding:14px 16px;font-family:var(--font-head);font-weight:600;font-size:1.08rem;list-style:none;display:flex;gap:10px;align-items:baseline}
 details.sop > summary::-webkit-details-marker{display:none}
+details.sop > summary h2,details.sop > summary h3{font:inherit;margin:0;display:inline;color:inherit}
 details.sop > summary::before{content:"\25B8";color:var(--accent);flex:0 0 auto;transition:transform .15s}
 details.sop[open] > summary::before{transform:rotate(90deg)}
 details.sop .body{padding:0 16px 14px 16px;border-top:1px solid var(--border)}
@@ -234,38 +250,44 @@ details.plain summary{cursor:pointer;font-weight:600;color:var(--accent-text)}
 .tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px}
 .tile .n{font-family:var(--font-mono);font-size:1.5rem;font-weight:600}
 .tile .l{font-size:.82rem;color:var(--text-muted)}
-.tile .s{font-size:.75rem;color:var(--text-muted);margin-top:4px}
+.tile .s{font-size:.8rem;color:var(--text-muted);margin-top:4px}
 .tile.illus{border-style:dashed}
-.legend{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.86rem;margin:8px 0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:.86rem;margin:8px 0}
+.legend .lg{display:inline-flex;gap:6px;align-items:baseline;max-width:100%}
+.legend .lg .badge{flex:0 0 auto}
 footer.site{border-top:1px solid var(--border);background:var(--surface);padding:16px 0;font-size:.85rem;color:var(--text-muted)}
 ol.steps-list li,ul.tight li{margin:3px 0}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (max-width:420px){.brand-sub{display:none}.brand-name{font-size:1.02rem}.theme-btn{padding:5px 8px;font-size:.8rem}}
+@media (max-width:420px){.brand-sub{display:none}.brand-name{font-size:.98rem;white-space:normal;line-height:1.15;overflow:visible;text-overflow:clip}.theme-btn{padding:5px 8px;font-size:.8rem}.theme-btn .tb-txt{display:none}}
 /* ===== Layout: header, sidebar navigation, shell ===== */
 .wrap{max-width:1240px}
 .head-row{min-height:56px}
 .head-tools{display:flex;align-items:center;gap:8px;flex:0 1 auto;min-width:0}
-.icon-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;cursor:pointer;min-height:36px}
+.icon-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border-strong);background:var(--surface-2);color:var(--text);border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;cursor:pointer;min-height:36px}
 .icon-btn svg{display:block}
-.menu-btn{display:none}
+.menu-btn,.search-btn{display:none}
 @media (max-width:999px){.menu-btn{display:inline-flex}}
+@media (max-width:699px){.search-btn{display:inline-flex}}
 .shell{max-width:1240px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr)}
 @media (min-width:1000px){.shell{grid-template-columns:236px minmax(0,1fr);gap:40px}}
 main{min-width:0}
 .sidebar{display:none}
 @media (min-width:1000px){
-  .sidebar{display:block;position:sticky;top:57px;align-self:start;max-height:calc(100vh - 57px);overflow-y:auto;padding:20px 4px 40px 0}
+  .sidebar{display:block;position:sticky;top:57px;align-self:start;max-height:calc(100vh - 57px);overflow-y:auto;padding:14px 4px 0 0;scrollbar-width:thin;scrollbar-gutter:stable}
+  /* Scroll cue: a fade pinned to the bottom of the sidebar while more links lie below. */
+  .sidebar::after{content:"";display:block;position:sticky;bottom:0;height:36px;margin-top:-6px;background:linear-gradient(rgba(0,0,0,0),var(--bg));pointer-events:none;opacity:0;transition:opacity .2s}
+  .sidebar.has-more::after{opacity:1}
 }
-.sidebar.open{display:block;position:fixed;inset:0;z-index:60;background:var(--surface);overflow-y:auto;padding:12px 16px 40px}
+.sidebar.open{display:block;position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:60;background:var(--surface);overflow-y:auto;padding:12px 16px 40px}
 .drawer-head{display:none;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
 .sidebar.open .drawer-head{display:flex}
 .drawer-search{display:none;margin:0 0 12px}
 .sidebar.open .drawer-search{display:block}
 body.drawer-open{overflow:hidden}
-.nav-group{margin:0 0 18px}
-.nav-h{font-family:var(--font-body);font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px;padding-left:12px}
+.nav-group{margin:0 0 10px}
+.nav-h{font-family:var(--font-body);font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin:0 0 4px;padding-left:12px}
 .nav-list{list-style:none;margin:0;padding:0}
-.nav-list a{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;text-decoration:none;color:var(--text);font-size:.93rem;border-left:3px solid transparent}
+.nav-list a{display:flex;align-items:center;gap:8px;padding:5px 12px;border-radius:8px;text-decoration:none;color:var(--text);font-size:.92rem;line-height:1.4;border-left:3px solid transparent}
 .nav-list a:hover{background:var(--surface-2)}
 .nav-list a[aria-current="page"]{background:var(--accent-soft);color:var(--accent-text);font-weight:600;border-left-color:var(--accent)}
 .nav-list .nav-n{margin-left:auto;font-size:.72rem;font-family:var(--font-mono);color:var(--text-muted)}
@@ -324,25 +346,28 @@ a.btn{text-decoration:none;display:inline-block}
 .module-grid{list-style:none;margin:16px 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
 .module-card{margin:0;display:flex;flex-direction:column;gap:6px;height:100%}
 .module-card .m-n{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted)}
-.module-card h3{margin:0;font-size:1.12rem}
+.module-card h2{margin:0;font-size:1.12rem}
 .module-card .m-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto;padding-top:8px}
 .module-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
 .tablist{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--border);margin:16px 0 0}
-.tablist [role="tab"]{font:inherit;font-size:.92rem;font-weight:600;background:none;border:0;border-bottom:3px solid transparent;color:var(--text-muted);padding:9px 12px;cursor:pointer;margin-bottom:-1px}
+.tablist [role="tab"]{font:inherit;font-size:.92rem;font-weight:600;background:none;border:0;border-bottom:3px solid transparent;color:var(--text-muted);padding:9px 10px;cursor:pointer;margin-bottom:-1px}
 .tablist [role="tab"][aria-selected="true"]{color:var(--accent-text);border-bottom-color:var(--accent)}
 .tablist [role="tab"]:hover{color:var(--text)}
 [role="tabpanel"]{padding-top:14px}
 [role="tabpanel"]:focus-visible{outline-offset:4px}
 .objectives li{margin:6px 0}
-.module-content h4{margin-top:1.1em}
+.module-content h2.sub{margin-top:1.1em}
+h2.sub,h3.sub{font-size:1rem;font-family:var(--font-body);font-weight:600;margin:1.4em 0 .5em}
 .pager{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:20px}
 
 /* Quiz */
 .quiz fieldset{border:1px solid var(--border);border-radius:12px;padding:14px 16px 12px;margin:0 0 14px;background:var(--surface);min-width:0}
 .quiz legend{font-weight:600;padding:0 6px;max-width:100%}
 .quiz legend .qn{display:block;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);font-weight:500}
-.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;margin:6px 0;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:var(--surface)}
-.opt:hover{border-color:var(--border-strong)}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;margin:6px 0;border:1px solid var(--border-strong);border-radius:8px;cursor:pointer;background:var(--surface)}
+.opt:hover{border-color:var(--accent)}
+.qfb:focus{outline:none}
+.qfb:focus-visible{outline:3px solid var(--accent);outline-offset:4px;border-radius:10px}
 .opt input{margin-top:4px;flex:0 0 auto;accent-color:var(--accent);width:18px;height:18px}
 .opt.is-correct{border:2px solid var(--ok-border);background:var(--ok-bg);color:var(--ok-text)}
 .opt.is-wrong{border:2px dashed var(--danger-border);background:var(--danger-bg);color:var(--danger-text)}
@@ -366,7 +391,7 @@ a.btn{text-decoration:none;display:inline-block}
 .tnode::before{content:attr(data-n);position:absolute;left:10px;top:10px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--surface-3);color:var(--text)}
 .tnode .tq{font-weight:700}
 .tnode .td{display:block;font-size:.85rem;color:var(--text-muted)}
-.tnode .tbranch{display:block;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.tnode .tbranch{display:block;font-size:.8rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
 .tnode.sub{margin-left:22px}
 .tnode.pending{opacity:.62}
 .tnode.current{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
@@ -388,6 +413,11 @@ a.btn{text-decoration:none;display:inline-block}
 
 /* ===== Surge exercise ===== */
 .timer{display:flex;align-items:center;gap:12px;margin:8px 0 12px}
+/* While a run is in progress the clock sticks under the header and the category buttons stick to the bottom of the screen, so both stay in view on short screens. */
+#sgRun .timer{position:sticky;top:57px;z-index:3;background:var(--surface);padding:6px 0;margin:4px 0 8px}
+#sgRun .cat-row{position:sticky;bottom:0;z-index:3;background:var(--surface);padding:8px 0 10px;margin:6px 0 0;border-top:1px solid var(--border)}
+#tab-surge.running > .lead,#tab-surge.running > .callout{display:none}
+#sgPause{margin:8px 0}
 .timer .t-num{font-family:var(--font-mono);font-size:1.6rem;font-weight:600;min-width:4ch}
 .tbar{flex:1;height:10px;border-radius:999px;background:var(--surface-3);overflow:hidden;border:1px solid var(--border)}
 .tbar > span{display:block;height:100%;background:var(--accent);width:100%}
@@ -410,19 +440,20 @@ a.btn{text-decoration:none;display:inline-block}
 .fict{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:2px dashed var(--warn-border);color:var(--warn-text);background:var(--warn-bg)}
 .inject{border-left:5px solid var(--warn-border)}
 .inject h4{margin:0 0 4px}
+.inject .fict{display:none} /* one "Fictional exercise" notice on the header card is enough on screen; the per-inject badge is kept for print */
 .print-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
 .print-btn::before{content:"\2399  ";}
 .debrief-form label{display:block;font-weight:600;margin:12px 0 4px}
 .debrief-form textarea{width:100%;min-height:72px;font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;padding:8px}
 .qr{border:2px solid var(--text);border-radius:12px;padding:14px;background:var(--surface)}
-.qr h3{margin:0 0 2px}
+.qr h2{margin:0 0 2px;font-size:1.15rem}
 .qr .qr-sub{font-size:.8rem;color:var(--text-muted);margin:0 0 8px}
 .qr ol{margin:6px 0;padding-left:1.4em}
 .qr li{margin:5px 0}
 .qr .qr-foot{font-size:.75rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:6px;margin-top:8px}
 .cas-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
 .cas{border:2px dashed var(--border-strong);border-radius:12px;padding:12px;background:var(--surface);font-size:.9rem}
-.cas h4{margin:0 0 4px;font-family:var(--font-head)}
+.cas h3{margin:0 0 4px;font-family:var(--font-head);font-size:1rem}
 .cas .kv{font-size:.85rem}
 .gloss{margin:0}
 .gloss .g{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 0;border-bottom:1px solid var(--border)}
@@ -438,7 +469,10 @@ a.btn{text-decoration:none;display:inline-block}
 @media print{
   @page{margin:14mm}
   body{background:#fff !important;color:#000 !important;font-size:11pt}
-  header.site,.sidebar,footer.site,.skip,.crumb,.theme-btn,.print-row,.no-print,.cta-row,.yn,.tablist,.seg{display:none !important}
+  header.site,.sidebar,footer.site,.skip,.crumb,.theme-btn,.print-row,.no-print,.cta-row,.yn,.tablist,.seg,.totop,.jump,.inc-tools,.tw-hint{display:none !important}
+  .inject .fict{display:inline-block}
+  #printRoot::after{content:"Mass Casualty Handbook, training only";display:block;font-size:9pt;color:#000;margin-top:6mm;border-top:1px solid #000;padding-top:2mm}
+  .tw::before,.tw::after{display:none}
   .shell{display:block;padding:0}
   section.tab:not(.active){display:none !important}
   .card,.qr,.cas,details.sop{box-shadow:none !important;break-inside:avoid}
@@ -497,16 +531,95 @@ section.tab[data-sec]{border-top:4px solid var(--sc);margin-top:10px}
 .home-sec .btn{margin-top:auto;align-self:stretch;text-align:center;background:var(--sc);border-color:var(--sc);color:var(--bg)}
 .search-pop .r-sec .sec-tag{margin-right:4px}
 .landing-sub{display:flex;align-items:center;gap:8px;color:var(--sc-text)}
-h1[id],h2[id],h3[id]{scroll-margin-top:80px}
+[id]{scroll-margin-top:80px}
+/* Targets on the incident database must also clear the sticky filter bar (its height is set on --incbar by JS). */
+#tab-incidents{--incbar:0px}
+#tab-incidents [id]{scroll-margin-top:calc(72px + var(--incbar))}
 /* late fixes */
 .head-tools{flex:0 0 auto}
 .brand{flex:1 1 auto;min-width:0}
 h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:focus{outline:none}
 .tablist{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
 .tablist [role="tab"]{white-space:nowrap}
-@media (max-width:420px){.hero{padding:22px 16px}.theme-btn{max-width:96px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media (max-width:560px){.tablist{flex-wrap:wrap;overflow:visible}}
+@media (max-width:420px){.hero{padding:22px 16px}}
 .quiz legend{float:left;width:100%;padding:0;margin:0 0 8px}
 .quiz legend + *{clear:both}
+
+/* ===== Usability pass ===== */
+/* Readable measure for running text inside the content column; grids and flowcharts opt out. */
+main p,main li,main dd{max-width:75ch}
+.flow > li,.tflow > li,.module-grid > li,.cas-cards > *,.prog-row,.search-pop li{max-width:none}
+/* No-JS: the home section is marked active in the markup; this notice explains what needs scripting. */
+.nojs{margin:12px 0}
+/* In-page contents for long pages */
+.jump{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 14px;font-size:.88rem}
+.jump .jl{color:var(--text-muted);font-weight:600;margin-right:4px}
+.jump a{display:inline-flex;align-items:center;min-height:30px;padding:3px 10px;border-radius:999px;border:1px solid var(--border-strong);background:var(--surface);color:var(--accent-text);text-decoration:none;font-weight:500}
+.jump a:hover{border-color:var(--accent);background:var(--accent-soft)}
+.jump.az a{min-width:30px;justify-content:center;padding:3px 6px}
+.jump-details{margin:4px 0 12px}
+.jump-details > summary{padding:6px 0;min-height:30px;display:flex;align-items:center;gap:6px}
+.jump-details > summary::before{content:"\25B8";color:var(--accent);transition:transform .15s}
+.jump-details[open] > summary::before{transform:rotate(90deg)}
+.jump-details > summary::-webkit-details-marker{display:none}
+.jump-details .jump{margin:6px 0 4px}
+/* Back to top */
+.totop{position:fixed;right:16px;bottom:16px;z-index:30;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--accent);background:var(--surface);color:var(--accent-text);font:inherit;font-size:.88rem;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.18);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}
+.totop.show{opacity:1;visibility:visible;transform:none}
+@media (prefers-reduced-motion:reduce){.totop{transition:none}}
+/* Sticky incident filter bar */
+#incFilterBar{position:sticky;top:57px;z-index:5;padding:10px 12px;margin:10px 0 8px;box-shadow:var(--shadow),0 6px 14px rgba(0,0,0,.08)}
+#incFilterBar .filters{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px}
+#incFilterBar label{font-size:.84rem}
+#incFilterBar select,#incFilterBar input{padding:6px 8px;font-size:.92rem}
+.inc-more-wrap{display:contents}
+.inc-filters-toggle{display:none}
+#incFilterBar label{min-width:0}
+#incFilterBar select,#incFilterBar input{width:100%;min-width:0}
+@media (max-width:699px){
+  #incFilterBar .filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}
+  .inc-more-wrap{display:none}
+  .inc-more-wrap.open{display:contents}
+  .inc-more-wrap.open label{grid-column:span 1}
+  .inc-filters-toggle{display:inline-flex;align-items:center;gap:6px;align-self:end;padding:8px 10px;font-size:.88rem}
+}
+.inc-tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:6px 0 10px}
+.inc-tools .count{margin:0}
+/* Collapsible incident cards */
+.inc details.inc-more{margin:8px 0 0}
+.inc details.inc-more > summary{cursor:pointer;font-weight:600;color:var(--accent-text);padding:8px 0;list-style:none;display:flex;gap:8px;align-items:center}
+.inc details.inc-more > summary::-webkit-details-marker{display:none}
+.inc details.inc-more > summary::before{content:"\25B8";color:var(--accent);transition:transform .15s}
+.inc details.inc-more[open] > summary::before{transform:rotate(90deg)}
+.inc details.inc-more[open] > summary .sum-open,.inc details.inc-more:not([open]) > summary .sum-closed{display:none}
+.inc details.inc-more > summary .sum-open{display:inline}
+.inc .inc-brief{margin:6px 0 0}
+/* Learn overview: the module cards come first, the progress list after */
+#learnProgress{margin-top:4px}
+/* Phone home: a shorter hero so the three section cards sit within the first screen; the progress list appears once, lower down */
+@media (max-width:859px){
+  .hero{padding:18px 16px;gap:0}
+  .hero .eyebrow{display:none}
+  .hero .lead{font-size:.98rem;margin:.3em 0 0}
+  .hero h1{font-size:1.75rem;margin:0 0 .2em}
+  #heroProgress{display:none}
+  #sections{margin-top:.9em}
+}
+/* Touch and small screens: tap targets of at least 44 px */
+@media (pointer:coarse),(max-width:699px){
+  .btn,.chip,.act,.icon-btn,.theme-btn,select,input[type=search],input[type=text],input[type=number],.cat-btn,.tablist [role="tab"],.seg [role="tab"],.jump a,.sec-chip,.print-btn,details.plain > summary,.inc details.inc-more > summary{min-height:44px}
+  .btn,.chip,.act,.icon-btn,.theme-btn,.tablist [role="tab"],.seg [role="tab"]{display:inline-flex;align-items:center;justify-content:center}
+  .act{justify-content:flex-start}
+  .choice span{padding:11px 14px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  .opt{padding:12px 10px}
+  .opt input{width:22px;height:22px}
+  input[type=radio]:not(.opt input),input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+  .sec-chip{min-height:36px}
+  details.sop > summary{padding:14px 16px;min-height:48px}
+  .queue .qd{width:26px;height:26px}
+  .nav-list a{padding:9px 12px}
+}
 
 </style>
 </head>
@@ -530,7 +643,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
         <span id="searchHint" class="sr-only">Results appear below as you type. Press Escape to close.</span>
         <div class="search-pop" id="searchResults" hidden></div>
       </div>
-      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme">Auto theme</button>
+      <button class="icon-btn search-btn" id="searchBtn" type="button" aria-label="Search the handbook"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12.3 12.3 17 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="sr-only">Search</span></button>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Colour theme: auto. Switch to light theme" title="Switch to light theme"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></svg><span class="tb-txt">Theme: Auto</span></button>
       <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sidebar">
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Menu
       </button>
@@ -553,10 +667,14 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 </aside>
 
 <main id="main" tabindex="-1">
+<noscript>
+  <div class="callout danger nojs" role="note"><p><strong>This handbook needs JavaScript</strong> for navigation, search, the knowledge checks, the triage trainer, the surge exercise and the drill. With scripts off, the pages below are shown one after another, but the lists and tools built by script stay empty. Enable JavaScript, or open the page in a browser that allows it.</p></div>
+  <style>section.tab{display:block !important;border-top:4px solid var(--border);margin-top:24px}#moduleView,#sgRun,#sgDebrief{display:none}</style>
+</noscript>
 <p class="crumb" id="crumb" aria-live="polite"></p>
 
 <!-- ============ HOME ============ -->
-<section class="tab" id="tab-home" aria-labelledby="h-home">
+<section class="tab active" id="tab-home" aria-labelledby="h-home">
   <div class="hero">
     <div>
       <p class="eyebrow">Research &middot; Planning &middot; Training &middot; UK emergency departments and pre-hospital care</p>
@@ -654,7 +772,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     </div>
   </div>
 
-  <h2>Your progress</h2>
+  <h2 id="home-progress">Your progress by module</h2>
   <div class="card"><div id="homeProgress"></div></div>
 
   <h2>What has been verified</h2>
@@ -848,8 +966,9 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <div id="learnOverview">
     <h1 id="h-learn">Learning pathway</h1>
     <p class="lead">Eight short modules. Each has learning objectives, concise teaching content linked to the reference pages, and a knowledge check with feedback, a rationale and a source for every answer. Pass mark: 80%.</p>
-    <div class="card"><div id="learnProgress"></div></div>
     <ol class="module-grid" id="moduleGrid" aria-label="Modules"></ol>
+    <h2 id="learn-progress">Your progress</h2>
+    <div class="card"><div id="learnProgress"></div></div>
     <p class="small muted">Progress is saved in this browser only, if your browser allows it. It is not sent anywhere. <button class="btn secondary" type="button" id="resetProgress" style="margin-left:6px">Reset my progress</button></p>
   </div>
   <div id="moduleView" hidden></div>
@@ -901,14 +1020,14 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <fieldset style="border:0;padding:0;margin:0 0 10px">
       <legend style="font-weight:600;margin-bottom:6px">Where are you triaging?</legend>
       <label style="display:block;margin:4px 0"><input type="radio" name="sgMode" value="TST" checked> At the scene, with TST (bands: P1, P2, P3, NOT BREATHING)</label>
-      <label style="display:block;margin:4px 0"><input type="radio" name="sgMode" value="MITT"> NHS clinician with MITT (P1, P2, P3, DEAD). SIM_02 and SIM_07 present at ED re-triage.</label>
+      <label style="display:block;margin:4px 0"><input type="radio" name="sgMode" value="MITT"> NHS clinician with MITT (P1, P2, P3, DEAD). <small class="muted" style="display:block;margin-left:1.6em">SIM_02 and SIM_07 present at ED re-triage.</small></label>
     </fieldset>
     <div class="filters" style="max-width:520px">
       <label>Time per casualty
         <select id="sgTime"><option value="15">15 seconds</option><option value="30" selected>30 seconds</option><option value="60">60 seconds</option></select>
       </label>
       <label>Casualties
-        <select id="sgCount"><option value="5">5 (random)</option><option value="10" selected>All 10, random order</option></select>
+        <select id="sgCount"><option value="5">5, random order</option><option value="10" selected>All 10, random order</option></select>
       </label>
     </div>
     <p style="margin-top:14px"><button class="btn lg" type="button" id="sgStart">Start exercise</button></p>
@@ -920,9 +1039,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       <h2 style="margin:0" id="sgTitle">Casualty</h2>
       <button class="btn secondary" type="button" id="sgStop">End exercise</button>
     </div>
+    <div class="timer" role="timer" aria-label="Time left for this casualty"><span class="t-num" id="sgClock">30</span><div class="tbar" id="sgBar"><span></span></div></div>
+    <div class="callout warn" id="sgPause" role="status" hidden><p><strong>Paused.</strong> You left the page during the run, so the clock was stopped. <button class="btn" type="button" id="sgResume" style="margin-left:6px">Resume</button></p></div>
     <div class="queue" id="sgQueue" aria-hidden="true"></div>
     <p class="arrive" id="sgArrive"></p>
-    <div class="timer" role="timer" aria-label="Time left for this casualty"><span class="t-num" id="sgClock">30</span><div class="tbar" id="sgBar"><span></span></div></div>
     <p class="sr-only" id="sgLive" aria-live="assertive"></p>
     <div id="sgCase"></div>
     <h3 id="sgAskH">Your triage category</h3>
@@ -937,16 +1057,16 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <h1 id="h-inc">Incident database</h1>
   <p class="lead">Ten UK incidents from 2016 to 2024 and seven European incidents from 2004 to 2017. Each UK card shows the corrected facts, the verification status of each point and the sources read; the UK figures were checked against sources on 16 October 2026. Each European card shows an overall confidence level, the medical facts with a source and confidence for each, the lessons and the caveats; the European figures were checked against sources on 30 October 2026.</p>
   <div class="legend" aria-label="Verification key">
-    <span class="badge ok">Confirmed</span> a source was read that states it
-    <span class="badge partial">Partly correct</span> snapshot, secondary or nuanced
-    <span class="badge unverified">Unverified</span> no source could be read
+    <span class="lg"><span class="badge ok">Confirmed</span> a source was read that states it</span>
+    <span class="lg"><span class="badge partial">Partly correct</span> snapshot, secondary or nuanced</span>
+    <span class="lg"><span class="badge unverified">Unverified</span> no source could be read</span>
   </div>
   <div class="legend" aria-label="European confidence key">
-    <span class="badge ok">High confidence</span> a peer-reviewed or official source reports the figure directly
-    <span class="badge partial">Medium confidence</span> a single source, a trade or medical-chamber publication, or an internal inconsistency
-    <span class="badge unverified">Low confidence</span> a news outlet only, or an unresolved disagreement
+    <span class="lg"><span class="badge ok">High confidence</span> a peer-reviewed or official source reports the figure directly</span>
+    <span class="lg"><span class="badge partial">Medium confidence</span> a single source, a trade or medical-chamber publication, or an internal inconsistency</span>
+    <span class="lg"><span class="badge unverified">Low confidence</span> a news outlet only, or an unresolved disagreement</span>
   </div>
-  <div class="card">
+  <div class="card" id="incFilterBar" role="search" aria-label="Filter incidents">
     <div class="filters">
       <label>Region
         <select id="incRegion">
@@ -958,6 +1078,8 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       <label>Search
         <input type="search" id="incSearch" placeholder="e.g. Manchester, Bataclan, blast lung" autocomplete="off">
       </label>
+      <button class="btn secondary inc-filters-toggle" type="button" id="incMoreBtn" aria-expanded="false" aria-controls="incMore">More filters</button>
+      <div class="inc-more-wrap" id="incMore">
       <label>Incident type
         <select id="incType"><option value="">All types</option></select>
       </label>
@@ -979,9 +1101,14 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       <label>Year
         <select id="incYear"><option value="">All years</option></select>
       </label>
+      </div>
     </div>
   </div>
-  <p class="count" id="incCount" aria-live="polite"></p>
+  <div class="inc-tools">
+    <p class="count" id="incCount" aria-live="polite"></p>
+    <button class="btn secondary" type="button" id="incExpandAll" aria-pressed="false">Expand all details</button>
+  </div>
+  <details class="plain jump-details" id="incJumpWrap"><summary>Jump to an incident</summary><nav class="jump" id="incJump" aria-label="Jump to an incident"></nav></details>
   <div id="ukBlock">
     <h2 id="uk-incidents">UK incidents</h2>
     <div id="incList"></div>
@@ -999,7 +1126,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <h1 id="europe-lessons">European lessons</h1>
   <p class="lead">Cross-cutting teaching points from the European incidents. Each is supported by the source cited.</p>
   <div class="card"><ol class="eu-list" id="eurLessons"></ol></div>
-  <h3 id="europe-not-found">European data: not found or unverified</h3>
+  <h2 id="europe-not-found">European data: not found or unverified</h2>
   <p class="small">No source could be found for these, so they are not used in teaching content.</p>
   <div class="card"><ul class="eu-list" id="eurNotFound"></ul></div>
 
@@ -1033,7 +1160,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
       </ol>
       <div class="flow-end">Additional rule: any child under 2 is automatically <span class="tag p1">P1</span></div>
       <p class="small muted">The under-2 rule and the list of body regions come from the NARU supplementary guidance (v1.0, April 2023); the NHS England card itself carries only the flowchart labels ("Penetrating Injury", "Front or Back").</p>
-      <h4>Bands</h4>
+      <h3 class="sub">Bands</h3>
       <p class="small"><span class="tag p1">P1</span> white on red &nbsp; <span class="tag p2">P2</span> black on yellow &nbsp; <span class="tag p3">P3</span> white on green &nbsp; <span class="tag nb">NOT BREATHING</span> black on silver. A white checked border identifies TST bands and separates them from MITT cards.</p>
       <p class="small"><strong>No DEAD category.</strong> "Not Breathing" records the objective finding of the breathing check. Later, a healthcare practitioner with time reassesses the casualty as a viable resuscitation (P1) or ROLE/PLE (dead).</p>
     </div>
@@ -1139,10 +1266,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <p><button class="btn secondary" type="button" id="sopToggle">Expand all</button></p>
   <div id="sopList">
 
-<details class="sop"><summary>SOP 1: Triage and re-triage at the front door</summary><div class="body">
+<details class="sop"><summary><h2>SOP 1: Triage and re-triage at the front door</h2></summary><div class="body">
 <p><strong>Trigger:</strong> major incident declared, or casualties arriving from an incident before declaration.</p>
 <p><strong>Why:</strong> at Manchester Arena, 95 of the 153 patients who reached hospital made their own way there, bypassing ambulance triage, and 14 went to hospitals outside the local network (<a href="https://doi.org/10.1136/emermed-2019-208575">EMJ 2021</a>). ED vital signs were largely unrecorded, so triage could not be reviewed afterwards.</p>
-<h4>Actions</h4>
+<h3 class="sub">Actions</h3>
 <ol>
 <li>Open a single triage point at the ED entrance, staffed by a senior clinician and a scribe. Divert all arrivals, ambulance and self-presenting, through it.</li>
 <li>Treat any casualty still bleeding catastrophically first: pressure, tourniquet or packing, then P1.</li>
@@ -1166,10 +1293,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <p><strong>TST bands you may see on arrival:</strong> red P1, yellow P2, green P3, and black on silver "Not Breathing". TST bands have a white checked border. A Not Breathing band is an observation, not a declaration of death: a clinician must reassess for resuscitation or recognition of life extinct (<a href="https://www.england.nhs.uk/wp-content/uploads/2023/04/PRN00358ii-major-incident-triage-tools-letter-acute-trusts.pdf">NHS England, April 2023</a>).</p>
 </div></details>
 
-<details class="sop"><summary>SOP 2: Surge and patient flow in the first six hours</summary><div class="body">
+<details class="sop"><summary><h2>SOP 2: Surge and patient flow in the first six hours</h2></summary><div class="body">
 <p><strong>Trigger:</strong> major incident standby or declared.</p>
 <p><strong>Why:</strong> at Manchester Arena, 138 of 153 hospital patients (90%) arrived within 6 hours across 11 hospitals. Of the 153, 24 (16%) needed critical care and 21 (14%) needed emergency damage control surgery; only 5 needed secondary transfer in the first 24 hours (<a href="https://doi.org/10.1136/emermed-2019-208575">EMJ 2021</a>). Plan for the bulk of demand early, and for children: 44 of the 153 were under 16.</p>
-<h4>Actions</h4>
+<h3 class="sub">Actions</h3>
 <ol>
 <li>Hospital command <span class="ph">[role]</span> opens the major incident plan and confirms the hospital's role in the network: MTC, trauma unit or local emergency hospital.</li>
 <li>Clear the ED: move patients who can safely go to wards, assessment units or discharge, so resuscitation bays and majors cubicles are free before the first arrivals.</li>
@@ -1182,10 +1309,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 </ol>
 </div></details>
 
-<details class="sop"><summary>SOP 3: Massive haemorrhage activation in a mass casualty incident</summary><div class="body">
+<details class="sop"><summary><h2>SOP 3: Massive haemorrhage activation in a mass casualty incident</h2></summary><div class="body">
 <p><strong>Trigger:</strong> any casualty with suspected major haemorrhage, typically penetrating torso or junctional wounds, blast fragment injuries or traumatic amputation.</p>
 <p><strong>Why:</strong> the mechanism depends on the attack. Manchester Arena: blast with high-energy shrapnel penetration, mainly limb and torso injuries; 153–160 ED attendances, 61% admitted, 14% needing damage-control surgery and 16% critical care, while most casualties (median ISS 1) were walking wounded who self-presented (<a href="https://emj.bmj.com/content/38/10/746">Dark et al. EMJ 2021</a>; <a href="https://militaryhealth.bmj.com/content/166/2/72">Craigie et al. BMJ Mil Health 2020</a>). London Bridge, June 2017: 48 injured, mostly stab wounds, plus vehicle-strike injuries (<a href="https://www.bmj.com/content/358/bmj.j4309.full">Gulland, BMJ 2017</a>; <a href="https://www.paramedicpractice.com/content/opinion/the-london-bridge-attack-managing-multiple-victims-of-penetrating-trauma">Rutherford, J Paramedic Pract 2017</a>). Westminster Bridge, March 2017: 29 seriously injured, mostly blunt vehicle-strike trauma, with one fatal stabbing (<a href="https://www.judiciary.uk/wp-content/uploads/2018/12/Westminster-Terror-Attack-2018-0304.pdf">Chief Coroner, 2018</a>; BMJ 2017). No published series gives mechanism percentages. Plan for penetrating and blast injury, but do not assume it will dominate every incident. Several patients bleeding at once can exhaust blood bank stock quickly, so blood bank must know the scale early.</p>
-<h4>Actions</h4>
+<h3 class="sub">Actions</h3>
 <ol>
 <li>Declare a major haemorrhage using your trust's call <span class="ph">[local name, e.g. "Code Red"]</span> and give the patient's major incident number, not only their name.</li>
 <li>Blood bank lead <span class="ph">[role]</span> is told at declaration how many P1 casualties are expected, so they can call in emergency stock from NHS Blood and Transplant early.</li>
@@ -1202,10 +1329,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 </ol>
 </div></details>
 
-<details class="sop"><summary>SOP 4: Smoke inhalation, carbon monoxide and cyanide</summary><div class="body">
+<details class="sop"><summary><h2>SOP 4: Smoke inhalation, carbon monoxide and cyanide</h2></summary><div class="body">
 <p><strong>Trigger:</strong> casualties from an enclosed-space or high-rise fire, or any casualty with smoke exposure.</p>
 <p><strong>Why:</strong> fire gases cause carbon monoxide and cyanide poisoning alongside airway burns. Standard pulse oximeters cannot tell carboxyhaemoglobin from oxyhaemoglobin, so a normal SpO2 does not exclude CO poisoning (<a href="https://fphc.rcsed.ac.uk/media/2957/2020-09-20-burns-consensus.pdf">FPHC/BBA 2020</a>).</p>
-<h4>Actions</h4>
+<h3 class="sub">Actions</h3>
 <ol>
 <li>Give high-flow oxygen via a non-rebreathing reservoir mask at 10–15 L/min to every smoke-exposed casualty.</li>
 <li>Do not rely on SpO2. Measure COHb by co-oximetry or blood gas. A level above 30% indicates severe poisoning. In confirmed CO poisoning, continue 100% oxygen until COHb is normal (below 3%). Without CO poisoning, aim for SpO2 94–98%.</li>
@@ -1223,10 +1350,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <p>Stock: confirm where hydroxocobalamin is held and how many doses are available <span class="ph">[location, number]</span>, and how to get more from the network.</p>
 </div></details>
 
-<details class="sop"><summary>SOP 5: Burns in a mass casualty incident</summary><div class="body">
+<details class="sop"><summary><h2>SOP 5: Burns in a mass casualty incident</h2></summary><div class="body">
 <p><strong>Trigger:</strong> two or more burns casualties, or any burns casualty during a declared major incident.</p>
 <p><strong>Why:</strong> all of these steps come from the FPHC/BBA pre-hospital burns consensus (version 2, April 2020), which is graded C/D expert opinion. They are recommendations, not mandates (<a href="https://fphc.rcsed.ac.uk/media/2957/2020-09-20-burns-consensus.pdf">FPHC/BBA 2020</a>).</p>
-<h4>Actions</h4>
+<h3 class="sub">Actions</h3>
 <ol>
 <li>Manage airway and smoke inhalation first (SOP 4).</li>
 <li>Cool the burn with cool running water for 20 minutes. This is ideally started within 10 minutes and is still worthwhile up to 3 hours after injury. Use water below 20°C; do not use ice water.</li>
@@ -1240,10 +1367,10 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <p>Note: "Burn Rapid Response Team" and "Burn Specialist Team" in the original report are WHO Emergency Medical Team terms, not UK NHS structures. Use your burns network's own arrangements.</p>
 </div></details>
 
-<details class="sop"><summary>SOP 6: Suspected nerve agent casualties</summary><div class="body">
+<details class="sop"><summary><h2>SOP 6: Suspected nerve agent casualties</h2></summary><div class="body">
 <p><strong>Trigger:</strong> unexplained collapse with pinpoint pupils, heavy secretions or breathing difficulty, especially in more than one person, or any notice from police or ambulance of a chemical incident.</p>
 <p><strong>Why:</strong> at Salisbury and Amesbury in 2018, five people were poisoned with a Novichok agent and one died. Novichok agents inhibit acetylcholinesterase, and the inhibited enzyme "ages" within minutes, so oximes work poorly (<a href="https://doi.org/10.1007/s00204-022-03437-5">Noga and Jurowski 2022</a>). Atropine titrated to effect is the mainstay. The actions below follow the PHE/NHS England ED briefing on suspected Novichok poisoning (<a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/738497/ED_briefing_note_nerve_agents.pdf">July 2018</a>). It is from 2018: check TOXBASE for any newer guidance before sign-off.</p>
-<h4>Actions</h4>
+<h3 class="sub">Actions</h3>
 <ol>
 <li>Protect staff first. Put on the PPE your CBRN plan specifies <span class="ph">[local PPE]</span> before touching the casualty. Isolate the casualty and anyone who came with them.</li>
 <li>Decontaminate: remove the casualty's clothing and double-bag it. Wash skin with soap or detergent and water where time allows. Follow your trust's decontamination plan <span class="ph">[location of decontamination area]</span>.</li>
@@ -1266,7 +1393,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <p>Stock: confirm how much atropine the hospital holds and where <span class="ph">[location, number of ampoules]</span>. Repeated doses at 4 mg each use ampoules quickly, so agree how to get more.</p>
 </div></details>
 
-<details class="sop"><summary>Before sign-off: checklist</summary><div class="body">
+<details class="sop"><summary><h2>Before sign-off: checklist</h2></summary><div class="body">
 <ul>
 <li>Pharmacy checks every dose against current BNF, BNFc, TOXBASE and JRCALC (none were accessible for this draft).</li>
 <li>Use the current NHS England MITT card wording for heart rate ("100 or more"); the EMJ 2022 derivation paper's "&gt;100" is not the operational wording.</li>
@@ -1307,9 +1434,9 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     </div>
     <div class="card">
       <h2 style="margin-top:0" id="jesip">JESIP</h2>
-      <h4>Principles for joint working</h4>
+      <h3 class="sub">Principles for joint working</h3>
       <ul class="tight"><li>Co-locate</li><li>Communicate</li><li>Co-ordinate</li><li>Jointly understand risk</li><li>Shared situational awareness</li></ul>
-      <h4>Joint Decision Model</h4>
+      <h3 class="sub">Joint Decision Model</h3>
       <p class="small muted">At the centre: working together, saving lives, reducing harm.</p>
       <ol class="tight">
         <li>Gather information and intelligence</li>
@@ -1342,7 +1469,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <div class="card">
       <h2 style="margin-top:0">First crew on scene</h2>
       <p class="small muted">From the 2018 WMAS card, which refers crews to the major incident action cards carried in the vehicle. Follow your own service's action cards.</p>
-      <h4>Driver</h4>
+      <h3 class="sub">Driver</h3>
       <ul class="tight">
         <li>Park as near to the scene as safety permits. Leave roof beacons on.</li>
         <li>Send a windscreen report: press priority on the radio, give call sign, say what you see, follow up with METHANE.</li>
@@ -1350,7 +1477,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
         <li>Switch to the designated talk group when instructed.</li>
         <li>Stay with the vehicle and keep a communications link between the scene and ambulance control.</li>
       </ul>
-      <h4>Attendant</h4>
+      <h3 class="sub">Attendant</h3>
       <ul class="tight">
         <li>Assume the role of ambulance incident commander until relieved by a suitably trained officer.</li>
         <li>Carry out a rapid assessment and send an initial METHANE report; send updated METHANE reports.</li>
@@ -1467,18 +1594,19 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
 <section class="tab" id="tab-sources" aria-labelledby="h-src">
   <h1 id="h-src">Sources &amp; verification</h1>
   <p class="lead">How the content was checked, what is still unverified, and every source used.</p>
+  <nav class="jump" aria-label="On this page"><span class="jl">On this page:</span><a href="#review-findings">Review findings</a><a href="#round-2">Second verification round</a><a href="#site-changes">Changes made</a><a href="#still-unverified">Still unverified</a><a href="#source-list">Sources</a></nav>
 
-  <h2>Review findings</h2>
+  <h2 id="review-findings">Review findings</h2>
   <p>The original injury database was reviewed on 16 October 2026. Most headline figures traced to real sources. The remaining errors were concentrated in drug doses, triage doctrine and attribution, where a mistake would carry straight into practice. These are the ten corrections that mattered most; all are fixed on this site.</p>
   <div class="table-wrap"><table class="wide">
     <thead><tr><th>#</th><th>Problem in the original report</th><th>What the sources say</th></tr></thead>
     <tbody id="findingsBody"></tbody>
   </table></div>
   <p class="small">The original report also contained extraction artefacts (unrendered LaTeX and fragments such as "span_184") inside clinical sentences. None are reused here.</p>
-  <h3>Second verification round, 30 October 2026</h3>
+  <h3 id="round-2">Second verification round, 30 October 2026</h3>
   <p>A second round re-checked the items left unverified or in conflict after the first review, using official inquiry, inquest, sentencing and government documents, trust statements and the primary papers. The findings tables are in this repository: <a href="docs/verification/verify_round2_uk.md">UK incidents</a>, <a href="docs/verification/verify_round2_clinical.md">clinical and triage claims</a> and <a href="docs/verification/verify_round2_europe.md">European incidents</a>, alongside the first-round tables (<a href="docs/verification/verify_triage.md">triage</a>, <a href="docs/verification/verify_clinical.md">clinical</a>, <a href="docs/verification/verify_incidents.md">incidents</a>, <a href="docs/verification/verify_registry.md">registry</a>, <a href="docs/verification/verify_europe.md">Europe</a>). The rule was unchanged: a claim is "confirmed" only where a source opened in the session states it, and nothing is filled from memory. Several hosts could not be opened (NICE, PubMed/PMC, Europe PMC, the Evening Standard, gov.uk direct downloads and web.archive.org), so a few items remain unverified and the NICE NG39 wording was read from a reproduction.</p>
 
-  <h2>Changes made for this site</h2>
+  <h2 id="site-changes">Changes made for this site</h2>
   <div class="card">
     <ul class="tight" id="changesList"></ul>
   </div>
@@ -1487,7 +1615,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <p>These may be true, but no source could be read for them. They are left out of teaching content or marked <span class="unv">Unverified</span>.</p>
   <div class="card"><ul class="tight" id="unvList"></ul></div>
 
-  <h2>Sources</h2>
+  <h2 id="source-list">Sources</h2>
   <p class="small muted">Several news sites (Guardian, Evening Standard, Independent, Manchester Evening News, Croydon Advertiser) blocked automated reading, so claims resting only on them are marked unverified. Some incident details are confirmed from Wikipedia summaries; treat those as secondary.</p>
   <p class="small muted">European incident figures were checked on 30 October 2026 against sources opened that day: PubMed records (abstract or PMC full text), journal PDFs and pages fetched directly, and in the second round the French inquiry hearing transcripts, the Élysée, AP-HP, the Berlin Fire Brigade and Senate, NOU 2012:14, the Belgian Chamber brochure and SPF Santé publique press releases. Pages that could not be fetched in full (thelancet.com, link.springer.com, ResearchGate, the body of the French and Belgian inquiry reports and the Bundestag report) are not used beyond what was read. High confidence means a peer-reviewed or official source reports the figure directly; medium means a single source, a trade or medical-chamber publication, or an internal inconsistency; low means a news outlet only, or an unresolved disagreement. Headline figures from news outlets are labelled as such. See the <a href="#europe">European incidents</a>.</p>
   <div id="srcList"></div>
@@ -1498,6 +1626,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   <h1 id="h-teach">Facilitator guide</h1>
   <p class="lead">Ready-made sessions for teams of any size: a 15-minute huddle, a 60-minute teaching session and a tabletop exercise, plus fictional injects and a hot-debrief template. Each has a Print button.</p>
   <div class="callout warn"><p><strong>Before you run a session.</strong> Read out the training-only disclaimer. Text in <span class="ph">[square brackets]</span> is for your local detail: this site does not know your phone numbers, roles, locations or capacities, and does not guess them. Use your trust's major incident plan.</p></div>
+  <nav class="jump" aria-label="On this page"><span class="jl">On this page:</span><a href="#session-plans">Session plans</a><a href="#injects">Tabletop injects</a><a href="#hotdebrief">Hot-debrief template</a><a href="#facilitator-tips">Facilitator tips</a></nav>
 
   <h2 id="session-plans">Session plans</h2>
   <div id="planList"></div>
@@ -1536,7 +1665,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
   </div>
   <div class="print-row"><button class="btn secondary print-btn" type="button" data-print="pr-debrief">Print hot-debrief template</button></div>
 
-  <h2>Facilitator tips</h2>
+  <h2 id="facilitator-tips">Facilitator tips</h2>
   <div class="card">
     <ul class="tight">
       <li>Pair the quick-reference cards with the <a href="#trainer">triage trainer</a> projected on a screen, so the group sees each decision.</li>
@@ -1557,7 +1686,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <div>
       <div class="printable" id="pr-tst">
         <div class="qr">
-          <h3>Ten Second Triage (TST)</h3>
+          <h2>Ten Second Triage (TST)</h2>
           <p class="qr-sub">Anyone at the scene &middot; NHS England / NARU v1.0, April 2023 &middot; No physiological measurements</p>
           <ol>
             <li><b>Walking?</b> Yes: <span class="tag p3">P3</span> (uninjured: place of relative safety; injured walking: casualty collection point)</li>
@@ -1574,7 +1703,7 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <div>
       <div class="printable" id="pr-mitt">
         <div class="qr">
-          <h3>NHS Major Incident Triage Tool (MITT)</h3>
+          <h2>NHS Major Incident Triage Tool (MITT)</h2>
           <p class="qr-sub">NHS responders &middot; NHS England, April 2023 &middot; Same thresholds at all ages</p>
           <ol>
             <li><b>Catastrophic bleeding?</b> <span class="tag p1">P1</span></li>
@@ -1617,11 +1746,13 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,h3[tabindex="-1"]:focus,main:foc
     <input type="search" id="glossFilter" placeholder="e.g. MITT, burns, P1" autocomplete="off" style="width:100%;max-width:420px">
     <p class="count" id="glossCount" aria-live="polite"></p>
   </div>
+  <nav class="jump az" id="glossJump" aria-label="Jump to a letter"></nav>
   <dl class="gloss" id="glossList"></dl>
 </section>
 
 </main>
 </div>
+<button class="totop" id="toTop" type="button" aria-label="Back to top" hidden><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4M4 10l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Top</button>
 <footer class="site">
   <div class="wrap">
     <p style="margin:0">Mass Casualty Handbook. For training and education only; not clinical guidance. Content checked against sources on 16–17 October 2026, with a second verification round on 30 October 2026. Doses not verified against JRCALC or TOXBASE. All casualties and exercises are fictional.</p>
@@ -3360,14 +3491,14 @@ const archName = id => (ARCHETYPES_MATRIX.find(a=>a.id===id)||{}).name || id;
   const root=document.documentElement, btn=$("#themeBtn");
   const saved=store.get("mch-theme");
   if(saved==="light"||saved==="dark") root.setAttribute("data-theme",saved);
-  const label=()=>{const t=root.getAttribute("data-theme");btn.textContent=(t?t.charAt(0).toUpperCase()+t.slice(1):"Auto")+" theme";btn.setAttribute("aria-label","Colour theme: "+(t||"system")+". Switch theme");};
+  // Three-state cycle: Auto (follow the system) -> Light -> Dark -> Auto. The visible text names the state; the label names the action.
+  const NEXT={auto:"light",light:"dark",dark:"auto"};
+  const label=()=>{const t=root.getAttribute("data-theme")||"auto";btn.querySelector(".tb-txt").textContent="Theme: "+t.charAt(0).toUpperCase()+t.slice(1);const act="Switch to "+(NEXT[t]==="auto"?"automatic (system) theme":NEXT[t]+" theme");btn.setAttribute("aria-label","Colour theme: "+t+". "+act);btn.title=act;};
   label();
   btn.addEventListener("click",()=>{
-    const cur=root.getAttribute("data-theme");
-    const sysDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const effective=cur||(sysDark?"dark":"light");
-    const next=effective==="dark"?"light":"dark";
-    root.setAttribute("data-theme",next); store.set("mch-theme",next); label();
+    const next=NEXT[root.getAttribute("data-theme")||"auto"];
+    if(next==="auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme",next);
+    store.set("mch-theme",next); label();
   });
 })();
 
@@ -3395,14 +3526,13 @@ const LANDINGS=new Set(NAV.map(g=>g[2]).filter(Boolean));
 const HASH_ALIASES={"planning-for-incidents":"incident-planning","plan":"incident-planning","prepare":"incident-planning","training-and-practice":"training","practice":"training","practise":"training","learning":"learn","evidence":"research","lessons":"europe-lessons","case-series":"registry","manchester":"registry","planning-tools":"planning"};
 const secIco=k=>SEC_ICON[k]?`<span class="sec-ico">${SEC_ICON[k]}</span>`:"";
 document.querySelectorAll("section.tab").forEach(s=>{const k=TAB_SEC[s.id.slice(4)];if(k&&SEC_ICON[k])s.dataset.sec=k;});
-$("#siteNav").innerHTML=NAV.map(([k,g,land,items],gi)=>`<div class="nav-group"${SEC_ICON[k]?` data-sec="${k}"`:""}>${g?`<h2 class="nav-h" id="ng-${gi}">${secIco(k)}<span>${esc(g)}</span></h2>`:""}<ul class="nav-list"${g?` aria-labelledby="ng-${gi}"`:""}>${items.map(([id,t])=>`<li><a href="#${id}" data-tab="${id}"${id===land?` class="nav-ov"`:""}>${esc(t)}${id==="learn"?`<span class="nav-n" id="navLearnN"></span>`:""}</a></li>`).join("")}</ul></div>`).join("");
+$("#siteNav").innerHTML=NAV.map(([k,g,land,items],gi)=>`<div class="nav-group"${SEC_ICON[k]?` data-sec="${k}"`:""}>${g?`<div class="nav-h" id="ng-${gi}">${secIco(k)}<span>${esc(g)}</span></div>`:""}<ul class="nav-list"${g?` aria-labelledby="ng-${gi}"`:""}>${items.map(([id,t])=>`<li><a href="#${id}" data-tab="${id}"${id===land?` class="nav-ov"`:""}>${esc(t)}${id==="learn"?`<span class="nav-n" id="navLearnN"></span>`:""}</a></li>`).join("")}</ul></div>`).join("");
 function secOfHash(h){const id=h.split("/")[0];if(TAB_SEC[id])return TAB_SEC[id];const el=document.getElementById(h);const s=el&&el.closest("section.tab");return s?TAB_SEC[s.id.slice(4)]:"";}
 function secTag(h){const k=secOfHash(h);return SEC_ICON[k]?` <span class="sec-tag" data-sec="${k}">${esc(SEC_NAME[k])}</span>`:"";}
 function crumbHTML(id){
   if(id==="home") return "";
   const k=TAB_SEC[id], g=SEC_NAME[k]||"";
   const chip=SEC_ICON[k]?`<a class="sec-chip" data-sec="${k}" href="#${SEC_LANDING[k]}">${secIco(k)}${esc(g)}</a>`:(g?`<span>${esc(g)}</span>`:"");
-  if(LANDINGS.has(id)) return `${chip}<span class="sep" aria-hidden="true">&rsaquo;</span><b>Section overview</b>`;
   return `${chip}<span class="sep" aria-hidden="true">&rsaquo;</span><b>${esc(TAB_NAME[id])}</b>`;
 }
 
@@ -3418,8 +3548,10 @@ function showTab(id,focus){
   const sk=TAB_SEC[id]; if(SEC_ICON[sk]) $("#main").dataset.sec=sk; else delete $("#main").dataset.sec;
   store.set("mch-tab",id);
   closeDrawer();
-  if(id!=="surge") surgeAbortIfRunning();
+  if(id!=="surge") surgePauseIfRunning();
+  if(id==="incidents") setIncBar();
   if(focus){window.scrollTo(0,0);}
+  updateToTop();
 }
 function revealEl(el){
   if(!el) return;
@@ -3449,6 +3581,18 @@ menuBtn.addEventListener("click",()=>sidebar.classList.contains("open")?closeDra
 $("#menuClose").addEventListener("click",()=>{closeDrawer();menuBtn.focus();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&sidebar.classList.contains("open")){closeDrawer();menuBtn.focus();}});
 sidebar.addEventListener("click",e=>{const a=e.target.closest("a[href^='#']");if(a&&a.getAttribute("href")===location.hash){closeDrawer();}});
+// Phone: the search field lives in the drawer; this header button opens it one tap away.
+$("#searchBtn").addEventListener("click",()=>{openDrawer();setTimeout(()=>$("#siteSearchM").focus(),0);});
+// Desktop sidebar: show a fade at the bottom while more links lie below the visible part.
+(function(){
+  const cue=()=>{sidebar.classList.toggle("has-more",!sidebar.classList.contains("open")&&sidebar.scrollHeight-sidebar.clientHeight-sidebar.scrollTop>8);};
+  sidebar.addEventListener("scroll",cue,{passive:true}); window.addEventListener("resize",cue); window.addEventListener("load",cue,{once:true}); cue();
+})();
+// Back to top: appears after scrolling down a screen or so.
+const toTopBtn=$("#toTop");
+function updateToTop(){const show=window.scrollY>Math.max(500,window.innerHeight*0.8);toTopBtn.hidden=false;toTopBtn.classList.toggle("show",show);toTopBtn.setAttribute("aria-hidden",show?"false":"true");toTopBtn.tabIndex=show?0:-1;}
+window.addEventListener("scroll",updateToTop,{passive:true}); window.addEventListener("resize",updateToTop); updateToTop();
+toTopBtn.addEventListener("click",()=>{const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;try{window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});}catch(e){window.scrollTo(0,0);}$("#main").focus({preventScroll:true});});
 
 // ============ Accessible tabs helper (roving tabindex, arrow keys) ============
 function wireTablist(list,onSelect){
@@ -3507,7 +3651,7 @@ function renderProgress(){
 function renderModuleGrid(){
   $("#moduleGrid").innerHTML=MODULES.map(m=>{const st=modState(m);return `<li class="card module-card">
     <span class="m-n">Module ${m.n} &middot; about ${m.mins} min &middot; ${m.quiz.length} questions</span>
-    <h3>${esc(m.title)}</h3><p class="small muted" style="margin:0">${esc(m.short)}</p>
+    <h2>${esc(m.title)}</h2><p class="small muted" style="margin:0">${esc(m.short)}</p>
     <div class="m-foot">${statusChip(st)}${st.complete?`<span class="small muted">Score ${st.correct}/${st.total}</span>`:""}<a class="btn secondary" href="#learn/${m.id}" style="margin-left:auto">Open<span class="sr-only"> module ${m.n}</span></a></div></li>`;}).join("");
 }
 function showModuleList(){ $("#learnOverview").hidden=false; $("#moduleView").hidden=true; }
@@ -3535,8 +3679,8 @@ function openModule(id){
       <p><button class="btn" type="button" data-goto-tab="mt-learn">Start the teaching</button></p>
     </div>
     <div role="tabpanel" id="mp-learn" aria-labelledby="mt-learn" tabindex="0" hidden>
-      <div class="module-content">${m.content}</div>
-      <h4>Go deeper</h4><ul class="tight">${m.links.map(([t,l])=>`<li><a href="#${t}">${esc(l)}</a>${secTag(t)}</li>`).join("")}</ul>
+      <div class="module-content">${m.content.replace(/<h4>/g,'<h2 class="sub">').replace(/<\/h4>/g,"</h2>")}</div>
+      <h2 class="sub">Go deeper</h2><ul class="tight">${m.links.map(([t,l])=>`<li><a href="#${t}">${esc(l)}</a>${secTag(t)}</li>`).join("")}</ul>
       <p><button class="btn" type="button" data-goto-tab="mt-quiz">Take the knowledge check</button></p>
     </div>
     <div role="tabpanel" id="mp-quiz" aria-labelledby="mt-quiz" tabindex="0" hidden>
@@ -3593,10 +3737,13 @@ function markQuestion(m,qi,chosen,announce){
     l.classList.toggle("is-wrong",oi===chosen&&!ok);
     l.querySelector(".mk").textContent=oi===q.a?"\u2713 Correct answer":(oi===chosen?"\u2717 Your answer":"");
   });
-  fs.querySelector("[data-check]").hidden=true;
   const dose=/atropine|hydroxocobalamin|Dose check/i.test(q.why+q.q);
-  fs.querySelector(".qfb").innerHTML=`<div class="feedback ${ok?"good":"bad"}"><p class="res-line ${ok?"good":"bad"}">${ok?"\u2713 Correct.":"\u2717 Not quite. The correct answer is: "+esc(q.o[q.a])}</p>
+  const fbEl=fs.querySelector(".qfb"), btn=fs.querySelector("[data-check]");
+  fbEl.innerHTML=`<div class="feedback ${ok?"good":"bad"}"><p class="res-line ${ok?"good":"bad"}">${ok?"\u2713 Correct.":"\u2717 Not quite. The correct answer is: "+esc(q.o[q.a])}</p>
     <p><strong>Rationale.</strong> ${esc(q.why)}</p>${dose?`<span class="dose-warn">${esc(DOSE_WARNING)}</span>`:""}${srcHTML(q.src)}</div>`;
+  // Keep keyboard focus in the question: move it to the feedback before the button goes, so Tab continues to the next question.
+  if(announce){fbEl.setAttribute("tabindex","-1");fbEl.focus({preventScroll:true});}
+  btn.hidden=true;
 }
 function updateQuizSummary(m){
   const st=modState(m), el=$("#quizSummary"); if(!el) return;
@@ -3625,7 +3772,7 @@ function renderTrainerCase(){
     ?[["Walking",c.walking],["Bleeding",c.bleeding],["Talking",c.talking],["Breathing",c.breathing]]
     :[["Walking",c.walking],["Bleeding",c.bleeding],["Talking",c.talking],["Breathing",c.breathing],["RR",c.rr+" /min"],["HR",c.hr+" /min"],["GCS",c.gcs]];
   $("#trCase").innerHTML=`<div class="inc-head"><h2 style="margin:0">${esc(c.id)}</h2><span class="badge neutral">${esc(c.archetype)}</span></div>
-    <p class="meta muted small" style="margin:4px 0">${esc(c.demo)} &middot; fictional casualty, not a real patient</p>
+    <p class="meta muted small" style="margin:4px 0">${esc(c.demo)}</p>
     <p><b>${trTool==="TST"?"At the scene":(DRILL_CONTEXT[c.id]?"At ED re-triage":"At first assessment")}:</b> ${esc(presentation(c,trTool))}</p>
     <dl class="kv">${facts.map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
     ${trTool==="TST"?`<p class="small muted">TST uses no physiological measurements, so vital signs are not shown.</p>`:""}`;
@@ -3715,8 +3862,10 @@ function classify(exp,ch){
 function surgeStart(){
   const mode=(document.querySelector('input[name="sgMode"]:checked')||{}).value||"TST";
   const limit=+$("#sgTime").value, count=+$("#sgCount").value;
-  SG={mode,limit,cards:shuffle(SIMULATION_CARDS).slice(0,count),i:-1,results:[],timer:null,t0:0,warned:false,next:null};
-  $("#sgSetup").hidden=true; $("#sgDebrief").hidden=true; $("#sgRun").hidden=false;
+  SG={mode,limit,cards:shuffle(SIMULATION_CARDS).slice(0,count),i:-1,results:[],timer:null,t0:0,warned:false,next:null,paused:null};
+  $("#sgSetup").hidden=true; $("#sgDebrief").hidden=true; $("#sgRun").hidden=false; $("#sgPause").hidden=true;
+  $("#tab-surge").classList.add("running");
+  $("#sgRun").scrollIntoView({block:"start"});
   const opts=mode==="TST"?TST_OPTIONS:MITT_OPTIONS;
   $("#sgCats").innerHTML=opts.map(([v,cls,l])=>`<button type="button" class="cat-btn" data-cat="${v}"><span class="tag ${cls}">${l}</span><small>${v==="SILVER"?"black on silver":v==="DEAD"?"MITT only":({P1:"immediate",P2:"urgent",P3:"walking / minor"})[v]}</small></button>`).join("");
   surgeNext();
@@ -3768,7 +3917,7 @@ function surgeFinish(){
   const card=id=>SIMULATION_CARDS.find(c=>c.id===id);
   const CL={correct:["res-ok","\u2713 Correct"],over:["res-warn","\u2191 Over-triage"],under:["res-bad","\u2193 Under-triage"],timeout:["res-bad","\u23F1 No decision"]};
   const wrong=R.filter(r=>r.cls!=="correct");
-  $("#sgRun").hidden=true;
+  $("#sgRun").hidden=true; $("#tab-surge").classList.remove("running");
   const d=$("#sgDebrief"); d.hidden=false;
   d.innerHTML=`<div class="card"><h2 style="margin-top:0" id="sgDebriefH">Debrief</h2>
     <p class="small muted">Training simulation, ${SG.mode} mode, ${SG.limit} s per casualty, ${n} fictional casualties.</p>
@@ -3793,10 +3942,31 @@ function surgeFinish(){
   SG.i=SG.cards.length;
   $("#sgDebriefH").setAttribute("tabindex","-1"); $("#sgDebriefH").focus();
   renderSurgeHistory();
+  cueTables();
 }
-function surgeAbortIfRunning(){
-  if(SG&&SG.i>=0&&SG.i<SG.cards.length){clearInterval(SG.timer);clearTimeout(SG.next);SG=null;$("#sgRun").hidden=true;$("#sgSetup").hidden=false;}
+function surgeRunning(){return !!(SG&&SG.i>=0&&SG.i<SG.cards.length);}
+// Leaving the page mid-run pauses the clock rather than discarding the run; the run page then shows a notice with Resume.
+function surgePauseIfRunning(){
+  if(!surgeRunning()||SG.paused) return;
+  clearInterval(SG.timer); clearTimeout(SG.next);
+  const between=SG.results.length>SG.i; // paused during the short gap before the next casualty
+  SG.paused={between,left:between?SG.limit:Math.max(0,SG.limit-(performance.now()-SG.t0)/1000)};
+  $("#sgCats").querySelectorAll("button").forEach(b=>b.disabled=true);
+  $("#sgPause").hidden=false;
+  $("#sgArrive").textContent="Paused.";
 }
+function surgeResume(){
+  if(!SG||!SG.paused) return;
+  const p=SG.paused; SG.paused=null; $("#sgPause").hidden=true;
+  if(p.between){surgeNext();return;}
+  SG.t0=performance.now()-(SG.limit-p.left)*1000;
+  $("#sgArrive").textContent=`${SG.cards.length-SG.i-1} more waiting. Fictional casualty ${SG.cards[SG.i].id}.`;
+  $("#sgCats").querySelectorAll("button").forEach(b=>b.disabled=false);
+  surgeTick(); SG.timer=setInterval(surgeTick,200);
+  $("#sgLive").textContent=`Resumed. ${Math.ceil(p.left)} seconds left.`;
+  const first=$("#sgCats button"); if(first) first.focus({preventScroll:true});
+}
+function surgeAbort(){clearInterval(SG.timer);clearTimeout(SG.next);SG=null;$("#sgRun").hidden=true;$("#sgPause").hidden=true;$("#sgSetup").hidden=false;$("#tab-surge").classList.remove("running");}
 function renderSurgeHistory(){
   const h=(PROGRESS.surge||[]);
   $("#sgHistory").innerHTML=h.length?`<h3>Your recent runs</h3><div class="table-wrap"><table><thead><tr><th>Date</th><th>Mode</th><th>Accuracy</th><th>Over</th><th>Under</th><th>No decision</th><th>Mean time</th></tr></thead><tbody>${h.slice().reverse().map(r=>`<tr><td>${esc(new Date(r.d).toLocaleString("en-GB",{day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"}))}</td><td>${esc(r.mode)}</td><td>${r.acc}%</td><td>${r.over}</td><td>${r.under}</td><td>${r.to}</td><td>${r.mean} s</td></tr>`).join("")}</tbody></table></div>`:"";
@@ -3804,13 +3974,14 @@ function renderSurgeHistory(){
 function initSurgeExercise(){
   $("#sgStart").addEventListener("click",surgeStart);
   $("#sgCats").addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(b&&!b.disabled)surgeDecide(b.dataset.cat);});
-  $("#sgStop").addEventListener("click",()=>{if(!SG)return;clearInterval(SG.timer);clearTimeout(SG.next);SG.cards=SG.cards.slice(0,SG.results.length);if(SG.results.length)surgeFinish();else{SG=null;$("#sgRun").hidden=true;$("#sgSetup").hidden=false;}});
+  $("#sgStop").addEventListener("click",()=>{if(!SG)return;clearInterval(SG.timer);clearTimeout(SG.next);SG.paused=null;$("#sgPause").hidden=true;SG.cards=SG.cards.slice(0,SG.results.length);if(SG.results.length)surgeFinish();else surgeAbort();});
+  $("#sgResume").addEventListener("click",surgeResume);
   renderSurgeHistory();
 }
 
 // ============ Facilitator materials, printables, glossary ============
 function renderTeach(){
-  $("#planList").innerHTML=SESSION_PLANS.map(p=>`<details class="sop" id="plan-${p.id}"><summary>${esc(p.title)}</summary><div class="body"><div class="printable" id="pr-plan-${p.id}">
+  $("#planList").innerHTML=SESSION_PLANS.map(p=>`<details class="sop" id="plan-${p.id}"><summary><h3>${esc(p.title)}</h3></summary><div class="body"><div class="printable" id="pr-plan-${p.id}">
     <h3 style="margin-top:12px">${esc(p.title)}</h3>
     ${p.id==="tabletop"?`<p><span class="fict">Fictional exercise</span></p>`:""}
     <p class="small muted">For: ${esc(p.who)} &middot; ${p.mins} minutes</p>
@@ -3823,7 +3994,7 @@ function renderTeach(){
   $("#injectList").innerHTML=INJECTS.map(([h,t,q])=>`<div class="card inject"><h4>${esc(h)} <span class="fict">Fictional</span></h4><p>${esc(t)}</p><p class="small"><b>Discuss:</b> ${q}</p></div>`).join("");
 }
 function renderPrintCards(){
-  $("#casCards").innerHTML=SIMULATION_CARDS.map(c=>`<article class="cas"><h4>${esc(c.id)} <span class="fict">Fictional</span></h4>
+  $("#casCards").innerHTML=SIMULATION_CARDS.map(c=>`<article class="cas"><h3>${esc(c.id)} <span class="fict">Fictional</span></h3>
     <p class="small muted" style="margin:0 0 4px">${esc(c.demo)} &middot; ${esc(c.archetype)}</p>
     <p style="margin:4px 0">${esc(c.narrative)}</p>
     <dl class="kv"><dt>Walking</dt><dd>${esc(c.walking)}</dd><dt>Bleeding</dt><dd>${esc(c.bleeding)}</dd><dt>Talking</dt><dd>${esc(c.talking)}</dd><dt>Breathing</dt><dd>${esc(c.breathing)}</dd><dt>RR / HR</dt><dd>${esc(c.rr)} / ${esc(c.hr)}</dd><dt>SBP / GCS</dt><dd>${esc(c.sbp)} / ${esc(c.gcs)}</dd></dl>
@@ -3833,7 +4004,12 @@ function renderGlossary(){
   const q=$("#glossFilter").value.trim().toLowerCase();
   const list=GLOSSARY.filter(g=>!q||g.join(" ").toLowerCase().includes(q));
   $("#glossCount").textContent=`${list.length} of ${GLOSSARY.length} terms`;
-  $("#glossList").innerHTML=list.map(([t,x,d,f])=>`<div class="g" id="g-${t.replace(/[^A-Za-z0-9]/g,"")}"><dt>${esc(t)}</dt><dd>${x&&x[0]==="~"?`<span class="gx">${esc(x.slice(1))}</span> <span class="small muted">(expansion confirmed against a source in verification round 2, 30 October 2026)</span>`:x?`<span class="gx">${esc(x)}</span>`:`<span class="chk">Check</span> <span class="small muted">Expansion not given in the verified files.</span>`}<br>${esc(d)}<br><span class="gs">From: ${esc(VFILE[f]||f)}</span></dd></div>`).join("")||`<p class="empty">No matching terms.</p>`;
+  // A-Z jump list (the glossary is alphabetical): the first term under each letter carries the letter's anchor.
+  const letters=[]; const letterOf=t=>t.charAt(0).toUpperCase();
+  list.forEach(g=>{const L=letterOf(g[0]);if(letters.indexOf(L)<0)letters.push(L);});
+  $("#glossJump").innerHTML=letters.length>1?`<span class="jl">Jump to:</span>`+letters.map(L=>`<a href="#gl-${L}">${L}</a>`).join(""):"";
+  const firstOf={}; list.forEach((g,k)=>{const L=letterOf(g[0]);if(!(L in firstOf))firstOf[L]=k;});
+  $("#glossList").innerHTML=list.map(([t,x,d,f],k)=>`<div class="g" id="g-${t.replace(/[^A-Za-z0-9]/g,"")}"><dt${firstOf[letterOf(t)]===k?` id="gl-${letterOf(t)}"`:""}>${esc(t)}</dt><dd>${x&&x[0]==="~"?`<span class="gx">${esc(x.slice(1))}</span> <span class="small muted">(expansion confirmed against a source in verification round 2, 30 October 2026)</span>`:x?`<span class="gx">${esc(x)}</span>`:`<span class="chk">Check</span> <span class="small muted">Expansion not given in the verified files.</span>`}<br>${esc(d)}<br><span class="gs">From: ${esc(VFILE[f]||f)}</span></dd></div>`).join("")||`<p class="empty">No matching terms.</p>`;
 }
 
 // ============ Print one item ============
@@ -3848,8 +4024,11 @@ function printItem(id){
   printRoot.innerHTML=""; printRoot.appendChild(clone);
   document.body.classList.add("print-one");
   try{window.print();}catch(e){}
+  // Some print-to-PDF flows never fire afterprint; clear the one-item state anyway after a moment.
+  clearTimeout(printItem.t); printItem.t=setTimeout(printCleanup,2500);
 }
-window.addEventListener("afterprint",()=>{document.body.classList.remove("print-one");printRoot.innerHTML="";});
+function printCleanup(){clearTimeout(printItem.t);document.body.classList.remove("print-one");printRoot.innerHTML="";}
+window.addEventListener("afterprint",printCleanup);
 document.addEventListener("click",e=>{const b=e.target.closest("[data-print]");if(b){e.preventDefault();printItem(b.dataset.print);}});
 
 // ============ Site search ============
@@ -3956,9 +4135,17 @@ function renderIncidentFilters(){
   const years=[...new Set([...INCIDENTS_MASTER,...EUROPE_INCIDENTS].map(i=>i.date.slice(0,4)))].sort().reverse();
   $("#incYear").innerHTML+=years.map(y=>`<option>${y}</option>`).join("");
   ["#incRegion","#incSearch","#incType","#incVer","#incYear"].forEach(s=>$(s).addEventListener("input",renderIncidents));
+  $("#incMoreBtn").addEventListener("click",()=>{const w=$("#incMore"),open=!w.classList.contains("open");w.classList.toggle("open",open);$("#incMoreBtn").setAttribute("aria-expanded",open);$("#incMoreBtn").textContent=open?"Fewer filters":"More filters";setIncBar();});
+  $("#incExpandAll").addEventListener("click",()=>{const all=[...document.querySelectorAll("#tab-incidents details.inc-more")];const open=!all.every(d=>d.open);all.forEach(d=>d.open=open);const b=$("#incExpandAll");b.textContent=open?"Collapse all details":"Expand all details";b.setAttribute("aria-pressed",open);});
+  window.addEventListener("resize",setIncBar); window.addEventListener("load",setIncBar,{once:true});
+  $("#incJumpWrap").open=window.innerWidth>=700; // open on desktop, collapsed on phones where the list is long
   $("#eurLessons").innerHTML=EUROPE_TEACHING_POINTS.map(p=>`<li>${esc(p.text)}<span class="eu-src">Source: ${link(p.source,p.url)}</span></li>`).join("");
   $("#eurNotFound").innerHTML=EUROPE_NOT_FOUND.map(c=>`<li><span class="unv">Not found</span> ${esc(c)}</li>`).join("");
 }
+// The sticky filter bar's height feeds the scroll margin of anchors on this page, so a jump never lands under it.
+function setIncBar(){const bar=$("#incFilterBar");$("#tab-incidents").style.setProperty("--incbar",(bar.offsetHeight||0)+"px");}
+function incJumpHTML(ids){const w=$("#incJumpWrap");w.querySelector("summary").textContent=`Jump to an incident (${ids.length})`;w.hidden=!ids.length;return ids.map(([id,name])=>`<a href="#inc-${esc(id)}">${esc(name)}</a>`).join("");}
+function incDetails(inner){return `<details class="inc-more"><summary><span class="sum-closed">Show details</span><span class="sum-open">Hide details</span></summary>${inner}</details>`;}
 // ---- European incidents (data: europe_data.js, from verify_europe.md) ----
 const EU_TYPE={mixed:"Mixed: explosives and firearms",explosive:"Explosive",vehicle:"Vehicle ramming"};
 const EU_CONF={high:["ok","High confidence"],medium:["partial","Medium confidence"],low:["unverified","Low confidence"]};
@@ -3978,7 +4165,7 @@ function euCard(i){
   const srcs=[...new Map([...i.medicalFacts,...i.lessons].map(f=>[f.url,f.source])).entries()];
   const conflict=EU_CONFLICTS[i.id];
   return `
-    <article class="card inc inc-eu" data-inc="${esc(i.id)}" data-region="europe">
+    <article class="card inc inc-eu" id="inc-${esc(i.id)}" data-inc="${esc(i.id)}" data-region="europe">
       <div class="inc-head"><h3>${esc(i.name)}</h3><span class="inc-badges"><span class="badge neutral">Europe &middot; ${esc(i.country)}</span>${euBadge(i.verification)}</span></div>
       <p class="meta">${esc(fmtDate(i.date))} &middot; ${esc(i.city)}, ${esc(i.country)} &middot; <span class="mono">${esc(i.id)}</span></p>
       <p>${esc(i.summary)}</p>
@@ -3988,6 +4175,7 @@ function euCard(i){
         <dt>Injured</dt><dd>${esc(i.injured)}</dd>
         <dt>Overall</dt><dd>${euBadge(i.verification)}</dd>
       </dl>
+      ${incDetails(`
       ${conflict?(conflict.kind==="conflict"?`<div class="callout warn eu-conflict"><p><strong>Sources disagree</strong> on ${esc(conflict.text)} The differing figures are shown side by side; none has been chosen over the others.</p></div>`:`<div class="callout eu-conflict"><p><strong>Why the figures differ.</strong> ${esc(conflict.text)}</p></div>`):""}
       <h4>Medical facts</h4>
       <ul class="checks eu-facts">${i.medicalFacts.map(f=>`<li>${euBadge(f.confidence)}<span>${esc(f.text)}<span class="eu-src">Source: ${link(f.source,f.url)}</span></span></li>`).join("")}</ul>
@@ -3996,7 +4184,7 @@ function euCard(i){
       <div class="callout"><p><strong>Caveats.</strong> ${esc(i.caveats)}</p></div>
       <details class="plain"><summary>Sources (${srcs.length})</summary>
         <ul class="src-list">${srcs.map(([u,s])=>`<li>${link(s,u)}</li>`).join("")}</ul>
-      </details>
+      </details>`)}
     </article>`;
 }
 function resetIncFilters(){["#incRegion","#incSearch","#incType","#incVer","#incYear"].forEach(s=>{$(s).value="";});}
@@ -4029,7 +4217,7 @@ function renderIncidents(){
   $("#incCount").textContent=`Showing ${nUK+nEU} of ${tot} incidents`+(showUK&&showEU?` (UK ${nUK} of ${INCIDENTS_MASTER.length}, Europe ${nEU} of ${EUROPE_INCIDENTS.length})`:showUK?" (UK)":" (Europe)");
   $("#eurList").innerHTML=euList.length?euList.map(euCard).join(""):`<div class="card empty">No European incidents match these filters.</div>`;
   $("#incList").innerHTML=list.length?list.map(i=>`
-    <article class="card inc" data-inc="${i.id}">
+    <article class="card inc" id="inc-${i.id}" data-inc="${i.id}">
       <div class="inc-head"><h3>${esc(i.name)}</h3><span class="badge neutral">${esc(archName(i.archetype))}</span></div>
       <p class="meta">${esc(fmtDate(i.date))} &middot; ${esc(i.location)} &middot; <span class="mono">${i.id}</span></p>
       <dl class="kv">
@@ -4038,12 +4226,17 @@ function renderIncidents(){
         <dt>Hospitals</dt><dd>${esc(i.dispersal)}</dd>
         <dt>Injuries</dt><dd>${esc(i.injuries)}</dd>
       </dl>
+      ${incDetails(`
       <h4>Verification</h4>
       <ul class="checks">${i.checks.map(c=>`<li>${badge(c[0])}<span>${esc(c[1])}</span></li>`).join("")}</ul>
       <details class="plain"><summary>Sources (${(INCIDENT_SOURCES[i.id]||[]).length})</summary>
         <ul class="src-list">${(INCIDENT_SOURCES[i.id]||[]).map(s=>`<li>${link(s[0],s[1])}</li>`).join("")}</ul>
-      </details>
+      </details>`)}
     </article>`).join(""):`<div class="card empty">No incidents match these filters.</div>`;
+  // Jump list of the incidents currently shown, in page order.
+  $("#incJump").innerHTML=incJumpHTML([...(showUK?list.map(i=>[i.id,i.name]):[]),...(showEU?euList.map(i=>[i.id,i.name]):[])]);
+  const eb=$("#incExpandAll"); if(eb){eb.textContent="Expand all details";eb.setAttribute("aria-pressed","false");}
+  setIncBar();
 }
 function renderRegistry(){
   $("#regTable tbody").innerHTML=REGISTRY_FACTS.map(([src,fig,st,cav])=>{
@@ -4207,7 +4400,7 @@ function renderTNA(){
     const sourced=t.mandate.map((m,mi)=>[m,srcs[mi]]).filter(x=>x[1]);
     const unsourcedMand=t.mandate.filter((m,mi)=>!srcs[mi]);
     const hasDose=t.mandate.some(m=>/hydroxocobalamin|atropine/i.test(m));
-    return `<details class="sop"${ti===0?" open":""}><summary>${esc(t.tier)}</summary><div class="body">
+    return `<details class="sop"${ti===0?" open":""}><summary><h3>${esc(t.tier)}</h3></summary><div class="body">
       <p class="small muted">${esc(t.personnel)}</p>
       <h4>Evidence of gaps</h4><p>${esc(t.gaps)}</p>
       <h4>Curriculum items (sourced)</h4>
@@ -4230,10 +4423,25 @@ function renderSources(){
   $("#srcList").innerHTML=SOURCE_GROUPS.map(([g,items])=>`<div class="card"><h3 style="margin-top:0">${esc(g)}</h3><ul class="src-list">${items.map(s=>`<li>${link(s[0],s[1])}${s[1]?`<br><span class="small muted mono url" style="overflow-wrap:anywhere">${esc(s[1])}</span>`:""}</li>`).join("")}</ul></div>`).join("");
 }
 
+// ============ Wide tables: scroll cue ============
+// Wraps each .table-wrap once and shows a fade (and a short hint) at the edge that has more columns.
+function cueTables(){
+  document.querySelectorAll(".table-wrap:not([data-cue])").forEach(w=>{
+    w.setAttribute("data-cue","1");
+    const outer=document.createElement("div"); outer.className="tw";
+    w.parentNode.insertBefore(outer,w); outer.appendChild(w);
+    const hint=document.createElement("p"); hint.className="tw-hint"; hint.textContent="Scroll sideways for more columns."; outer.appendChild(hint);
+    const upd=()=>{const more=w.scrollWidth-w.clientWidth>4;outer.classList.toggle("more-right",more&&w.scrollLeft<w.scrollWidth-w.clientWidth-4);outer.classList.toggle("more-left",more&&w.scrollLeft>4);};
+    w.addEventListener("scroll",upd,{passive:true}); outer._upd=upd; upd();
+  });
+}
+window.addEventListener("resize",()=>document.querySelectorAll(".tw").forEach(o=>o._upd&&o._upd()));
+window.addEventListener("load",()=>document.querySelectorAll(".tw").forEach(o=>o._upd&&o._upd()),{once:true});
+
 // ============ Init ============
 renderHome(); renderIncidentFilters(); renderIncidents(); renderRegistry(); initDrill(); initSops(); renderClinical(); initSurge(); renderTNA(); renderSources();
 renderTeach(); renderPrintCards(); renderGlossary(); $("#glossFilter").addEventListener("input",renderGlossary);
-initTrainer(); initSurgeExercise(); renderProgress();
+initTrainer(); initSurgeExercise(); renderProgress(); cueTables();
 (function(){
   if(!route(false)){ const last=store.get("mch-tab"); showTab(TABS.some(t=>t[0]===last)?last:"home"); }
   // A page whose heading shares its hash (#europe-lessons, #registry) should open at the top, with the breadcrumb in view.
